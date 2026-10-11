@@ -15,6 +15,17 @@ import time
 import logging
 import logging.handlers
 import numpy as np
+import threading
+
+_shutdown_requested = threading.Event()
+
+# Select dependency source and neural device before imports can initialize torch.
+import json
+from pathlib import Path
+from core.mindscape_config import activate as activate_mindscape
+_config_path = Path(__file__).resolve().parent / "config/config.json"
+_startup_config = json.loads(_config_path.read_text()) if _config_path.exists() else {}
+_mindscape_settings = activate_mindscape(_startup_config)
 
 # ── Logging Setup ────────────────────────────────────────────────────
 # All logger.info/debug calls across the codebase route here.
@@ -52,6 +63,9 @@ def _load_credentials():
     GITHUB_TOKEN, GEMINI_API_KEY, ANTHROPIC_API_KEY, etc.
     """
     cred_path = os.path.expanduser("~/.config/helix/credentials.env")
+    if not os.path.exists(cred_path) and _mindscape_settings is not None:
+        # The full local composition needs no cloud/channel credentials.
+        return
     if not os.path.exists(cred_path):
         print("\n" + "="*70)
         print("  ⚠  HELIX AGI IS NOT CONFIGURED YET!")
@@ -127,9 +141,13 @@ def on_delivery(recipient: str, message: str):
     print(f"\n  📤 → {recipient}: {message}")
 
 
-def setup_helix(data_dir: str = "data"):
+def setup_helix(data_dir: str = "data", *, start_sensors: bool = True):
     """Initialize the complete Helix cognitive architecture."""
     print("Initializing Helix Architecture...")
+    local_models = None
+    if _mindscape_settings is not None:
+        from core.mindscape_config import local_model_receipt
+        local_models = local_model_receipt(_mindscape_settings)
 
     # Load configuration
     import json as _json
@@ -215,8 +233,9 @@ def setup_helix(data_dir: str = "data"):
         print(f"  Tool notes: load failed ({e})")
     
     # Sensory Cortex (Passive Background Vision/Audio)
-    sensory_cortex = SensoryCortex(camera_device=0)
-    sensory_cortex.start_passive_sensing()
+    sensory_cortex = SensoryCortex(camera_device=0) if start_sensors else None
+    if start_sensors:
+        sensory_cortex.start_passive_sensing()
     tool_executor._vision_cortex = sensory_cortex
     
     print(f"  Contacts: {len(channel_router.contacts)} known")
@@ -259,7 +278,13 @@ def setup_helix(data_dir: str = "data"):
     # _cfg is already loaded at the start of setup_helix()
     pulse_mode = _cfg.get("pulse_mode", "standard")
 
-    provider_config = detect_available_provider()
+    if _mindscape_settings is not None:
+        context = int(_mindscape_settings["local_context_window"])
+        provider_config = ProviderConfig(provider_type="ollama",
+            model=_mindscape_settings["local_model"], context_window=context,
+            options={"num_ctx": context, "url": _cfg.get("ollama_url", "http://localhost:11434")})
+    else:
+        provider_config = detect_available_provider()
     if provider_config:
         print(f"  Provider: {provider_config.provider_type} ({provider_config.model})")
     else:
@@ -398,6 +423,13 @@ def setup_helix(data_dir: str = "data"):
             sentinel=sentinel,
             sensory_cortex=sensory_cortex,
         )
+
+    if _mindscape_settings is not None:
+        from core.mindscape import Mindscape
+        pulse_loop.mindscape = Mindscape(_mindscape_settings, data_dir, preconscious, local_models=local_models)
+        auxiliary_llm.context_counter = pulse_loop.mindscape.token_counter
+        print("  Mindscape: Helix + mRAG + MightyMem/Habitus cortex + RWKV + Context Loom loaded")
+        print(f"  Composition receipt: {pulse_loop.mindscape.directory / 'composition-manifest.json'}")
 
     # Wire comms bots to pulse loop for inbound messages
     telegram_bot.set_pulse_loop(pulse_loop)
@@ -555,9 +587,12 @@ def setup_helix(data_dir: str = "data"):
     return pulse_loop, orchestrator, daemon, memory_manager, belief_store, scratchpad, telegram_bot, discord_bot, slack_bot, whatsapp_bot, webhook_channel, sentinel
 
 
-def main_loop():
+def main_loop(data_dir="data", interactive=False):
     """Interactive loop — user messages are events in the pulse stream."""
-    pulse_loop, orchestrator, daemon, memory, beliefs, scratchpad, telegram_bot, discord_bot, slack_bot, whatsapp_bot, webhook_channel, sentinel = setup_helix()
+    pulse_loop, orchestrator, daemon, memory, beliefs, scratchpad, telegram_bot, discord_bot, slack_bot, whatsapp_bot, webhook_channel, sentinel = setup_helix(data_dir)
+    if _shutdown_requested.is_set():
+        pulse_loop.stop()
+        return
 
     print("\n--- Helix Pulse System ---")
     print("Commands: 'exit', 'stats', 'core', 'recent', 'beliefs', 'notes', 'dream'")
@@ -610,13 +645,12 @@ def main_loop():
 
     # Detect if running headless (no terminal attached)
     import sys
-    headless = not sys.stdin.isatty()
+    headless = not sys.stdin.isatty() and not interactive
 
     if headless:
         print("Running in headless/daemon mode (Telegram only).")
         try:
-            while True:
-                time.sleep(60)
+            _shutdown_requested.wait()
         except KeyboardInterrupt:
             pass
     else:
@@ -709,4 +743,19 @@ def main_loop():
 
 
 if __name__ == "__main__":
-    main_loop()
+    import argparse
+    import signal
+    # A launcher shutdown must let initialization or the active pulse finish
+    # saving its joint state, including when the process has no terminal.
+    signal.signal(signal.SIGTERM, lambda *_: _shutdown_requested.set())
+    parser = argparse.ArgumentParser(description="Run the configured Helix composition")
+    parser.add_argument("--data-dir", default="data")
+    parser.add_argument("--check-setup", action="store_true", help="Load the actual composition, sync/checkpoint, then exit")
+    parser.add_argument("--interactive", action="store_true", help="Force interactive CLI mode even without TTY")
+    args = parser.parse_args()
+    if args.check_setup:
+        components = setup_helix(args.data_dir, start_sensors=False)
+        components[0].stop()
+        print("Setup initialized. This verifies loading, not agent competence.")
+    else:
+        main_loop(args.data_dir, interactive=args.interactive)

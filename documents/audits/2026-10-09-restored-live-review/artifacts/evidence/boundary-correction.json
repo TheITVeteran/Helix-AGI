@@ -1,0 +1,6 @@
+{
+  "time": 1791563449.1031537,
+  "source": "llm/orchestrated.py:40",
+  "correction": "MAX_REQUESTS_PER_TURN is 1, not 3 as mistakenly transcribed in manifest; source and runtime unchanged",
+  "interpretation": "all operational observations remain unscored; no product competence or uncapped-completion claim"
+}

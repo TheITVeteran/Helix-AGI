@@ -1,0 +1,16 @@
+{
+  "time": 1791606141.212798,
+  "reason": "all submitted awake user turns returned and checkpointed; no file actions occurred; graceful stop requested",
+  "processes": [
+    {
+      "pid": 1712254,
+      "command": "/home/nemo/Helix_AGI (GitHub Repo) (Public)/venv/bin/python main.py ",
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 1712335,
+      "signal": "SIGTERM",
+      "component": "test dashboard"
+    }
+  ]
+}

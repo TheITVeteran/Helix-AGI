@@ -115,6 +115,12 @@ class SummaryPage(QWidget):
 
         # Build summary cards
         sections = [
+            ("Mindscape", [
+                ("Composition", cfg.get("composition", "helix")),
+                ("Foreground model", cfg.get("local_model", "granite4.1:3b")),
+                ("Memory", "MightyMem / Habitus + Context Loom + mRAG" if cfg.get("composition") == "mindscape" else "Helix"),
+                ("Startup", cfg.get("mindscape", {}).get("gestation", "if_missing")),
+            ]),
             ("🤖  Identity", [
                 ("Agent Name", agent_name),
                 ("Creator", cfg.get("creator_name", "")),

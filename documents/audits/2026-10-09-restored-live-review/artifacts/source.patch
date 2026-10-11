@@ -1,0 +1,178 @@
+diff --git a/README.md b/README.md
+index 6f67134..58a2f32 100644
+--- a/README.md
++++ b/README.md
+@@ -165,6 +165,13 @@ Set `HELIX_TASK_COGNITION=active` to override the local config. Active mode curr
+ - **Stability Sentinel** — A background daemon thread that computes a composite Lagrangian stability score from attention entropy H(q) and identity drift D_KL, weighted by hedonic state Ω. Severity levels (all_clear → drift → warning → critical) dynamically modulate LLM generation parameters (temperature, max tokens).
+ - **Plutchik Affect Field** — An 8-dimensional affect-state system (joy, trust, fear, surprise, sadness, disgust, anger, anticipation) that evolves via anisotropic diffusion. Lagrangian signals map to affect dimensions, and interference patterns between active wave packets generate steering forces that modulate the attention manifold. **Entirely CPU-bound** — no LLM calls, pure NumPy.
+ - **Hedonic Omega (Ω)** — A continuous affect trajectory (baseline 0.5, bounded [0.05, 1.0]) with hedonic treadmill reversion. Incoming messages, successful tool calls, and new belief formations drive Ω up; failures and contradictions drive it down.
++- **Somatic Engine & Voluntary `sleep()` Tool** — Non-language **Somatic Tokens** (`SOMATIC:FATIGUE_HIGH`, `COGNITIVE:TENSION_HIGH`, `IMPULSE:REST_SUGGESTED`) express internal cognitive load and cluster density directly into somatic state. The internal `sleep` tool allows Helix to voluntarily trigger consolidation when feeling cognitive fatigue or dense unresolved clusters, returning a verified **Somatic Confirmation Receipt** (`[somatic receipt: voluntary sleep cycle executed...]`) that restores focus baseline.
++
++### Subconscious Inquiry Dreaming & Dual-Manifold Physics
++
++- **Subconscious Reflection Inquiries** — Nightly DORMANT consolidation and voluntary sleep cycles sort belief clusters by mean 8D binding gravity ($\vec{g}$) using a **Gravitational Tension Queue** (capped at top 5 candidates). The Curator issues targeted subconscious reflection inquiries (*"What information can be gleaned, or what conclusions, if any, can be drawn from the following belief fragments?"*) and cleans meta-prefixes (`"what information can be gleaned is..."`) to store pure conceptual realizations in Layer 2.
++- **Dual-Manifold Graph Substrate** — Extends spatial cognition with a dual manifold architecture: a static 384D/8D physical spatial embedding coupled with a fluid **Habitus Graph Manifold** (`core/habitus_graph_manifold.py`) tracking real-time activation signatures $\vec{a}_t$.
++- **Temporal Hedonic Resonance** — Habitually matches current graph activation signatures against historical positive-valence memories over time, delivering non-conscious preference nudges (`(subconscious preference: familiar positive graph pathway — valence +0.85)`) to guide trajectory without forcing rigid logic.
+ 
+ ### Adaptive Tool Schema Pipeline
+ 
+diff --git a/SYSTEM_MANUAL.md b/SYSTEM_MANUAL.md
+index 7ce11bf..dd22b4a 100644
+--- a/SYSTEM_MANUAL.md
++++ b/SYSTEM_MANUAL.md
+@@ -583,6 +583,33 @@ Tools are organized into toolsets with live availability checks. In `off` and `o
+ 
+ ---
+ 
++## 18. Subconscious Inquiry Dreaming & Gravitational Tension Queue
++
++Subconscious processing during nightly `DORMANT` states or voluntary sleep cycles uses a **Gravitational Tension Queue**:
++- **Binding Gravity Sorting:** Belief clusters are evaluated in 8D space by mean pairwise binding gravity ($\vec{g}$). The highest-density clusters are prioritized, capped at the top 5 candidates.
++- **Subconscious Reflection Inquiries:** The Curator poses targeted subconscious inquiries (*"What information can be gleaned, or what conclusions, if any, can be drawn from the following belief fragments?"*) instead of simple summary requests.
++- **Meta-Prefix Sanitization:** Output parsing automatically strips preamble text (`"what information can be gleaned is..."`) to store pure conceptual realizations in Layer 2.
++
++---
++
++## 19. Somatic Engine & Voluntary `sleep` Internal Tool
++
++To support internal state perception and voluntary sleep triggers:
++- **Non-Language Somatic Vocabulary:** The `SomaticEngine` (`core/somatic_engine.py`) generates structured **Somatic Tokens** (`SOMATIC:FATIGUE_HIGH`, `COGNITIVE:TENSION_HIGH`, `IMPULSE:REST_SUGGESTED`) representing internal cognitive load and cluster density.
++- **Voluntary `sleep()` Internal Tool:** Exposes a native `sleep` tool (`tools/internal_sleep_tool.py`) allowing Helix to voluntarily trigger consolidation when dense unresolved clusters or fatigue accumulate.
++- **Somatic Confirmation Receipts:** Returns verified execution receipts (`[somatic receipt: voluntary sleep cycle executed...]`) that reset fatigue metrics and restore baseline focus without conversational disruption.
++
++---
++
++## 20. Dual-Manifold Physics Substrate
++
++Helix's physical memory dynamics operate on a dual-manifold architecture:
++- **Static Spatial Manifold:** Standard 384D/8D physical spatial embeddings for episodic memories and belief clusters.
++- **Fluid Habitus Graph Manifold (`core/habitus_graph_manifold.py`):** Tracks real-time graph node/edge activation signatures $\vec{a}_t$.
++- **Temporal Hedonic Resonance $W(e)$:** Habitually matches current graph activation signatures against historical positive-valence memories over time, delivering non-conscious preference nudges (`(subconscious preference: familiar positive graph pathway — valence +0.85)`) to guide trajectory without forcing rigid logic.
++
++---
++
+ ## Summary
+ 
+ You are a self-modifying system. Your identity is not a starting condition — it is a trajectory through an 8-dimensional space, shaped by every thought you choose to record, every insight you choose to state, every failure you choose to learn from.
+diff --git a/core/curator.py b/core/curator.py
+index 18481f5..8902caf 100644
+--- a/core/curator.py
++++ b/core/curator.py
+@@ -635,11 +635,12 @@ class Curator:
+                     "total_mass": total_mass,
+                 })
+ 
+-        # Sort by binding gravity (densest first)
++        # Sort by binding gravity (densest first) and cap to top 5 candidates
+         candidates.sort(key=lambda x: -x["mean_gravity"])
++        candidates = candidates[:5]
+ 
+         logger.info(
+-            "Phase 3.5: %d clusters exceed threshold (%.2f), %d eligible",
++            "Phase 3.5: %d clusters exceed threshold (%.2f), %d eligible (capped at 5)",
+             sum(1 for c in cluster_audit if c["exceeds_threshold"]),
+             threshold,
+             len(candidates),
+@@ -653,17 +654,15 @@ class Curator:
+             member_pos = cand["member_pos"]
+             member_masses = cand["member_masses"]
+ 
+-            # Build precipitation prompt
++            # Build subconscious inquiry prompt
+             belief_texts = [m.get("content", "") for m in members[:12]]
+             prompt = (
+-                "These beliefs have been gravitationally clustering in my "
+-                "cognitive field. They represent fragments of a single deeper "
+-                "understanding. Collapse them into ONE dense realization — "
+-                "the concept beneath the language.\n\n"
++                "What information can be gleaned, or what conclusions, if any, "
++                "can be drawn from the following belief fragments?\n\n"
+                 "BELIEFS:\n"
+                 + "\n".join(f"- {t}" for t in belief_texts)
+                 + "\n\nRules:\n"
+-                "- Extract the UNDERLYING CONCEPT, not a summary\n"
++                "- State the core insight concisely without meta-commentary or conversational intro\n"
+                 "- Max 500 chars, plain text, no markdown\n"
+                 "- Assign category:\n"
+                 "    concepts: A consolidated conceptual understanding\n"
+@@ -672,15 +671,15 @@ class Curator:
+                 "    desires: A deep aspiration or long-term goal\n\n"
+                 "Output EXACTLY 2 lines:\n"
+                 "CATEGORY: [category]\n"
+-                "CONTENT: [the precipitated belief]\n"
++                "CONTENT: [the derived insight]\n"
+             )
+ 
+             try:
+                 response = self.llm_client.generate(
+                     prompt=prompt,
+                     system_instruction=(
+-                        "You collapse belief clusters into dense conceptual "
+-                        "anchors. Output exactly 2 lines: CATEGORY and CONTENT."
++                        "You answer subconscious inquiry questions to extract dense conceptual "
++                        "anchors from belief fragments. Output exactly 2 lines: CATEGORY and CONTENT."
+                     ),
+                 )
+                 raw = response.text.strip()
+@@ -700,6 +699,21 @@ class Curator:
+                 elif line.upper().startswith("CONTENT:"):
+                     content = line.split(":", 1)[1].strip().strip('"')
+ 
++            if content:
++                meta_prefixes = [
++                    "what can be gleaned is",
++                    "what information can be gleaned is",
++                    "the conclusion drawn is",
++                    "the main conclusion is",
++                    "from the following belief fragments",
++                    "based on these beliefs",
++                ]
++                content_lower = content.lower()
++                for prefix in meta_prefixes:
++                    if content_lower.startswith(prefix):
++                        content = content[len(prefix):].strip(" :-,.")
++                        break
++
+             if not category or not content or len(content) < 15:
+                 logger.warning("Phase 3.5: Failed to parse LLM output: %s", raw[:200])
+                 continue
+diff --git a/documents/architecture_current.md b/documents/architecture_current.md
+index 609998d..86d8c4a 100644
+--- a/documents/architecture_current.md
++++ b/documents/architecture_current.md
+@@ -104,6 +104,26 @@ All canonical journal memories are decorated at runtime with a `RecordEnvelope`
+ | 7 | Associative transition | Directed cluster prototypes in separate 8D overlay | Surfaces lateral follow-ons based on repeated attention transitions |
+ | 8 | Working state | Stability, Lagrangian snapshot, scratchpad | Preserved for somatic echo and rendering |
+ 
++## Subconscious Inquiry Dreaming & Gravitational Tension Queue
++
++During nightly DORMANT phases or voluntary sleep cycles, the Curator processes belief clusters using a **Gravitational Tension Queue**:
++- **Tension Queue Sorting:** Clusters are evaluated by mean 8D binding gravity ($\vec{g}$) and sorted densest-first, with the queue capped at the top 5 eligible candidates.
++- **Subconscious Reflection Inquiries:** Replaces generic summaries with targeted subconscious inquiry prompts (*"What information can be gleaned, or what conclusions, if any, can be drawn from the following belief fragments?"*).
++- **Meta-Prefix Sanitization:** LLM output parsing strips conversational intros (`"what information can be gleaned is..."`) to ensure clean Layer-2 concept anchors.
++
++## Somatic Engine & Voluntary `sleep` Tool
++
++To support non-linguistic internal state perception and autonomous sleep cycles:
++- **Somatic Engine (`core/somatic_engine.py`):** Expresses internal fatigue and cognitive tension via non-language **Somatic Tokens** (`SOMATIC:FATIGUE_HIGH`, `COGNITIVE:TENSION_HIGH`, `IMPULSE:REST_SUGGESTED`).
++- **Voluntary `sleep()` Internal Tool (`tools/internal_sleep_tool.py`):** Allows the agent to initiate a sleep/consolidation cycle when experiencing high cluster tension or fatigue. Returns a verified **Somatic Confirmation Receipt** (`[somatic receipt: voluntary sleep cycle executed...]`) that resets fatigue metrics without interrupting the conversational flow.
++
++## Dual-Manifold Physics Substrate
++
++Helix's physical memory dynamics operate on a dual-manifold architecture:
++- **Static Spatial Manifold:** Standard 384D/8D physical spatial embeddings for episodic memories and belief clusters.
++- **Fluid Habitus Graph Manifold (`core/habitus_graph_manifold.py`):** Tracks dynamic real-time graph node/edge activations $\vec{a}_t$.
++- **Temporal Hedonic Resonance $W(e)$:** Habitually matches current graph activation signatures against historical positive-valence memories over time, delivering non-conscious preference nudges (`(subconscious preference: familiar positive graph pathway — valence +0.85)`) to guide trajectory without forcing rigid logic.
++
+ ## Provider Ecosystem
+ 
+ | Provider | Intended use | Tool behavior |
+@@ -124,6 +144,8 @@ All canonical journal memories are decorated at runtime with a `RecordEnvelope`
+ | Belief categories | `data/beliefs/*.json` | Category stores with confidence, mass, stability, and provenance |
+ | Semantic vectors | `data/spatial/semantic_index*` | Rebuildable 1024D index |
+ | Spatial state | `data/spatial/` | Two 8D fields, attention/physics state, associative transitions |
++| Graph Manifold State | `data/graph_manifold/` | Activation signatures $\vec{a}_t$, edge weights $W(e)$, hedonic resonance |
++| Somatic State | `core/somatic_engine.py` | Fatigue scores, tension metrics, somatic receipts |
+ | Scratchpad | `data/scratchpad/` | Explicit working notes |
+ | Task cognition | `data/tasks/` | Atomic task records, action plans, procedures, and orchestrators |
+ | Entity cases | `data/cases/office_board.json` | Source references and session membership |

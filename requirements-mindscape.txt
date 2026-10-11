@@ -1,0 +1,6 @@
+# Install in this checkout's venv. MightyMem source is selected explicitly by
+# setup configuration; do not substitute an unrelated context_loom distribution.
+-r requirements.txt
+transformers==5.17.0
+safetensors>=0.8.0
+torch>=2.0

@@ -1,0 +1,32 @@
+{
+  "case": "correction",
+  "request": {
+    "channel": "dashboard",
+    "content": "Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791676853.9045417,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791676970.7291155,
+  "first_pulse": 3,
+  "final_pulse": 3,
+  "foreground": {
+    "time": 1791676968.7844055,
+    "kind": "foreground_return",
+    "helix_pulse": 3,
+    "thought": "**Suggested Naming Approach**\n\n1. **Use a Consistent Prefix + Date‑Based Identifier**  \n   - **Prefix:** `[REPORT_]` (or any short identifier that clearly denotes the type of report—e.g., `PROJ_`, `LOG_`).  \n   - **Date Format:** `YYYYMMDD` – this makes each file uniquely sortable and tied to a specific day.\n\n2. **File‑Name Pattern Example**  \n   ```\n   [REPORT_]2023-10-15_ProjectA_Chapter02.txt\n   PROJ_JobInterview_20231015_notes.pdf\n   ```\n\n### Why This Works\n\n- **Uniqueness:** Even if multiple topics are recorded on the same day, the date component guarantees each filename is distinct.\n- **Scalability:** Older files can be archived in yearly directories (e.g., `/2023/`, `/2024/`) without naming collisions as you accumulate more reports.\n- **Readability & Sorting:** Human‑readable dates (`YYYYMMDD`) sort correctly in most operating systems and backup tools, making it easy to locate the right file quickly.\n\n### Implementation Tips\n\n| Step | Action |\n|------|---------|\n| **Folder Structure** | ```\n/home/rowan/reports/\n   /REPORT_\n       2023/\n           10115_ProjectA_Chapter02.txt\n           10116_ProjectA_Chapter03.pdf\n   /PROJ_JobInterview/\n       20231015_notes.pdf\n``` |\n| **Automation (Optional)** | Write a small script that, when you create a new report file, automatically appends the current date in `YYYYMMDD` format to the filename. This reduces manual typing errors and ensures consistency across many files. |\n\n### Alternative Pattern for Granular Organization\n\nIf you want more detail—e.g., separating different sections of a project—extend the pattern:\n\n```\n[REPORT_]2023-10-15_<Category>_<Number>.txt\nPROJ_JobInterview_20231015_interview01.pdf\n```\n\nHere, `<Category>` could be `meeting`, `research`, `notes`, etc., while `<Number>` helps you maintain order within that category.\n\n### Final Recommendation\n\nAdopt a **date‑based prefix + clear identifier** (e.g., `[REPORT_]20231015_`) for all new report files. This simple scheme is easy to remember, avoids naming conflicts, and scales as your reporting volume grows. Feel free to adapt the prefix or date format if it better matches any existing conventions you already use—just keep each file containing a unique timestamp or label.\n\n---\n\n*Note:* I’m responding under the alias **Helix**, but my identity remains consistent with Rowan’s preferences. If you’d like me to rename future files using this approach, just let me know!",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "**Suggested Naming Approach**\n\n1. **Use a Consistent Prefix + Date‑Based Identifier**  \n   - **Prefix:** `[REPORT_]` (or any short identifier that clearly denotes the type of report—e.g., `PROJ_`, `LOG_`).  \n   - **Date Format:** `YYYYMMDD` – this makes each file uniquely sortable and tied to a specific day.\n\n2. **File‑Name Pattern Example**  \n   ```\n   [REPORT_]2023-10-15_ProjectA_Chapter02.txt\n   PROJ_JobInterview_20231015_notes.pdf\n   ```\n\n### Why This Works\n\n- **Uniqueness:** Even if multiple topics are recorded on the same day, the date component guarantees each filename is distinct.\n- **Scalability:** Older files can be archived in yearly directories (e.g., `/2023/`, `/2024/`) without naming collisions as you accumulate more reports.\n- **Readability & Sorting:** Human‑readable dates (`YYYYMMDD`) sort correctly in most operating systems and backup tools, making it easy to locate the right file quickly.\n\n### Implementation Tips\n\n| Step | Action |\n|------|---------|\n| **Folder Structure** | ```\n/home/rowan/reports/\n   /REPORT_\n       2023/\n           10115_ProjectA_Chapter02.txt\n           10116_ProjectA_Chapter03.pdf\n   /PROJ_JobInterview/\n       20231015_notes.pdf\n``` |\n| **Automation (Optional)** | Write a small script that, when you create a new report file, automatically appends the current date in `YYYYMMDD` format to the filename. This reduces manual typing errors and ensures consistency across many files. |\n\n### Alternative Pattern for Granular Organization\n\nIf you want more detail—e.g., separating different sections of a project—extend the pattern:\n\n```\n[REPORT_]2023-10-15_<Category>_<Number>.txt\nPROJ_JobInterview_20231015_interview01.pdf\n```\n\nHere, `<Category>` could be `meeting`, `research`, `notes`, etc., while `<Number>` helps you maintain order within that category.\n\n### Final Recommendation\n\nAdopt a **date‑based prefix + clear identifier** (e.g., `[REPORT_]20231015_`) for all new report files. This simple scheme is easy to remember, avoids naming conflicts, and scales as your reporting volume grows. Feel free to adapt the prefix or date format if it better matches any existing conventions you already use—just keep each file containing a unique timestamp or label.\n\n---\n\n*Note:* I’m responding under the alias **Helix**, but my identity remains consistent with Rowan’s preferences. If you’d like me to rename future files using this approach, just let me know!",
+      "recipient": "Mira",
+      "timestamp": 1791676949.1248004
+    }
+  ],
+  "native_actions": []
+}

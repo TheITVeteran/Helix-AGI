@@ -1,0 +1,7 @@
+{
+  "kind": "unscored launcher integration diagnostic",
+  "input": "Please acknowledge this final launcher wiring check.",
+  "transport": "production DashboardComms.push_inbound -> main.py dashboard poller",
+  "source": "final working tree",
+  "score": null
+}

@@ -1,0 +1,210 @@
+  Credentials: loaded via dotenv
+Initializing Helix Architecture...
+  Memory: {'total_entries': 11, 'total_memories': 11, 'journal_path': 'data/memory/cognitive_journal.jsonl'}
+  Beliefs: {'total_beliefs': 39, 'with_relations': 0, 'with_memory_refs': 0, 'core': 1, 'deep': 38, 'surface': 0, 'avg_confidence': 0.804, 'schema_version': 4, 'premises': 8, 'propositions': 11, 'preferences': 6, 'people': 2, 'skills': 2, 'desires': 4, 'concepts': 6}
+  Scratchpad: 0 active notes
+  Spatial: pulse=0, γ=0.50
+  SemanticIndex: 46 vectors (numpy_brute)
+  Sentinel: Ω=0.624, severity=critical
+  Spatial bootstrap: 39 beliefs, 7 memories in 8D manifold
+[ WARN:0@0.171] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+[ WARN:0@0.172] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 0
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.172] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.172] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video1): can't open camera by index
+[ WARN:0@0.172] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 1
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.172] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.172] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video2): can't open camera by index
+[ WARN:0@0.172] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 2
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.172] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.172] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video3): can't open camera by index
+[ WARN:0@0.172] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 3
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.172] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.172] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.172] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video4): can't open camera by index
+[ WARN:0@0.172] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 4
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.173] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.173] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video5): can't open camera by index
+[ WARN:0@0.173] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 5
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.173] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.173] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video6): can't open camera by index
+[ WARN:0@0.173] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 6
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.173] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.173] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video7): can't open camera by index
+[ WARN:0@0.173] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 7
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.173] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.173] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video8): can't open camera by index
+[ WARN:0@0.173] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 8
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.173] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:0@0.173] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video9): can't open camera by index
+[ WARN:0@0.173] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 9
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:0@0.173] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:0@0.173] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+[ WARN:1@0.174] global cap_v4l.cpp:914 open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+[ WARN:1@0.174] global cap.cpp:438 open VIDEOIO(FFMPEG): raised OpenCV exception:
+
+OpenCV(4.13.0) /io/opencv/modules/videoio/src/cap_ffmpeg_impl.hpp:1220: error: (-2:Unspecified error) in function 'bool CvCapture_FFMPEG::open(const char*, int, const cv::Ptr<cv::IStreamReader>&, const cv::VideoCaptureParameters&)'
+> VIDEOIO/FFMPEG: Camera index out of range (expected: 'index < device_list->nb_devices'), where
+>     'index' is 0
+> must be less than
+>     'device_list->nb_devices' is 0
+
+
+  Contacts: 1 known
+  Tools: executor ready
+[ WARN:1@0.174] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+  Telegram: disabled (no token)[ WARN:1@0.174] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+
+  Discord: disabled (no token)
+[ WARN:1@0.174] global obsensor_stream_channel_v4l2.cpp:82 xioctl ioctl: fd=-1, req=-2140645888
+[ WARN:1@0.174] global obsensor_stream_channel_v4l2.cpp:138 queryUvcDeviceInfoList ioctl error return: 9
+[ERROR:1@0.174] global obsensor_uvc_stream_channel.cpp:163 getStreamChannelGroup Camera index out of range
+  Slack: disabled (no token)
+  WhatsApp: disabled (no token)
+  Webhook: disabled (no config)
+  Provider: ollama (granite4.1:3b)
+  Pulse mode: standard
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+{"loaded_shard": "model-00001-of-00004.safetensors"}
+{"loaded_shard": "model-00002-of-00004.safetensors"}
+{"loaded_shard": "model-00003-of-00004.safetensors"}
+{"loaded_shard": "model-00004-of-00004.safetensors"}
+  Mindscape: Helix + mRAG + MightyMem/Habitus cortex + RWKV + Context Loom loaded
+  Composition receipt: /home/nemo/Helix_AGI (GitHub Repo) (Public)/data/mindscape/composition-manifest.json
+  Curator LLM: ready (ollama auxiliary route)
+  Pulse loop: Ready
+  Post-pulse hooks: registered (task_inception=observe, workflow_detector, belief_detector, engagement_monitor, co_occurrence_tracker, affect_field)
+
+--- Helix Pulse System ---
+Commands: 'exit', 'stats', 'core', 'recent', 'beliefs', 'notes', 'dream'
+Anything else is sent as a user message into the pulse stream.
+
+Running in headless/daemon mode (Telegram only).
+
+  💭 [Pulse 1] **Acknowledgment:** I acknowledge that the launcher wiring check has been performed and reviewed. Please let me know if there are any additional details or follow‑up actions required.
+
+  💬 [Pulse 2] **Acknowledgment:** I acknowledge that the final launcher wiring check has been performed and reviewed. Please let me know if there are any additional details or follow‑up actions required.
+
+Helix offline.

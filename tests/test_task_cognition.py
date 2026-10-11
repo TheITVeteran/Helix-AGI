@@ -516,6 +516,9 @@ class ProceduralMemoryVerificationTests(unittest.TestCase):
                 task, ["desktop_open", "desktop_type"],
                 success=False, verified=False, error_codes=["window_not_found"],
             )
+            from core.action_protocol import ToolReceipt, ReceiptStatus, EvidenceLevel
+            task.receipts = [ToolReceipt("email_send", {}, "delivery confirmed",
+                ReceiptStatus.SUCCESS, EvidenceLevel.CONFIRMED).to_dict()]
             memory.observe(
                 task, ["email_send"], success=True, verified=True,
             )
@@ -531,6 +534,7 @@ class ProceduralMemoryVerificationTests(unittest.TestCase):
 class PulseIntegrationTests(unittest.TestCase):
     def test_active_main_session_is_minimal_and_receives_no_tool_schemas(self):
         pulse = PulseLoop.__new__(PulseLoop)
+        pulse.mindscape = None
         pulse._chat = None
         pulse._task_cognition = SimpleNamespace(active=True, enabled=True)
         pulse._provider_config = ProviderConfig(

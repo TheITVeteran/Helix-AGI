@@ -1,0 +1,45 @@
+{
+  "models": {
+    "models": [
+      {
+        "name": "qwen3-embedding:0.6b",
+        "model": "qwen3-embedding:0.6b",
+        "size": 2371270737,
+        "digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "595.78M",
+          "quantization_level": "Q8_0"
+        },
+        "expires_at": "2026-10-10T11:59:48.796545608-04:00",
+        "size_vram": 0,
+        "context_length": 4096
+      },
+      {
+        "name": "granite4.1:3b",
+        "model": "granite4.1:3b",
+        "size": 2926827272,
+        "digest": "6fd349357287c7ffc9e38189a93b48ea175d24fc566b38f09cfc564fb7f303eb",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "granite",
+          "families": [
+            "granite"
+          ],
+          "parameter_size": "3.4B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-10T11:49:55.402242254-04:00",
+        "size_vram": 0,
+        "context_length": 8192
+      }
+    ]
+  },
+  "process": "    PID     ELAPSED     TIME %CPU   RSS STAT COMMAND\n1751151       01:29 00:00:57 64.4 1659384 Sl /home/nemo/Helix_AGI (GitHub Repo) (Public)/venv/bin/python3 -u /home/nemo/Helix_AGI (GitHub Repo) (Public)/main.py --data-dir data\n"
+}

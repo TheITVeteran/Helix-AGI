@@ -1,0 +1,19 @@
+{"time": 1791675046.014958, "event": "status", "page": 0, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791675046.0887437, "event": "click", "page": 0, "button": "Get Started  \u2192"}
+{"time": 1791675047.0138316, "event": "status", "page": 1, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791675047.067214, "event": "click", "page": 1, "button": "Next  \u2192"}
+{"time": 1791675048.0167248, "event": "status", "page": 2, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791675048.0545495, "event": "click", "page": 2, "button": "Next  \u2192"}
+{"time": 1791675049.0142798, "event": "status", "page": 3, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791675049.0333886, "event": "selected_tools", "tools": ["core", "files"]}
+{"time": 1791675049.0521922, "event": "click", "page": 3, "button": "Next  \u2192"}
+{"time": 1791675050.0142667, "event": "status", "page": 4, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791675050.0512788, "event": "click", "page": 4, "button": "Next  \u2192"}
+{"time": 1791675051.0148132, "event": "status", "page": 5, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791675051.055662, "event": "click", "page": 5, "button": "Next  \u2192"}
+{"time": 1791675052.0142682, "event": "status", "page": 6, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791675052.0522387, "event": "click", "page": 6, "button": "\ud83d\ude80  Create Helix"}
+{"time": 1791675073.014264, "event": "status", "page": 6, "install_rc": 0, "status": "", "child_pid": null}
+{"time": 1791675075.018846, "event": "status", "page": 6, "install_rc": 0, "status": "Loading the configured agent composition\u2026", "child_pid": 1790448}
+{"time": 1791675113.014449, "event": "status", "page": 6, "install_rc": 0, "status": "Mindscape loaded: Helix \u00b7 mRAG \u00b7 MightyMem/Habitus \u00b7 RWKV \u00b7 Context Loom", "child_pid": 1790448}
+{"time": 1791675192.0150084, "event": "status", "page": 6, "install_rc": 0, "status": "Mindscape failed: ProgrammingError: Error binding parameter 2: type 'dict' is not supported", "child_pid": 1790448}

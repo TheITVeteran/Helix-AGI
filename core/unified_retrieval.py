@@ -217,8 +217,9 @@ class UnifiedRetrieval:
         self.last_work_order = work_order
         search_query = work_order.search_query or trigger_text
 
+        passage_args = {"passage_text": trigger_text} if getattr(self.lane_a, "contextual_sentence_heads", False) else {}
         semantic_lane_a = [
-            item for item in self.lane_a.retrieve(search_query)
+            item for item in self.lane_a.retrieve(search_query, **passage_args)
             if item["id"] not in exclude
         ]
         semantic_lane_a = self._route_record_roles(
@@ -264,6 +265,14 @@ class UnifiedRetrieval:
             blocked,
             expand_adjacency=self.enable_mrag_adjacency,
         )
+        # Bind each returned source to this retrieval's actual passage heads.
+        # Copy the item so another hop/query cannot overwrite its anchor trace
+        # through the shared canonical corpus dictionaries.
+        anchor_hits = getattr(self.lane_a, "last_anchor_hits", {})
+        selected = [dict(item, context_anchor_queries=tuple(
+            hit["text"] for hit in sorted(anchor_hits.get(item["id"], ()),
+                                         key=lambda hit: (hit["kind"] != "sentence", -hit["similarity"]))))
+            for item in selected]
 
         lane_counts = {"semantic": 0, "spatial": 0, "both": 0}
         for item in selected:

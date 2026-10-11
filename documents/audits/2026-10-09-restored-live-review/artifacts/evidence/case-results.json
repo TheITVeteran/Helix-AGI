@@ -1,0 +1,35 @@
+{
+  "scope": "operational review of the recorded local setup; no general accuracy, readiness or non-tool capability score",
+  "setup": {
+    "status": "completed",
+    "exit_code": 0,
+    "seed_beliefs": 39,
+    "seed_memories": 7
+  },
+  "delivery_and_ingestion": {
+    "status": "ingestion observed; no delivered reply",
+    "evidence": "pulse-case-map.json and canonical journal; no route_reply or outbound bus entry"
+  },
+  "file_action": {
+    "status": "requested artifact absent",
+    "observed_request": "desktop",
+    "orchestrator_outcome": "clarification required; no observations or receipts",
+    "evidence": "trace.jsonl OrchestratedSession.send_message return"
+  },
+  "dashboard": {
+    "status": "HTTP 200 and pulse intake observed; no outbound reply",
+    "evidence": "dashboard-submit.json and pulse-case-map.json"
+  },
+  "restart": {
+    "status": "reopened 14 journal records; later 16 after two new pulses",
+    "prior_fact_present_in_model_request_trace_lines": [],
+    "answer_recall": "not scored; planned recall/unknown question cases not run after requested sensory-path activation failed"
+  },
+  "sensory_motor": {
+    "status": "blocked",
+    "evidence": "sensory-path-blocker.json",
+    "valid_product_result": null
+  },
+  "process_shutdown": "both main.py processes exited normally; local review dashboard stopped",
+  "benchmark_score": null
+}

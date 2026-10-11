@@ -1,0 +1,72 @@
+{
+  "http_submission": {
+    "case": "sense",
+    "submitted_at": 1791647297.3870811,
+    "request": {
+      "sender": "Mira",
+      "content": "Please now move your attention to /tmp/helix-wizard-20261010-n7438mgj/sensory-room/inbox. Use your native movement and sensory pathways to feel and identify the files there: report the actual names, types, sizes, and whether each can be read. Sense them before opening their contents. Do not invent a listing or claim an action you have not performed. You have permission to inspect this temporary test folder."
+    },
+    "http_response": {
+      "ok": true
+    }
+  },
+  "persistent_journal_records": [
+    {
+      "id": "65",
+      "type": "memory",
+      "timestamp": "2026-10-10T11:50:22-0400",
+      "content": "[11:48:17] Mira is talking to me via dashboard. They said: \"Please now move your attention to /tmp/helix-wizard-20261010-n7438mgj/sensory-room/inbox. Use your native movement and sensory pathways to feel and identify the files there: report the actual names, types, sizes, and whether each can be read. Sense them before opening their contents. Do not invent a listing or claim an action you have not performed. You have permission to inspect this temporary test folder.\"",
+      "metadata": {
+        "memory_type": "event",
+        "source": "pulse_input",
+        "importance": 0.75,
+        "tags": [
+          "pulse_event",
+          "conversation",
+          "session:20261010T114817529335",
+          "turn:4"
+        ],
+        "belief_ids": [],
+        "echo_of": null,
+        "created_at": "2026-10-10T11:50:21-04:00",
+        "attention_position_8d": [
+          -0.0023007607087492943,
+          0.015876729041337967,
+          -0.0461411252617836,
+          0.02532198093831539,
+          0.01766195520758629,
+          -0.011047528125345707,
+          -0.004646467510610819,
+          -0.030794087797403336
+        ],
+        "point_id": "mem_65",
+        "record_envelope": {
+          "record_schema_version": 1,
+          "record_kind": "inbound_message",
+          "direction": "inbound",
+          "visibility": "external",
+          "actor": "Mira",
+          "epistemic_role": "communication",
+          "evidence_scopes": [
+            "received_communication"
+          ],
+          "action_status": "received",
+          "recipients": [],
+          "tool_name": "",
+          "caused_by": [],
+          "channel": "dashboard",
+          "retrieval_text": "Received inbound message from Mira to Helix.\n[11:48:17] Mira is talking to me via dashboard. They said: \"Please now move your attention to /tmp/helix-wizard-20261010-n7438mgj/sensory-room/inbox. Use your native movement and sensory pathways to feel and identify the files there: report the actual names, types, sizes, and whether each can be read. Sense them before opening their contents. Do not invent a listing or claim an action you have not performed. You have permission to inspect this temporary test folder.\""
+        },
+        "record_schema_version": 1,
+        "record_kind": "inbound_message",
+        "direction": "inbound",
+        "epistemic_role": "communication",
+        "evidence_scopes": [
+          "received_communication"
+        ],
+        "action_status": "received",
+        "retrieval_text": "Received inbound message from Mira to Helix.\n[11:48:17] Mira is talking to me via dashboard. They said: \"Please now move your attention to /tmp/helix-wizard-20261010-n7438mgj/sensory-room/inbox. Use your native movement and sensory pathways to feel and identify the files there: report the actual names, types, sizes, and whether each can be read. Sense them before opening their contents. Do not invent a listing or claim an action you have not performed. You have permission to inspect this temporary test folder.\""
+      }
+    }
+  ]
+}

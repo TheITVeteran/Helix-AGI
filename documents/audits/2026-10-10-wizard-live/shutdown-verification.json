@@ -1,0 +1,8 @@
+{
+  "time": 1791648032.87336,
+  "agent_pid": 1751151,
+  "agent_process_present": false,
+  "dashboard_port_accepting_connections": false,
+  "wizard_exec_exit_code": 0,
+  "wizard_exit_evidence": "normal execution session completed with exit code 0 after closeEvent"
+}

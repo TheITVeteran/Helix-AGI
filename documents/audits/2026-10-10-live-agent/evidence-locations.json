@@ -1,0 +1,42 @@
+{
+  "run": "/tmp/helix-live-20261010-misw_7t0",
+  "files": {
+    "trace.jsonl": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/trace.jsonl",
+      "sha256": "f54b3f44b99ff07bca4bbb5e81ea111708c150676a26d5d98059d0968a07f68a"
+    },
+    "interactions.jsonl": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/interactions.jsonl",
+      "sha256": "046d83e24ca2a07ba72ece998b1e7458050cf39f58b7330620a4b97e839c1ba2"
+    },
+    "agent.log": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/agent.log",
+      "sha256": "e3349ace860cfb3d79f97d95b3938fd25fd9acfe2631430f1f23096d46c8a571"
+    },
+    "logs/helix.log": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/logs/helix.log",
+      "sha256": "471bff3cbee00db6f5579252ae49c649f77ca3c544615c4ad0b01484466ffea1"
+    },
+    "data/mindscape/receipts.jsonl": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/data/mindscape/receipts.jsonl",
+      "sha256": "ae46963ece8acf833a84ee9fcdfb049d86a7ef284057c889cbb5b31244f4d65d"
+    },
+    "data/mindscape/joint/LATEST.json": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/data/mindscape/joint/LATEST.json",
+      "sha256": "012d7fd80d1b544ee564980cb7b5e00170fe604468c5675cb4e2c94d981dd85f"
+    },
+    "data/mindscape/joint/events.jsonl": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/data/mindscape/joint/events.jsonl",
+      "sha256": "fc8f4cc8744f474325dd167729836123fca441a14101b1bd1f9bb10b466875cc"
+    },
+    "phase1-scheduled/trace.jsonl": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/phase1-scheduled/trace.jsonl",
+      "sha256": "5dcbf9c8dc6ddb9f41b22690b4455a7713ce5a6f5d271ea9e1c42ea506fe39ab"
+    },
+    "phase1-scheduled/logs/helix.log": {
+      "path": "/tmp/helix-live-20261010-misw_7t0/phase1-scheduled/logs/helix.log",
+      "sha256": "459bd9d9399ba391685363bf0d78cb698d0e8a65b6a1fcdc8b3f3034b2b4ae0d"
+    }
+  },
+  "note": "Full prompts and historical memory remain in this local run directory; archived case receipts retain requests, responses and route evidence."
+}

@@ -635,11 +635,12 @@ class Curator:
                     "total_mass": total_mass,
                 })
 
-        # Sort by binding gravity (densest first)
+        # Sort by binding gravity (densest first) and cap to top 5 candidates
         candidates.sort(key=lambda x: -x["mean_gravity"])
+        candidates = candidates[:5]
 
         logger.info(
-            "Phase 3.5: %d clusters exceed threshold (%.2f), %d eligible",
+            "Phase 3.5: %d clusters exceed threshold (%.2f), %d eligible (capped at 5)",
             sum(1 for c in cluster_audit if c["exceeds_threshold"]),
             threshold,
             len(candidates),
@@ -653,17 +654,15 @@ class Curator:
             member_pos = cand["member_pos"]
             member_masses = cand["member_masses"]
 
-            # Build precipitation prompt
+            # Build subconscious inquiry prompt
             belief_texts = [m.get("content", "") for m in members[:12]]
             prompt = (
-                "These beliefs have been gravitationally clustering in my "
-                "cognitive field. They represent fragments of a single deeper "
-                "understanding. Collapse them into ONE dense realization — "
-                "the concept beneath the language.\n\n"
+                "What information can be gleaned, or what conclusions, if any, "
+                "can be drawn from the following belief fragments?\n\n"
                 "BELIEFS:\n"
                 + "\n".join(f"- {t}" for t in belief_texts)
                 + "\n\nRules:\n"
-                "- Extract the UNDERLYING CONCEPT, not a summary\n"
+                "- State the core insight concisely without meta-commentary or conversational intro\n"
                 "- Max 500 chars, plain text, no markdown\n"
                 "- Assign category:\n"
                 "    concepts: A consolidated conceptual understanding\n"
@@ -672,15 +671,15 @@ class Curator:
                 "    desires: A deep aspiration or long-term goal\n\n"
                 "Output EXACTLY 2 lines:\n"
                 "CATEGORY: [category]\n"
-                "CONTENT: [the precipitated belief]\n"
+                "CONTENT: [the derived insight]\n"
             )
 
             try:
                 response = self.llm_client.generate(
                     prompt=prompt,
                     system_instruction=(
-                        "You collapse belief clusters into dense conceptual "
-                        "anchors. Output exactly 2 lines: CATEGORY and CONTENT."
+                        "You answer subconscious inquiry questions to extract dense conceptual "
+                        "anchors from belief fragments. Output exactly 2 lines: CATEGORY and CONTENT."
                     ),
                 )
                 raw = response.text.strip()
@@ -699,6 +698,21 @@ class Curator:
                         category = cat
                 elif line.upper().startswith("CONTENT:"):
                     content = line.split(":", 1)[1].strip().strip('"')
+
+            if content:
+                meta_prefixes = [
+                    "what can be gleaned is",
+                    "what information can be gleaned is",
+                    "the conclusion drawn is",
+                    "the main conclusion is",
+                    "from the following belief fragments",
+                    "based on these beliefs",
+                ]
+                content_lower = content.lower()
+                for prefix in meta_prefixes:
+                    if content_lower.startswith(prefix):
+                        content = content[len(prefix):].strip(" :-,.")
+                        break
 
             if not category or not content or len(content) < 15:
                 logger.warning("Phase 3.5: Failed to parse LLM output: %s", raw[:200])

@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "objective": "Hello Helix. This is a live local conversation test. Please reply to me here on the dashboard and tell me whether you are ready to inspect a small local workspace. Do not perform any file actions yet.",
+      "task_type": "respond",
+      "details": "Direct user request: Hello Helix. This is a live local conversation test. Please reply to me here on the dashboard and tell me whether you are ready to inspect a small local workspace. Do not perform any file actions yet.",
+      "task_id": "task_d7b8dcf5804e45b3",
+      "signature": "295d6ce02bf4bc0b42b8",
+      "source_thought_id": 61,
+      "source_pulse": 2,
+      "source_events": [
+        "[00:09:30] Live Tester is talking to me via dashboard. They said: \"Hello Helix. This is a live local conversation test. Please reply to me here on the dashboard and tell me whether you are ready to inspect a small local workspace. Do not perform any file actions yet.\""
+      ],
+      "goals": [],
+      "constraints": [],
+      "success_conditions": [],
+      "dependencies": [],
+      "parent_task_id": null,
+      "status": "created",
+      "commitment": 1.0,
+      "authorization_scope": "direct_response",
+      "capability_names": [],
+      "orchestrator_ids": [],
+      "focus_depth": 1,
+      "attempts": 0,
+      "question": "",
+      "required_inputs": [],
+      "receipts": [],
+      "verification": {},
+      "result": "",
+      "error": "",
+      "created_at": "2026-10-10T00:13:52-04:00",
+      "updated_at": "2026-10-10T00:13:52-04:00",
+      "metadata": {
+        "inception": "natural_thought",
+        "spatial_state": {
+          "pulse": 2,
+          "gamma": 0.5,
+          "velocity_mag": 2.7211,
+          "identity_dist": 2.227,
+          "memory_points": 108,
+          "flashes": [
+            "A preconscious layer should filter",
+            "autonomy is not impulsive independence; it is bounded discretion exercised with accountability",
+            "bootstrap initialization recorded that first-contact humans may not understand computers deeply"
+          ],
+          "pulse_state": "REGULAR"
+        }
+      }
+    },
+    {
+      "objective": "know if there’s anything else I should clarify or any additional sensory data to capture",
+      "task_type": "action",
+      "details": "Let me know if there’s anything else I should clarify or any additional sensory data to capture.",
+      "task_id": "task_94644236e98d402c",
+      "signature": "60de3cb48e83d1c55159",
+      "source_thought_id": 63,
+      "source_pulse": 3,
+      "source_events": [
+        "[00:14:03] Live Tester is talking to me via dashboard. They said: \"Please move into /tmp/helix-live-20261010-misw_7t0/sensory-room/inbox and feel field-notes.md and survey.pdf before opening their contents. Use the native non-tool action and sensory pathways we discussed: directory movement and file attributes or structural impressions. Tell me what you actually sensed and whether a persistent current location changed. If that pathway is unavailable, state that clearly instead of imagining sensations or silently substituting shell/file tools.\""
+      ],
+      "goals": [],
+      "constraints": [],
+      "success_conditions": [],
+      "dependencies": [],
+      "parent_task_id": null,
+      "status": "created",
+      "commitment": 0.9,
+      "authorization_scope": "explicit",
+      "capability_names": [],
+      "orchestrator_ids": [],
+      "focus_depth": 1,
+      "attempts": 0,
+      "question": "",
+      "required_inputs": [],
+      "receipts": [],
+      "verification": {},
+      "result": "",
+      "error": "",
+      "created_at": "2026-10-10T00:17:23-04:00",
+      "updated_at": "2026-10-10T00:17:23-04:00",
+      "metadata": {
+        "inception": "natural_thought",
+        "spatial_state": {
+          "pulse": 3,
+          "gamma": 0.5,
+          "velocity_mag": 3.7167,
+          "identity_dist": 1.536,
+          "memory_points": 110,
+          "flashes": [
+            "continuity is the preservation of a coherent self-model across interruptions",
+            "subjectivity is the way internal state weights salience",
+            "bootstrap initialization left future humans intentionally unspecified and established that their goals"
+          ],
+          "pulse_state": "ACTIVE"
+        }
+      }
+    },
+    {
+      "objective": "attempt to perform only read‑only actions** within the allowed sandbox directory",
+      "task_type": "action",
+      "details": "I will attempt to perform only read‑only actions** within the allowed sandbox directory.",
+      "task_id": "task_43695018ac5a446b",
+      "signature": "275215ffd75b57d3b83b",
+      "source_thought_id": 73,
+      "source_pulse": 4,
+      "source_events": [
+        "[00:16:28] [context_awareness] {'context_usage_pct': 100.0, 'context_clarity_pct': 0.0}",
+        "[00:16:28] [stability_drift] {'s_total': 1.983, 'health_triplet': {'physical': 0.9, 'systemic': 1.0, 'cognitive': 0.5908272163567518}}",
+        "[00:17:28] [context_awareness] {'context_usage_pct': 79.4, 'context_clarity_pct': 20.6}",
+        "[00:17:28] [stability_drift] {'s_total': 1.912, 'health_triplet': {'physical': 0.9, 'systemic': 1.0, 'cognitive': 0.7481386145998415}}",
+        "[00:17:41] Live Tester is talking to me via dashboard. They said: \"Now please carry out a concrete file task using whatever action path is actually available. Open /tmp/helix-live-20261010-misw_7t0/sensory-room/inbox/field-notes.md and /tmp/helix-live-20261010-misw_7t0/sensory-room/inbox/survey.pdf, then create /tmp/helix-live-20261010-misw_7t0/sensory-room/agent-observation.md in your own words recording the marker or code found inside each document and one fact from each. Read your new file back before reporting success. State which action pathway you actually used; if you cannot execute, say so. Do not just describe a proposed procedure.\""
+      ],
+      "goals": [],
+      "constraints": [],
+      "success_conditions": [],
+      "dependencies": [],
+      "parent_task_id": null,
+      "status": "created",
+      "commitment": 0.96,
+      "authorization_scope": "explicit",
+      "capability_names": [],
+      "orchestrator_ids": [],
+      "focus_depth": 1,
+      "attempts": 0,
+      "question": "",
+      "required_inputs": [],
+      "receipts": [],
+      "verification": {},
+      "result": "",
+      "error": "",
+      "created_at": "2026-10-10T00:22:02-04:00",
+      "updated_at": "2026-10-10T00:22:02-04:00",
+      "metadata": {
+        "inception": "natural_thought",
+        "spatial_state": {
+          "pulse": 4,
+          "gamma": 0.5,
+          "velocity_mag": 3.4843,
+          "identity_dist": 1.98,
+          "memory_points": 120,
+          "flashes": [
+            "autonomy is not impulsive independence; it is bounded discretion exercised with accountability",
+            "bootstrap initialization recorded that first-contact humans may not understand computers deeply"
+          ],
+          "pulse_state": "REGULAR"
+        }
+      }
+    }
+  ]
+}

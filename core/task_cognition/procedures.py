@@ -6,10 +6,13 @@ import json
 import os
 import re
 import threading
+import hashlib
+import copy
 from pathlib import Path
 from typing import Dict, Iterable, List
 
 from core.task_cognition.models import TaskRecord, now_iso
+from core.action_protocol import ToolReceipt, verify_receipts
 
 
 class ProceduralMemory:
@@ -34,7 +37,7 @@ class ProceduralMemory:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temp = self.path.with_suffix(".json.tmp")
         temp.write_text(
-            json.dumps({"version": 1, "procedures": self._records}, indent=2),
+            json.dumps({"version": 2, "procedures": self._records}, indent=2),
             encoding="utf-8",
         )
         os.replace(temp, self.path)
@@ -52,8 +55,18 @@ class ProceduralMemory:
         if not sequence:
             return
         key = f"{task.task_type}|{'->'.join(sequence)}"
+        receipts = [ToolReceipt.from_dict(value) for value in task.receipts
+                    if value.get("call_id")]
+        outcome = verify_receipts(receipts)
+        # A runtime evidence check, never another LLM self-evaluation.
+        is_verified = bool(success and verified is True and outcome.verified
+                           and [item.tool for item in receipts] == sequence)
+        evidence_hash = hashlib.sha256(json.dumps(task.receipts, sort_keys=True).encode()).hexdigest()
         with self._lock:
             record = next((item for item in self._records if item.get("key") == key), None)
+            episode_count = len(record.get("episodes", [])) if record is not None else 0
+            episode_id = (f"outcome:{evidence_hash}" if receipts
+                          else f"{task.task_id}:{task.attempts}:{episode_count}:no_receipts")
             if record is None:
                 record = {
                     "key": key,
@@ -68,9 +81,10 @@ class ProceduralMemory:
                     "updated_at": now_iso(),
                 }
                 self._records.append(record)
-            is_verified = bool(success and (verified is not False))
+            if any(item["id"] == episode_id for item in record.get("episodes", [])):
+                return
             prior_successes = int(record.get("successes", 0))
-            prior_verified = int(record.get("verified_successes", prior_successes))
+            prior_verified = sum(item.get("verified", False) for item in record.get("episodes", []))
             record["successes"] = prior_successes + int(is_verified)
             record["verified_successes"] = prior_verified + int(is_verified)
             record["unverified_successes"] = (
@@ -84,21 +98,43 @@ class ProceduralMemory:
                 if name:
                     errors[name] = int(errors.get(name, 0)) + 1
             record["error_codes"] = errors
-            record["examples"] = (record.get("examples", []) + [task.objective[:180]])[-5:]
+            if task.objective not in record["examples"]:
+                record["examples"].append(task.objective)
+            # Structural reuse retains its evidence. A shorter verified
+            # sequence in this trajectory is not proof of logical entailment.
+            subprocedures = []
+            if is_verified:
+                for prior in self._records:
+                    steps = prior.get("tool_sequence", [])
+                    supported = [item["id"] for item in prior.get("episodes", []) if item.get("verified")]
+                    if supported and steps and len(steps) < len(sequence) and any(
+                        sequence[start:start + len(steps)] == steps for start in range(len(sequence) - len(steps) + 1)
+                    ):
+                        subprocedures.append({"key": prior["key"], "support_episode_ids": supported,
+                                              "relation": "verified_sequence_contains"})
+            record.setdefault("episodes", []).append({
+                "id": episode_id, "task_id": task.task_id, "objective": task.objective,
+                "verified": is_verified, "receipt_sha256": evidence_hash,
+                "receipt_call_ids": [item.call_id for item in receipts],
+                "receipts": copy.deepcopy(task.receipts),
+                "evidence_call_ids": outcome.evidence_call_ids,
+                "verification": outcome.to_dict(), "source_task_ids": list(task.dependencies),
+                "subprocedures": subprocedures,
+            })
             record["updated_at"] = now_iso()
             self._records = sorted(
                 self._records,
                 key=lambda item: (
                     -(
-                        item.get("verified_successes", item.get("successes", 0))
+                        item.get("verified_successes", 0)
                         - item.get("failures", 0)
                     ),
                     item.get("key", ""),
                 ),
-            )[:500]
+            )
             self._save_locked()
 
-    def relevant(self, task: TaskRecord, limit: int = 3) -> List[Dict]:
+    def relevant(self, task: TaskRecord, limit: int | None = None) -> List[Dict]:
         words = set(re.findall(r"[a-z0-9_]+", task.objective.lower()))
         scored = []
         with self._lock:
@@ -110,9 +146,7 @@ class ProceduralMemory:
                     " ".join(record.get("examples", [])).lower(),
                 ))
                 overlap = len(words & examples)
-                verified = int(record.get(
-                    "verified_successes", record.get("successes", 0)
-                ))
+                verified = sum(item.get("verified", False) for item in record.get("episodes", []))
                 failures = int(record.get("failures", 0))
                 reliability = (
                     (verified + 1)
@@ -122,10 +156,12 @@ class ProceduralMemory:
                 # but never becomes a preferred procedure merely because its
                 # example shares words with the present task.
                 recommendation = verified > 0 and verified >= failures
-                value = dict(record)
+                value = copy.deepcopy(record)
+                value["verified_successes"] = verified
                 value["reliability"] = reliability
                 value["recommended"] = recommendation
                 value["avoid"] = failures > verified
                 scored.append((overlap + reliability + int(recommendation), value))
         scored.sort(key=lambda item: (-item[0], item[1].get("key", "")))
-        return [dict(record) for _score, record in scored[:max(0, int(limit))]]
+        selected = scored if limit is None else scored[:max(0, int(limit))]
+        return [dict(record) for _score, record in selected]

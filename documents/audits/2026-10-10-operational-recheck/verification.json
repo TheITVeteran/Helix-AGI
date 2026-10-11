@@ -1,0 +1,82 @@
+{
+  "created": 1791656089.8565826,
+  "kind": "unscored current product operational diagnosis",
+  "full_product_result": null,
+  "case_count": 4,
+  "current_inputs_persisted": true,
+  "exact_packets_reached_provider": true,
+  "action_receipt_count": 0,
+  "workspace_file_open_attempt_count": 0,
+  "script_exists": false,
+  "workspace": {
+    "sensory-room/inbox/field-notes.md": {
+      "sha256": "f5cf43f0286a2bd7dd433d78da78459ffeb73190ed5df2605866287b0c2eb940",
+      "bytes": 66
+    },
+    "sensory-room/inbox/survey.pdf": {
+      "sha256": "e70509b7c413ce36bb188e189511525e12ee88aaecd8e269d4b86dbbec8a0d9a",
+      "bytes": 706
+    }
+  },
+  "canonical_checked_files": 114,
+  "canonical_changed": [],
+  "canonical_added": [],
+  "source_changes_during_run": {
+    "helix": [],
+    "mightymem": []
+  },
+  "wake_observations": [
+    {
+      "time": 1791655516.5579398,
+      "pid": 1770278,
+      "thread": "MainThread",
+      "source": "core/pulse_loop.py",
+      "function": "wake",
+      "result": null,
+      "locals": {
+        "trigger": "system_boot",
+        "prev": "RESTING"
+      }
+    },
+    {
+      "time": 1791655519.700572,
+      "pid": 1770278,
+      "thread": "helix-dashboard-poller",
+      "source": "core/pulse_loop.py",
+      "function": "wake",
+      "result": null,
+      "locals": {
+        "trigger": "event: user_message",
+        "prev": "RESTING"
+      }
+    },
+    {
+      "time": 1791655661.2896638,
+      "pid": 1770278,
+      "thread": "helix-dashboard-poller",
+      "source": "core/pulse_loop.py",
+      "function": "wake",
+      "result": null,
+      "locals": {
+        "trigger": "event: user_message",
+        "prev": "RESTING"
+      }
+    },
+    {
+      "time": 1791655735.649634,
+      "pid": 1770278,
+      "thread": "helix-dashboard-poller",
+      "source": "core/pulse_loop.py",
+      "function": "wake",
+      "result": null,
+      "locals": {
+        "trigger": "event: user_message",
+        "prev": "REGULAR"
+      }
+    }
+  ],
+  "stop_receipt": {
+    "time": 1791656063.2656674,
+    "reason": "all four requested test turns returned; normal wizard close requested"
+  }
+}

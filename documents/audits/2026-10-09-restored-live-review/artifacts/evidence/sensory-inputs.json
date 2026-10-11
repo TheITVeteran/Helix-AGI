@@ -1,0 +1,17 @@
+{
+  "kind": "input documents only; no authored agent output",
+  "files": {
+    "brief.md": {
+      "sha256": "3616e1ea2fea91bd9f50ca181db0a3ad9903eb24488f72f5757102eecb493358",
+      "bytes": 121
+    },
+    "report.pdf": {
+      "sha256": "63cd9d7eb166b8460d27e5f10d87ed4fd6e94fdaa7c08f322cae7f0a7a8b811b",
+      "bytes": 613
+    }
+  },
+  "expected_phrases": {
+    "brief.md": "meadow-c72a638c9a",
+    "report.pdf": "harbor-4255149107"
+  }
+}

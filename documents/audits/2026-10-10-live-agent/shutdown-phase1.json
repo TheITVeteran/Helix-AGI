@@ -1,0 +1,1 @@
+{"pid": 1710906, "command": "/home/nemo/Helix_AGI (GitHub Repo) (Public)/venv/bin/python main.py ", "time": 1791605316.3746727, "reason": "configured sleep immediately overrides incoming wake; continue under declared awake test schedule"}

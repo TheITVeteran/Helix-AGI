@@ -975,6 +975,66 @@ class StabilitySentinel:
             "dkl_ratio": round(dkl_ratio, 3),
         }
 
+    def get_cognitive_focus_state(
+        self,
+        feeling: Optional[dict] = None,
+        pending_task: Optional[dict] = None,
+        has_pending_obligations: bool = False,
+    ) -> dict:
+        """Derive the current working memory focus state.
+
+        Combines 384D/8D attention entropy H(q), attentional inertia,
+        and hedonic omega with subconscious RWKV feelings and task obligations
+        to dynamically drive the Context Loom's focus allocation.
+        """
+        feeling = feeling or {}
+        modality = feeling.get("modality", "")
+        is_external = bool(feeling.get("is_external", False))
+        speak_prob = float(feeling.get("speak_probability", 0.0))
+
+        # Entropy ratio from 384D attention distribution
+        h_ratio = 1.0
+        spatial_H = getattr(self, "_spatial_H", None)
+        baseline = getattr(self, "_h_raw_baseline", None)
+        if spatial_H is not None and baseline and baseline > 0.01:
+            h_ratio = float(spatial_H) / float(baseline)
+        elif getattr(self, "current_entropy", 0.0) > 0:
+            h_ratio = float(self.current_entropy) / max(0.01, float(self.baseline_entropy))
+
+        if has_pending_obligations or modality == "INTERNAL_ACTION_REQUIRED":
+            focus_modality = "INTERNAL_ACTION_REQUIRED"
+            weights = {
+                "action": 3.0,
+                "inquiry": 1.5,
+                "reflection": 1.0,
+                "conversation": 0.2,
+            }
+        elif is_external and speak_prob >= 0.35 and h_ratio <= 1.3:
+            focus_modality = "EXTERNAL_COMMUNICATION"
+            weights = {
+                "conversation": 2.5,
+                "reflection": 1.0,
+                "action": 0.5,
+                "inquiry": 1.0,
+            }
+        else:
+            focus_modality = "INTERNAL_MONOLOGUE"
+            refl_weight = 3.0 if h_ratio < 0.8 else 2.0
+            weights = {
+                "reflection": refl_weight,
+                "inquiry": 1.8,
+                "action": 0.8,
+                "conversation": 0.4,
+            }
+
+        return {
+            "modality": focus_modality,
+            "weights": weights,
+            "h_ratio": round(h_ratio, 3),
+            "omega": round(float(self.omega), 3),
+            "mode": self.get_generation_params().get("mode", "steady"),
+        }
+
     # ── Lagrangian Snapshot (for State-Bound Memory) ───────────────
 
     def get_lagrangian_snapshot(self) -> dict:

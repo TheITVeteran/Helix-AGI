@@ -1,0 +1,75 @@
+{
+  "captured_at_utc": "2026-10-11T01:15:01.836885+00:00",
+  "kind": "implementation-check handoff; not a product evaluation or composition manifest",
+  "repository": "/home/nemo/Helix_AGI (GitHub Repo) (Public)",
+  "head": "d78de2707dd44c7d88b41f57f67844255e42e952",
+  "working_tree_status": " M README.md\n M SYSTEM_MANUAL.md\n M core/auxiliary_llm.py\n M core/context_compressor.py\n M core/curator.py\n M core/preconscious.py\n M core/pulse_loop.py\n M core/task_cognition/capabilities.py\n M core/task_cognition/controller.py\n M core/task_cognition/procedures.py\n M core/unified_retrieval.py\n M documents/architecture_current.md\n M install.sh\n M llm/providers/ollama_provider.py\n M main.py\n M memory/mrag/semantic_lane.py\n M memory/record_envelope.py\n M setup.py\n M tests/test_mrag_semantic_lane.py\n M tests/test_task_cognition.py\n M wizard/app.py\n M wizard/pages/credentials.py\n M wizard/pages/schedule.py\n M wizard/pages/summary.py\n?? core/context_focus.py\n?? core/mindscape.py\n?? core/mindscape_config.py\n?? core/mindscape_context.py\n?? core/mindscape_intention.py\n?? core/mindscape_lanes.py\n?? core/mindscape_workspace.py\n?? core/pulse_context.py\n?? documents/audits/2026-10-09-mindscape-launch/\n?? documents/audits/2026-10-09-restored-live-review/\n?? documents/audits/2026-10-10-attention-focus/\n?? documents/audits/2026-10-10-context-stability/\n?? documents/audits/2026-10-10-context-weave/\n?? documents/audits/2026-10-10-live-agent/\n?? documents/audits/2026-10-10-memory-pathways/\n?? documents/audits/2026-10-10-native-cycle-repair/\n?? documents/audits/2026-10-10-operational-recheck/\n?? documents/audits/2026-10-10-procedural-focus/\n?? documents/audits/2026-10-10-wizard-live/\n?? documents/mindscape_diagnostics_2026-10-10.md\n?? documents/mindscape_launch.md\n?? implementation_plan.md\n?? llm/ollama_tokens.py\n?? requirements-mindscape.txt\n?? tests/test_context_focus.py\n?? tests/test_mindscape_body.py\n?? tests/test_mindscape_continuity.py\n?? tests/test_mindscape_roles.py\n?? tests/test_mindscape_setup.py\n?? tests/test_pulse_context.py\n?? tests/test_pulse_wake.py\n",
+  "context_layout": "separate-routing-and-native-ability-effects-v9",
+  "source_snapshot_scope": "five changed runtime modules and seven focused test modules; not the full dependency graph",
+  "source_sha256": {
+    "core/pulse_context.py": "ab01a4f98b88798e1d46252643fb175019db19102cb26e31e2b631082f68df5f",
+    "core/preconscious.py": "9ef7ef13fc6bed81771ad63dd9a8f5ff55e2ab1f2772db244fecd86a742fabad",
+    "core/mindscape_intention.py": "ca6ce8f73ce06dd2573571cbb2c7d36504a059f7ac91ff9108bcc1f21df2789a",
+    "core/mindscape_workspace.py": "d812d1c3f2c61bde58e1f3ba55f1403cbc3662a0254487cced1c910cbce80d26",
+    "core/mindscape.py": "ce06409969906f082d64502aa22ccf4ff89fffb98a5ab6857693c841a31bd8d6",
+    "tests/test_mindscape_roles.py": "6ae9fd59005994f83f32577423bbf17769e07cade297aea0b9ad2615a7b66b39",
+    "tests/test_mindscape_body.py": "feeb65687d4ca92b31911f428641180a7984e874dc006bb24bb1f899288624ca",
+    "tests/test_mindscape_continuity.py": "99ababaf34f71a39d2652a1d375acce3b20c63c1a8e005072e54f1d94345e2eb",
+    "tests/test_pulse_context.py": "398de5fe2e9d2a1fc768322bb05a62ccc690d46d18d91d791a1efcccaa04a04a",
+    "tests/test_context_focus.py": "15c90b43e9f3d76f3f9393d3803f37200fd03ca689956b6195f2534fc13b840f",
+    "tests/test_mindscape_setup.py": "8505abbbc5d985a4911d7d9f2e5f4581571ca6f55d617d1452d109eafe7ef335",
+    "tests/test_pulse_wake.py": "fbc8fcb5cac4f292704a07ce8d71db69d31ef7f4ae4d8cb3cab8607465d813db"
+  },
+  "focused_checks": {
+    "command": [
+      "venv/bin/python",
+      "-m",
+      "unittest",
+      "tests.test_mindscape_roles",
+      "tests.test_mindscape_body",
+      "tests.test_mindscape_continuity",
+      "tests.test_pulse_context",
+      "tests.test_context_focus",
+      "tests.test_mindscape_setup",
+      "tests.test_pulse_wake"
+    ],
+    "result": "83 tests passed; completed before this documentation handoff",
+    "raw_log": "implementation-checks.txt",
+    "raw_log_sha256": "f2f84fbd781e148ad2b286098ace221e0da59eac789174ac52ec07da644e8ea7",
+    "log_modified_at_utc": "2026-10-11T01:10:58.111763+00:00"
+  },
+  "closure_checks": [
+    {
+      "command": [
+        "venv/bin/python",
+        "-m",
+        "py_compile",
+        "core/pulse_context.py",
+        "core/preconscious.py",
+        "core/mindscape_intention.py",
+        "core/mindscape_workspace.py",
+        "core/mindscape.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "latest_live_evidence": "../attempt-7-intention-gate/verification.json",
+  "post_change_live_trial": false,
+  "full_readiness_result": null,
+  "open_defects": [
+    "A single verified native return does not establish all task obligations or reply claims.",
+    "Live recall and action selection remain unreliable in the latest trial."
+  ]
+}

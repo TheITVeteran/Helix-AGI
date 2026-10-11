@@ -261,8 +261,14 @@ def _procedural_experience(data_dir: str):
         verified: bool,
         error_codes: List[str],
     ) -> None:
+        from core.action_protocol import ToolReceipt, ReceiptStatus, EvidenceLevel
+        receipts = [
+            ToolReceipt(name, {}, "verified", ReceiptStatus.SUCCESS, EvidenceLevel.CONFIRMED).to_dict()
+            for name in tool_sequence
+        ] if verified else []
+        task = TaskRecord(objective=request, task_type="action", receipts=receipts)
         memory.observe(
-            task_for(request),
+            task,
             tool_sequence,
             success=verified,
             verified=verified,

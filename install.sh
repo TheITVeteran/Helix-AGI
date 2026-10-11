@@ -24,7 +24,7 @@ for candidate in python3 python; do
         version=$("$candidate" --version 2>&1 | grep -oP '\d+\.\d+')
         major=$(echo "$version" | cut -d. -f1)
         minor=$(echo "$version" | cut -d. -f2)
-        if [ "$major" -ge 3 ] && [ "$minor" -ge 10 ]; then
+        if [ "$major" -gt 3 ] || { [ "$major" -eq 3 ] && [ "$minor" -ge 11 ]; }; then
             PYTHON="$candidate"
             break
         fi
@@ -32,7 +32,7 @@ for candidate in python3 python; do
 done
 
 if [ -z "$PYTHON" ]; then
-    echo "❌ Python 3.10+ is required but not found."
+    echo "❌ Python 3.11+ is required but not found."
     echo "   Install Python from https://python.org/downloads"
     exit 1
 fi
@@ -40,36 +40,36 @@ fi
 echo "✓ Using $PYTHON ($($PYTHON --version))"
 
 # ── Check virtual environment ─────────────────────────────────
-if [ -d "venv" ]; then
+if [ -x "venv/bin/python" ]; then
     echo "✓ Virtual environment found"
-    source venv/bin/activate 2>/dev/null || true
-elif [ -d ".venv" ]; then
+    source venv/bin/activate
+    PYTHON="$SCRIPT_DIR/venv/bin/python"
+elif [ -x ".venv/bin/python" ]; then
     echo "✓ Virtual environment found (.venv)"
-    source .venv/bin/activate 2>/dev/null || true
+    source .venv/bin/activate
+    PYTHON="$SCRIPT_DIR/.venv/bin/python"
 else
     echo "Creating virtual environment..."
     $PYTHON -m venv venv
     source venv/bin/activate
+    PYTHON="$SCRIPT_DIR/venv/bin/python"
     echo "✓ Virtual environment created"
 fi
 
 # ── Install dependencies ──────────────────────────────────────
 echo ""
 echo "Checking dependencies..."
-pip install --quiet --upgrade pip
+"$PYTHON" -m pip install --quiet --upgrade pip
 
 # Install PyQt6 first (needed for the wizard GUI)
-pip install --quiet PyQt6 PyQt6-WebEngine 2>/dev/null || {
+"$PYTHON" -m pip install --quiet PyQt6 PyQt6-WebEngine || {
     echo "⚠ PyQt6 installation failed. You may need to install system Qt libraries:"
     echo "   sudo apt install python3-pyqt6 python3-pyqt6.qtwebengine"
 }
 
 # Install remaining requirements
-if [ -f "requirements.txt" ]; then
-    pip install --quiet -r requirements.txt 2>/dev/null || {
-        echo "⚠ Some dependencies failed to install."
-        echo "   The wizard may still work — advanced features may be limited."
-    }
+if [ -f "requirements-mindscape.txt" ]; then
+    "$PYTHON" -m pip install --quiet -r requirements-mindscape.txt
 fi
 
 echo "✓ Dependencies ready"
@@ -78,4 +78,4 @@ echo ""
 # ── Launch Wizard ─────────────────────────────────────────────
 echo "Launching Helix‑AGI Setup Wizard..."
 echo ""
-$PYTHON -m wizard "$@"
+"$PYTHON" -m wizard "$@"

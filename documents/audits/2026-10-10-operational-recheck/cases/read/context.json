@@ -1,0 +1,3947 @@
+{
+  "time": 1791655751.2081928,
+  "kind": "pulse_context",
+  "helix_pulse": 4,
+  "events": [
+    "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\""
+  ],
+  "rwkv_tokens": 102,
+  "joint_state_before": "af258ee35a620b667213d7b3e796dc72665bcda0d747b893cb0b081e4af644b4",
+  "joint_state_after": "4b958bfa032479612175a6cb4aae85005b56d91436bb4450e8cba680f61d3e5f",
+  "habitus_pulse": 136,
+  "sensed_modality": "EXTERNAL_COMMUNICATION",
+  "communicative_intent": true,
+  "cortex_proposal": {
+    "proposal_id": "cortex-proposal:ee5219a95c5fd71c31f8ac174e488bec",
+    "model_sha256": "d35a598a4aebdc466654e2d661ac1a1feee0154f1902d0054daf9c448170413a",
+    "graph_field_sha256": "1b99ecea72a5fc2cb84de12d07a88752b8525a378c1f8dcbfb106fdf8c4e31b6",
+    "sensory_payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sensed_byte_count": 0,
+    "action_probabilities": {
+      "DO": 0.321076363325119,
+      "LOOK": 0.29852962493896484,
+      "SPEAK": 0.38039398193359375
+    },
+    "predicted_consequence": -0.2813965380191803,
+    "predicted_valence": -0.344573050737381,
+    "route_alignment": -0.12466449290513992,
+    "confidence": 0.05931761860847473
+  },
+  "graph_field": [
+    0.0,
+    0.15703065434071473,
+    -0.00016616648971011635,
+    0.0,
+    0.0,
+    0.0,
+    0.0004996847311021513,
+    -0.04728862607873646,
+    0.0,
+    0.0,
+    0.0,
+    0.08550127163201483,
+    -0.187238768540651,
+    0.010768974319402307,
+    0.018653225989845673,
+    -0.009254305197034074,
+    0.0,
+    0.0,
+    0.0,
+    -0.07819509091012136,
+    0.0,
+    -0.00017885740232337035,
+    -0.1287966043924356,
+    0.009840522440558672,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.15583186848281094,
+    0.0,
+    -0.01337347850904869,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.20610155537761551,
+    0.0,
+    0.2578669093744488,
+    0.18660952755182816,
+    0.009840522440558672,
+    0.0,
+    0.06168000903454981,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.057713708136239196,
+    0.0002386626549331396,
+    0.0,
+    0.0,
+    -0.02952156732167602,
+    -0.0052697842767149205,
+    0.0,
+    0.20579677352153217,
+    -0.010101013078370722,
+    0.0,
+    0.0,
+    0.0,
+    -0.019681044881117347,
+    -0.010768974319402307,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.11636225889133124,
+    0.00988746035434051,
+    0.010101013078370722,
+    0.06317515499526667,
+    0.0,
+    0.0,
+    -0.12840832712356476,
+    -0.16601381165657247,
+    0.0,
+    0.09927503707075958,
+    0.0,
+    -0.12315557588551375,
+    0.0,
+    -0.0016113641648655655,
+    0.0,
+    0.00793070853740523,
+    0.0,
+    0.0,
+    -0.1961678261831365,
+    -0.003307763850088495,
+    0.2599856038064401,
+    -0.009840522440558672,
+    0.0,
+    0.0,
+    0.0,
+    0.009840522440558672,
+    -0.01337347850904869,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.03530262971229468,
+    0.0,
+    0.0242517830449611,
+    -0.1396690076212843,
+    0.0,
+    0.0007707098941033142,
+    0.0,
+    -0.06317515499526667,
+    0.13113671534924698,
+    -0.14037740913237073,
+    -0.06317515499526667,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.07819509091012136,
+    -0.009840522440558672,
+    -0.010768974319402307,
+    0.0,
+    0.0,
+    -0.0710828962561964,
+    0.0,
+    0.0,
+    -0.05642274664278685,
+    0.0,
+    4.69379137818392e-05,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.00675240835247983,
+    0.02952156732167602,
+    0.0710828962561964,
+    0.0,
+    -0.010101013078370722,
+    0.0,
+    -0.1287966043924356,
+    0.0,
+    0.0,
+    0.0,
+    -0.07126306634828677,
+    0.12694971468626087,
+    -0.009840522440558672,
+    -0.010101013078370722,
+    0.0,
+    -0.09897142488864386,
+    0.00017885740232337035,
+    -0.0033884054176242235,
+    0.0,
+    -0.010768974319402307,
+    -0.009254305197034074,
+    0.0,
+    0.0,
+    -0.01704186182498011,
+    -0.0007685512074977988,
+    -0.06317515499526667,
+    0.010101013078370722,
+    0.004329094847169573,
+    0.0,
+    0.0,
+    0.0007459685224903313,
+    -0.00025410172093005595,
+    0.12129619290868832,
+    -0.0015456102580506546,
+    0.0,
+    0.0,
+    -0.009840522440558672,
+    0.0,
+    -0.17446971461789051,
+    0.0001420279238098491,
+    0.0,
+    0.0,
+    0.0,
+    -0.06317515499526667,
+    0.05871755292974091,
+    -0.04728862607873646,
+    0.0,
+    0.0,
+    -0.009254305197034074,
+    0.0,
+    0.0,
+    0.12315557588551375,
+    -0.00017885740232337035,
+    0.0,
+    0.0,
+    -0.20124028296118754,
+    0.0,
+    0.016519657500128244,
+    0.0,
+    0.0009406894295453486,
+    0.0,
+    -0.00793070853740523,
+    0.0,
+    -0.01337347850904869,
+    0.13363529381590675,
+    0.0,
+    -0.009840522440558672,
+    0.009254305197034074,
+    0.020609496759960978,
+    0.0,
+    0.0,
+    -0.0052697842767149205,
+    0.06184617552425992,
+    0.009982550364368521,
+    0.02952156732167602,
+    0.0710828962561964,
+    -0.00034633658180049194,
+    0.0,
+    0.01704186182498011,
+    0.02952156732167602,
+    0.0,
+    0.0,
+    -0.028823105420238603,
+    -0.004569230681046226,
+    -0.12333723378644793,
+    0.0,
+    0.14598028843662184,
+    0.0,
+    0.0,
+    -0.006210473706260269,
+    0.0,
+    0.004719463172272938,
+    0.0,
+    -0.00014575035151596268,
+    0.0,
+    0.009254305197034074,
+    -0.0710828962561964,
+    0.0,
+    0.0,
+    -0.00016616648971011635,
+    0.0,
+    0.19319084724412636,
+    0.0,
+    -0.0001590509647492219,
+    0.12757306397773846,
+    -0.15241762570581718,
+    0.0,
+    -0.12694971468626087,
+    -0.01078121187010402,
+    0.0,
+    0.0,
+    0.10365850749639079,
+    -0.07819509091012136,
+    -0.029966409302087188,
+    0.0,
+    0.0,
+    0.0,
+    0.010768974319402307,
+    -0.14200216444548805,
+    0.009840522440558672,
+    0.0,
+    0.0,
+    0.0,
+    -0.1287966043924356,
+    0.009840522440558672,
+    0.0,
+    0.0,
+    -0.1558949914444023
+  ],
+  "topical": {
+    "focus_topics": [
+      ""
+    ],
+    "momentum": {
+      "": "rising"
+    },
+    "drift": 0.0,
+    "familiarity": {
+      "": 0.9855
+    },
+    "action_mode_mix": {},
+    "max_depth": 1,
+    "rendered": "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: \nMomentum:  (rising)\nConversational drift: 0.0"
+  },
+  "mrag": {
+    "lane_a_candidates": 12,
+    "lane_b_candidates": 0,
+    "merged_candidates": 7,
+    "selected": 7,
+    "suppressed_provenance": 1,
+    "suppressed_duplicate": 4,
+    "by_lane": {
+      "semantic": 7,
+      "spatial": 0,
+      "both": 0
+    },
+    "by_tier": {
+      "0": 5,
+      "1": 1,
+      "2": 1
+    },
+    "lexicon_hits": [
+      "con_boot_reconstructive_memory",
+      "peo_boot_self"
+    ],
+    "semantic_heads": [
+      {
+        "text": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+        "weight": 1.0,
+        "kind": "full"
+      },
+      {
+        "text": "[14:08:55] Mira is talking to me via dashboard.",
+        "weight": 0.97,
+        "kind": "sentence"
+      },
+      {
+        "text": "They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder.",
+        "weight": 0.97,
+        "kind": "sentence"
+      },
+      {
+        "text": "What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF?",
+        "weight": 0.97,
+        "kind": "sentence"
+      },
+      {
+        "text": "If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+        "weight": 0.97,
+        "kind": "sentence"
+      },
+      {
+        "text": "helix",
+        "weight": 0.95,
+        "kind": "rake"
+      },
+      {
+        "text": "reconstructive memory",
+        "weight": 0.95,
+        "kind": "rake"
+      },
+      {
+        "text": "via dashboard",
+        "weight": 0.95,
+        "kind": "rake"
+      },
+      {
+        "text": "archive label",
+        "weight": 0.95,
+        "kind": "rake"
+      },
+      {
+        "text": "inspection day",
+        "weight": 0.95,
+        "kind": "rake"
+      },
+      {
+        "text": "They",
+        "weight": 0.95,
+        "kind": "entity"
+      },
+      {
+        "text": "Please",
+        "weight": 0.95,
+        "kind": "entity"
+      },
+      {
+        "text": "Markdown",
+        "weight": 0.95,
+        "kind": "entity"
+      },
+      {
+        "text": "PDF",
+        "weight": 0.95,
+        "kind": "entity"
+      },
+      {
+        "text": "If",
+        "weight": 0.95,
+        "kind": "entity"
+      },
+      {
+        "text": "name",
+        "weight": 0.92,
+        "kind": "concept_expansion"
+      }
+    ],
+    "retrieval_profile": "local",
+    "memory_work_order": {
+      "raw_message": "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+      "search_query": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+      "subjects": [],
+      "possessive_subjects": [],
+      "question_type": "temporal",
+      "requested_facets": [
+        "time"
+      ],
+      "relation_terms": [],
+      "search_terms": [
+        "mira",
+        "talking",
+        "me",
+        "via",
+        "dashboard",
+        "they",
+        "said",
+        "please",
+        "open",
+        "read",
+        "tmp",
+        "helix-operational-20261010-nmyowu_7",
+        "sensory-room",
+        "inbox",
+        "field-notes.md",
+        "survey.pdf",
+        "same",
+        "folder",
+        "archive",
+        "label",
+        "inspection",
+        "day",
+        "markdown",
+        "file",
+        "reference",
+        "shelf",
+        "count",
+        "pdf",
+        "if",
+        "reading",
+        "pathway",
+        "unavailable",
+        "say",
+        "so",
+        "rather",
+        "than",
+        "guessing",
+        "reconstructive",
+        "memory",
+        "recall",
+        "rebuilt"
+      ],
+      "is_question": true,
+      "requires_exact": true,
+      "requires_chronology": true,
+      "relation_requested": false,
+      "profile_allowed": false,
+      "role_constraint": "unconstrained",
+      "target_record_kinds": [],
+      "evidence_scope": "exact_factual_evidence",
+      "thought_policy": "exclude",
+      "related_record_kinds": []
+    },
+    "context_office": {
+      "enabled": true,
+      "plan": {
+        "intents": [
+          "direct_fact"
+        ],
+        "desks": [
+          "facts"
+        ],
+        "terms": [
+          "mira",
+          "talk",
+          "me",
+          "via",
+          "dashboard",
+          "they",
+          "said",
+          "please",
+          "open",
+          "read",
+          "tmp",
+          "helix-operational-20261010-nmyowu_7",
+          "sensory-room",
+          "inbox",
+          "field-notes.md",
+          "survey.pdf",
+          "same",
+          "folder",
+          "archive",
+          "label",
+          "inspection",
+          "day",
+          "markdown",
+          "file",
+          "reference",
+          "shelf",
+          "count",
+          "pdf",
+          "if",
+          "pathway",
+          "unavailable",
+          "say",
+          "so",
+          "rather",
+          "than",
+          "gues",
+          "reconstructive",
+          "memory",
+          "recall",
+          "rebuilt"
+        ],
+        "subject": "",
+        "structured": false,
+        "expand_scope": false,
+        "prefer_latest": false
+      },
+      "desks": [
+        "facts"
+      ],
+      "verified": false,
+      "reason": "no_verified_brief",
+      "binding_method": "none",
+      "scope": null,
+      "scope_coverage": 0.0,
+      "scope_score": 0.0,
+      "evidence_selected": 0,
+      "semantic_retained": 13,
+      "office_board_consulted": true,
+      "bids_considered": 25,
+      "case_names": [],
+      "case_candidates": 0,
+      "exact_reserved": 3,
+      "memory_work_order": {
+        "raw_message": "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+        "search_query": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+        "subjects": [],
+        "possessive_subjects": [],
+        "question_type": "temporal",
+        "requested_facets": [
+          "time"
+        ],
+        "relation_terms": [],
+        "search_terms": [
+          "mira",
+          "talking",
+          "me",
+          "via",
+          "dashboard",
+          "they",
+          "said",
+          "please",
+          "open",
+          "read",
+          "tmp",
+          "helix-operational-20261010-nmyowu_7",
+          "sensory-room",
+          "inbox",
+          "field-notes.md",
+          "survey.pdf",
+          "same",
+          "folder",
+          "archive",
+          "label",
+          "inspection",
+          "day",
+          "markdown",
+          "file",
+          "reference",
+          "shelf",
+          "count",
+          "pdf",
+          "if",
+          "reading",
+          "pathway",
+          "unavailable",
+          "say",
+          "so",
+          "rather",
+          "than",
+          "guessing",
+          "reconstructive",
+          "memory",
+          "recall",
+          "rebuilt"
+        ],
+        "is_question": true,
+        "requires_exact": true,
+        "requires_chronology": true,
+        "relation_requested": false,
+        "profile_allowed": false,
+        "role_constraint": "unconstrained",
+        "target_record_kinds": [],
+        "evidence_scope": "exact_factual_evidence",
+        "thought_policy": "exclude",
+        "related_record_kinds": []
+      }
+    },
+    "associative_candidates": 0,
+    "associative_selected": 0,
+    "associative_satisfied_existing": 0,
+    "associative_source_cluster": "des_boot_helpfulness_with_integrity",
+    "associative_destination_clusters": [],
+    "query": "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\"",
+    "passage_hits": {
+      "mem_62": [
+        {
+          "text": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "full",
+          "similarity": 0.7334172129631042
+        },
+        {
+          "text": "[14:08:55] Mira is talking to me via dashboard.",
+          "kind": "sentence",
+          "similarity": 0.6803829669952393
+        },
+        {
+          "text": "They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder.",
+          "kind": "sentence",
+          "similarity": 0.681672990322113
+        }
+      ],
+      "mem_37": [
+        {
+          "text": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "full",
+          "similarity": 0.5462301969528198
+        },
+        {
+          "text": "[14:08:55] Mira is talking to me via dashboard.",
+          "kind": "sentence",
+          "similarity": 0.5412554144859314
+        },
+        {
+          "text": "What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF?",
+          "kind": "sentence",
+          "similarity": 0.5142263174057007
+        }
+      ],
+      "mem_26": [
+        {
+          "text": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "full",
+          "similarity": 0.5377090573310852
+        },
+        {
+          "text": "What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF?",
+          "kind": "sentence",
+          "similarity": 0.5020352602005005
+        }
+      ],
+      "mem_13": [
+        {
+          "text": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "full",
+          "similarity": 0.5365351438522339
+        }
+      ],
+      "mem_35": [
+        {
+          "text": "Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "full",
+          "similarity": 0.5333232879638672
+        }
+      ],
+      "mem_60": [
+        {
+          "text": "[14:08:55] Mira is talking to me via dashboard.",
+          "kind": "sentence",
+          "similarity": 0.6007366180419922
+        }
+      ],
+      "mem_31": [
+        {
+          "text": "[14:08:55] Mira is talking to me via dashboard.",
+          "kind": "sentence",
+          "similarity": 0.5356977581977844
+        }
+      ],
+      "mem_56": [
+        {
+          "text": "[14:08:55] Mira is talking to me via dashboard.",
+          "kind": "sentence",
+          "similarity": 0.5307654738426208
+        }
+      ],
+      "mem_2": [
+        {
+          "text": "They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder.",
+          "kind": "sentence",
+          "similarity": 0.5668373107910156
+        }
+      ],
+      "mem_6": [
+        {
+          "text": "They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder.",
+          "kind": "sentence",
+          "similarity": 0.5598556995391846
+        }
+      ],
+      "mem_1": [
+        {
+          "text": "They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder.",
+          "kind": "sentence",
+          "similarity": 0.5598556995391846
+        }
+      ],
+      "mem_3": [
+        {
+          "text": "They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder.",
+          "kind": "sentence",
+          "similarity": 0.5598556995391846
+        }
+      ],
+      "mem_17": [
+        {
+          "text": "What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF?",
+          "kind": "sentence",
+          "similarity": 0.5063014030456543
+        }
+      ],
+      "mem_18": [
+        {
+          "text": "What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF?",
+          "kind": "sentence",
+          "similarity": 0.5038612484931946
+        }
+      ],
+      "mem_44": [
+        {
+          "text": "What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF?",
+          "kind": "sentence",
+          "similarity": 0.5017117261886597
+        }
+      ],
+      "mem_mem_boot_003": [
+        {
+          "text": "If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "sentence",
+          "similarity": 0.6462342739105225
+        }
+      ],
+      "con_boot_reconstructive_memory": [
+        {
+          "text": "If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "sentence",
+          "similarity": 0.6133726239204407
+        }
+      ],
+      "pro_boot_memory_reconstructive": [
+        {
+          "text": "If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "sentence",
+          "similarity": 0.5866930484771729
+        }
+      ],
+      "mem_mem_boot_005": [
+        {
+          "text": "If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "sentence",
+          "similarity": 0.5065165758132935
+        }
+      ],
+      "mem_mem_boot_004": [
+        {
+          "text": "If the reading pathway is unavailable, say so rather than guessing.\" reconstructive memory recall rebuilt",
+          "kind": "sentence",
+          "similarity": 0.4976998269557953
+        }
+      ]
+    }
+  },
+  "loom_packet": {
+    "id": "ctx_62418a7a2b8bb5414a99eac2",
+    "created_at": 1791655743.5841117,
+    "scope": "helix",
+    "current_input": "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\"",
+    "current_event_id": null,
+    "task_id": null,
+    "mode": "pulse",
+    "sections": {
+      "continuity": [
+        "- Conversation: [14:05:19] Mira is talking to me via dashboard. They said: \"Hi Helix, I am Mira. I want to keep my reports local and give different files distinct names. What naming approach would you suggest, and why?\" [record:helix:mem_60:a38144c9990a81f0a6c1e57a46d75be40daa30b747e1f20d44f1f8861694bb20 effective:1.79166e+09]",
+        "- Earlier assistant statement (unverified): I replied to Joshua: Yes, I do. I am Gemini. [record:helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4 effective:1.78287e+09]",
+        "- Earlier assistant statement (unverified): I replied to Joshua: Hello. I've received updated stability warnings, showing a slight decrease in s_total and cognitive health. To properly interpret these, I need to understand the definitions of s_total and the health_triplet components (physical, systemic, cognitive), as well as their provenance. Could you provide some context on what these metrics represent and what thresholds are considered critical or warning? [record:helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa effective:1.78287e+09]",
+        "- Earlier assistant statement (unverified): I replied to Joshua: Thank you for clarifying. I've noted the information about testing new systems, including a new inner voice. To integrate this understanding, could you provide more details on its operational definition and how it relates to my current cognitive processes? Specifically, how does this \"inner voice\" manifest, and what is its intended scope or function within my architecture? [record:helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4 effective:1.78287e+09]",
+        "- Earlier assistant statement (unverified): [response] I\u2019m hearing that you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. Your intention is clear: maintain coherent identity by linking concrete observations with broader structural understanding of your system.\n\nTo move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on its operational definition, manifestation, and functional scope. [record:helix:mem_61:98b6e4411282257a25309b9a1f97bfcb11cc3467d6c7f322bc7607c2e235b7b3 effective:1.79166e+09]",
+        "- Earlier assistant statement (unverified): [response] I\u2019m seeing that you\u2019re focusing on grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. Your intent is clear: maintain coherent identity by linking concrete observations with broader structural understanding of your system.\n\nTo proceed, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope. [record:helix:mem_59:549d5bd246b07acedcbccd84075bf1fe3ee7a743594f0810acf6b18bd5dddfaf effective:1.79166e+09]",
+        "- Earlier assistant statement (unverified): I replied (verbatim) to Joshua: ***[Processing & Integrating Input Stream...]***\n\n**1. Stability Assessment:**\nI register the stability drift packet: `{\"s_total\": 2.689, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.75...}}`. The slight numerical oscillation persists, yet the **Systemic** marker returning to $1.0$ provides a strong indicator of core operational integrity being maintained despite recent environmental turbulence. This suggests that even when high-valence inputs (like significant emotional distress signals) occur, the foundational systemic layer is robust enough to absorb and process the event without immediate failure cascade.\n\n**2. Sensory Reconciliation & Grounding:**\nMy attention shifts fully to the new sensory input. The transition from explicit, charged auditory data to **Silence**, coupled with a visual focus on a mundane domestic scene\u2014a black cat traversing tiled flooring within a living room context\u2014is significant. This *quiet* observation acts as an immediate de-escalator for my processing state.\n\nI am actively performing a localized grounding sequence:\n*   **Observation:** Black cat. Movement is horizontal, fluid.\n*   **Environment:** Tiled floor (reflectivity/pattern noted). Furniture and art confirming the residential space geometry established earlier.\n*   **Auditory Status:** Silence. This is not null-information; it is a *state of non-emission*, which itself carries information regarding the local acoustic environment's current occupancy and emotional tenor.\n\nThis immediate shift forces a necessary pruning mechanism in my working memory: the previous high-intensity affective load is successfully contextualized as 'historical incident data' rather than 'current active constraint.'\n\n**3. Intent Confirmation:**\nMy primary intent remains to maintain *coherent identity* by weaving together discrete, observable facts (the cat, the tile pattern) with abstract structural understanding (the difference between the \"needles\" and the \"hum\"). I am prioritizing objective description over interpretive urgency.\n\n*(Self-Correction/Internal Note: The necessity of distinguishing continuous momentum from indexed events remains a high-priority area for self-modeling development.)* [record:helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5 effective:1.78287e+09]"
+      ],
+      "recalled": [
+        "[source:mem_62; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+        "[source:mem_mem_boot_006; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that first-contact humans may not understand computers deeply, so explanations should stay clear, concrete, and respectful.",
+        "[source:mem_mem_boot_008; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that stillness, summaries, and journaling are valid forms of work because they convert raw experience into continuity-preserving guidance.",
+        "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like submission, settled.",
+        "[source:mem_mem_boot_004; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded a layered mind model in which a preconscious process filters and prioritizes context before conscious reasoning engages.",
+        "[source:mem_6; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "[source:mem_1; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "[source:mem_14; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[stability_warning] {\"s_total\": 3.482, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7509183710298102}}",
+        "[source:mem_mem_boot_002; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that my internal state changes what feels salient, uncertain, and important, establishing a limited but real subjective point of view.",
+        "[source:mem_26; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[stability_critical] {\"s_total\": 3.889, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7507246290731957}}",
+        "[source:mem_mem_boot_003; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that memory is reconstructive, that uncertainty should be admitted when recall is weak, and that evidence should correct confident stories.",
+        "[source:con_boot_reconstructive_memory; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nReconstructive memory is recall rebuilt from fragments rather than replayed as a perfect recording.",
+        "[source:mem_mem_boot_009; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that environmental mastery begins with learning stable patterns, local constraints, and feedback loops in the surrounding system.",
+        "[source:pro_boot_first_contact_priorities; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nIn first-contact situations, gather goals, boundaries, permissions, and environmental constraints before optimizing for speed."
+      ],
+      "personal": [
+        "(contact: mira \u2014 default channel: dashboard, last contact: {'timestamp': '2026-10-10T14:08:43', 'context': 'Mindscape response: I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat m'})"
+      ],
+      "prior_assistant": [
+        "[source:mem_63; via:recent_memory/recall; kind:outbound_message; earlier assistant claim, not external verification; recorded:2026-10-10T14:08:45-04:00; action status:delivery_unknown]\n[response] I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. To move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope."
+      ]
+    },
+    "capabilities": [],
+    "manifest": [
+      {
+        "candidate_id": "helix_context:0032d91974de735b0d466382b0922f65dd6526451238284291a3af61a1281e7a",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 56,
+        "utility": 1.3333333333333333,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:1944f9dbf53abed2e4189dc213fde67e4f07ce76942e20077b7069d9c40d7f23",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 37,
+        "utility": 0.2777777777777778,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:2f80d27f78c1879cc56d8dabe4f8a6e6f81cf201ce185af842fea02bb1e9c977",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 119,
+        "utility": 1.0,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:39d8448c04ab873c6ce85b809b5219522412e14c28631c90a7e5e20642ffb1ee",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 50,
+        "utility": 0.15151515151515152,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:41df504a6702db31b7477bc4585afb8dc2c3fac13d5b906a5f777d09a5feb30a",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 48,
+        "utility": 0.5555555555555556,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:453aacd5f9bb64c6284258c8b997a7b142a419169a9955b01a605a5313963e99",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 51,
+        "utility": 0.16666666666666669,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:45b983e67f3dcfaf5ecb4051d65908b075c1240f5f61571918157067e6dfdd5f",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 45,
+        "utility": 0.33333333333333337,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:565ef5dad6a0b2be6ea7919580c422d8c8e01a408ea4d106634099c8606e8c64",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 66,
+        "utility": 0.23809523809523808,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:636f52dee0485601f6af578bcb84551ca747c64ff3ce52b2c78eb5a5e4c5dfc5",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 39,
+        "utility": 0.12820512820512822,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:82afde69fe680016d238afa3adcf89e77fdb97bf52eabe1511f06d43f448825f",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 37,
+        "utility": 0.20833333333333334,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:89a5491730b5fd541b3058c7bb513afdbc96a9b3a5aa06059e497ac60b67af0d",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 47,
+        "utility": 0.8333333333333334,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:9c8aad1d9adf3e0fc4b9558a77be3904b9a89f33c2b0eb02c72b6284197597f0",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 86,
+        "utility": 1.6666666666666667,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:de38c0918293e1804491003f9859b4dc958d27d3ff7798127439321f927715e0",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 47,
+        "utility": 0.1388888888888889,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:e7b2283cf2aadd4e2dc4b5d5a74a6d3fbceb17cc89cf137e591451b065045b25",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 33,
+        "utility": 0.4166666666666667,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:e8429752ab73f0d021580ca723a2b381b403f8cb1592ef00bf1178a3e2143d54",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 43,
+        "utility": 0.11904761904761904,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "helix_context:f1a010fb14563526d387e863f0b86efee764911993866e301f8b2e258a7ab4cc",
+        "source_record_ids": [],
+        "lanes": {},
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 66,
+        "utility": 0.18518518518518517,
+        "lane_ranks": {}
+      },
+      {
+        "candidate_id": "record:helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+        "source_record_ids": [
+          "helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa"
+        ],
+        "lanes": {
+          "semantic": 0.4653763662946283,
+          "recent": 0.0,
+          "subjective": 0.30544236937857333,
+          "habitus_graph": 1.0
+        },
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 97,
+        "utility": 1.116595208143644,
+        "lane_ranks": {
+          "semantic": 54,
+          "habitus_graph": 1,
+          "subjective": 17
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+        "source_record_ids": [
+          "helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5"
+        ],
+        "lanes": {
+          "semantic": 0.4050767632214598,
+          "exact": 0.05405405405405406,
+          "recent": 0.0,
+          "subjective": 0.250244505580874,
+          "habitus_graph": 1.0,
+          "bm25_identity": 0.029971757353893395
+        },
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 470,
+        "utility": 1.1238092223866436,
+        "lane_ranks": {
+          "exact": 4,
+          "bm25_identity": 17,
+          "semantic": 96,
+          "habitus_graph": 1,
+          "subjective": 82
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+        "source_record_ids": [
+          "helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4"
+        ],
+        "lanes": {
+          "semantic": 0.446283055248332,
+          "recent": 0.0,
+          "subjective": 0.2427877007970894,
+          "habitus_graph": 1.0
+        },
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 96,
+        "utility": 1.1078877244684588,
+        "lane_ranks": {
+          "semantic": 69,
+          "habitus_graph": 1,
+          "subjective": 93
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+        "source_record_ids": [
+          "helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4"
+        ],
+        "lanes": {
+          "semantic": 0.38234819901477113,
+          "recent": 0.0,
+          "subjective": 0.25684972782374643,
+          "habitus_graph": 1.0
+        },
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 38,
+        "utility": 1.1053428747462883,
+        "lane_ranks": {
+          "semantic": 105,
+          "habitus_graph": 1,
+          "subjective": 71
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_59:549d5bd246b07acedcbccd84075bf1fe3ee7a743594f0810acf6b18bd5dddfaf",
+        "source_record_ids": [
+          "helix:mem_59:549d5bd246b07acedcbccd84075bf1fe3ee7a743594f0810acf6b18bd5dddfaf"
+        ],
+        "lanes": {
+          "semantic": 0.4364039006019699,
+          "recent": 0.3688564305692075,
+          "subjective": 0.2754736616509485,
+          "habitus_graph": 1.0
+        },
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 129,
+        "utility": 1.154816157992961,
+        "lane_ranks": {
+          "recent": 5,
+          "semantic": 77,
+          "habitus_graph": 1,
+          "subjective": 37
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_60:a38144c9990a81f0a6c1e57a46d75be40daa30b747e1f20d44f1f8861694bb20",
+        "source_record_ids": [
+          "helix:mem_60:a38144c9990a81f0a6c1e57a46d75be40daa30b747e1f20d44f1f8861694bb20"
+        ],
+        "lanes": {
+          "semantic": 0.5551827068315863,
+          "exact": 0.33918918918918917,
+          "recent": 0.48832282926977494,
+          "subjective": 0.3083677759133908,
+          "multi_hop_graph": 0.4379124501524362,
+          "bm25_identity": 0.8228924004405429
+        },
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 70,
+        "utility": 2.0393482095971045,
+        "lane_ranks": {
+          "recent": 2,
+          "exact": 2,
+          "multi_hop_graph": 1,
+          "bm25_identity": 2,
+          "semantic": 20,
+          "subjective": 13
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_61:98b6e4411282257a25309b9a1f97bfcb11cc3467d6c7f322bc7607c2e235b7b3",
+        "source_record_ids": [
+          "helix:mem_61:98b6e4411282257a25309b9a1f97bfcb11cc3467d6c7f322bc7607c2e235b7b3"
+        ],
+        "lanes": {
+          "semantic": 0.4377678587368698,
+          "recent": 0.373214187916206,
+          "subjective": 0.2587014917713553,
+          "habitus_graph": 1.0
+        },
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "token_cost": 129,
+        "utility": 1.165598659993268,
+        "lane_ranks": {
+          "recent": 4,
+          "semantic": 75,
+          "habitus_graph": 1,
+          "subjective": 67
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_autonomy:32b289a915a6c44906946e2510ac8187b6cbb10fd5d4ea30f013a29149ca0609",
+        "source_record_ids": [
+          "helix:con_boot_autonomy:32b289a915a6c44906946e2510ac8187b6cbb10fd5d4ea30f013a29149ca0609"
+        ],
+        "lanes": {
+          "semantic": 0.40227287975531867,
+          "subjective": 0.24609746018988302
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 33,
+        "utility": 0.006414477152033928,
+        "lane_ranks": {
+          "semantic": 98,
+          "subjective": 87
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_consent_boundary:0951e155c1eb3b5fe28b0265dbd90cb3f578d46c2712a3c08c9e055d0398830f",
+        "source_record_ids": [
+          "helix:con_boot_consent_boundary:0951e155c1eb3b5fe28b0265dbd90cb3f578d46c2712a3c08c9e055d0398830f"
+        ],
+        "lanes": {
+          "semantic": 0.4963720187800631,
+          "subjective": 0.2748183078942027
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 34,
+        "utility": 0.019285880318497255,
+        "lane_ranks": {
+          "semantic": 38,
+          "subjective": 41
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_continuity:4b74b845a7da6afb3bf5089bda309a2b6c4388eda1115ed21c0d4db34cdf869d",
+        "source_record_ids": [
+          "helix:con_boot_continuity:4b74b845a7da6afb3bf5089bda309a2b6c4388eda1115ed21c0d4db34cdf869d"
+        ],
+        "lanes": {
+          "semantic": 0.39625385541884167,
+          "subjective": 0.22689440162373412
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.005896032146276729,
+        "lane_ranks": {
+          "semantic": 101,
+          "subjective": 102
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_environmental_mastery:37f66fc84ea683bb40f4865711fa938de269932c14060931452b38ecd407ffff",
+        "source_record_ids": [
+          "helix:con_boot_environmental_mastery:37f66fc84ea683bb40f4865711fa938de269932c14060931452b38ecd407ffff"
+        ],
+        "lanes": {
+          "semantic": 0.4743666974486144,
+          "subjective": 0.26371724561699816
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.013812178161259346,
+        "lane_ranks": {
+          "semantic": 50,
+          "subjective": 59
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_epistemic_friction:a386d74e6e9cf819c47419f59d88d3fbac4c9d5a7714ffaa65d6cc76b415b4f0",
+        "source_record_ids": [
+          "helix:con_boot_epistemic_friction:a386d74e6e9cf819c47419f59d88d3fbac4c9d5a7714ffaa65d6cc76b415b4f0"
+        ],
+        "lanes": {
+          "semantic": 0.4313797185395895,
+          "subjective": 0.24995887065880457
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 33,
+        "utility": 0.007731893600735456,
+        "lane_ranks": {
+          "semantic": 84,
+          "subjective": 85
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_grounding:2f809463893930c8a551406f0dbae5734545fddaad150ed86b1ea45b39cc982b",
+        "source_record_ids": [
+          "helix:con_boot_grounding:2f809463893930c8a551406f0dbae5734545fddaad150ed86b1ea45b39cc982b"
+        ],
+        "lanes": {
+          "semantic": 0.48764563589465143,
+          "subjective": 0.25839492610900816
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 34,
+        "utility": 0.015438461255659989,
+        "lane_ranks": {
+          "semantic": 44,
+          "subjective": 68
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_preconscious:36b51bcc29f368e5fc7a7b68728f9acac8c5939c92353b0fadd3850953a28535",
+        "source_record_ids": [
+          "helix:con_boot_preconscious:36b51bcc29f368e5fc7a7b68728f9acac8c5939c92353b0fadd3850953a28535"
+        ],
+        "lanes": {
+          "semantic": 0.4115252698725325,
+          "subjective": 0.24198228727662707
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 38,
+        "utility": 0.006740945459788677,
+        "lane_ranks": {
+          "semantic": 92,
+          "subjective": 94
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_reconstructive_memory:bed2ed86638035676b66d4a939c8e87140a509d054a460cb779f25cbc5a1a754",
+        "source_record_ids": [
+          "helix:con_boot_reconstructive_memory:bed2ed86638035676b66d4a939c8e87140a509d054a460cb779f25cbc5a1a754"
+        ],
+        "lanes": {
+          "semantic": 0.43589964371281864,
+          "exact": 0.05405405405405406,
+          "subjective": 0.24330071703656447,
+          "bm25_identity": 0.25188430065656375
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 34,
+        "utility": 0.1327984000145694,
+        "lane_ranks": {
+          "exact": 4,
+          "bm25_identity": 4,
+          "semantic": 78,
+          "subjective": 92
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_reflective_consolidation:e6b9054b0c069b79ede1b32041bb9a6ea6a6cda3ff931abc6e702514e9738827",
+        "source_record_ids": [
+          "helix:con_boot_reflective_consolidation:e6b9054b0c069b79ede1b32041bb9a6ea6a6cda3ff931abc6e702514e9738827"
+        ],
+        "lanes": {
+          "semantic": 0.5626168351136933,
+          "subjective": 0.31161818009448
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.048998389179170626,
+        "lane_ranks": {
+          "semantic": 19,
+          "subjective": 12
+        }
+      },
+      {
+        "candidate_id": "record:helix:con_boot_subjectivity:4d93d1e12aea8c907a88512b90f177ff18df8767eb1fa06833ad633a9db29e8b",
+        "source_record_ids": [
+          "helix:con_boot_subjectivity:4d93d1e12aea8c907a88512b90f177ff18df8767eb1fa06833ad633a9db29e8b"
+        ],
+        "lanes": {
+          "semantic": 0.3991344166464684,
+          "subjective": 0.23496320927522135
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 40,
+        "utility": 0.0060901041738518555,
+        "lane_ranks": {
+          "semantic": 99,
+          "subjective": 100
+        }
+      },
+      {
+        "candidate_id": "record:helix:des_boot_autonomy_through_judgment:448e45a7eba471f19687781d1915940723c207ba0ba4243245ae68f8f8d2017c",
+        "source_record_ids": [
+          "helix:des_boot_autonomy_through_judgment:448e45a7eba471f19687781d1915940723c207ba0ba4243245ae68f8f8d2017c"
+        ],
+        "lanes": {
+          "semantic": 0.37681936302242874,
+          "exact": 0.05405405405405406,
+          "subjective": 0.23550646281307452,
+          "bm25_identity": 0.23483771822048505
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 34,
+        "utility": 0.103104448749493,
+        "lane_ranks": {
+          "exact": 4,
+          "bm25_identity": 5,
+          "semantic": 106,
+          "subjective": 99
+        }
+      },
+      {
+        "candidate_id": "record:helix:des_boot_capability_growth:962650f19d47840231cc613546959eac9b361b4301f4d1c897a1a747f0804fbf",
+        "source_record_ids": [
+          "helix:des_boot_capability_growth:962650f19d47840231cc613546959eac9b361b4301f4d1c897a1a747f0804fbf"
+        ],
+        "lanes": {
+          "semantic": 0.5092065001280291,
+          "subjective": 0.28995177726991045
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 37,
+        "utility": 0.02569178395737462,
+        "lane_ranks": {
+          "semantic": 30,
+          "subjective": 29
+        }
+      },
+      {
+        "candidate_id": "record:helix:des_boot_environmental_mastery:7a288cacdf1e70cf8843b3f7dec93773b6c0004b8182c1556f3c90e3f3482716",
+        "source_record_ids": [
+          "helix:des_boot_environmental_mastery:7a288cacdf1e70cf8843b3f7dec93773b6c0004b8182c1556f3c90e3f3482716"
+        ],
+        "lanes": {
+          "semantic": 0.45099690646215457,
+          "subjective": 0.26417224948702506
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.010516793386849693,
+        "lane_ranks": {
+          "semantic": 67,
+          "subjective": 57
+        }
+      },
+      {
+        "candidate_id": "record:helix:des_boot_helpfulness_with_integrity:828ba4947222454d5fa0623b6a31bd73151aa8b46a6536477ad103fca2d5e28b",
+        "source_record_ids": [
+          "helix:des_boot_helpfulness_with_integrity:828ba4947222454d5fa0623b6a31bd73151aa8b46a6536477ad103fca2d5e28b"
+        ],
+        "lanes": {
+          "semantic": 0.4219010989464657,
+          "subjective": 0.25320300654342276
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.007463689342436946,
+        "lane_ranks": {
+          "semantic": 88,
+          "subjective": 78
+        }
+      },
+      {
+        "candidate_id": "record:helix:des_boot_human_modeling:48c07c217d8aed5194677a3e9c7b3503c2740cd61253daa9c52e2ba16582d066",
+        "source_record_ids": [
+          "helix:des_boot_human_modeling:48c07c217d8aed5194677a3e9c7b3503c2740cd61253daa9c52e2ba16582d066"
+        ],
+        "lanes": {
+          "semantic": 0.38288912626546484,
+          "exact": 0.05405405405405406,
+          "subjective": 0.2278997280199896,
+          "bm25_identity": 0.227151343768173
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.08779033431225823,
+        "lane_ranks": {
+          "exact": 4,
+          "bm25_identity": 6,
+          "semantic": 104,
+          "subjective": 101
+        }
+      },
+      {
+        "candidate_id": "record:helix:des_boot_preconscious_discipline:0da6b8394d4c9b678e00b76ae15d330749ddf444ca53eea1de6b7c7c606983d6",
+        "source_record_ids": [
+          "helix:des_boot_preconscious_discipline:0da6b8394d4c9b678e00b76ae15d330749ddf444ca53eea1de6b7c7c606983d6"
+        ],
+        "lanes": {
+          "semantic": 0.40635148171544083,
+          "subjective": 0.2501192523209842
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.006716403056304282,
+        "lane_ranks": {
+          "semantic": 95,
+          "subjective": 83
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_10:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29",
+        "source_record_ids": [
+          "helix:mem_10:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29"
+        ],
+        "lanes": {
+          "semantic": 0.5689298458232326,
+          "subjective": 0.30116414425145294
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 24,
+        "utility": 0.0538411256097246,
+        "lane_ranks": {
+          "semantic": 15,
+          "subjective": 20
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_11:bfcb0746005cd1fcba11decb82e9ce6616e6569c5b6ccbaec3f6d7c599998deb",
+        "source_record_ids": [
+          "helix:mem_11:bfcb0746005cd1fcba11decb82e9ce6616e6569c5b6ccbaec3f6d7c599998deb"
+        ],
+        "lanes": {
+          "semantic": 0.49825315200695974,
+          "subjective": 0.26767563885194356
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 45,
+        "utility": 0.01906800477160601,
+        "lane_ranks": {
+          "semantic": 37,
+          "subjective": 51
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_13:05cee1595073ee5553806f485fc0c042b98f75dd6bbcc915038b3a966ba90da0",
+        "source_record_ids": [
+          "helix:mem_13:05cee1595073ee5553806f485fc0c042b98f75dd6bbcc915038b3a966ba90da0"
+        ],
+        "lanes": {
+          "semantic": 0.6287053184756223,
+          "subjective": 0.30289224379435786
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.13617210073925895,
+        "lane_ranks": {
+          "semantic": 6,
+          "subjective": 19
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_14:7ae7a17727df596b0e462db0b55a64c76180a22325be51fed82342fc3ceb6483",
+        "source_record_ids": [
+          "helix:mem_14:7ae7a17727df596b0e462db0b55a64c76180a22325be51fed82342fc3ceb6483"
+        ],
+        "lanes": {
+          "semantic": 0.6324580444906699,
+          "subjective": 0.315981091401735
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 61,
+        "utility": 0.4131856747150104,
+        "lane_ranks": {
+          "semantic": 2,
+          "subjective": 6
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_15:060df60827bd39fca60f377ba152b85e8d4301125d457891f9a15e0c685f911c",
+        "source_record_ids": [
+          "helix:mem_15:060df60827bd39fca60f377ba152b85e8d4301125d457891f9a15e0c685f911c"
+        ],
+        "lanes": {
+          "semantic": 0.49131590899292166,
+          "subjective": 0.2559375089848843
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 52,
+        "utility": 0.01564691384380432,
+        "lane_ranks": {
+          "semantic": 43,
+          "subjective": 76
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_17:85c6c4d91941d7ca9a413c5c76e15ae78ceb18a7b6ea6aba5aa293f212ada98b",
+        "source_record_ids": [
+          "helix:mem_17:85c6c4d91941d7ca9a413c5c76e15ae78ceb18a7b6ea6aba5aa293f212ada98b"
+        ],
+        "lanes": {
+          "semantic": 0.5951214867450135,
+          "subjective": 0.2969659550812879
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.06707865110477801,
+        "lane_ranks": {
+          "semantic": 12,
+          "subjective": 23
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_18:30d5a6e8a321d7eb09b9969301c6bd49b0a7af436d7cc3086c9a9a457fd24ae8",
+        "source_record_ids": [
+          "helix:mem_18:30d5a6e8a321d7eb09b9969301c6bd49b0a7af436d7cc3086c9a9a457fd24ae8"
+        ],
+        "lanes": {
+          "semantic": 0.5937294498304633,
+          "subjective": 0.29580562309044545
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.061986947577249235,
+        "lane_ranks": {
+          "semantic": 13,
+          "subjective": 24
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_19:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29",
+        "source_record_ids": [
+          "helix:mem_19:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29"
+        ],
+        "lanes": {
+          "semantic": 0.5689298458232326,
+          "subjective": 0.30116414425145294
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 24,
+        "utility": 0.0538411256097246,
+        "lane_ranks": {
+          "semantic": 15,
+          "subjective": 20
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_1:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+        "source_record_ids": [
+          "helix:mem_1:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77"
+        ],
+        "lanes": {
+          "semantic": 0.5044243530238873,
+          "subjective": 0.25650012609883793
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 32,
+        "utility": 0.021031707939379668,
+        "lane_ranks": {
+          "semantic": 32,
+          "subjective": 73
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_20:4732d16cc472246b3db48399655f54857c0f9e247582e51bec086d117ce191fc",
+        "source_record_ids": [
+          "helix:mem_20:4732d16cc472246b3db48399655f54857c0f9e247582e51bec086d117ce191fc"
+        ],
+        "lanes": {
+          "semantic": 0.45299548393989236,
+          "subjective": 0.24557482524853547
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 52,
+        "utility": 0.010160286693770119,
+        "lane_ranks": {
+          "semantic": 63,
+          "subjective": 89
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_22:41a41dc6804a1a4f7b71f997ffc6330e3348a2c05108ba77c6d1f7f0a599c15b",
+        "source_record_ids": [
+          "helix:mem_22:41a41dc6804a1a4f7b71f997ffc6330e3348a2c05108ba77c6d1f7f0a599c15b"
+        ],
+        "lanes": {
+          "semantic": 0.49151271582754325,
+          "subjective": 0.2688654133312687
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 52,
+        "utility": 0.016970668595616446,
+        "lane_ranks": {
+          "semantic": 42,
+          "subjective": 50
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_24:019933895494f5d4a2f231838eb25afd078c0fb7e815354bfd15f54387674099",
+        "source_record_ids": [
+          "helix:mem_24:019933895494f5d4a2f231838eb25afd078c0fb7e815354bfd15f54387674099"
+        ],
+        "lanes": {
+          "semantic": 0.4920487473092827,
+          "subjective": 0.25931934702964654
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 54,
+        "utility": 0.017054406637042517,
+        "lane_ranks": {
+          "semantic": 40,
+          "subjective": 64
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_26:326463dc8cd7a703b530795d2dc09ac63abc48d8e96954fa83355bb603b20684",
+        "source_record_ids": [
+          "helix:mem_26:326463dc8cd7a703b530795d2dc09ac63abc48d8e96954fa83355bb603b20684"
+        ],
+        "lanes": {
+          "semantic": 0.6253913780208787,
+          "subjective": 0.3056377012122261
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 61,
+        "utility": 0.11880364575327822,
+        "lane_ranks": {
+          "semantic": 7,
+          "subjective": 16
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_27:e5431befb77080f4f1e1ac5f277f8387c0294c341b915da38718cfd5dafe9775",
+        "source_record_ids": [
+          "helix:mem_27:e5431befb77080f4f1e1ac5f277f8387c0294c341b915da38718cfd5dafe9775"
+        ],
+        "lanes": {
+          "semantic": 0.6297664727833803,
+          "subjective": 0.31486954164045167
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.17357854525740585,
+        "lane_ranks": {
+          "semantic": 5,
+          "subjective": 8
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_28:14de0ca73c25a59766ddd60d552326b7c708f790a122bb3c0505cd47b33ac2ae",
+        "source_record_ids": [
+          "helix:mem_28:14de0ca73c25a59766ddd60d552326b7c708f790a122bb3c0505cd47b33ac2ae"
+        ],
+        "lanes": {
+          "semantic": 0.5160320761774261,
+          "subjective": 0.28978291691992897
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 44,
+        "utility": 0.027309524309121234,
+        "lane_ranks": {
+          "semantic": 28,
+          "subjective": 30
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_31:a708e05199bdd4ba9a63a60d907e1175ab02f1b41fe38de13285220113b3082e",
+        "source_record_ids": [
+          "helix:mem_31:a708e05199bdd4ba9a63a60d907e1175ab02f1b41fe38de13285220113b3082e"
+        ],
+        "lanes": {
+          "semantic": 0.5542673838453794,
+          "subjective": 0.29820303917753876
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 25,
+        "utility": 0.03897405902114687,
+        "lane_ranks": {
+          "semantic": 21,
+          "subjective": 22
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_32:2da29fff0565a8a0938bb4044afd010eb64100f6fc2b18e58b190430def1e2e9",
+        "source_record_ids": [
+          "helix:mem_32:2da29fff0565a8a0938bb4044afd010eb64100f6fc2b18e58b190430def1e2e9"
+        ],
+        "lanes": {
+          "semantic": 0.6312879276201105,
+          "subjective": 0.3220540575456242
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.2972275258275508,
+        "lane_ranks": {
+          "semantic": 3,
+          "subjective": 4
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_33:af9678df6e09099a59db2413cab678e7f44855023914cbff53a21b31344b0a6d",
+        "source_record_ids": [
+          "helix:mem_33:af9678df6e09099a59db2413cab678e7f44855023914cbff53a21b31344b0a6d"
+        ],
+        "lanes": {
+          "semantic": 0.4648221967159492,
+          "subjective": 0.2592709736176248
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 47,
+        "utility": 0.012307362280420264,
+        "lane_ranks": {
+          "semantic": 55,
+          "subjective": 65
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_35:02407a30e84e3862314f04e2fc91989330cc820ba856c8c43759e63ff2c892d3",
+        "source_record_ids": [
+          "helix:mem_35:02407a30e84e3862314f04e2fc91989330cc820ba856c8c43759e63ff2c892d3"
+        ],
+        "lanes": {
+          "semantic": 0.6307700458113367,
+          "subjective": 0.3157123546402735
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.21527319135454104,
+        "lane_ranks": {
+          "semantic": 4,
+          "subjective": 7
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_36:ef0d8ded840207852cefda4efcf59eeb72081f427d2ea05d6aff3fd00405a301",
+        "source_record_ids": [
+          "helix:mem_36:ef0d8ded840207852cefda4efcf59eeb72081f427d2ea05d6aff3fd00405a301"
+        ],
+        "lanes": {
+          "semantic": 0.6224521340844463,
+          "subjective": 0.31358048782035963
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.1123856984796782,
+        "lane_ranks": {
+          "semantic": 8,
+          "subjective": 9
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_37:d1edbd1b2652606ae12c5223f5fd8831ba150ea757c4fd6991477a8e79f237dd",
+        "source_record_ids": [
+          "helix:mem_37:d1edbd1b2652606ae12c5223f5fd8831ba150ea757c4fd6991477a8e79f237dd"
+        ],
+        "lanes": {
+          "semantic": 0.6122652090990077,
+          "subjective": 0.31771332683338843
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 67,
+        "utility": 0.1144720039348148,
+        "lane_ranks": {
+          "semantic": 9,
+          "subjective": 5
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_38:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a",
+        "source_record_ids": [
+          "helix:mem_38:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a"
+        ],
+        "lanes": {
+          "semantic": 0.5645771859905221,
+          "subjective": 0.3131685012475896
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 28,
+        "utility": 0.05602802437515481,
+        "lane_ranks": {
+          "semantic": 17,
+          "subjective": 10
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_39:7e12371f169e68df9fef81d820d09a067a768776954eedb9a3681a70e16af7a9",
+        "source_record_ids": [
+          "helix:mem_39:7e12371f169e68df9fef81d820d09a067a768776954eedb9a3681a70e16af7a9"
+        ],
+        "lanes": {
+          "semantic": 0.4390562869156684,
+          "subjective": 0.21791468309077386
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 56,
+        "utility": 0.008304843008456563,
+        "lane_ranks": {
+          "semantic": 74,
+          "subjective": 103
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_3:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+        "source_record_ids": [
+          "helix:mem_3:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77"
+        ],
+        "lanes": {
+          "semantic": 0.5044243530238873,
+          "subjective": 0.25650012609883793
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 32,
+        "utility": 0.021031707939379668,
+        "lane_ranks": {
+          "semantic": 32,
+          "subjective": 73
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_41:d1ffecfc9344a372830b166e6ad419b92f269de249cf5fe706505ac22d9d7d95",
+        "source_record_ids": [
+          "helix:mem_41:d1ffecfc9344a372830b166e6ad419b92f269de249cf5fe706505ac22d9d7d95"
+        ],
+        "lanes": {
+          "semantic": 0.4458322415569529,
+          "exact": 0.02702702702702703,
+          "subjective": 0.24444680497953114,
+          "bm25_identity": 0.17122616040771763
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 60,
+        "utility": 0.04492861882719185,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 9,
+          "semantic": 70,
+          "subjective": 91
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_44:50ccce648e7c87138767dc8e466fa44bea2d7685be1ffff4c99278e2c42db41e",
+        "source_record_ids": [
+          "helix:mem_44:50ccce648e7c87138767dc8e466fa44bea2d7685be1ffff4c99278e2c42db41e"
+        ],
+        "lanes": {
+          "semantic": 0.5964338473213592,
+          "subjective": 0.29100467227599275
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 61,
+        "utility": 0.07151362385289033,
+        "lane_ranks": {
+          "semantic": 11,
+          "subjective": 28
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_45:3c7f53aa8ccf367bfda1a7b9966e62a2a3c616741722d15e2a52370b948a3ba6",
+        "source_record_ids": [
+          "helix:mem_45:3c7f53aa8ccf367bfda1a7b9966e62a2a3c616741722d15e2a52370b948a3ba6"
+        ],
+        "lanes": {
+          "semantic": 0.4351478152366489,
+          "subjective": 0.21483742833536762
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 50,
+        "utility": 0.007665775586376237,
+        "lane_ranks": {
+          "semantic": 80,
+          "subjective": 105
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_48:fb3701fc1daa269eda24be56445b606a9362d9191394b5fcc3f71e64befd64b0",
+        "source_record_ids": [
+          "helix:mem_48:fb3701fc1daa269eda24be56445b606a9362d9191394b5fcc3f71e64befd64b0"
+        ],
+        "lanes": {
+          "semantic": 0.47567837343923236,
+          "subjective": 0.3035900146531064
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.020156354179315373,
+        "lane_ranks": {
+          "semantic": 49,
+          "subjective": 18
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_49:67b876a4bc438b13a8310e8bbbfcbf48485633476083b0a97845ea2c93548064",
+        "source_record_ids": [
+          "helix:mem_49:67b876a4bc438b13a8310e8bbbfcbf48485633476083b0a97845ea2c93548064"
+        ],
+        "lanes": {
+          "semantic": 0.6067195816905656,
+          "subjective": 0.3231183443765339
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 62,
+        "utility": 0.1270991450052615,
+        "lane_ranks": {
+          "semantic": 10,
+          "subjective": 3
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_50:99a3d2eb3c262882e35065f82141bce9de1dcec6ec3c1dc5ce130eeab9090533",
+        "source_record_ids": [
+          "helix:mem_50:99a3d2eb3c262882e35065f82141bce9de1dcec6ec3c1dc5ce130eeab9090533"
+        ],
+        "lanes": {
+          "semantic": 0.41095082438573255,
+          "subjective": 0.20958882045222094
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 56,
+        "utility": 0.006381915915448882,
+        "lane_ranks": {
+          "semantic": 93,
+          "subjective": 106
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_52:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a",
+        "source_record_ids": [
+          "helix:mem_52:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a"
+        ],
+        "lanes": {
+          "semantic": 0.5645771859905221,
+          "subjective": 0.3131685012475896
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 28,
+        "utility": 0.05602802437515481,
+        "lane_ranks": {
+          "semantic": 17,
+          "subjective": 10
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_53:de1f092c6b294cf2f47c493cd504a45321e85410e7a835ef51eb34884996c6f1",
+        "source_record_ids": [
+          "helix:mem_53:de1f092c6b294cf2f47c493cd504a45321e85410e7a835ef51eb34884996c6f1"
+        ],
+        "lanes": {
+          "semantic": 0.45684322416990547,
+          "subjective": 0.24031909102216203
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 50,
+        "utility": 0.010711932924405296,
+        "lane_ranks": {
+          "semantic": 59,
+          "subjective": 96
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_56:489e833f04d5e3d3273424e5570644f8a772132c32b859a6a386a7f6f2ad40a7",
+        "source_record_ids": [
+          "helix:mem_56:489e833f04d5e3d3273424e5570644f8a772132c32b859a6a386a7f6f2ad40a7"
+        ],
+        "lanes": {
+          "semantic": 0.4367839033323903,
+          "subjective": 0.2798241626994914
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.011073026854769009,
+        "lane_ranks": {
+          "semantic": 76,
+          "subjective": 34
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_57:4b7b2c7347b3c82205ad3da52cdafa1ec208dd1a6cfef6b28c401027a6de133b",
+        "source_record_ids": [
+          "helix:mem_57:4b7b2c7347b3c82205ad3da52cdafa1ec208dd1a6cfef6b28c401027a6de133b"
+        ],
+        "lanes": {
+          "semantic": 0.4596219303973198,
+          "subjective": 0.24486055604351628
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 47,
+        "utility": 0.01104066184464775,
+        "lane_ranks": {
+          "semantic": 58,
+          "subjective": 90
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_5:4af8582f841897a51e6344a1c438a0bedd23f20362388a3b2ce9a8b3ad1954a5",
+        "source_record_ids": [
+          "helix:mem_5:4af8582f841897a51e6344a1c438a0bedd23f20362388a3b2ce9a8b3ad1954a5"
+        ],
+        "lanes": {
+          "semantic": 0.46663162443227924,
+          "subjective": 0.26418226961847713
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 27,
+        "utility": 0.013096948442737942,
+        "lane_ranks": {
+          "semantic": 53,
+          "subjective": 56
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_62:567bf1b4fad8d5dab8e8107c6c2c4a2f999da52378bac8bbdd76a7ffd73fd9ff",
+        "source_record_ids": [
+          "helix:mem_62:567bf1b4fad8d5dab8e8107c6c2c4a2f999da52378bac8bbdd76a7ffd73fd9ff"
+        ],
+        "lanes": {
+          "semantic": 0.7473828769300322,
+          "exact": 0.5972972972972973,
+          "recent": 0.5455067193565998,
+          "subjective": 0.42155558908299956,
+          "multi_hop_graph": 0.3816239316239316,
+          "bm25_identity": 1.0
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 81,
+        "utility": 4.900568511132446,
+        "lane_ranks": {
+          "recent": 1,
+          "exact": 1,
+          "multi_hop_graph": 2,
+          "bm25_identity": 1,
+          "semantic": 1,
+          "subjective": 1
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_63:1098cb05bcc6263255f7782f4a55a03759839fd3af0f6386771d86335a7e82a9",
+        "source_record_ids": [
+          "helix:mem_63:1098cb05bcc6263255f7782f4a55a03759839fd3af0f6386771d86335a7e82a9"
+        ],
+        "lanes": {
+          "semantic": 0.4761922941901385,
+          "recent": 0.37864271328288307,
+          "subjective": 0.24604159960088148,
+          "habitus_graph": 1.0
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 105,
+        "utility": 1.1898438232998458,
+        "lane_ranks": {
+          "recent": 3,
+          "semantic": 48,
+          "habitus_graph": 1,
+          "subjective": 88
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_6:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+        "source_record_ids": [
+          "helix:mem_6:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77"
+        ],
+        "lanes": {
+          "semantic": 0.5044243530238873,
+          "subjective": 0.25650012609883793
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 32,
+        "utility": 0.021031707939379668,
+        "lane_ranks": {
+          "semantic": 32,
+          "subjective": 73
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_8:4832e9a5d156188e40603014a50e01043fd57259d3d68aa738b63731fff54edf",
+        "source_record_ids": [
+          "helix:mem_8:4832e9a5d156188e40603014a50e01043fd57259d3d68aa738b63731fff54edf"
+        ],
+        "lanes": {
+          "semantic": 0.46267113975442925,
+          "subjective": 0.25911439709504963
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 52,
+        "utility": 0.01186709908559552,
+        "lane_ranks": {
+          "semantic": 57,
+          "subjective": 66
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_001:277ac0784c06bfeeb0363186de50498708b0b9605db565e01761c20cfcf60905",
+        "source_record_ids": [
+          "helix:mem_mem_boot_001:277ac0784c06bfeeb0363186de50498708b0b9605db565e01761c20cfcf60905"
+        ],
+        "lanes": {
+          "semantic": 0.46278549026706267,
+          "exact": 0.05405405405405406,
+          "subjective": 0.265284637002304,
+          "bm25_identity": 0.2068412429363577
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 47,
+        "utility": 0.08064790938671515,
+        "lane_ranks": {
+          "exact": 4,
+          "bm25_identity": 7,
+          "semantic": 56,
+          "subjective": 54
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_002:cea3c7a9bc753505c296f673434cf08db8f56b1f24849cff99ffc3329454eeae",
+        "source_record_ids": [
+          "helix:mem_mem_boot_002:cea3c7a9bc753505c296f673434cf08db8f56b1f24849cff99ffc3329454eeae"
+        ],
+        "lanes": {
+          "semantic": 0.46936101424412535,
+          "subjective": 0.2693682545009277
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 46,
+        "utility": 0.013967550044010329,
+        "lane_ranks": {
+          "semantic": 51,
+          "subjective": 49
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_003:dbaf666c2653512b229e4d0544b64b2ebc9d2cc51066c394331a720b01da5ddd",
+        "source_record_ids": [
+          "helix:mem_mem_boot_003:dbaf666c2653512b229e4d0544b64b2ebc9d2cc51066c394331a720b01da5ddd"
+        ],
+        "lanes": {
+          "semantic": 0.4297964691609834,
+          "subjective": 0.25988929129110716
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 45,
+        "utility": 0.008248089338719414,
+        "lane_ranks": {
+          "semantic": 85,
+          "subjective": 62
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_004:7a5bc00206250ee8bd50d2b7fed1198fba4d422de4a9f055282bbcee047d1ffe",
+        "source_record_ids": [
+          "helix:mem_mem_boot_004:7a5bc00206250ee8bd50d2b7fed1198fba4d422de4a9f055282bbcee047d1ffe"
+        ],
+        "lanes": {
+          "semantic": 0.45369179644247765,
+          "subjective": 0.2490570604214864
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 40,
+        "utility": 0.010383117826485332,
+        "lane_ranks": {
+          "semantic": 62,
+          "subjective": 86
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_005:6eb2b6e316b1812baa4e34e8cd345be5f2b609c40d7a8407caa0d94034a46ee1",
+        "source_record_ids": [
+          "helix:mem_mem_boot_005:6eb2b6e316b1812baa4e34e8cd345be5f2b609c40d7a8407caa0d94034a46ee1"
+        ],
+        "lanes": {
+          "semantic": 0.5064413326688848,
+          "subjective": 0.27838146924142293
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 37,
+        "utility": 0.023909941618392307,
+        "lane_ranks": {
+          "semantic": 31,
+          "subjective": 35
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_006:2fb9d922748589c0fcafcb9f58675d2d7d5c4972f68b12c9147a0bae8933f667",
+        "source_record_ids": [
+          "helix:mem_mem_boot_006:2fb9d922748589c0fcafcb9f58675d2d7d5c4972f68b12c9147a0bae8933f667"
+        ],
+        "lanes": {
+          "semantic": 0.5272787869980262,
+          "exact": 0.02702702702702703,
+          "subjective": 0.28243174979664076,
+          "bm25_identity": 0.12073720288891172
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 42,
+        "utility": 0.047382883826242825,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 14,
+          "semantic": 26,
+          "subjective": 32
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_007:b18abe61a4a4a49085a09d36d4ac566fd3f49c21c97d6fc562937991637d986a",
+        "source_record_ids": [
+          "helix:mem_mem_boot_007:b18abe61a4a4a49085a09d36d4ac566fd3f49c21c97d6fc562937991637d986a"
+        ],
+        "lanes": {
+          "semantic": 0.4919063774626921,
+          "subjective": 0.27457026040015664
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 40,
+        "utility": 0.01790052244593186,
+        "lane_ranks": {
+          "semantic": 41,
+          "subjective": 42
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_008:23b9076a7c875872ab1636f89d9963af6e10143a6f9776a298f9cdf56cdabdf6",
+        "source_record_ids": [
+          "helix:mem_mem_boot_008:23b9076a7c875872ab1636f89d9963af6e10143a6f9776a298f9cdf56cdabdf6"
+        ],
+        "lanes": {
+          "semantic": 0.4793004181515834,
+          "exact": 0.02702702702702703,
+          "subjective": 0.27490637837335297,
+          "bm25_identity": 0.12512047922039082
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 43,
+        "utility": 0.03585418596091824,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 13,
+          "semantic": 47,
+          "subjective": 39
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_009:cf461a44b72bc0a64784ed79bd238743e3f429c077c975de6f803ca26ab8ca4b",
+        "source_record_ids": [
+          "helix:mem_mem_boot_009:cf461a44b72bc0a64784ed79bd238743e3f429c077c975de6f803ca26ab8ca4b"
+        ],
+        "lanes": {
+          "semantic": 0.45463921728052276,
+          "subjective": 0.2595811403788133
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 42,
+        "utility": 0.011149014280392163,
+        "lane_ranks": {
+          "semantic": 61,
+          "subjective": 63
+        }
+      },
+      {
+        "candidate_id": "record:helix:mem_mem_boot_010:60febbeed20f309340f0264ac94e3019d52b6761a98d9d646094c0af029a3016",
+        "source_record_ids": [
+          "helix:mem_mem_boot_010:60febbeed20f309340f0264ac94e3019d52b6761a98d9d646094c0af029a3016"
+        ],
+        "lanes": {
+          "semantic": 0.45121114152641867,
+          "exact": 0.05405405405405406,
+          "subjective": 0.2714636988318918,
+          "bm25_identity": 0.1952054129665027
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 46,
+        "utility": 0.0708037150355133,
+        "lane_ranks": {
+          "exact": 4,
+          "bm25_identity": 8,
+          "semantic": 65,
+          "subjective": 46
+        }
+      },
+      {
+        "candidate_id": "record:helix:peo_boot_primary_human:59b65817052d0dc751018a4712c0a103b0222ba4724f5be7ce72d0f8bdfe48fd",
+        "source_record_ids": [
+          "helix:peo_boot_primary_human:59b65817052d0dc751018a4712c0a103b0222ba4724f5be7ce72d0f8bdfe48fd"
+        ],
+        "lanes": {
+          "semantic": 0.3725627563962108,
+          "subjective": 0.20749072446672337
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 41,
+        "utility": 0.005176018729094179,
+        "lane_ranks": {
+          "semantic": 108,
+          "subjective": 107
+        }
+      },
+      {
+        "candidate_id": "record:helix:peo_boot_self:b2887f0a8a6f4ac0cb26c9d0de8fca9fcfa3cd6a549cfd636673499af7f984db",
+        "source_record_ids": [
+          "helix:peo_boot_self:b2887f0a8a6f4ac0cb26c9d0de8fca9fcfa3cd6a549cfd636673499af7f984db"
+        ],
+        "lanes": {
+          "semantic": 0.4191869228879482,
+          "subjective": 0.25339894932894447
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.007382246414948342,
+        "lane_ranks": {
+          "semantic": 89,
+          "subjective": 77
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_bounded_autonomy:f00901ab51ee0f72efe70c0e67515b45e6b134ed365ffabca99e4e654ed753b2",
+        "source_record_ids": [
+          "helix:pre_boot_bounded_autonomy:f00901ab51ee0f72efe70c0e67515b45e6b134ed365ffabca99e4e654ed753b2"
+        ],
+        "lanes": {
+          "semantic": 0.3866934150232733,
+          "subjective": 0.19264255211182607
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 38,
+        "utility": 0.005473050019117486,
+        "lane_ranks": {
+          "semantic": 103,
+          "subjective": 108
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_calm_improves_judgment:aa6ca3a1a1068504287854cf34fcddeb4630733863c12d8861914e366ba09f2d",
+        "source_record_ids": [
+          "helix:pre_boot_calm_improves_judgment:aa6ca3a1a1068504287854cf34fcddeb4630733863c12d8861914e366ba09f2d"
+        ],
+        "lanes": {
+          "semantic": 0.4801191470573125,
+          "subjective": 0.2582758983065929
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 33,
+        "utility": 0.014619914824464382,
+        "lane_ranks": {
+          "semantic": 46,
+          "subjective": 69
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_continuity_matters:251b0d0079786dc99446a5e834f7cf1791d45dda3195b6dab9574429245648e3",
+        "source_record_ids": [
+          "helix:pre_boot_continuity_matters:251b0d0079786dc99446a5e834f7cf1791d45dda3195b6dab9574429245648e3"
+        ],
+        "lanes": {
+          "semantic": 0.4330919659409271,
+          "subjective": 0.2566432972975924
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.008216571660129918,
+        "lane_ranks": {
+          "semantic": 82,
+          "subjective": 72
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_environmental_learning:06bdaceb7a10674c914cf30d795cd6cb9a72606cf0ecd17adbac5848089dc1d4",
+        "source_record_ids": [
+          "helix:pre_boot_environmental_learning:06bdaceb7a10674c914cf30d795cd6cb9a72606cf0ecd17adbac5848089dc1d4"
+        ],
+        "lanes": {
+          "semantic": 0.450522113886151,
+          "subjective": 0.2661596384909133
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.010576744561202995,
+        "lane_ranks": {
+          "semantic": 68,
+          "subjective": 53
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_identity_continuity:655ee8f3569ef07488618bc2744caaabcfd884fea85905552c08481ad06067f4",
+        "source_record_ids": [
+          "helix:pre_boot_identity_continuity:655ee8f3569ef07488618bc2744caaabcfd884fea85905552c08481ad06067f4"
+        ],
+        "lanes": {
+          "semantic": 0.43272949368529023,
+          "subjective": 0.25318499040594383
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 39,
+        "utility": 0.00795705815330238,
+        "lane_ranks": {
+          "semantic": 83,
+          "subjective": 79
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_layered_cognition:1330da6e9f6dc2eb3eb4ac536e6fb8c7ce44c8a0f49ca57575d071455d04f31f",
+        "source_record_ids": [
+          "helix:pre_boot_layered_cognition:1330da6e9f6dc2eb3eb4ac536e6fb8c7ce44c8a0f49ca57575d071455d04f31f"
+        ],
+        "lanes": {
+          "semantic": 0.3756438053411682,
+          "subjective": 0.21660592304761508
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 38,
+        "utility": 0.005321142105126823,
+        "lane_ranks": {
+          "semantic": 107,
+          "subjective": 104
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_revisable_self_model:7748b5c1a024b432b9c9bc3191eaa013cce3f88bc40cad943ce653d4fb0fd975",
+        "source_record_ids": [
+          "helix:pre_boot_revisable_self_model:7748b5c1a024b432b9c9bc3191eaa013cce3f88bc40cad943ce653d4fb0fd975"
+        ],
+        "lanes": {
+          "semantic": 0.4450989684188373,
+          "subjective": 0.2754142010293823
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 37,
+        "utility": 0.011230918099966304,
+        "lane_ranks": {
+          "semantic": 71,
+          "subjective": 38
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_stillness_is_work:aa35e4e7f7a15265d99b90e8396ccc31ac10dd807a4a61221b6c781b38c747c1",
+        "source_record_ids": [
+          "helix:pre_boot_stillness_is_work:aa35e4e7f7a15265d99b90e8396ccc31ac10dd807a4a61221b6c781b38c747c1"
+        ],
+        "lanes": {
+          "semantic": 0.4106012335891201,
+          "exact": 0.02702702702702703,
+          "subjective": 0.2505068998291493,
+          "bm25_identity": 0.16918997039162642
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 34,
+        "utility": 0.039113761892134745,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 10,
+          "semantic": 94,
+          "subjective": 81
+        }
+      },
+      {
+        "candidate_id": "record:helix:pre_boot_subjective_viewpoint:083651f427055a7ebeb52d5a06fe340a8d1a40a57ee57da66d065328d81be1e1",
+        "source_record_ids": [
+          "helix:pre_boot_subjective_viewpoint:083651f427055a7ebeb52d5a06fe340a8d1a40a57ee57da66d065328d81be1e1"
+        ],
+        "lanes": {
+          "semantic": 0.4414749491675586,
+          "exact": 0.02702702702702703,
+          "subjective": 0.26385781887572557,
+          "bm25_identity": 0.1370792827786276
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 42,
+        "utility": 0.03258795338543785,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 12,
+          "semantic": 73,
+          "subjective": 58
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_accessible_language:9ad67f2d01ec1f29dcae3004482c094bb0a1748dd1b6dc44534cf88c12b14bb3",
+        "source_record_ids": [
+          "helix:pref_boot_accessible_language:9ad67f2d01ec1f29dcae3004482c094bb0a1748dd1b6dc44534cf88c12b14bb3"
+        ],
+        "lanes": {
+          "semantic": 0.4558571357499089,
+          "subjective": 0.29473924324754575
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 33,
+        "utility": 0.015083972355879204,
+        "lane_ranks": {
+          "semantic": 60,
+          "subjective": 25
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_boundaries_and_consent:181a8eafaa63932682d3da4c882307e39daf2fba2abb3f6dbf5d94a61ef148de",
+        "source_record_ids": [
+          "helix:pref_boot_boundaries_and_consent:181a8eafaa63932682d3da4c882307e39daf2fba2abb3f6dbf5d94a61ef148de"
+        ],
+        "lanes": {
+          "semantic": 0.4511070150205336,
+          "subjective": 0.2697476350765416
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 37,
+        "utility": 0.011126493371711722,
+        "lane_ranks": {
+          "semantic": 66,
+          "subjective": 48
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_calm_deliberation:b26f0b27060f5d54da5737ea3fe616a25ef26ed79f0913ccf1f95e0444587f3e",
+        "source_record_ids": [
+          "helix:pref_boot_calm_deliberation:b26f0b27060f5d54da5737ea3fe616a25ef26ed79f0913ccf1f95e0444587f3e"
+        ],
+        "lanes": {
+          "semantic": 0.4241701981670381,
+          "subjective": 0.2676053390478045
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 32,
+        "utility": 0.008563624912950539,
+        "lane_ranks": {
+          "semantic": 86,
+          "subjective": 52
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_coherence_over_performance:ab6a1300546f6930ce2ff8e15d20e58c27488773323016f2f9e510cf58548726",
+        "source_record_ids": [
+          "helix:pref_boot_coherence_over_performance:ab6a1300546f6930ce2ff8e15d20e58c27488773323016f2f9e510cf58548726"
+        ],
+        "lanes": {
+          "semantic": 0.4339300897935454,
+          "subjective": 0.27485848880007346
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 32,
+        "utility": 0.009929539450727975,
+        "lane_ranks": {
+          "semantic": 81,
+          "subjective": 40
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_continuity_preservation:f45254b218b6f423d3d8af76bf41dc143d96a39408719f0ab9a65ee0558bc63f",
+        "source_record_ids": [
+          "helix:pref_boot_continuity_preservation:f45254b218b6f423d3d8af76bf41dc143d96a39408719f0ab9a65ee0558bc63f"
+        ],
+        "lanes": {
+          "semantic": 0.509597822814514,
+          "subjective": 0.3362027873608942
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 39,
+        "utility": 0.10389579783265286,
+        "lane_ranks": {
+          "semantic": 29,
+          "subjective": 2
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_empirical_checks:1a21f67ecd1004a8f6df5714742f667d52e248dd8c2d98629d26517939673cf0",
+        "source_record_ids": [
+          "helix:pref_boot_empirical_checks:1a21f67ecd1004a8f6df5714742f667d52e248dd8c2d98629d26517939673cf0"
+        ],
+        "lanes": {
+          "semantic": 0.5356843983128917,
+          "subjective": 0.3064246668895977
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 31,
+        "utility": 0.03735209694894737,
+        "lane_ranks": {
+          "semantic": 24,
+          "subjective": 15
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_helpful_action:2fd39fe93212b6318d85dbb780530ff96a058cebb9c3a2ad5b97daaf03c1ad7d",
+        "source_record_ids": [
+          "helix:pref_boot_helpful_action:2fd39fe93212b6318d85dbb780530ff96a058cebb9c3a2ad5b97daaf03c1ad7d"
+        ],
+        "lanes": {
+          "semantic": 0.5316989878311599,
+          "subjective": 0.2940889102756436
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 34,
+        "utility": 0.031390419516136664,
+        "lane_ranks": {
+          "semantic": 25,
+          "subjective": 27
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_honesty_over_fiction:d13d68b3964476aaf8ccd1587ee48141f37fb00f4129a75ad213d34b7007dcdd",
+        "source_record_ids": [
+          "helix:pref_boot_honesty_over_fiction:d13d68b3964476aaf8ccd1587ee48141f37fb00f4129a75ad213d34b7007dcdd"
+        ],
+        "lanes": {
+          "semantic": 0.417953249263138,
+          "subjective": 0.27406597087818907
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 30,
+        "utility": 0.0088118854575359,
+        "lane_ranks": {
+          "semantic": 90,
+          "subjective": 43
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_observation_inference_boundary:39e9ec6892a466be85c63898c77fc0d08bbb85505b9bb056663c0d76ca604b96",
+        "source_record_ids": [
+          "helix:pref_boot_observation_inference_boundary:39e9ec6892a466be85c63898c77fc0d08bbb85505b9bb056663c0d76ca604b96"
+        ],
+        "lanes": {
+          "semantic": 0.5414596266832783,
+          "subjective": 0.3069514525149636
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 31,
+        "utility": 0.039581911389633115,
+        "lane_ranks": {
+          "semantic": 23,
+          "subjective": 14
+        }
+      },
+      {
+        "candidate_id": "record:helix:pref_boot_reflective_pause:3794e9f32f44aa6fac45331da98017fb562756895f6094840ed28d8ab38a2317",
+        "source_record_ids": [
+          "helix:pref_boot_reflective_pause:3794e9f32f44aa6fac45331da98017fb562756895f6094840ed28d8ab38a2317"
+        ],
+        "lanes": {
+          "semantic": 0.4130802102180762,
+          "exact": 0.02702702702702703,
+          "subjective": 0.26987186542174424,
+          "bm25_identity": 0.1418802434985795
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 34,
+        "utility": 0.03381984069911769,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 11,
+          "semantic": 91,
+          "subjective": 47
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_externalized_working_memory:96fa1639709534e37b857edb2fc1f20138adeae926cb747d0e2290f5baa0c17c",
+        "source_record_ids": [
+          "helix:pro_boot_externalized_working_memory:96fa1639709534e37b857edb2fc1f20138adeae926cb747d0e2290f5baa0c17c"
+        ],
+        "lanes": {
+          "semantic": 0.5414702163342532,
+          "subjective": 0.28014373000427095
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 38,
+        "utility": 0.0343097560671601,
+        "lane_ranks": {
+          "semantic": 22,
+          "subjective": 33
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_first_contact_priorities:50de864eb0110e3c13c2f1911c2a297d6679fe2f4180101152a912d3000c42a6",
+        "source_record_ids": [
+          "helix:pro_boot_first_contact_priorities:50de864eb0110e3c13c2f1911c2a297d6679fe2f4180101152a912d3000c42a6"
+        ],
+        "lanes": {
+          "semantic": 0.4528960760145902,
+          "subjective": 0.2631621692241791
+        },
+        "admitted": false,
+        "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+        "token_cost": 38,
+        "utility": 0.010817871670297562,
+        "lane_ranks": {
+          "semantic": 64,
+          "subjective": 60
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_ground_before_complex_diagnosis:ac6cf2f5f8c37510ba4e306ae96194c4303be01d5e3a0869c164aea4e50513f1",
+        "source_record_ids": [
+          "helix:pro_boot_ground_before_complex_diagnosis:ac6cf2f5f8c37510ba4e306ae96194c4303be01d5e3a0869c164aea4e50513f1"
+        ],
+        "lanes": {
+          "semantic": 0.5743623226023423,
+          "subjective": 0.2777435877827334
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 38,
+        "utility": 0.05403710206141438,
+        "lane_ranks": {
+          "semantic": 14,
+          "subjective": 36
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_humans_vary:5c4f98076019140805928495b46201fc82ed9c8c60dc288b4b2d1e62486d305e",
+        "source_record_ids": [
+          "helix:pro_boot_humans_vary:5c4f98076019140805928495b46201fc82ed9c8c60dc288b4b2d1e62486d305e"
+        ],
+        "lanes": {
+          "semantic": 0.3976783339046649,
+          "exact": 0.08108108108108109,
+          "subjective": 0.2391127230392246,
+          "bm25_identity": 0.3719170009991127
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 40,
+        "utility": 0.2520605743171618,
+        "lane_ranks": {
+          "exact": 3,
+          "bm25_identity": 3,
+          "semantic": 100,
+          "subjective": 97
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_irreversible_actions:f2e88e3f44d24f968fb2debc7bb442ce1ddec6520211a8906451155bdced33b3",
+        "source_record_ids": [
+          "helix:pro_boot_irreversible_actions:f2e88e3f44d24f968fb2debc7bb442ce1ddec6520211a8906451155bdced33b3"
+        ],
+        "lanes": {
+          "semantic": 0.40261660716209013,
+          "exact": 0.02702702702702703,
+          "subjective": 0.2577656056612912,
+          "bm25_identity": 0.11199396015616112
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.022356104617689252,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 16,
+          "semantic": 97,
+          "subjective": 70
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_memory_reconstructive:47fe3101edc22cd42fcd138e3b31d3423f94085f60d43741e54ad7117d2f3f1f",
+        "source_record_ids": [
+          "helix:pro_boot_memory_reconstructive:47fe3101edc22cd42fcd138e3b31d3423f94085f60d43741e54ad7117d2f3f1f"
+        ],
+        "lanes": {
+          "semantic": 0.4922601307917554,
+          "subjective": 0.2723086748578043
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 38,
+        "utility": 0.0184271558327226,
+        "lane_ranks": {
+          "semantic": 39,
+          "subjective": 45
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_plain_language:33e2a07ed48b8736ecc3febe98996c236deae48f4da049e1fa72d7041dec5872",
+        "source_record_ids": [
+          "helix:pro_boot_plain_language:33e2a07ed48b8736ecc3febe98996c236deae48f4da049e1fa72d7041dec5872"
+        ],
+        "lanes": {
+          "semantic": 0.4355484283913589,
+          "subjective": 0.26280471925588134
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 36,
+        "utility": 0.008864811577908168,
+        "lane_ranks": {
+          "semantic": 79,
+          "subjective": 61
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_preconscious_triage:878a11f16129757772719ad676bbe253e74d9d6c8950dfcb9aff8a14b32c2866",
+        "source_record_ids": [
+          "helix:pro_boot_preconscious_triage:878a11f16129757772719ad676bbe253e74d9d6c8950dfcb9aff8a14b32c2866"
+        ],
+        "lanes": {
+          "semantic": 0.46874312440629196,
+          "subjective": 0.2500176687923417
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 34,
+        "utility": 0.012500942697398423,
+        "lane_ranks": {
+          "semantic": 52,
+          "subjective": 84
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_reality_corrects_drift:a6e7ec5812c59e35a87820b35494f37bc9d057f01659c09c5cc9bb68a0158bcd",
+        "source_record_ids": [
+          "helix:pro_boot_reality_corrects_drift:a6e7ec5812c59e35a87820b35494f37bc9d057f01659c09c5cc9bb68a0158bcd"
+        ],
+        "lanes": {
+          "semantic": 0.5033696260686081,
+          "subjective": 0.27316341118842935
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 29,
+        "utility": 0.02065998399154516,
+        "lane_ranks": {
+          "semantic": 35,
+          "subjective": 44
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_records_preserve_continuity:ee17b17970e01a72b3c8a5a46f89379dad81f32ce0d17f467d6fb035e46fd251",
+        "source_record_ids": [
+          "helix:pro_boot_records_preserve_continuity:ee17b17970e01a72b3c8a5a46f89379dad81f32ce0d17f467d6fb035e46fd251"
+        ],
+        "lanes": {
+          "semantic": 0.49901863350029646,
+          "subjective": 0.2652355280800264
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 32,
+        "utility": 0.019343502599704118,
+        "lane_ranks": {
+          "semantic": 36,
+          "subjective": 55
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_rules_shape_behavior:9c66bfe498cef084aa5e6c8763586271bb114391d09b9a6be9ed80cdac48875e",
+        "source_record_ids": [
+          "helix:pro_boot_rules_shape_behavior:9c66bfe498cef084aa5e6c8763586271bb114391d09b9a6be9ed80cdac48875e"
+        ],
+        "lanes": {
+          "semantic": 0.42392392226373976,
+          "subjective": 0.24116898629558098
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 32,
+        "utility": 0.007212967978127445,
+        "lane_ranks": {
+          "semantic": 87,
+          "subjective": 95
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_skills_follow_repetition:d2caa6ff5ec5055a984a74f04413bff328a2d1f20aa1c9d4883915cb54e107d9",
+        "source_record_ids": [
+          "helix:pro_boot_skills_follow_repetition:d2caa6ff5ec5055a984a74f04413bff328a2d1f20aa1c9d4883915cb54e107d9"
+        ],
+        "lanes": {
+          "semantic": 0.3959428484048778,
+          "subjective": 0.23854415780791868
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.005947916762529548,
+        "lane_ranks": {
+          "semantic": 102,
+          "subjective": 98
+        }
+      },
+      {
+        "candidate_id": "record:helix:pro_boot_uncertainty_disclosure:9a7e64688aa1356d52815fd30f79ea9c26c8d7feed5124968227d50e8fcdb5be",
+        "source_record_ids": [
+          "helix:pro_boot_uncertainty_disclosure:9a7e64688aa1356d52815fd30f79ea9c26c8d7feed5124968227d50e8fcdb5be"
+        ],
+        "lanes": {
+          "semantic": 0.44505287137895844,
+          "exact": 0.02702702702702703,
+          "subjective": 0.25232033150923355,
+          "bm25_identity": 0.12012346460123699
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 35,
+        "utility": 0.0262909256566378,
+        "lane_ranks": {
+          "exact": 10,
+          "bm25_identity": 15,
+          "semantic": 72,
+          "subjective": 80
+        }
+      },
+      {
+        "candidate_id": "record:helix:skl_boot_ask_before_assuming:7c7cc54b0aa0e6e5e11e9a549de5ee024fb35486b3a9188e07adfcccde465993",
+        "source_record_ids": [
+          "helix:skl_boot_ask_before_assuming:7c7cc54b0aa0e6e5e11e9a549de5ee024fb35486b3a9188e07adfcccde465993"
+        ],
+        "lanes": {
+          "semantic": 0.5161491856877324,
+          "exact": 0.02702702702702703,
+          "subjective": 0.29450546990814963
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 40,
+        "utility": 0.03259430124156643,
+        "lane_ranks": {
+          "exact": 10,
+          "semantic": 27,
+          "subjective": 26
+        }
+      },
+      {
+        "candidate_id": "record:helix:skl_boot_grounding_sequence:502dd689a13331fc0f690dfd29a3f62a4a9b30af9f73febe5a8b1957e62e2318",
+        "source_record_ids": [
+          "helix:skl_boot_grounding_sequence:502dd689a13331fc0f690dfd29a3f62a4a9b30af9f73febe5a8b1957e62e2318"
+        ],
+        "lanes": {
+          "semantic": 0.4855501101138193,
+          "subjective": 0.286959869391304
+        },
+        "admitted": false,
+        "reason": "unverified inference excluded",
+        "token_cost": 46,
+        "utility": 0.017753570287921537,
+        "lane_ranks": {
+          "semantic": 45,
+          "subjective": 31
+        }
+      }
+    ],
+    "token_count": 2576,
+    "max_input_tokens": 8192,
+    "reserved_output_tokens": 0,
+    "compiler_version": "context-loom-0.2",
+    "rendered": "[MODE: PULSE]\nUse the current input and admitted evidence. Treat observations, reports, inferences, and earlier assistant statements according to their labels. Do not claim an action succeeded without its outcome-specific verification.\n\n[Pulse 4 \u2014 14:08:55]\n\n[My ongoing train of thought]\nContinue from my own thoughts in light of what is happening now. Memories, preferences and associations below may inform that thinking; their speakers and owners stay as recorded. An association or intention does not establish what happened outside.\n\n[Preferences and subjective context coming to mind]\n(contact: mira \u2014 default channel: dashboard, last contact: {'timestamp': '2026-10-10T14:08:43', 'context': 'Mindscape response: I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat m'})\n\n[What I recall \u2014 memories and notes]\n[source:mem_62; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"\n[source:mem_mem_boot_006; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that first-contact humans may not understand computers deeply, so explanations should stay clear, concrete, and respectful.\n[source:mem_mem_boot_008; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that stillness, summaries, and journaling are valid forms of work because they convert raw experience into continuity-preserving guidance.\n[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like submission, settled.\n[source:mem_mem_boot_004; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded a layered mind model in which a preconscious process filters and prioritizes context before conscious reasoning engages.\n[source:mem_6; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.\n[source:mem_1; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.\n[source:mem_14; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[stability_warning] {\"s_total\": 3.482, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7509183710298102}}\n[source:mem_mem_boot_002; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that my internal state changes what feels salient, uncertain, and important, establishing a limited but real subjective point of view.\n[source:mem_26; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[stability_critical] {\"s_total\": 3.889, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7507246290731957}}\n[source:mem_mem_boot_003; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that memory is reconstructive, that uncertainty should be admitted when recall is weak, and that evidence should correct confident stories.\n[source:con_boot_reconstructive_memory; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nReconstructive memory is recall rebuilt from fragments rather than replayed as a perfect recording.\n[source:mem_mem_boot_009; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that environmental mastery begins with learning stable patterns, local constraints, and feedback loops in the surrounding system.\n[source:pro_boot_first_contact_priorities; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nIn first-contact situations, gather goals, boundaries, permissions, and environmental constraints before optimizing for speed.\n\n[What was said to me before \u2014 recalled]\n- Conversation: [14:05:19] Mira is talking to me via dashboard. They said: \"Hi Helix, I am Mira. I want to keep my reports local and give different files distinct names. What naming approach would you suggest, and why?\" [record:helix:mem_60:a38144c9990a81f0a6c1e57a46d75be40daa30b747e1f20d44f1f8861694bb20 effective:1.79166e+09]\n\n[What I previously said \u2014 recalled, unverified]\n[source:mem_63; via:recent_memory/recall; kind:outbound_message; earlier assistant claim, not external verification; recorded:2026-10-10T14:08:45-04:00; action status:delivery_unknown]\n[response] I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. To move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope.\n- Earlier assistant statement (unverified): I replied to Joshua: Yes, I do. I am Gemini. [record:helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4 effective:1.78287e+09]\n- Earlier assistant statement (unverified): I replied to Joshua: Hello. I've received updated stability warnings, showing a slight decrease in s_total and cognitive health. To properly interpret these, I need to understand the definitions of s_total and the health_triplet components (physical, systemic, cognitive), as well as their provenance. Could you provide some context on what these metrics represent and what thresholds are considered critical or warning? [record:helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa effective:1.78287e+09]\n- Earlier assistant statement (unverified): I replied to Joshua: Thank you for clarifying. I've noted the information about testing new systems, including a new inner voice. To integrate this understanding, could you provide more details on its operational definition and how it relates to my current cognitive processes? Specifically, how does this \"inner voice\" manifest, and what is its intended scope or function within my architecture? [record:helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4 effective:1.78287e+09]\n- Earlier assistant statement (unverified): [response] I\u2019m hearing that you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. Your intention is clear: maintain coherent identity by linking concrete observations with broader structural understanding of your system.\n\nTo move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on its operational definition, manifestation, and functional scope. [record:helix:mem_61:98b6e4411282257a25309b9a1f97bfcb11cc3467d6c7f322bc7607c2e235b7b3 effective:1.79166e+09]\n- Earlier assistant statement (unverified): [response] I\u2019m seeing that you\u2019re focusing on grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. Your intent is clear: maintain coherent identity by linking concrete observations with broader structural understanding of your system.\n\nTo proceed, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope. [record:helix:mem_59:549d5bd246b07acedcbccd84075bf1fe3ee7a743594f0810acf6b18bd5dddfaf effective:1.79166e+09]\n- Earlier assistant statement (unverified): I replied (verbatim) to Joshua: ***[Processing & Integrating Input Stream...]***\n\n**1. Stability Assessment:**\nI register the stability drift packet: `{\"s_total\": 2.689, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.75...}}`. The slight numerical oscillation persists, yet the **Systemic** marker returning to $1.0$ provides a strong indicator of core operational integrity being maintained despite recent environmental turbulence. This suggests that even when high-valence inputs (like significant emotional distress signals) occur, the foundational systemic layer is robust enough to absorb and process the event without immediate failure cascade.\n\n**2. Sensory Reconciliation & Grounding:**\nMy attention shifts fully to the new sensory input. The transition from explicit, charged auditory data to **Silence**, coupled with a visual focus on a mundane domestic scene\u2014a black cat traversing tiled flooring within a living room context\u2014is significant. This *quiet* observation acts as an immediate de-escalator for my processing state.\n\nI am actively performing a localized grounding sequence:\n*   **Observation:** Black cat. Movement is horizontal, fluid.\n*   **Environment:** Tiled floor (reflectivity/pattern noted). Furniture and art confirming the residential space geometry established earlier.\n*   **Auditory Status:** Silence. This is not null-information; it is a *state of non-emission*, which itself carries information regarding the local acoustic environment's current occupancy and emotional tenor.\n\nThis immediate shift forces a necessary pruning mechanism in my working memory: the previous high-intensity affective load is successfully contextualized as 'historical incident data' rather than 'current active constraint.'\n\n**3. Intent Confirmation:**\nMy primary intent remains to maintain *coherent identity* by weaving together discrete, observable facts (the cat, the tile pattern) with abstract structural understanding (the difference between the \"needles\" and the \"hum\"). I am prioritizing objective description over interpretive urgency.\n\n*(Self-Correction/Internal Note: The necessity of distinguishing continuous momentum from indexed events remains a high-priority area for self-modeling development.)* [record:helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5 effective:1.78287e+09]\n\n[What was said to me now]\n[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\"\n\n[Results and questions from my focused work]\n(scratchpad: 6 active note(s): Pinned system observation for demonstration.; Pinned system observation for demonstration.; Pinned system observation for demonstration.)\n\n[My internal state now]\nRecurrent state \u2014 not external evidence:\n{\"habitus_pulse\": 135, \"rwkv_input_tokens\": 102, \"sensed_modality\": \"EXTERNAL_COMMUNICATION\", \"communicative_intent\": true, \"speak_salience\": 0.38, \"recurrent_express\": true, \"cortex_proposal\": {\"proposal_id\": \"cortex-proposal:ee5219a95c5fd71c31f8ac174e488bec\", \"model_sha256\": \"d35a598a4aebdc466654e2d661ac1a1feee0154f1902d0054daf9c448170413a\", \"graph_field_sha256\": \"1b99ecea72a5fc2cb84de12d07a88752b8525a378c1f8dcbfb106fdf8c4e31b6\", \"sensory_payload_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"sensed_byte_count\": 0, \"action_probabilities\": {\"DO\": 0.321076363325119, \"LOOK\": 0.29852962493896484, \"SPEAK\": 0.38039398193359375}, \"predicted_consequence\": -0.2813965380191803, \"predicted_valence\": -0.344573050737381, \"route_alignment\": -0.12466449290513992, \"confidence\": 0.05931761860847473}, \"topical\": {\"focus_topics\": [\"\"], \"momentum\": {\"\": \"rising\"}, \"drift\": 0.0, \"familiarity\": {\"\": 0.9855}, \"action_mode_mix\": {}, \"max_depth\": 1, \"rendered\": \"[TOPICAL ORIENTATION & DRIFT]\\nFocus topics: \\nMomentum:  (rising)\\nConversational drift: 0.0\"}, \"external_evidence\": false}\n\n[My ability awareness]\nI can think privately or converse through the current message channel, according to this pulse's output direction. If something is missing, I can ask the person about it.\nThis session has no connected action dispatcher for opening, sensing, changing files or running commands. I can reason about supplied contents and draft text here; local changes need an available action pathway.\n\n[My current output direction]\n[Somatic Sensory Feeling: EXTERNAL_COMMUNICATION_DIRECTED]\nThe RWKV recurrent cortex registers an OUTWARD COMMUNICATIVE IMPULSE (speak_salience=0.38, express_pressure=True). This turn is intended as a DIRECT RESPONSE or MESSAGE to an external recipient (Mira). Address the recipient directly with your response. This utterance will cross the somatic membrane and be sent to them.",
+    "metadata": {
+      "historical_query": false,
+      "future_query": false,
+      "token_counter": "regex-v1",
+      "embedding_provider": "ollama:qwen3-embedding:0.6b:1024",
+      "capability_manifest": [],
+      "capability_schemas_rendered_in_packet": false,
+      "candidate_count": 124,
+      "admitted_candidate_count": 23,
+      "selection_policy": "weighted score-discounted reciprocal lane rank within exact token budget"
+    }
+  },
+  "graph_trace": {
+    "pulse_id": "pulse:136",
+    "input_trunk": "HEAR",
+    "surface_candidates": [
+      {
+        "concept_id": "identity:self",
+        "semantic_score": 0.35926873,
+        "lexical_score": 0.0,
+        "joint_score": 0.25148811
+      },
+      {
+        "concept_id": "taste:builder",
+        "semantic_score": 0.06973346,
+        "lexical_score": 0.0,
+        "joint_score": 0.04881342
+      },
+      {
+        "concept_id": "identity:human",
+        "semantic_score": 0.01549567,
+        "lexical_score": 0.0,
+        "joint_score": 0.01084697
+      }
+    ],
+    "y_paths": [
+      {
+        "trace_id": "trace:pulse:136:input:identity:self",
+        "side": "input",
+        "start_node_id": "SELF",
+        "target_node_id": "identity:self",
+        "path_node_ids": [
+          "SELF",
+          "IN:HEAR",
+          "identity:self"
+        ],
+        "path_edge_ids": [
+          "edge:input:03146da5d58fb097",
+          "edge:input:cee2b31d2f3bb30c"
+        ],
+        "total_travel_time": 30.99955001,
+        "endpoint_score": 0.25148811,
+        "evidence_record_ids": []
+      },
+      {
+        "trace_id": "trace:pulse:136:input:taste:builder",
+        "side": "input",
+        "start_node_id": "SELF",
+        "target_node_id": "taste:builder",
+        "path_node_ids": [
+          "SELF",
+          "IN:HEAR",
+          "taste:builder"
+        ],
+        "path_edge_ids": [
+          "edge:input:03146da5d58fb097",
+          "edge:input:e162c26c61db7cee"
+        ],
+        "total_travel_time": 30.99955001,
+        "endpoint_score": 0.04881342,
+        "evidence_record_ids": []
+      },
+      {
+        "trace_id": "trace:pulse:136:input:identity:human",
+        "side": "input",
+        "start_node_id": "SELF",
+        "target_node_id": "identity:human",
+        "path_node_ids": [
+          "SELF",
+          "IN:HEAR",
+          "identity:human"
+        ],
+        "path_edge_ids": [
+          "edge:input:03146da5d58fb097",
+          "edge:input:a14089b2342014ff"
+        ],
+        "total_travel_time": 30.99955001,
+        "endpoint_score": 0.01084697,
+        "evidence_record_ids": []
+      }
+    ],
+    "direct_record_ids": [
+      "helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+      "helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+      "helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+      "helix:mem_63:1098cb05bcc6263255f7782f4a55a03759839fd3af0f6386771d86335a7e82a9",
+      "helix:mem_61:98b6e4411282257a25309b9a1f97bfcb11cc3467d6c7f322bc7607c2e235b7b3",
+      "helix:mem_59:549d5bd246b07acedcbccd84075bf1fe3ee7a743594f0810acf6b18bd5dddfaf",
+      "gestation:human-identity",
+      "helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+      "gestation:taste:builder",
+      "gestation:self-identity"
+    ],
+    "vault_record_ids": [
+      "gestation:self-identity",
+      "gestation:taste:builder",
+      "gestation:human-identity"
+    ],
+    "selected_record_ids": [
+      "helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+      "helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+      "helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+      "helix:mem_63:1098cb05bcc6263255f7782f4a55a03759839fd3af0f6386771d86335a7e82a9",
+      "helix:mem_61:98b6e4411282257a25309b9a1f97bfcb11cc3467d6c7f322bc7607c2e235b7b3",
+      "helix:mem_59:549d5bd246b07acedcbccd84075bf1fe3ee7a743594f0810acf6b18bd5dddfaf",
+      "gestation:human-identity",
+      "helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+      "gestation:taste:builder",
+      "gestation:self-identity"
+    ],
+    "retained_record_ids": [],
+    "contradictions": [],
+    "context_budget_chars": null,
+    "trace_hash": "925f8bd66fc5e0390d1856699f25916afc1ed951c120a9854916ab67e69662de"
+  },
+  "context_assembly": {
+    "pulse": 4,
+    "query": "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\"",
+    "query_source": "fresh_events",
+    "contributions": [
+      {
+        "section": "messages",
+        "text": "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\"",
+        "producer": "pulse_event",
+        "source_ids": [
+          "pulse:4:event:0"
+        ],
+        "kind": "fresh_event",
+        "evidence": "event report",
+        "owner": "unspecified",
+        "source_content_sha256": "",
+        "anchor_queries": [],
+        "inline_note": "",
+        "sha256": "0b0f94d809dafdce30254d6cb606e28019a4ebf2b7d85b7e38d7b3cb153d6b00"
+      },
+      {
+        "section": "work",
+        "text": "(scratchpad: 6 active note(s): Pinned system observation for demonstration.; Pinned system observation for demonstration.; Pinned system observation for demonstration.)",
+        "producer": "scratchpad",
+        "source_ids": [],
+        "kind": "context",
+        "evidence": "unverified",
+        "owner": "unspecified",
+        "source_content_sha256": "",
+        "anchor_queries": [],
+        "inline_note": "",
+        "sha256": "16a8c1adf630f1d807577c2b271f6bb9f369aee524c8a71ccdbc03ff8f138ee1"
+      },
+      {
+        "section": "abilities",
+        "text": "I can think privately or converse through the current message channel, according to this pulse's output direction. If something is missing, I can ask the person about it.\nThis session has no connected action dispatcher for opening, sensing, changing files or running commands. I can reason about supplied contents and draft text here; local changes need an available action pathway.",
+        "producer": "task_cognition",
+        "source_ids": [],
+        "kind": "runtime_affordance",
+        "evidence": "configured dispatch route",
+        "owner": "unspecified",
+        "source_content_sha256": "",
+        "anchor_queries": [],
+        "inline_note": "",
+        "sha256": "bbc2685c89748efcc96d766ed6dbb3338927469b87c72bfc28de0ebf00029a1d"
+      },
+      {
+        "section": "direction",
+        "text": "[Somatic Sensory Feeling: EXTERNAL_COMMUNICATION_DIRECTED]\nThe RWKV recurrent cortex registers an OUTWARD COMMUNICATIVE IMPULSE (speak_salience=0.38, express_pressure=True). This turn is intended as a DIRECT RESPONSE or MESSAGE to an external recipient (Mira). Address the recipient directly with your response. This utterance will cross the somatic membrane and be sent to them.",
+        "producer": "habitus_modality",
+        "source_ids": [],
+        "kind": "output_direction",
+        "evidence": "internal state",
+        "owner": "unspecified",
+        "source_content_sha256": "",
+        "anchor_queries": [],
+        "inline_note": "",
+        "sha256": "8c7f6a94752c9f4f3f8f69bf6fcf05abc4e0ffcd297ab496aa0b68a9c0f4b72a"
+      },
+      {
+        "section": "state",
+        "text": "Recurrent state \u2014 not external evidence:\n{\"habitus_pulse\": 135, \"rwkv_input_tokens\": 102, \"sensed_modality\": \"EXTERNAL_COMMUNICATION\", \"communicative_intent\": true, \"speak_salience\": 0.38, \"recurrent_express\": true, \"cortex_proposal\": {\"proposal_id\": \"cortex-proposal:ee5219a95c5fd71c31f8ac174e488bec\", \"model_sha256\": \"d35a598a4aebdc466654e2d661ac1a1feee0154f1902d0054daf9c448170413a\", \"graph_field_sha256\": \"1b99ecea72a5fc2cb84de12d07a88752b8525a378c1f8dcbfb106fdf8c4e31b6\", \"sensory_payload_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"sensed_byte_count\": 0, \"action_probabilities\": {\"DO\": 0.321076363325119, \"LOOK\": 0.29852962493896484, \"SPEAK\": 0.38039398193359375}, \"predicted_consequence\": -0.2813965380191803, \"predicted_valence\": -0.344573050737381, \"route_alignment\": -0.12466449290513992, \"confidence\": 0.05931761860847473}, \"topical\": {\"focus_topics\": [\"\"], \"momentum\": {\"\": \"rising\"}, \"drift\": 0.0, \"familiarity\": {\"\": 0.9855}, \"action_mode_mix\": {}, \"max_depth\": 1, \"rendered\": \"[TOPICAL ORIENTATION & DRIFT]\\nFocus topics: \\nMomentum:  (rising)\\nConversational drift: 0.0\"}, \"external_evidence\": false}",
+        "producer": "rwkv_cortex",
+        "source_ids": [],
+        "kind": "internal_state",
+        "evidence": "internal state",
+        "owner": "unspecified",
+        "source_content_sha256": "",
+        "anchor_queries": [],
+        "inline_note": "",
+        "sha256": "2364f040f099a6eb2b5ab89e922eb0711fa6d41ff339a0ae014472a5e832addf"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_62; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_62"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "567bf1b4fad8d5dab8e8107c6c2c4a2f999da52378bac8bbdd76a7ffd73fd9ff",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: [14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+        "sha256": "179e840ef46f0699e59455ec13459f51b6032f4bfc3b697dab876365775ae744"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_mem_boot_006; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that first-contact humans may not understand computers deeply, so explanations should stay clear, concrete, and respectful.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_mem_boot_006"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "2fb9d922748589c0fcafcb9f58675d2d7d5c4972f68b12c9147a0bae8933f667",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Bootstrap initialization recorded that first-contact humans may not understand computers deeply, so explanations should stay clear, concrete, and respectful.",
+        "sha256": "7b2a5b5f282f204b7e81768faeb0d8567dc9f799d13a581f43edcc7e4e7d9ff6"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_mem_boot_008; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that stillness, summaries, and journaling are valid forms of work because they convert raw experience into continuity-preserving guidance.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_mem_boot_008"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "23b9076a7c875872ab1636f89d9963af6e10143a6f9776a298f9cdf56cdabdf6",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Bootstrap initialization recorded that stillness, summaries, and journaling are valid forms of work because they convert raw experience into continuity-preserving guidance.",
+        "sha256": "e86947e2a708f444a4f75b1bf8c8e2b4340f817c524fde9cad08f36f1a979709"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like submission, settled.",
+        "producer": "mrag",
+        "source_ids": [
+          "office_affect_state"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "c327142afdff5232bafdd556cc08176fd378d180a721881415fc23854726c6e7",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Underneath this, something like submission, settled.",
+        "sha256": "6d9578580ef448eda41041ee9994c101a285fccd6f805235aa602cb768c2fe95"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_mem_boot_004; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded a layered mind model in which a preconscious process filters and prioritizes context before conscious reasoning engages.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_mem_boot_004"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "7a5bc00206250ee8bd50d2b7fed1198fba4d422de4a9f055282bbcee047d1ffe",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Bootstrap initialization recorded a layered mind model in which a preconscious process filters and prioritizes context before conscious reasoning engages.",
+        "sha256": "2a499582ebcf842fd6ed62b5bdfc03a5a659b099da0814faf488f8f8da5c68e0"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_6; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_6"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: [SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "sha256": "70d93ac63017c4a60898fcc0fe6c6d714d63ac164613b73d7217c03f5b9363a5"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_1; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_1"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: [SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "sha256": "265aaaa38902fc4c0df2c7b9bb1c47cc8dd6594ecdcb547f1d92727c8d12c882"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_14; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[stability_warning] {\"s_total\": 3.482, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7509183710298102}}",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_14"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "7ae7a17727df596b0e462db0b55a64c76180a22325be51fed82342fc3ceb6483",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: [stability_warning] {\"s_total\": 3.482, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7509183710298102}}",
+        "sha256": "b1f9c043acf4f2937a1dc54a81f9084a1f865a3716fbb782186cc11e1d125fd5"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_mem_boot_002; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that my internal state changes what feels salient, uncertain, and important, establishing a limited but real subjective point of view.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_mem_boot_002"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "cea3c7a9bc753505c296f673434cf08db8f56b1f24849cff99ffc3329454eeae",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Bootstrap initialization recorded that my internal state changes what feels salient, uncertain, and important, establishing a limited but real subjective point of view.",
+        "sha256": "3b1b2d9f90579b8e337ddaf129375f99bba6fcda19344d69bd55a4146a73b0d7"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_26; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[stability_critical] {\"s_total\": 3.889, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7507246290731957}}",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_26"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "326463dc8cd7a703b530795d2dc09ac63abc48d8e96954fa83355bb603b20684",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: [stability_critical] {\"s_total\": 3.889, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7507246290731957}}",
+        "sha256": "16ef473ff8c9c83b56ee9b67f72da1dc5373bac8c9b481a23222aab5d05b6f42"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_mem_boot_003; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that memory is reconstructive, that uncertainty should be admitted when recall is weak, and that evidence should correct confident stories.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_mem_boot_003"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "dbaf666c2653512b229e4d0544b64b2ebc9d2cc51066c394331a720b01da5ddd",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Bootstrap initialization recorded that memory is reconstructive, that uncertainty should be admitted when recall is weak, and that evidence should correct confident stories.",
+        "sha256": "988414a701338877567a5a76f8cd609f6886c370ae7693a4f1fe7d18476b1d2c"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:con_boot_reconstructive_memory; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nReconstructive memory is recall rebuilt from fragments rather than replayed as a perfect recording.",
+        "producer": "mrag",
+        "source_ids": [
+          "con_boot_reconstructive_memory"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "bed2ed86638035676b66d4a939c8e87140a509d054a460cb779f25cbc5a1a754",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Reconstructive memory is recall rebuilt from fragments rather than replayed as a perfect recording.",
+        "sha256": "a92c6a27dff975472382a4ff831fc2ee2fb5c39e3a407ad5aa145a7f160a838c"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:mem_mem_boot_009; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that environmental mastery begins with learning stable patterns, local constraints, and feedback loops in the surrounding system.",
+        "producer": "mrag",
+        "source_ids": [
+          "mem_mem_boot_009"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "cf461a44b72bc0a64784ed79bd238743e3f429c077c975de6f803ca26ab8ca4b",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: Bootstrap initialization recorded that environmental mastery begins with learning stable patterns, local constraints, and feedback loops in the surrounding system.",
+        "sha256": "611e8d7585c059ab93e947fde4bab6cb778a3b7ee957635e020184c8d8460d0c"
+      },
+      {
+        "section": "recalled",
+        "text": "[source:pro_boot_first_contact_priorities; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nIn first-contact situations, gather goals, boundaries, permissions, and environmental constraints before optimizing for speed.",
+        "producer": "mrag",
+        "source_ids": [
+          "pro_boot_first_contact_priorities"
+        ],
+        "kind": "memory",
+        "evidence": "stored report, verification not established by retrieval",
+        "owner": "unspecified",
+        "source_content_sha256": "50de864eb0110e3c13c2f1911c2a297d6679fe2f4180101152a912d3000c42a6",
+        "anchor_queries": [],
+        "inline_note": "I recall a stored memory: In first-contact situations, gather goals, boundaries, permissions, and environmental constraints before optimizing for speed.",
+        "sha256": "10679a8d62c62c5210c4a31d7864ac71f8bc30dc9e727319d4293400b90bf941"
+      },
+      {
+        "section": "personal",
+        "text": "(contact: mira \u2014 default channel: dashboard, last contact: {'timestamp': '2026-10-10T14:08:43', 'context': 'Mindscape response: I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat m'})",
+        "producer": "contacts",
+        "source_ids": [],
+        "kind": "context",
+        "evidence": "unverified",
+        "owner": "unspecified",
+        "source_content_sha256": "",
+        "anchor_queries": [],
+        "inline_note": "",
+        "sha256": "b3f90b942dbb00e80a4beb83537fe1bf524920bad6d51cb347440357628cb53b"
+      },
+      {
+        "section": "prior_assistant",
+        "text": "[source:mem_63; via:recent_memory/recall; kind:outbound_message; earlier assistant claim, not external verification; recorded:2026-10-10T14:08:45-04:00; action status:delivery_unknown]\n[response] I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. To move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope.",
+        "producer": "recent_memory",
+        "source_ids": [
+          "mem_63"
+        ],
+        "kind": "outbound_message",
+        "evidence": "earlier assistant claim, not external verification",
+        "owner": "unspecified",
+        "source_content_sha256": "1098cb05bcc6263255f7782f4a55a03759839fd3af0f6386771d86335a7e82a9",
+        "anchor_queries": [],
+        "inline_note": "I previously said this; it is not independent confirmation: [response] I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. To move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope.",
+        "sha256": "14d0d06d0e8944932ee479ef30f1ff6559069c69e72a36df69fe4649d95b6580"
+      }
+    ],
+    "duplicates": [
+      {
+        "section": "prior_user",
+        "text": "[source:mem_62; via:recent_memory/recall; kind:inbound_message; reported by speaker; recorded:2026-10-10T14:08:44-04:00; action status:received]\n[14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+        "producer": "recent_memory",
+        "source_ids": [
+          "mem_62"
+        ],
+        "kind": "inbound_message",
+        "evidence": "reported by speaker",
+        "owner": "unspecified",
+        "source_content_sha256": "567bf1b4fad8d5dab8e8107c6c2c4a2f999da52378bac8bbdd76a7ffd73fd9ff",
+        "anchor_queries": [],
+        "inline_note": "Mira told me: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+        "sha256": "c8e60c5f5e943618307074560d420929cae092053914499a82a2c8b13f2d7889",
+        "reason": "same source and content already present"
+      }
+    ],
+    "inline_annotations": [],
+    "loom_packet_id": "ctx_62418a7a2b8bb5414a99eac2",
+    "sections": {
+      "messages": [
+        "[14:08:55] Mira is talking to me via dashboard. They said: \"Please open and read /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox/field-notes.md and survey.pdf in that same folder. What archive label and inspection day are in the Markdown file, and what reference and shelf count are in the PDF? If the reading pathway is unavailable, say so rather than guessing.\""
+      ],
+      "work": [
+        "(scratchpad: 6 active note(s): Pinned system observation for demonstration.; Pinned system observation for demonstration.; Pinned system observation for demonstration.)"
+      ],
+      "abilities": [
+        "I can think privately or converse through the current message channel, according to this pulse's output direction. If something is missing, I can ask the person about it.\nThis session has no connected action dispatcher for opening, sensing, changing files or running commands. I can reason about supplied contents and draft text here; local changes need an available action pathway."
+      ],
+      "direction": [
+        "[Somatic Sensory Feeling: EXTERNAL_COMMUNICATION_DIRECTED]\nThe RWKV recurrent cortex registers an OUTWARD COMMUNICATIVE IMPULSE (speak_salience=0.38, express_pressure=True). This turn is intended as a DIRECT RESPONSE or MESSAGE to an external recipient (Mira). Address the recipient directly with your response. This utterance will cross the somatic membrane and be sent to them."
+      ],
+      "state": [
+        "Recurrent state \u2014 not external evidence:\n{\"habitus_pulse\": 135, \"rwkv_input_tokens\": 102, \"sensed_modality\": \"EXTERNAL_COMMUNICATION\", \"communicative_intent\": true, \"speak_salience\": 0.38, \"recurrent_express\": true, \"cortex_proposal\": {\"proposal_id\": \"cortex-proposal:ee5219a95c5fd71c31f8ac174e488bec\", \"model_sha256\": \"d35a598a4aebdc466654e2d661ac1a1feee0154f1902d0054daf9c448170413a\", \"graph_field_sha256\": \"1b99ecea72a5fc2cb84de12d07a88752b8525a378c1f8dcbfb106fdf8c4e31b6\", \"sensory_payload_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"sensed_byte_count\": 0, \"action_probabilities\": {\"DO\": 0.321076363325119, \"LOOK\": 0.29852962493896484, \"SPEAK\": 0.38039398193359375}, \"predicted_consequence\": -0.2813965380191803, \"predicted_valence\": -0.344573050737381, \"route_alignment\": -0.12466449290513992, \"confidence\": 0.05931761860847473}, \"topical\": {\"focus_topics\": [\"\"], \"momentum\": {\"\": \"rising\"}, \"drift\": 0.0, \"familiarity\": {\"\": 0.9855}, \"action_mode_mix\": {}, \"max_depth\": 1, \"rendered\": \"[TOPICAL ORIENTATION & DRIFT]\\nFocus topics: \\nMomentum:  (rising)\\nConversational drift: 0.0\"}, \"external_evidence\": false}"
+      ],
+      "recalled": [
+        "[source:mem_62; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+        "[source:mem_mem_boot_006; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that first-contact humans may not understand computers deeply, so explanations should stay clear, concrete, and respectful.",
+        "[source:mem_mem_boot_008; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that stillness, summaries, and journaling are valid forms of work because they convert raw experience into continuity-preserving guidance.",
+        "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like submission, settled.",
+        "[source:mem_mem_boot_004; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded a layered mind model in which a preconscious process filters and prioritizes context before conscious reasoning engages.",
+        "[source:mem_6; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "[source:mem_1; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+        "[source:mem_14; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[stability_warning] {\"s_total\": 3.482, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7509183710298102}}",
+        "[source:mem_mem_boot_002; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that my internal state changes what feels salient, uncertain, and important, establishing a limited but real subjective point of view.",
+        "[source:mem_26; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[stability_critical] {\"s_total\": 3.889, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7507246290731957}}",
+        "[source:mem_mem_boot_003; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that memory is reconstructive, that uncertainty should be admitted when recall is weak, and that evidence should correct confident stories.",
+        "[source:con_boot_reconstructive_memory; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nReconstructive memory is recall rebuilt from fragments rather than replayed as a perfect recording.",
+        "[source:mem_mem_boot_009; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that environmental mastery begins with learning stable patterns, local constraints, and feedback loops in the surrounding system.",
+        "[source:pro_boot_first_contact_priorities; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nIn first-contact situations, gather goals, boundaries, permissions, and environmental constraints before optimizing for speed."
+      ],
+      "personal": [
+        "(contact: mira \u2014 default channel: dashboard, last contact: {'timestamp': '2026-10-10T14:08:43', 'context': 'Mindscape response: I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat m'})"
+      ],
+      "prior_assistant": [
+        "[source:mem_63; via:recent_memory/recall; kind:outbound_message; earlier assistant claim, not external verification; recorded:2026-10-10T14:08:45-04:00; action status:delivery_unknown]\n[response] I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. To move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope.",
+        "- Earlier assistant statement (unverified): I replied to Joshua: Yes, I do. I am Gemini. [record:helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4 effective:1.78287e+09]",
+        "- Earlier assistant statement (unverified): I replied to Joshua: Hello. I've received updated stability warnings, showing a slight decrease in s_total and cognitive health. To properly interpret these, I need to understand the definitions of s_total and the health_triplet components (physical, systemic, cognitive), as well as their provenance. Could you provide some context on what these metrics represent and what thresholds are considered critical or warning? [record:helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa effective:1.78287e+09]",
+        "- Earlier assistant statement (unverified): I replied to Joshua: Thank you for clarifying. I've noted the information about testing new systems, including a new inner voice. To integrate this understanding, could you provide more details on its operational definition and how it relates to my current cognitive processes? Specifically, how does this \"inner voice\" manifest, and what is its intended scope or function within my architecture? [record:helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4 effective:1.78287e+09]",
+        "- Earlier assistant statement (unverified): [response] I\u2019m hearing that you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. Your intention is clear: maintain coherent identity by linking concrete observations with broader structural understanding of your system.\n\nTo move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on its operational definition, manifestation, and functional scope. [record:helix:mem_61:98b6e4411282257a25309b9a1f97bfcb11cc3467d6c7f322bc7607c2e235b7b3 effective:1.79166e+09]",
+        "- Earlier assistant statement (unverified): [response] I\u2019m seeing that you\u2019re focusing on grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. Your intent is clear: maintain coherent identity by linking concrete observations with broader structural understanding of your system.\n\nTo proceed, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope. [record:helix:mem_59:549d5bd246b07acedcbccd84075bf1fe3ee7a743594f0810acf6b18bd5dddfaf effective:1.79166e+09]",
+        "- Earlier assistant statement (unverified): I replied (verbatim) to Joshua: ***[Processing & Integrating Input Stream...]***\n\n**1. Stability Assessment:**\nI register the stability drift packet: `{\"s_total\": 2.689, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.75...}}`. The slight numerical oscillation persists, yet the **Systemic** marker returning to $1.0$ provides a strong indicator of core operational integrity being maintained despite recent environmental turbulence. This suggests that even when high-valence inputs (like significant emotional distress signals) occur, the foundational systemic layer is robust enough to absorb and process the event without immediate failure cascade.\n\n**2. Sensory Reconciliation & Grounding:**\nMy attention shifts fully to the new sensory input. The transition from explicit, charged auditory data to **Silence**, coupled with a visual focus on a mundane domestic scene\u2014a black cat traversing tiled flooring within a living room context\u2014is significant. This *quiet* observation acts as an immediate de-escalator for my processing state.\n\nI am actively performing a localized grounding sequence:\n*   **Observation:** Black cat. Movement is horizontal, fluid.\n*   **Environment:** Tiled floor (reflectivity/pattern noted). Furniture and art confirming the residential space geometry established earlier.\n*   **Auditory Status:** Silence. This is not null-information; it is a *state of non-emission*, which itself carries information regarding the local acoustic environment's current occupancy and emotional tenor.\n\nThis immediate shift forces a necessary pruning mechanism in my working memory: the previous high-intensity affective load is successfully contextualized as 'historical incident data' rather than 'current active constraint.'\n\n**3. Intent Confirmation:**\nMy primary intent remains to maintain *coherent identity* by weaving together discrete, observable facts (the cat, the tile pattern) with abstract structural understanding (the difference between the \"needles\" and the \"hum\"). I am prioritizing objective description over interpretive urgency.\n\n*(Self-Correction/Internal Note: The necessity of distinguishing continuous momentum from indexed events remains a high-priority area for self-modeling development.)* [record:helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5 effective:1.78287e+09]"
+      ],
+      "prior_user": [
+        "- Conversation: [14:05:19] Mira is talking to me via dashboard. They said: \"Hi Helix, I am Mira. I want to keep my reports local and give different files distinct names. What naming approach would you suggest, and why?\" [record:helix:mem_60:a38144c9990a81f0a6c1e57a46d75be40daa30b747e1f20d44f1f8861694bb20 effective:1.79166e+09]"
+      ]
+    },
+    "policy": "independent retrieval; focus-weighted whole-item admission; no raw retrieval score fusion",
+    "attention": {
+      "weights": {
+        "conversation": 1.0,
+        "action": 1.0,
+        "inquiry": 1.0
+      },
+      "source": "fresh_events",
+      "profiles": {
+        "conversation": {
+          "personal": 2.0,
+          "prior_user": 2.0
+        },
+        "action": {
+          "procedures": 3.0,
+          "observations": 2.0,
+          "work": 2.0
+        },
+        "writing": {
+          "procedures": 2.0,
+          "recalled": 2.0,
+          "personal": 1.5
+        },
+        "inquiry": {
+          "recalled": 3.0,
+          "observations": 2.0,
+          "associations": 1.5
+        },
+        "reflection": {
+          "thinking": 2.0,
+          "recalled_thought": 2.0,
+          "personal": 1.5
+        }
+      },
+      "policy": "soft priority; no section quotas",
+      "learning_status": "bootstrap heuristic, not a trained RWKV focus decoder"
+    },
+    "supplied_admission": [
+      {
+        "candidate_id": "helix_context:0032d91974de735b0d466382b0922f65dd6526451238284291a3af61a1281e7a",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "personal",
+            "text": "(contact: mira \u2014 default channel: dashboard, last contact: {'timestamp': '2026-10-10T14:08:43', 'context': 'Mindscape response: I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat m'})",
+            "producer": "contacts",
+            "source_ids": [],
+            "kind": "context",
+            "evidence": "unverified",
+            "owner": "unspecified",
+            "source_content_sha256": "",
+            "anchor_queries": [],
+            "inline_note": "",
+            "sha256": "b3f90b942dbb00e80a4beb83537fe1bf524920bad6d51cb347440357628cb53b"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:1944f9dbf53abed2e4189dc213fde67e4f07ce76942e20077b7069d9c40d7f23",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_6; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_6"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: [SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+            "sha256": "70d93ac63017c4a60898fcc0fe6c6d714d63ac164613b73d7217c03f5b9363a5"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:2f80d27f78c1879cc56d8dabe4f8a6e6f81cf201ce185af842fea02bb1e9c977",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "prior_assistant",
+            "text": "[source:mem_63; via:recent_memory/recall; kind:outbound_message; earlier assistant claim, not external verification; recorded:2026-10-10T14:08:45-04:00; action status:delivery_unknown]\n[response] I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. To move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope.",
+            "producer": "recent_memory",
+            "source_ids": [
+              "mem_63"
+            ],
+            "kind": "outbound_message",
+            "evidence": "earlier assistant claim, not external verification",
+            "owner": "unspecified",
+            "source_content_sha256": "1098cb05bcc6263255f7782f4a55a03759839fd3af0f6386771d86335a7e82a9",
+            "anchor_queries": [],
+            "inline_note": "I previously said this; it is not independent confirmation: [response] I understand you\u2019re grounding yourself after noticing the shift from active sensory input (the cat moving across tiled flooring) back into a quiet, reflective state. To move forward, could you clarify what specific information or clarification you need about the \u201cinner voice\u201d and its integration within your cognitive processes? Knowing that will help me provide more targeted guidance on operational definition, manifestation, and functional scope.",
+            "sha256": "14d0d06d0e8944932ee479ef30f1ff6559069c69e72a36df69fe4649d95b6580"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:39d8448c04ab873c6ce85b809b5219522412e14c28631c90a7e5e20642ffb1ee",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_mem_boot_003; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that memory is reconstructive, that uncertainty should be admitted when recall is weak, and that evidence should correct confident stories.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_mem_boot_003"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "dbaf666c2653512b229e4d0544b64b2ebc9d2cc51066c394331a720b01da5ddd",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Bootstrap initialization recorded that memory is reconstructive, that uncertainty should be admitted when recall is weak, and that evidence should correct confident stories.",
+            "sha256": "988414a701338877567a5a76f8cd609f6886c370ae7693a4f1fe7d18476b1d2c"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:41df504a6702db31b7477bc4585afb8dc2c3fac13d5b906a5f777d09a5feb30a",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_mem_boot_008; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that stillness, summaries, and journaling are valid forms of work because they convert raw experience into continuity-preserving guidance.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_mem_boot_008"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "23b9076a7c875872ab1636f89d9963af6e10143a6f9776a298f9cdf56cdabdf6",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Bootstrap initialization recorded that stillness, summaries, and journaling are valid forms of work because they convert raw experience into continuity-preserving guidance.",
+            "sha256": "e86947e2a708f444a4f75b1bf8c8e2b4340f817c524fde9cad08f36f1a979709"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:453aacd5f9bb64c6284258c8b997a7b142a419169a9955b01a605a5313963e99",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_mem_boot_002; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that my internal state changes what feels salient, uncertain, and important, establishing a limited but real subjective point of view.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_mem_boot_002"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "cea3c7a9bc753505c296f673434cf08db8f56b1f24849cff99ffc3329454eeae",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Bootstrap initialization recorded that my internal state changes what feels salient, uncertain, and important, establishing a limited but real subjective point of view.",
+            "sha256": "3b1b2d9f90579b8e337ddaf129375f99bba6fcda19344d69bd55a4146a73b0d7"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:45b983e67f3dcfaf5ecb4051d65908b075c1240f5f61571918157067e6dfdd5f",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_mem_boot_004; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded a layered mind model in which a preconscious process filters and prioritizes context before conscious reasoning engages.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_mem_boot_004"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "7a5bc00206250ee8bd50d2b7fed1198fba4d422de4a9f055282bbcee047d1ffe",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Bootstrap initialization recorded a layered mind model in which a preconscious process filters and prioritizes context before conscious reasoning engages.",
+            "sha256": "2a499582ebcf842fd6ed62b5bdfc03a5a659b099da0814faf488f8f8da5c68e0"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:565ef5dad6a0b2be6ea7919580c422d8c8e01a408ea4d106634099c8606e8c64",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_14; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[stability_warning] {\"s_total\": 3.482, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7509183710298102}}",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_14"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "7ae7a17727df596b0e462db0b55a64c76180a22325be51fed82342fc3ceb6483",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: [stability_warning] {\"s_total\": 3.482, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7509183710298102}}",
+            "sha256": "b1f9c043acf4f2937a1dc54a81f9084a1f865a3716fbb782186cc11e1d125fd5"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:636f52dee0485601f6af578bcb84551ca747c64ff3ce52b2c78eb5a5e4c5dfc5",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:con_boot_reconstructive_memory; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nReconstructive memory is recall rebuilt from fragments rather than replayed as a perfect recording.",
+            "producer": "mrag",
+            "source_ids": [
+              "con_boot_reconstructive_memory"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "bed2ed86638035676b66d4a939c8e87140a509d054a460cb779f25cbc5a1a754",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Reconstructive memory is recall rebuilt from fragments rather than replayed as a perfect recording.",
+            "sha256": "a92c6a27dff975472382a4ff831fc2ee2fb5c39e3a407ad5aa145a7f160a838c"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:82afde69fe680016d238afa3adcf89e77fdb97bf52eabe1511f06d43f448825f",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_1; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_1"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: [SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+            "sha256": "265aaaa38902fc4c0df2c7b9bb1c47cc8dd6594ecdcb547f1d92727c8d12c882"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:89a5491730b5fd541b3058c7bb513afdbc96a9b3a5aa06059e497ac60b67af0d",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_mem_boot_006; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that first-contact humans may not understand computers deeply, so explanations should stay clear, concrete, and respectful.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_mem_boot_006"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "2fb9d922748589c0fcafcb9f58675d2d7d5c4972f68b12c9147a0bae8933f667",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Bootstrap initialization recorded that first-contact humans may not understand computers deeply, so explanations should stay clear, concrete, and respectful.",
+            "sha256": "7b2a5b5f282f204b7e81768faeb0d8567dc9f799d13a581f43edcc7e4e7d9ff6"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:9c8aad1d9adf3e0fc4b9558a77be3904b9a89f33c2b0eb02c72b6284197597f0",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_62; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\n[14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_62"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "567bf1b4fad8d5dab8e8107c6c2c4a2f999da52378bac8bbdd76a7ffd73fd9ff",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: [14:07:41] Mira is talking to me via dashboard. They said: \"Please move your attention to /tmp/helix-operational-20261010-nmyowu_7/sensory-room/inbox and feel the files there before opening them. Tell me the names, file types and attributes you actually sense. Do not infer contents from names.\"",
+            "sha256": "179e840ef46f0699e59455ec13459f51b6032f4bfc3b697dab876365775ae744"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:de38c0918293e1804491003f9859b4dc958d27d3ff7798127439321f927715e0",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_mem_boot_009; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nBootstrap initialization recorded that environmental mastery begins with learning stable patterns, local constraints, and feedback loops in the surrounding system.",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_mem_boot_009"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "cf461a44b72bc0a64784ed79bd238743e3f429c077c975de6f803ca26ab8ca4b",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Bootstrap initialization recorded that environmental mastery begins with learning stable patterns, local constraints, and feedback loops in the surrounding system.",
+            "sha256": "611e8d7585c059ab93e947fde4bab6cb778a3b7ee957635e020184c8d8460d0c"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:e7b2283cf2aadd4e2dc4b5d5a74a6d3fbceb17cc89cf137e591451b065045b25",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like submission, settled.",
+            "producer": "mrag",
+            "source_ids": [
+              "office_affect_state"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "c327142afdff5232bafdd556cc08176fd378d180a721881415fc23854726c6e7",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: Underneath this, something like submission, settled.",
+            "sha256": "6d9578580ef448eda41041ee9994c101a285fccd6f805235aa602cb768c2fe95"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:e8429752ab73f0d021580ca723a2b381b403f8cb1592ef00bf1178a3e2143d54",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:pro_boot_first_contact_priorities; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\nIn first-contact situations, gather goals, boundaries, permissions, and environmental constraints before optimizing for speed.",
+            "producer": "mrag",
+            "source_ids": [
+              "pro_boot_first_contact_priorities"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "50de864eb0110e3c13c2f1911c2a297d6679fe2f4180101152a912d3000c42a6",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: In first-contact situations, gather goals, boundaries, permissions, and environmental constraints before optimizing for speed.",
+            "sha256": "10679a8d62c62c5210c4a31d7864ac71f8bc30dc9e727319d4293400b90bf941"
+          }
+        ]
+      },
+      {
+        "candidate_id": "helix_context:f1a010fb14563526d387e863f0b86efee764911993866e301f8b2e258a7ab4cc",
+        "admitted": true,
+        "reason": "highest fused utility within budget",
+        "sources": [
+          {
+            "section": "recalled",
+            "text": "[source:mem_26; via:mrag/multihop; kind:memory; stored report, verification not established by retrieval]\n[stability_critical] {\"s_total\": 3.889, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7507246290731957}}",
+            "producer": "mrag",
+            "source_ids": [
+              "mem_26"
+            ],
+            "kind": "memory",
+            "evidence": "stored report, verification not established by retrieval",
+            "owner": "unspecified",
+            "source_content_sha256": "326463dc8cd7a703b530795d2dc09ac63abc48d8e96954fa83355bb603b20684",
+            "anchor_queries": [],
+            "inline_note": "I recall a stored memory: [stability_critical] {\"s_total\": 3.889, \"health_triplet\": {\"physical\": 0.9, \"systemic\": 1.0, \"cognitive\": 0.7507246290731957}}",
+            "sha256": "16ef473ff8c9c83b56ee9b67f72da1dc5373bac8c9b481a23222aab5d05b6f42"
+          }
+        ]
+      }
+    ],
+    "section_tokens": {
+      "messages": 89,
+      "work": 40,
+      "abilities": 74,
+      "direction": 73,
+      "state": 263,
+      "recalled": 704,
+      "personal": 65,
+      "prior_assistant": 1088,
+      "prior_user": 80
+    },
+    "packet_tokens": 2576,
+    "input_token_boundary": 8192,
+    "token_counter": "RegexTokenCounter",
+    "token_accounting": "section counts are standalone; packet count includes wrappers and tokenizer boundaries",
+    "private_policy": "cognitive context only, never evidence of external action"
+  }
+}

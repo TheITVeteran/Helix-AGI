@@ -57,6 +57,15 @@ _MAX_LENGTHS = {
     "concepts": 500,
 }
 
+
+def _confidence_blend_weights(maturity: int | float) -> Tuple[float, float]:
+    """Compute (support_weight, source_weight) blending based on belief maturity/age."""
+    m = max(0.0, float(maturity))
+    support = 0.5 + 0.4 * (m / (m + 100.0))
+    source = 1.0 - support
+    return support, source
+
+
 # ── Format Specification (embedded for the LLM) ─────────────────────
 
 _FORMAT_SPEC = (

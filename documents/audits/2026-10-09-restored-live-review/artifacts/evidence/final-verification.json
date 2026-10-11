@@ -1,0 +1,26 @@
+{
+  "source_hashes_checked": 407,
+  "source_changes": [],
+  "protected_files_checked": 122,
+  "protected_file_changes": [],
+  "models_observed": [
+    "granite4.1:3b"
+  ],
+  "finish_reasons": {
+    "stop": 15
+  },
+  "completed_pulses": 6,
+  "tool_receipts": 0,
+  "reply_calls": 0,
+  "motor_calls": 0,
+  "sensory_file_open_attempts": 0,
+  "club_note_exists": false,
+  "dashboard_bus": {
+    "inbound": [],
+    "outbound": [],
+    "outbound_base": 0
+  },
+  "final_journal_records": 16,
+  "git_status": " M README.md\n M SYSTEM_MANUAL.md\n M core/curator.py\n M documents/architecture_current.md\n",
+  "product_benchmark_score": null
+}

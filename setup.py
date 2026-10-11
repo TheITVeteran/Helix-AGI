@@ -117,6 +117,14 @@ def subscription_cli_config(provider: str, model: str) -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Helix AGI First Run Setup")
     parser.add_argument("--non-interactive", action="store_true", help="Run without user prompts")
+    parser.add_argument("--composition", choices=["mindscape", "helix"], default=None,
+                        help="mindscape loads Helix + MightyMem/Habitus/RWKV + Context Loom + mRAG")
+    parser.add_argument("--composition-only", action="store_true",
+                        help="Configure composition without rewriting credentials or seeding lived memory")
+    parser.add_argument("--mightymem-path", type=Path)
+    parser.add_argument("--rwkv-model", type=Path)
+    parser.add_argument("--workspace", type=Path)
+    parser.add_argument("--resume-only", action="store_true")
     parser.add_argument("--agent-name", default="Helix", help="Name of your agent")
     parser.add_argument("--creator-name", default="<name>", help="Your name")
     parser.add_argument("--gemini-key", default="", help="Gemini API Key")
@@ -175,6 +183,35 @@ def main():
     args = parser.parse_args()
 
     base_dir = Path(__file__).parent.resolve()
+
+    if args.composition is not None:
+        from core.mindscape_config import defaults, activate
+        existing_path = base_dir / "config/config.json"
+        existing = json.loads(existing_path.read_text()) if existing_path.exists() else {}
+        updates = {"composition": args.composition}
+        if args.composition == "mindscape":
+            updates = {**defaults(base_dir), **existing, **updates}
+            updates["mindscape"] = {**defaults(base_dir)["mindscape"], **existing.get("mindscape", {})}
+            for key, value in (("package_path", args.mightymem_path), ("rwkv_model", args.rwkv_model), ("workspace", args.workspace)):
+                if value is not None:
+                    updates["mindscape"][key] = str(value.resolve())
+            if args.resume_only:
+                updates["mindscape"]["gestation"] = "resume_only"
+            updates.update(pulse_mode="standard", local_provider="ollama", llm_provider="ollama")
+            if args.model:
+                updates["local_model"] = args.model
+            updates["llm_model"] = updates["local_model"]
+            if not args.model:
+                args.model = updates["local_model"]
+            activate(updates)
+            args.local_mode, args.provider = True, "ollama"
+        if not apply_config_updates(base_dir, updates):
+            raise SystemExit("Composition configuration was not saved")
+        if args.composition_only:
+            print(f"Configured {args.composition}. Verify actual loading with: venv/bin/python main.py --check-setup")
+            return
+    elif args.composition_only:
+        parser.error("--composition-only requires --composition")
 
     print("=" * 60)
     print("  HELIX AGI — First Run Setup")

@@ -88,6 +88,7 @@ class AuxiliaryLLM:
         )
         self._lock = threading.RLock()
         self._gemini_client = None
+        self.context_counter = None
 
         if self._uses_direct_session:
             logger.info(
@@ -178,7 +179,13 @@ class AuxiliaryLLM:
             system_instruction=system_instruction or "You are a helpful assistant.",
         )
         try:
-            result = session.send_message(prompt)
+            if self.context_counter is not None:
+                session.context_counter = self.context_counter
+                result = session.send_context(prompt)
+                if result.startswith("[internal error:"):
+                    raise RuntimeError(result)
+            else:
+                result = session.send_message(prompt)
             if result:
                 return result.strip() if isinstance(result, str) else str(result).strip()
             return None

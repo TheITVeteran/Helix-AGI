@@ -504,11 +504,11 @@ class SemanticLane:
             sentence = " ".join(piece.split()).strip()
             if not sentence or sentence.lower() == normalized_full:
                 continue
-            if len(re.findall(r"\w+", sentence)) < 3:
+            if not getattr(self, "contextual_sentence_heads", False) and len(re.findall(r"\w+", sentence)) < 3:
                 continue
             if sentence not in sentences:
                 sentences.append(sentence)
-            if len(sentences) >= self.max_sentence_heads:
+            if not getattr(self, "contextual_sentence_heads", False) and len(sentences) >= self.max_sentence_heads:
                 break
         return sentences
 
@@ -519,7 +519,7 @@ class SemanticLane:
             + extraction.get("concepts", [])
         ))[:self.max_rake_heads]
 
-    def _generate_search_heads(self, text: str) -> List[str]:
+    def _generate_search_heads(self, text: str, *, passage_text: Optional[str] = None) -> List[str]:
         """Build the set of parallel embedding queries (multi-head retrieval).
 
         The full trigger is always searched. Compound inputs additionally get
@@ -536,7 +536,7 @@ class SemanticLane:
                 candidates.append((value, weight, kind))
 
         add(text, 1.0, "full")
-        for sentence in self._sentence_heads(text):
+        for sentence in self._sentence_heads(text if passage_text is None else passage_text):
             add(sentence, SENTENCE_HEAD_SIMILARITY_WEIGHT, "sentence")
         for phrase in self._rake_phrases(text):
             add(phrase, RAKE_HEAD_SIMILARITY_WEIGHT, "rake")
@@ -625,9 +625,12 @@ class SemanticLane:
             key = head.lower()
             if key in seen:
                 continue
+            if (getattr(self, "contextual_sentence_heads", False)
+                    and kind not in {"full", "sentence"} and len(selected) >= self.max_search_heads):
+                continue
             seen.add(key)
             selected.append((head, weight, kind))
-            if len(selected) >= self.max_search_heads:
+            if not getattr(self, "contextual_sentence_heads", False) and len(selected) >= self.max_search_heads:
                 break
 
         self._head_weights = {head: weight for head, weight, _ in selected}
@@ -734,7 +737,7 @@ class SemanticLane:
 
     # ── Retrieval ────────────────────────────────────────────────────
 
-    def retrieve(self, text: str, limit: Optional[int] = None) -> List[Dict[str, Any]]:
+    def retrieve(self, text: str, limit: Optional[int] = None, *, passage_text: Optional[str] = None) -> List[Dict[str, Any]]:
         """Rank corpus items against the trigger text.
 
         Hybrid union candidate selection (keyword top-k ∪ vector top-k)
@@ -748,6 +751,7 @@ class SemanticLane:
         """
         self.sync()
         self.last_lexicon_matches = set()
+        self.last_anchor_hits = {}
 
         text = (text or "").strip()
         if not text:
@@ -817,7 +821,7 @@ class SemanticLane:
 
         # Multi-head vector retrieval: every head contributes its own top-k,
         # so a query mixing an entity with an abstraction reaches both.
-        heads = self._generate_search_heads(text)
+        heads = self._generate_search_heads(text, passage_text=passage_text)
         per_head_k = max(self.min_per_head_k, dynamic_top_k // max(1, len(heads)))
         if hasattr(self._vector_store, "embed_texts"):
             head_embeddings = self._vector_store.embed_texts(heads)
@@ -839,6 +843,7 @@ class SemanticLane:
             ]
 
         multi_head_similarities: Dict[str, float] = {}
+        head_kinds = {item["text"]: item["kind"] for item in self.last_search_heads}
         for head, results in zip(heads, head_results):
             head_weight = self._head_weights.get(
                 head,
@@ -848,6 +853,13 @@ class SemanticLane:
                 item = by_id.get(bid)
                 if item is not None:
                     union[bid] = item
+                    # Keep the passage that actually retrieved this source.
+                    # Placement is not inferred later from coincidental words
+                    # in the memory, nor is this a contradiction classifier.
+                    if (head_kinds.get(head) in {"sentence", "full"}
+                            and float(similarity) >= self.min_semantic_similarity):
+                        self.last_anchor_hits.setdefault(bid, []).append({
+                            "text": head, "kind": head_kinds[head], "similarity": float(similarity)})
                     weighted_similarity = float(similarity) * head_weight
                     if weighted_similarity > multi_head_similarities.get(bid, -1.0):
                         multi_head_similarities[bid] = weighted_similarity

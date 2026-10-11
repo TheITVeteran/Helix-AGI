@@ -121,7 +121,7 @@ class CapabilityRegistry:
 
     def broad_awareness(self, active_toolsets: Optional[Set[str]] = None) -> str:
         """Describe ability families without revealing callable names or schemas."""
-        capabilities = self.available(active_toolsets, include_dormant=True)
+        capabilities = self.available(active_toolsets)
         if not capabilities:
             return ""
         families = []
@@ -160,6 +160,29 @@ class CapabilityRegistry:
             "I can form intentions and carry them out through task-specific abilities. "
             "Depending on the situation, I can " + "; ".join(families) + "."
         )
+
+    def procedural_awareness(self, capabilities, activities) -> str:
+        """Situation/action/outcome knowledge for connected named handlers only.
+
+        Runtime affordances are distinct from learned successes. The speaking
+        model does not need a handler schema or a validation checklist here.
+        """
+        names = {item.name for item in capabilities}
+        beliefs = []
+        if names & self._COMMUNICATION_NAMES:
+            beliefs.append("I can communicate with someone to ask for missing information or clarify what they mean.")
+        if activities & {"action", "inquiry", "writing"}:
+            if "read_file" in names:
+                beliefs.append("When an answer depends on a local document, I can read it and use the returned contents. A filename or its attributes alone do not tell me what it says.")
+            if "search" in names:
+                beliefs.append("For information I do not have, I can search and use the returned sources to investigate.")
+            if "read_url" in names:
+                beliefs.append("I can open a web source to read beyond its search description.")
+            if "terminal" in names:
+                beliefs.append("For local work I can run commands; their returned results tell me what happened.")
+        if "writing" in activities and names & {"note_write", "note_append"}:
+            beliefs.append("I can keep a working note as I develop a draft.")
+        return "\n".join(beliefs)
 
     @classmethod
     def _risk(cls, name: str, description: str) -> str:

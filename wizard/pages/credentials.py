@@ -447,6 +447,8 @@ class CredentialsPage(QWidget):
         # For legacy compatibility, save to ollama_model if ollama is selected
         if cfg["llm_provider"] == "ollama":
             cfg["ollama_model"] = cfg["llm_model"]
+            cfg["local_provider"] = "ollama"
+            cfg["local_model"] = cfg["llm_model"]
         else:
             cfg["ollama_model"] = self.ollama_model.text().strip()
 

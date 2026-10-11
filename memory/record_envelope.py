@@ -74,7 +74,7 @@ def _infer_kind(
     lowered_tags = {tag.lower() for tag in tags}
     if source == "helix_outbound":
         return "outbound_message"
-    if source == "office_speaker":
+    if source in {"office_speaker", "mindscape_speaker"}:
         return "outbound_message"
     if source in {"pulse_output", "dual_pulse_output"} or memory_type == "thought":
         return "thought"

@@ -70,6 +70,37 @@ class _VectorStore:
 
 
 class TestMultiHeadScoring(unittest.TestCase):
+    def test_contextual_reading_searches_all_sentences_past_legacy_head_limits(self):
+        raw = np.array([1.0, 0.0], dtype=np.float32)
+        lane = SemanticLane(_Corpus([]), _VectorStore(raw, raw))
+        lane.contextual_sentence_heads = True
+        sentences = [f"Claim number {i} concerns a different subject." for i in range(24)] + ["A+B=D."]
+        heads = lane._generate_search_heads(" ".join(sentences))
+        for sentence in sentences:
+            self.assertIn(sentence, heads)
+        self.assertGreater(len(heads), lane.max_search_heads)
+
+    def test_passage_newlines_survive_intake_query_normalization(self):
+        raw = np.array([1.0, 0.0], dtype=np.float32)
+        lane = SemanticLane(_Corpus([]), _VectorStore(raw, raw))
+        lane.contextual_sentence_heads = True
+        original = "A + B = D\nJames asked me to check his social media"
+        heads = lane._generate_search_heads(" ".join(original.split()), passage_text=original)
+        self.assertIn("A + B = D", heads)
+        self.assertIn("James asked me to check his social media", heads)
+
+    def test_passage_hits_record_actual_nominations_and_reset_between_queries(self):
+        raw = np.array([1.0, 0.0], dtype=np.float32)
+        lane = SemanticLane(_Corpus([_item("direct", "A stored claim", raw)]), _VectorStore(raw, raw))
+        with patch("memory.mrag.tagger.extract_keywords_and_phrases", return_value=[]), \
+                patch("memory.mrag.tagger.get_tag_counts", return_value={}):
+            lane.retrieve("What achievement mattered?")
+        self.assertIn("direct", lane.last_anchor_hits)
+        self.assertEqual(lane.last_anchor_hits["direct"][0]["text"], "What achievement mattered?")
+        self.assertEqual(lane.last_anchor_hits["direct"][0]["kind"], "full")
+        lane.retrieve("")
+        self.assertEqual(lane.last_anchor_hits, {})
+
     def test_small_corpus_does_not_turn_top_k_into_full_store_injection(self):
         class _AllResultsStore:
             @staticmethod

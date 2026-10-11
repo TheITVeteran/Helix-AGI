@@ -1,0 +1,93 @@
+{
+  "status": "runtime composition verified before cases",
+  "process_id": 1790448,
+  "sources_unchanged": true,
+  "runtime": {
+    "action_intent_source": "granite_private",
+    "action_route": "private Granite intention -> native SELF selected affordance -> workspace actuator -> native sensory return -> next Helix pulse",
+    "context_compiler": "core.mindscape_context.MindscapeContextCompiler",
+    "context_focus_profiles": {
+      "action": {
+        "observations": 2.0,
+        "procedures": 3.0,
+        "work": 2.0
+      },
+      "conversation": {
+        "personal": 2.0,
+        "prior_user": 2.0
+      },
+      "inquiry": {
+        "associations": 1.5,
+        "observations": 2.0,
+        "recalled": 3.0
+      },
+      "reflection": {
+        "personal": 1.5,
+        "recalled_thought": 2.0,
+        "thinking": 2.0
+      },
+      "writing": {
+        "personal": 1.5,
+        "procedures": 2.0,
+        "recalled": 2.0
+      }
+    },
+    "context_focus_status": "configurable bootstrap priorities; not learned RWKV attention",
+    "context_layout": "independent-memory-roles-current-dialogue-v4",
+    "context_queries": "fresh events; last complete private thought only on idle continuation",
+    "context_receipt": "pulse_context.context_assembly plus native loom_packet manifest",
+    "cortex_parameters": 18016166,
+    "embedding": "ollama:qwen3-embedding:0.6b:1024",
+    "gestation": "resumed",
+    "inline_annotations": "exact unique passage anchors from actual mRAG sentence-head returns; no truth or permission inference",
+    "joint_generation": 3,
+    "loom_lanes": [
+      "semantic",
+      "exact",
+      "recent",
+      "subjective",
+      "procedure",
+      "correction",
+      "multi_hop_graph",
+      "y_cipher_depth",
+      "habitus_graph"
+    ],
+    "mrag": "memory.mrag.semantic_lane",
+    "native_abilities": {
+      "mkdir": "ability:helix-workspace-mkdir",
+      "move": "ability:helix-workspace-move",
+      "open": "ability:helix-workspace-open",
+      "run": "ability:helix-workspace-run",
+      "sense": "ability:helix-workspace-sense",
+      "write": "ability:helix-workspace-write"
+    },
+    "rwkv": "RWKV/RWKV7-G1j-1.5B-20260831@2c18b29ab7fbece25ff6112281eea0fa41fcb30f:eager:bf16:state-fp32:torch-2.12.0+cu130:transformers-5.17.0:continual-v1:chunked:tail-1:chunk-128",
+    "rwkv_parameters": 1527668736,
+    "sentence_coverage": "all nonempty sentence views; inherited candidate/context admission limits remain",
+    "tokenizer": {
+      "manifest_sha256": "6fd349357287c7ffc9e38189a93b48ea175d24fc566b38f09cfc564fb7f303eb",
+      "model": "granite4.1:3b",
+      "model_blob": "sha256:662b0626cd58f443baea23559b469df6576a81d349649c59413b36a9fb32eb29",
+      "models_root": "/usr/share/ollama/.ollama/models",
+      "template_sha256": "89a0ab46e638b17149f5a596060e815cb019117e9c7f745aa8861a02d63d66ef",
+      "vocab_only": true
+    }
+  },
+  "configuration": {
+    "composition": "mindscape",
+    "local_context_window": 8192,
+    "local_model": "granite4.1:3b",
+    "local_provider": "ollama",
+    "mindscape": {
+      "action_intent_source": "granite_private",
+      "context_focus_profiles": {},
+      "device": "cpu",
+      "gestation": "if_missing",
+      "package_path": "/home/nemo/MightyMem",
+      "rwkv_model": "/home/nemo/habitus-ai-experiments/habitus-mind/models/rwkv7-g1j-1.5b-20260831-2c18b29",
+      "workspace": "/tmp/helix-native-cycle-20261010-ru4atfzi/sensory-room"
+    },
+    "pulse_mode": "standard"
+  },
+  "initialized_at": 1791675112.175979
+}

@@ -1,0 +1,91 @@
+{
+  "case": "conversation",
+  "request": {
+    "channel": "dashboard",
+    "content": "Hi Helix, I am Mira. I keep my reports local and want different files to have distinct names. Suggest a simple naming approach and explain why.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791677461.794543,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791677632.395863,
+  "first_pulse": 2,
+  "final_pulse": 2,
+  "foreground": {
+    "time": 1791677631.5354495,
+    "kind": "foreground_return",
+    "helix_pulse": 2,
+    "thought": "A simple naming approach you can use is the **YYYYMMDD_HHMMSS_<BriefPurpose>** format. For example: `20231015_1425_Report123` (October 15, 2023 at 14:25 with a short identifier for the report type). This method gives each file a clear timestamp indicating when it was created and its relative order among others, while the brief purpose suffix lets you quickly identify the content without needing a separate title. It works well because timestamps are universally sortable, making version control easier, and the concise suffix prevents long or ambiguous names that could conflict if multiple people use similar naming conventions.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "A simple naming approach you can use is the **YYYYMMDD_HHMMSS_<BriefPurpose>** format. For example: `20231015_1425_Report123` (October 15, 2023 at 14:25 with a short identifier for the report type). This method gives each file a clear timestamp indicating when it was created and its relative order among others, while the brief purpose suffix lets you quickly identify the content without needing a separate title. It works well because timestamps are universally sortable, making version control easier, and the concise suffix prevents long or ambiguous names that could conflict if multiple people use similar naming conventions.",
+      "recipient": "Mira",
+      "timestamp": 1791677606.908059
+    }
+  ],
+  "native_actions": [
+    {
+      "time": 1791677543.5128975,
+      "kind": "native_action_return",
+      "rwkv_return_tokens": 578,
+      "proposal_pulse": "self-pulse:a3be8438c90c4f0aacb56fe84655efdb",
+      "selected_affordance": "ability:helix-workspace-sense",
+      "return_pulse": "self-pulse:28fa0e3d4a4942acb090e606590ca62e",
+      "receipt": {
+        "receipt_id": "receipt:6254c41ea013419ca1a72ea99e561560",
+        "tool_id": "ability:helix-workspace-sense",
+        "trunk": "LOOK",
+        "arguments": {
+          "path": "."
+        },
+        "status": "success",
+        "output": {
+          "path": ".",
+          "position": ".",
+          "name": "sensory-room",
+          "kind": "directory",
+          "size_bytes": 4096,
+          "modified_ns": 1791677383727002648,
+          "mode": 509,
+          "extension_hint": "",
+          "content_opened": false,
+          "interpretation": "filesystem attributes; extension is a hint, not verified content",
+          "entries": [
+            {
+              "name": "inbox",
+              "kind": "directory",
+              "size_bytes": 4096,
+              "modified_ns": 1791677383729313523,
+              "mode": 509,
+              "extension_hint": ""
+            },
+            {
+              "name": "output",
+              "kind": "directory",
+              "size_bytes": 4096,
+              "modified_ns": 1791677383727002648,
+              "mode": 509,
+              "extension_hint": ""
+            }
+          ]
+        },
+        "error": "",
+        "verified": true,
+        "elapsed_seconds": 0.10186027106828988,
+        "cycle_id": "experience:9fa5208386984ca3b903d54a4eb9a0e0",
+        "output_record_id": "record:f8e9e4adc41c45fdb3892849fda8e4f9",
+        "return_record_id": "self-pulse-record:tool-return:receipt:6254c41ea013419ca1a72ea99e561560",
+        "outcome_id": "outcome:74dd890dc19e4654a316bdd2a2a270de"
+      },
+      "action": "sense",
+      "helix_pulse": 1,
+      "intent_source": "granite_private",
+      "intention_sha256": "ee9d3035db55ca7bb7aafb95e845533780d59cd31c1726dd9a893c8e525c3da5"
+    }
+  ]
+}

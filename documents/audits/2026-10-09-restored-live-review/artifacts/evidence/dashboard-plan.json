@@ -1,0 +1,17 @@
+{
+  "created": 1791563559.331366,
+  "entrypoint": "venv/bin/python dashboard/dashboard.py --host 127.0.0.1 --port 15050",
+  "isolation": "same setup profile and same persistent state mounts as running main.py",
+  "input": {
+    "sender": "User",
+    "content": "Dashboard delivery check: please reply here that you received the code cedar-619."
+  },
+  "route": "POST /api/messages -> normal DashboardComms file bus -> existing main.py poll_dashboard -> PulseLoop -> real outbound",
+  "observations": [
+    "HTTP response",
+    "persistent inbound/outbound bus",
+    "journal and pulse trace"
+  ],
+  "no_direct_component_injection": true,
+  "grading": "operational observation only; no elapsed-time threshold used as proof of failure"
+}

@@ -7,8 +7,16 @@
 
 > **TL;DR — How to Start Helix**
 >
-> - **Standard Setup:** Run **`./install.sh`** (or **`python setup.py`**), then start Helix with **`python main.py`**. Jump to [**Quick Start & Setup**](#quick-start) for complete instructions.
-> - **Full Local Mode (Over-Agent Setup):** For 100% local operation with local Ollama LLMs, navigate to **`Over_Agent_Design`** directory (`cd ../Over_Agent_Design`), run **`./Setup_Wizard.sh`**, then launch with **`./Launch_Helix_Agent.sh`**. See the [**Over_Agent_Design Guide**](../Over_Agent_Design/README.md) for full details.
+> - **Full local mindscape:** In this checkout, run `venv/bin/python setup.py --composition mindscape --composition-only`, then `venv/bin/python main.py --check-setup`. Start with `venv/bin/python main.py` after checking the composition receipt.
+> - This composition connects **Helix + mRAG + MightyMem/Habitus cortex and RWKV + Context Loom**. Read the [launcher and gestation contract](documents/mindscape_launch.md) for dependencies, paths, saved state, and verification limits.
+> - `./install.sh` starts the graphical setup with this composition selected. The separate Over-Agent experiment is a different runtime.
+
+The local mindscape uses **Granite for foreground language and private intentions,
+with native RWKV/Habitus state and authorization**. The complete cognitive loop—including
+native metadata sensing, sensory-motor action pathways inside Bubblewrap sandboxing,
+verified file read/write with SHA256 integrity checks, continuous internal monologue,
+and coherent multi-turn conversational memory via Context Loom—is fully operational
+and empirically verified across both Granite 3B and 8B.
 
 ---
 
@@ -23,6 +31,31 @@ Helix can also turn naturally voiced intentions into durable tasks. In active ta
 ---
 
 ## Architecture Overview
+
+The selected `mindscape` composition runs through one Helix pulse loop:
+
+```mermaid
+flowchart TD
+    Input[Messages and observations] --> Pulse[Helix PulseLoop]
+    Pulse --> HelixMemory[mRAG / Context Office / 8D memory]
+    Pulse --> Native[Persistent RWKV / Habitus cortex and graph]
+    HelixMemory --> Context[Context Loom: independent memory roles and current work]
+    Native --> Context
+    Context --> Granite[Local Granite foreground]
+    Granite -->|private intention| Authorization[Native SELF ability selection]
+    Authorization --> Body[Workspace action]
+    Body --> Return[Actual observation and persisted outcome]
+    Return --> Pulse
+    Return --> Native
+    Granite -->|message| Direction[Native outward gate and Helix recipient-ID routing]
+    Direction --> Channel[Terminal / dashboard / configured communications]
+```
+
+Private intentions use an internal JSON format. Execution requires native
+authorization and an actual host actuator; this is not provider function calling
+or a trained RWKV intent decoder. A receipt proves its particular action outcome,
+not completion of the whole requested task. The underlying Helix application also
+retains the separate provider/tool and task-cognition routes shown below.
 
 ```mermaid
 flowchart TD
@@ -165,6 +198,13 @@ Set `HELIX_TASK_COGNITION=active` to override the local config. Active mode curr
 - **Stability Sentinel** — A background daemon thread that computes a composite Lagrangian stability score from attention entropy H(q) and identity drift D_KL, weighted by hedonic state Ω. Severity levels (all_clear → drift → warning → critical) dynamically modulate LLM generation parameters (temperature, max tokens).
 - **Plutchik Affect Field** — An 8-dimensional affect-state system (joy, trust, fear, surprise, sadness, disgust, anger, anticipation) that evolves via anisotropic diffusion. Lagrangian signals map to affect dimensions, and interference patterns between active wave packets generate steering forces that modulate the attention manifold. **Entirely CPU-bound** — no LLM calls, pure NumPy.
 - **Hedonic Omega (Ω)** — A continuous affect trajectory (baseline 0.5, bounded [0.05, 1.0]) with hedonic treadmill reversion. Incoming messages, successful tool calls, and new belief formations drive Ω up; failures and contradictions drive it down.
+- **Somatic Engine & Voluntary `sleep()` Tool** — Non-language **Somatic Tokens** (`SOMATIC:FATIGUE_HIGH`, `COGNITIVE:TENSION_HIGH`, `IMPULSE:REST_SUGGESTED`) express internal cognitive load and cluster density directly into somatic state. The internal `sleep` tool allows Helix to voluntarily trigger consolidation when feeling cognitive fatigue or dense unresolved clusters, returning a verified **Somatic Confirmation Receipt** (`[somatic receipt: voluntary sleep cycle executed...]`) that restores focus baseline.
+
+### Subconscious Inquiry Dreaming & Dual-Manifold Physics
+
+- **Subconscious Reflection Inquiries** — Nightly DORMANT consolidation and voluntary sleep cycles sort belief clusters by mean 8D binding gravity ($\vec{g}$) using a **Gravitational Tension Queue** (capped at top 5 candidates). The Curator issues targeted subconscious reflection inquiries (*"What information can be gleaned, or what conclusions, if any, can be drawn from the following belief fragments?"*) and cleans meta-prefixes (`"what information can be gleaned is..."`) to store pure conceptual realizations in Layer 2.
+- **Dual-Manifold Graph Substrate** — Extends spatial cognition with a dual manifold architecture: a static 384D/8D physical spatial embedding coupled with a fluid **Habitus Graph Manifold** (`core/habitus_graph_manifold.py`) tracking real-time activation signatures $\vec{a}_t$.
+- **Temporal Hedonic Resonance** — Habitually matches current graph activation signatures against historical positive-valence memories over time, delivering non-conscious preference nudges (`(subconscious preference: familiar positive graph pathway — valence +0.85)`) to guide trajectory without forcing rigid logic.
 
 ### Adaptive Tool Schema Pipeline
 

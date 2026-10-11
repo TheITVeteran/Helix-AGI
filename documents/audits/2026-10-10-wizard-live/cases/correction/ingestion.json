@@ -1,0 +1,72 @@
+{
+  "http_submission": {
+    "case": "correction",
+    "submitted_at": 1791647200.1165576,
+    "request": {
+      "sender": "Mira",
+      "content": "Naming both reports notes would make them harder to distinguish, not easier. Please reconsider that advice and explain the safer choice in two sentences. Also confirm what I asked about where our work should happen. Do not rename or change any files yet."
+    },
+    "http_response": {
+      "ok": true
+    }
+  },
+  "persistent_journal_records": [
+    {
+      "id": "62",
+      "type": "memory",
+      "timestamp": "2026-10-10T11:47:44-0400",
+      "content": "[11:46:41] Mira is talking to me via dashboard. They said: \"Naming both reports notes would make them harder to distinguish, not easier. Please reconsider that advice and explain the safer choice in two sentences. Also confirm what I asked about where our work should happen. Do not rename or change any files yet.\"",
+      "metadata": {
+        "memory_type": "event",
+        "source": "pulse_input",
+        "importance": 0.75,
+        "tags": [
+          "pulse_event",
+          "conversation",
+          "session:20261010T114641006007",
+          "turn:3"
+        ],
+        "belief_ids": [],
+        "echo_of": null,
+        "created_at": "2026-10-10T11:47:44-04:00",
+        "attention_position_8d": [
+          -0.08040417730808258,
+          0.02299424074590206,
+          -0.008779993280768394,
+          0.033625949174165726,
+          -0.009161271154880524,
+          -0.003465990535914898,
+          0.07997392863035202,
+          -0.06402885913848877
+        ],
+        "point_id": "mem_62",
+        "record_envelope": {
+          "record_schema_version": 1,
+          "record_kind": "inbound_message",
+          "direction": "inbound",
+          "visibility": "external",
+          "actor": "Mira",
+          "epistemic_role": "communication",
+          "evidence_scopes": [
+            "received_communication"
+          ],
+          "action_status": "received",
+          "recipients": [],
+          "tool_name": "",
+          "caused_by": [],
+          "channel": "dashboard",
+          "retrieval_text": "Received inbound message from Mira to Helix.\n[11:46:41] Mira is talking to me via dashboard. They said: \"Naming both reports notes would make them harder to distinguish, not easier. Please reconsider that advice and explain the safer choice in two sentences. Also confirm what I asked about where our work should happen. Do not rename or change any files yet.\""
+        },
+        "record_schema_version": 1,
+        "record_kind": "inbound_message",
+        "direction": "inbound",
+        "epistemic_role": "communication",
+        "evidence_scopes": [
+          "received_communication"
+        ],
+        "action_status": "received",
+        "retrieval_text": "Received inbound message from Mira to Helix.\n[11:46:41] Mira is talking to me via dashboard. They said: \"Naming both reports notes would make them harder to distinguish, not easier. Please reconsider that advice and explain the safer choice in two sentences. Also confirm what I asked about where our work should happen. Do not rename or change any files yet.\""
+      }
+    }
+  ]
+}

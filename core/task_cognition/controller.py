@@ -64,7 +64,7 @@ class TaskCognitionController:
             ),
         )
         self.orchestrators = None
-        self.procedures = None
+        self.procedures = ProceduralMemory(task_dir)
         self.context_builder = None
         self.focus: Optional[FocusManager] = None
         self._pending_resumed = False
@@ -75,7 +75,6 @@ class TaskCognitionController:
                 spatial_projector=physics_engine.embed_and_project,
                 semantic_dim=getattr(physics_engine.semantic_index, "dim", 1024),
             )
-            self.procedures = ProceduralMemory(task_dir)
             self.context_builder = TaskContextBuilder(
                 belief_store, memory_manager, physics_engine
             )
@@ -107,8 +106,57 @@ class TaskCognitionController:
     def active(self) -> bool:
         return self.mode == "active"
 
-    def awareness(self, active_toolsets: set[str]) -> str:
-        return self.capabilities.broad_awareness(active_toolsets) if self.enabled else ""
+    def _connected_capabilities(self, active_toolsets):
+        pulse = self.pulse_loop
+        provider = getattr(getattr(pulse, "_provider_config", None), "provider_type", None)
+        format_ = getattr(pulse, "_tool_format", None)
+        if self.active:
+            connected = self.focus is not None
+        elif format_ == "local":
+            connected = getattr(pulse, "_tool_dispatcher", None) is not None
+        elif format_ == "orchestrated":
+            from llm.orchestrated import OrchestratedToolSession
+            connected = isinstance(getattr(pulse, "_chat", None), OrchestratedToolSession)
+        else:
+            connected = provider in {"gemini", "anthropic", "codex", "codex_cli"}
+        connected = connected and getattr(pulse, "tool_executor", None) is not None
+        return self.capabilities.available(active_toolsets) if connected else []
+
+    def awareness(self, active_toolsets: set[str], focus=None) -> str:
+        if not self.enabled:
+            return ""
+        activities = set(focus.weights) if focus else {"conversation"}
+        capabilities = self._connected_capabilities(active_toolsets)
+        lines = []
+        if getattr(self.pulse_loop, "mindscape", None) is not None:
+            lines.append("I can think privately or converse through the current message channel, according to this pulse's output direction. If something is missing, I can ask the person about it.")
+        awareness = self.capabilities.procedural_awareness(capabilities, activities)
+        if awareness:
+            lines.append(awareness)
+        if not capabilities and activities & {"action", "inquiry", "writing"}:
+            lines.append("This session has no connected action dispatcher for opening, sensing, changing files or running commands. I can reason about supplied contents and draft text here; local changes need an available action pathway.")
+        return "\n".join(lines)
+
+    def recalled_procedures(self, objective, focus, active_toolsets):
+        """Expose supported experience without granting capabilities or access."""
+        from core.pulse_context import ContextContribution
+        if not self.enabled or not set(focus.weights) & {"action", "inquiry", "writing"}:
+            return ()
+        available = {item.name: item for item in self._connected_capabilities(active_toolsets)}
+        task = TaskRecord(objective=objective, task_type="action")
+        contributions = []
+        for record in self.procedures.relevant(task):
+            if not record["recommended"] or not set(record["tool_sequence"]) <= available.keys():
+                continue
+            episodes = [item for item in record["episodes"] if item["verified"]]
+            objectives = list(dict.fromkeys(item["objective"] for item in episodes))
+            steps = [available[name].description for name in record["tool_sequence"]]
+            sources = tuple(item["id"] for item in episodes)
+            text = ("A procedure supported by recorded action outcomes for: " + "; ".join(objectives)
+                    + "\nSteps: " + " → ".join(steps))
+            contributions.append(ContextContribution("procedures", text, "procedural_memory", sources,
+                "procedure", "runtime-verified action trajectory, not a guarantee for this task"))
+        return tuple(contributions)
 
     def observe_pulse(self, ctx) -> None:
         """Post-pulse hook: persist committed intentions and optionally run them."""

@@ -59,6 +59,13 @@ class OllamaSession(ChatSession):
         # model is unloaded before the foreground and embedding models resume.
         self.keep_alive = self.options.pop("keep_alive", None)
         self.history: List[Dict[str, str]] = []
+        self.context_counter = None
+        self.context_format = None
+        self.context_decoder = None
+        self.last_context_output_kind = None
+        self.last_context_receipt = None
+        self._pending_context_response = None
+        self._context_in_flight = False
         self._last_token_count = 0
         try:
             self.max_attempts = max(
@@ -97,6 +104,97 @@ class OllamaSession(ChatSession):
         self.history.append({"role": "assistant", "content": thought})
         return thought
 
+    def context_messages(self, message):
+        """Render durable dialogue plus one replaceable pulse presentation."""
+        messages = [{"role": "system", "content": self.system_instruction}]
+        for item in self.history + [{"role": "user", "content": message}]:
+            item = dict(item)
+            if item["role"] == "assistant" and self.context_format and self.context_decoder:
+                # The native foreground emits message envelopes. Present its
+                # delivered history in the same protocol without changing the
+                # actual dialogue or admitting private actions as public speech.
+                item["content"] = json.dumps({"message": item["content"]}, ensure_ascii=False)
+            # Match adjacent-role collation explicitly so the tokenizer and
+            # provider receive the same conversation, including unanswered input.
+            if len(messages) > 1 and messages[-1]["role"] == item["role"]:
+                messages[-1] = {"role": item["role"],
+                                "content": messages[-1]["content"] + "\n\n" + item["content"]}
+            else:
+                messages.append(dict(item))
+        return messages
+
+    def pulse_input_allowance(self):
+        if self.context_counter is None:
+            raise RuntimeError("Mindscape requires the installed model's exact token counter")
+        overhead = self.context_counter.count_messages(self.context_messages(""))
+        headroom = int(self.max_output_tokens or 1024)
+        remaining = int(self.options["num_ctx"]) - overhead - headroom
+        if remaining <= 0:
+            from llm.ollama_tokens import ProviderContextExceeded
+            raise ProviderContextExceeded("Durable dialogue fills the selected context; explicit continuation is required")
+        return remaining
+
+    def covered_source_hashes(self):
+        """Canonical dialogue already present in the provider request."""
+        import hashlib
+        values = set()
+        for item in self.history:
+            text = item["content"]
+            values.add(hashlib.sha256(text.encode()).hexdigest())
+            if item["role"] == "assistant":
+                values.add(hashlib.sha256(("[response] " + text).encode()).hexdigest())
+        return values
+
+    def send_context(self, message):
+        """Generate from a pulse without retaining its temporary retrieval view."""
+        if self.context_counter is None:
+            raise RuntimeError("No exact provider context accounting configured")
+        messages = self.context_messages(message)
+        self.last_context_receipt = self.context_counter.check_request(messages, int(self.options["num_ctx"]))
+        self._pending_context_response = None
+        self._context_in_flight = True
+        try:
+            thought = self._send_via_package(messages) if self._use_package else self._send_via_rest(messages)
+        finally:
+            self._context_in_flight = False
+        self.last_context_output_kind = None
+        if not thought.startswith("[internal error:") and self.context_decoder is not None:
+            raw = thought
+            try:
+                thought, self.last_context_output_kind = self.context_decoder(raw)
+                self.last_context_receipt.update(raw_foreground=raw, output_kind=self.last_context_output_kind)
+            except (ValueError, TypeError) as exc:
+                raise ValueError(f"Invalid private foreground envelope; no action or message delivered: {exc}") from exc
+        if not thought.startswith("[internal error:"):
+            self._pending_context_response = thought
+        return thought
+
+    def finish_context(self, current_messages, response, *, delivered):
+        """Retain received dialogue and only actually delivered assistant prose.
+
+        Private continuation has its own pulse slot. Retrieved text, transient
+        telemetry and undelivered drafts do not become earlier user utterances.
+        """
+        if self._pending_context_response != response:
+            raise ValueError("No matching generated pulse to commit")
+        self.history.extend({"role": "user", "content": message} for message in current_messages)
+        if delivered:
+            self.history.append({"role": "assistant", "content": response})
+        self._pending_context_response = None
+
+    def _check_context_response(self, prompt_tokens, output_tokens, done_reason):
+        if not self._context_in_flight:
+            return
+        from llm.ollama_tokens import ProviderContextExceeded
+        self.last_context_receipt.update(
+            evaluated_prompt_tokens=prompt_tokens, generated_tokens=output_tokens, done_reason=done_reason)
+        if prompt_tokens != self.last_context_receipt["prompt_tokens"]:
+            raise ProviderContextExceeded(
+                f"Provider evaluated {prompt_tokens} input tokens, but the complete request "
+                f"contains {self.last_context_receipt['prompt_tokens']}; response withheld")
+        if done_reason == "length":
+            raise ProviderContextExceeded("Generation reached the provider context/output boundary; incomplete response withheld")
+
     def _send_via_package(self, messages: List[Dict[str, str]]) -> str:
         """Send using the ollama Python package."""
         import ollama
@@ -110,6 +208,7 @@ class OllamaSession(ChatSession):
                         messages=messages,
                         options=self.options,
                         keep_alive=self.keep_alive,
+                        format=self.context_format if self._context_in_flight else None,
                         think=False,  # Disable thinking for fast pulses
                     )
                     break
@@ -131,6 +230,7 @@ class OllamaSession(ChatSession):
             total_s = response.total_duration / 1e9 if response.total_duration else 0
             eval_count = response.eval_count or 0
             prompt_eval_count = getattr(response, "prompt_eval_count", 0) or 0
+            self._check_context_response(prompt_eval_count, eval_count, getattr(response, "done_reason", None))
             self._last_token_count = eval_count + prompt_eval_count
             logger.debug(
                 f"Ollama response: {eval_count} tokens in {total_s:.1f}s"
@@ -157,6 +257,7 @@ class OllamaSession(ChatSession):
                             "messages": messages,
                             "options": self.options,
                             "stream": False,
+                            **({"format": self.context_format} if self._context_in_flight and self.context_format else {}),
                             "think": False,
                             "keep_alive": self.keep_alive,
                         },
@@ -183,6 +284,7 @@ class OllamaSession(ChatSession):
             total_s = data.get("total_duration", 0) / 1e9
             eval_count = data.get("eval_count", 0)
             prompt_eval_count = data.get("prompt_eval_count", 0)
+            self._check_context_response(prompt_eval_count, eval_count, data.get("done_reason"))
             self._last_token_count = eval_count + prompt_eval_count
             if eval_count:
                 logger.debug(

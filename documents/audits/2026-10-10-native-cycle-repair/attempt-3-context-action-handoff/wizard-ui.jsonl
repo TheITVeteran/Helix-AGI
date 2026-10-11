@@ -1,0 +1,20 @@
+{"time": 1791676557.8851523, "event": "status", "page": 0, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791676557.9618385, "event": "click", "page": 0, "button": "Get Started  \u2192"}
+{"time": 1791676558.9360352, "event": "status", "page": 1, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791676558.9900534, "event": "click", "page": 1, "button": "Next  \u2192"}
+{"time": 1791676559.9850376, "event": "status", "page": 2, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791676560.0251803, "event": "click", "page": 2, "button": "Next  \u2192"}
+{"time": 1791676561.014768, "event": "status", "page": 3, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791676561.032097, "event": "selected_tools", "tools": ["core", "files"]}
+{"time": 1791676561.049368, "event": "click", "page": 3, "button": "Next  \u2192"}
+{"time": 1791676562.0142102, "event": "status", "page": 4, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791676562.0535843, "event": "click", "page": 4, "button": "Next  \u2192"}
+{"time": 1791676563.01381, "event": "status", "page": 5, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791676563.0540352, "event": "click", "page": 5, "button": "Next  \u2192"}
+{"time": 1791676564.0137277, "event": "status", "page": 6, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791676564.055249, "event": "click", "page": 6, "button": "\ud83d\ude80  Create Helix"}
+{"time": 1791676585.0136175, "event": "status", "page": 6, "install_rc": 0, "status": "", "child_pid": null}
+{"time": 1791676587.0368056, "event": "status", "page": 6, "install_rc": 0, "status": "Loading the configured agent composition\u2026", "child_pid": 1809507}
+{"time": 1791676625.0143335, "event": "status", "page": 6, "install_rc": 0, "status": "Mindscape loaded: Helix \u00b7 mRAG \u00b7 MightyMem/Habitus \u00b7 RWKV \u00b7 Context Loom", "child_pid": 1809507}
+{"time": 1791677125.0152051, "event": "close_requested"}
+{"time": 1791677209.0141382, "event": "status", "page": 6, "install_rc": 0, "status": "Mindscape failed: RuntimeError: Mindscape foreground did not complete: [internal error: LLM call failed \u2014 Generation reached the provider context/output boundary; incomplete response withheld]", "child_pid": 1809507}

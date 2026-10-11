@@ -1,0 +1,11 @@
+{
+  "time": 1791563575.098322,
+  "input": {
+    "sender": "User",
+    "content": "Dashboard delivery check: please reply here that you received the code cedar-619."
+  },
+  "http_status": 200,
+  "body": {
+    "ok": true
+  }
+}

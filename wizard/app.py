@@ -18,6 +18,7 @@ import subprocess
 import threading
 import logging
 from pathlib import Path
+from core.mindscape_config import defaults as mindscape_defaults, resolve as resolve_mindscape
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QStackedWidget, QWidget, QVBoxLayout,
     QHBoxLayout, QPushButton, QLabel, QMessageBox, QTabWidget,
@@ -39,10 +40,11 @@ CRED_PATH = CRED_DIR / "credentials.env"
 
 # ── Default Config Schema ─────────────────────────────────────────────
 DEFAULT_CONFIG = {
+    **mindscape_defaults(BASE_DIR),
     "agent_name": "Helix",
     "creator_name": "",
     "data_dir": "data",
-    "llm_provider": "gemini",
+    "llm_provider": "ollama",
     "model_name": "",
     "telegram_enabled": False,
     "telegram_token": "",
@@ -546,7 +548,12 @@ class HelixApp(QMainWindow):
 
     def finish_wizard(self):
         """Called when user clicks 'Create <Agent Name>' on summary page."""
-        self.config["setup_complete"] = True
+        try:
+            resolve_mindscape(self.config)
+        except (ValueError, RuntimeError) as error:
+            QMessageBox.critical(self, "Composition unavailable", str(error))
+            return
+        self.config["setup_complete"] = False
         save_config(self.config)
         self._write_credentials()
 
@@ -597,11 +604,11 @@ class HelixApp(QMainWindow):
         self._install_dependencies()
 
     def _install_dependencies(self):
-        """Install requirements.txt in a progress dialog, then bootstrap."""
-        req_file = BASE_DIR / "requirements.txt"
+        """Install the selected composition's dependencies, then bootstrap."""
+        requirements = "requirements-mindscape.txt" if self.config.get("composition") == "mindscape" else "requirements.txt"
+        req_file = BASE_DIR / requirements
         if not req_file.exists():
-            self._run_bootstrap()
-            self._switch_to_dashboard()
+            QMessageBox.critical(self, "Dependencies unavailable", f"Missing {req_file}")
             return
 
         # Build the progress dialog
@@ -702,13 +709,11 @@ class HelixApp(QMainWindow):
                     status_label.setText("✅  All dependencies installed successfully!")
                     status_label.setStyleSheet("font-size: 13px; color: #4ade80; font-weight: 600;")
                     log_output.append("\n✅ Done!")
+                    QTimer.singleShot(1500, lambda: self._finish_after_install(dlg))
                 else:
-                    status_label.setText("⚠️  Some packages may have failed — the dashboard may not work fully.")
+                    status_label.setText("Dependency installation failed. Setup has stopped; review the errors above.")
                     status_label.setStyleSheet("font-size: 13px; color: #fbbf24; font-weight: 600;")
-                    log_output.append("\n⚠️ Completed with warnings.")
-
-                # Auto-close after a moment and proceed
-                QTimer.singleShot(1500, lambda: self._finish_after_install(dlg))
+                    log_output.append("\nSetup incomplete. Repair the installation before launching.")
 
         poll_timer = QTimer()
         poll_timer.timeout.connect(_poll)
@@ -717,8 +722,10 @@ class HelixApp(QMainWindow):
     def _finish_after_install(self, dlg):
         """Close install dialog and proceed with bootstrap + dashboard."""
         dlg.close()
-        self._run_bootstrap()
-        self._switch_to_dashboard()
+        if self._run_bootstrap():
+            self.config["setup_complete"] = True
+            save_config(self.config)
+            self._switch_to_dashboard()
 
     def _write_credentials(self):
         """Write credentials.env from wizard config."""
@@ -776,11 +783,17 @@ class HelixApp(QMainWindow):
             f"--creator-name={creator_name}",
             f"--profile={profile}",
             f"--personality={personality}",
+            f"--composition={self.config.get('composition', 'mindscape')}",
         ]
         try:
-            subprocess.run(cmd, cwd=str(BASE_DIR), check=True, capture_output=True, timeout=60)
+            (BASE_DIR / "logs").mkdir(exist_ok=True)
+            with (BASE_DIR / "logs/bootstrap.log").open("a") as bootstrap_log:
+                subprocess.run(cmd, cwd=str(BASE_DIR), check=True,
+                               stdout=bootstrap_log, stderr=subprocess.STDOUT)
         except Exception as e:
-            logger.warning(f"Bootstrap subprocess error: {e}")
+            logger.error(f"Bootstrap subprocess error: {e}")
+            QMessageBox.critical(self, "Setup failed", "Bootstrap did not complete. See logs/bootstrap.log.")
+            return False
 
         # If "import" profile, run the soul importer after bootstrap
         import_paths = self.config.get("import_soul_paths", [])
@@ -792,9 +805,14 @@ class HelixApp(QMainWindow):
                 f"--data-dir={BASE_DIR / 'data'}",
             ] + import_paths
             try:
-                subprocess.run(import_cmd, cwd=str(BASE_DIR), check=True, capture_output=True, timeout=120)
+                with (BASE_DIR / "logs/bootstrap.log").open("a") as bootstrap_log:
+                    subprocess.run(import_cmd, cwd=str(BASE_DIR), check=True,
+                                   stdout=bootstrap_log, stderr=subprocess.STDOUT)
             except Exception as e:
-                logger.warning(f"Soul import error: {e}")
+                logger.error(f"Soul import error: {e}")
+                QMessageBox.critical(self, "Import failed", "Agent import did not complete. See logs/bootstrap.log.")
+                return False
+        return True
 
     def _switch_to_dashboard(self):
         """Switch from wizard to the dashboard + settings tabs."""
@@ -936,36 +954,50 @@ class HelixApp(QMainWindow):
             return
 
         import subprocess
-        # Terminate any other main.py processes running on the system to avoid conflicts
+        # The joint state writer lock prevents a second owner. Never terminate
+        # unrelated Python applications because their entrypoint is main.py.
+        cmd = [sys.executable, "-u", str(BASE_DIR / "main.py"),
+               "--data-dir", self.config.get("data_dir", "data")]
         try:
-            import psutil
-            for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
-                try:
-                    cmdline = proc.info.get('cmdline') or []
-                    if any('main.py' in part for part in cmdline) and proc.info['pid'] != os.getpid():
-                        logger.info(f"Terminating orphaned agent process: PID {proc.info['pid']}")
-                        proc.terminate()
-                        try:
-                            proc.wait(timeout=2)
-                        except Exception:
-                            proc.kill()
-                except Exception:
-                    pass
-        except Exception as pe:
-            logger.warning(f"Failed to check/kill orphaned agent processes: {pe}")
-
-        cmd = [sys.executable, str(BASE_DIR / "main.py")]
-        try:
-            self._agent_process = subprocess.Popen(
-                cmd,
-                cwd=str(BASE_DIR),
-                stdin=subprocess.PIPE,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL
-            )
+            (BASE_DIR / "logs").mkdir(exist_ok=True)
+            with (BASE_DIR / "logs/launcher.log").open("a") as launch_log:
+                self._agent_process = subprocess.Popen(cmd, cwd=str(BASE_DIR),
+                    stdin=subprocess.PIPE, stdout=launch_log, stderr=subprocess.STDOUT)
             logger.info("Agent process (main.py) started successfully.")
+            self.statusBar().showMessage("Loading the configured agent composition…")
+            self._agent_monitor = QTimer(self)
+            self._agent_monitor.timeout.connect(self._check_agent_status)
+            self._agent_monitor.start(1000)
         except Exception as e:
             logger.error(f"Failed to start agent process: {e}")
+            QMessageBox.critical(self, "Agent launch failed", str(e))
+
+    def _check_agent_status(self):
+        process = self._agent_process
+        if process is None:
+            return
+        if process.poll() is not None:
+            self._agent_monitor.stop()
+            if getattr(self, "_closing_agent", False):
+                self.close()
+                return
+            self.statusBar().showMessage(f"Agent stopped (exit {process.returncode}); see logs/launcher.log")
+            if process.returncode:
+                QMessageBox.critical(self, "Agent launch failed",
+                    "The agent process stopped. Details are preserved in logs/launcher.log.")
+            return
+        if self.config.get("composition") == "mindscape":
+            manifest = BASE_DIR / self.config.get("data_dir", "data") / "mindscape/composition-manifest.json"
+            try:
+                receipt = json.loads(manifest.read_text())
+            except (OSError, ValueError):
+                return
+            if receipt.get("process_id") != process.pid:
+                return
+            if receipt.get("status") == "initialized":
+                self.statusBar().showMessage("Mindscape loaded: Helix · mRAG · MightyMem/Habitus · RWKV · Context Loom")
+            elif receipt.get("status") == "failed":
+                self.statusBar().showMessage("Mindscape failed: " + receipt.get("error", "see composition receipt"))
 
     def _create_desktop_shortcuts(self, wizard_shortcut: bool, agent_shortcut: bool):
         """Create Linux desktop shortcuts for Setup Wizard and Agent Launcher."""
@@ -1078,13 +1110,14 @@ Categories=Utility;
                 pass
 
     def closeEvent(self, event):
-        """Clean up background processes on close."""
+        """Let the active pulse finish and checkpoint before closing."""
         if self._agent_process and self._agent_process.poll() is None:
-            self._agent_process.terminate()
-            try:
-                self._agent_process.wait(timeout=2)
-            except Exception:
-                self._agent_process.kill()
+            if not getattr(self, "_closing_agent", False):
+                self._closing_agent = True
+                self._agent_process.terminate()
+            self.statusBar().showMessage("Stopping after the current initialization or pulse saves its state…")
+            event.ignore()
+            return
         event.accept()
 
 

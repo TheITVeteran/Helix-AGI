@@ -1,0 +1,32 @@
+{
+  "case": "conversation",
+  "request": {
+    "channel": "dashboard",
+    "content": "Hi Helix, I am Mira. I keep my reports local and want different files to have distinct names. Suggest a simple naming approach and explain why.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791675354.999375,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791675541.7982092,
+  "first_pulse": 2,
+  "final_pulse": 2,
+  "foreground": {
+    "time": 1791675541.4238966,
+    "kind": "foreground_return",
+    "helix_pulse": 2,
+    "thought": "Hi Mira,\n\nBased on what you asked—“suggest a simple naming approach and explain why”—here’s a straightforward, easy‑to‑remember method:\n\n**1️⃣ Use a consistent prefix that identifies the file type or category**, followed by a brief, descriptive term for its content. For example:\n\n- **[ProjectName]_[Date]_[BriefDescription].txt**\n  - *Example:* `AI_Research_20231001_ModelOverview.txt`\n\n**Why this works**\n\n- **Clarity:** The prefix (e.g., `[AI]`, `[Research]`) quickly tells you what the file belongs to, reducing mental overhead when scanning a folder.\n- **Chronology & Relevance:** Including the date (`_[Date]`) helps differentiate versions or stages in case multiple files share similar names. Adding a short description (`_[BriefDescription]`) clarifies purpose at a glance.\n- **Scalability:** As you add more files, this scheme scales—no need to invent new naming conventions for each project.\n\n**2️⃣ Alternative: Use hyphens or underscores with clear sections**\n\nFor example:\n\n```\n[YYYYMMDD]-[Category]-[Title].extension\n```\n\n- *Example:* `20231001-AI-ModelTrainingPlan.md`\n\nThis keeps the file name short, chronological, and categorically explicit.\n\n**Key Benefits**\n\n- **Reduced ambiguity:** It’s easy to locate files by scanning a list without opening each one.\n- **Future‑proofing:** Adding more files won’t cause naming conflicts; you can always append numbers (e.g., `20231001-AI-ModelTrainingPlan_v2.txt`) for version control.\n- **Human readability:** Numbers and short words are easier to type on the fly than complex acronyms or cryptic codes.\n\nFeel free to adapt these patterns to whatever conventions your team prefers, but keeping a stable prefix/date/description structure will make file management much smoother. Let me know if you’d like more examples tailored to a specific domain!",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "Hi Mira,\n\nBased on what you asked—“suggest a simple naming approach and explain why”—here’s a straightforward, easy‑to‑remember method:\n\n**1️⃣ Use a consistent prefix that identifies the file type or category**, followed by a brief, descriptive term for its content. For example:\n\n- **[ProjectName]_[Date]_[BriefDescription].txt**\n  - *Example:* `AI_Research_20231001_ModelOverview.txt`\n\n**Why this works**\n\n- **Clarity:** The prefix (e.g., `[AI]`, `[Research]`) quickly tells you what the file belongs to, reducing mental overhead when scanning a folder.\n- **Chronology & Relevance:** Including the date (`_[Date]`) helps differentiate versions or stages in case multiple files share similar names. Adding a short description (`_[BriefDescription]`) clarifies purpose at a glance.\n- **Scalability:** As you add more files, this scheme scales—no need to invent new naming conventions for each project.\n\n**2️⃣ Alternative: Use hyphens or underscores with clear sections**\n\nFor example:\n\n```\n[YYYYMMDD]-[Category]-[Title].extension\n```\n\n- *Example:* `20231001-AI-ModelTrainingPlan.md`\n\nThis keeps the file name short, chronological, and categorically explicit.\n\n**Key Benefits**\n\n- **Reduced ambiguity:** It’s easy to locate files by scanning a list without opening each one.\n- **Future‑proofing:** Adding more files won’t cause naming conflicts; you can always append numbers (e.g., `20231001-AI-ModelTrainingPlan_v2.txt`) for version control.\n- **Human readability:** Numbers and short words are easier to type on the fly than complex acronyms or cryptic codes.\n\nFeel free to adapt these patterns to whatever conventions your team prefers, but keeping a stable prefix/date/description structure will make file management much smoother. Let me know if you’d like more examples tailored to a specific domain!",
+      "recipient": "Mira",
+      "timestamp": 1791675524.0532062
+    }
+  ],
+  "native_actions": []
+}

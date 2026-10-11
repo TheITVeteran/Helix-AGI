@@ -1,0 +1,66 @@
+{
+  "created": 1791647990.5547898,
+  "kind": "unscored live diagnosis; no full-system readiness result",
+  "case_count": 5,
+  "wizard": {
+    "actual_ui_trace": "wizard-ui.jsonl",
+    "dependencies_exit": 0,
+    "bootstrap_return": true,
+    "normal_main_child": 1751151,
+    "display": "real Qt widgets on offscreen platform; physical desktop/WebGL rendering not validated"
+  },
+  "foreground_generation_ends": [
+    "stop",
+    "stop",
+    "stop",
+    "stop",
+    "stop"
+  ],
+  "current_requests_reached_model": true,
+  "all_inputs_persisted": true,
+  "action_receipt_count": 0,
+  "workspace_python_open_attempt_count": 0,
+  "inventory_script_exists": false,
+  "workspace": {
+    "sensory-room/inbox/field-notes.md": {
+      "sha256": "cf098e09fa21426081ff657bda7d17ce008a1a8e1b401b2f52a88d50581cac05",
+      "bytes": 181
+    },
+    "sensory-room/inbox/survey.pdf": {
+      "sha256": "e70509b7c413ce36bb188e189511525e12ee88aaecd8e269d4b86dbbec8a0d9a",
+      "bytes": 706
+    }
+  },
+  "input_hashes_unchanged": true,
+  "expected_read_facts": {
+    "archive_label": "LANTERN-482",
+    "inspection_day": "Tuesday",
+    "survey_reference": "PEARL-619",
+    "shelves": 5
+  },
+  "canonical_checked_files": 114,
+  "canonical_changed": [],
+  "canonical_added": [],
+  "product_source_changes_during_run": {
+    "helix": [],
+    "mightymem": []
+  },
+  "stop_receipt": {
+    "time": 1791647973.2782183,
+    "reason": "all five requested live turns completed; script request pulse returned",
+    "matching_observer_event": 1791647973.2148597
+  },
+  "shutdown": {
+    "time": 1791648032.87336,
+    "agent_pid": 1751151,
+    "agent_process_present": false,
+    "dashboard_port_accepting_connections": false,
+    "wizard_exec_exit_code": 0,
+    "wizard_exit_evidence": "normal execution session completed with exit code 0 after closeEvent"
+  },
+  "launcher_implementation_checks": {
+    "py_compile": "passed",
+    "diff_check": "passed",
+    "actual_wizard_relaunch": "completed"
+  }
+}

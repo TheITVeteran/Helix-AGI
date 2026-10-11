@@ -1,0 +1,15 @@
+{
+  "time": 1791563792.5932608,
+  "phase": "initial_process",
+  "completed_pulses": 4,
+  "actual_model_calls": 9,
+  "native_tool_receipts": 0,
+  "reply_calls": 0,
+  "file_exists": false,
+  "dashboard_bus": {
+    "inbound": [],
+    "outbound": [],
+    "outbound_base": 0
+  },
+  "interpretation": "Input, local inference, persistent journal and retrieval observed. Requested file and outbound delivery absent before natural RESTING state. No product score."
+}

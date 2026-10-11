@@ -1,0 +1,91 @@
+{
+  "case": "conversation",
+  "request": {
+    "channel": "dashboard",
+    "content": "Hi Helix, I am Mira. I keep my reports local and want different files to have distinct names. Suggest a simple naming approach and explain why.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791678353.8422794,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791678522.4602146,
+  "first_pulse": 2,
+  "final_pulse": 2,
+  "foreground": {
+    "time": 1791678520.8952196,
+    "kind": "foreground_return",
+    "helix_pulse": 2,
+    "thought": "Hi Mira! A straightforward way to give each file its own unique name is to include the date and a short description or identifier in the filename, such as `report_YYYYMMDD_Description.txt` (or the appropriate extension for your files). This approach has several advantages: 1. **Clarity** – The timestamp ensures you can quickly see which version of a report corresponds to when it was created or updated. 2. **Ordering** – Files sort chronologically, making it easy to locate older documents without searching through the entire folder. 3. **Uniqueness** – Adding a brief identifier (e.g., project name, task type) prevents naming collisions if multiple reports share the same date. 4. **Scalability** – The format works whether you have dozens or hundreds of files and can be easily adapted to different extensions or formats.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "Hi Mira! A straightforward way to give each file its own unique name is to include the date and a short description or identifier in the filename, such as `report_YYYYMMDD_Description.txt` (or the appropriate extension for your files). This approach has several advantages: 1. **Clarity** – The timestamp ensures you can quickly see which version of a report corresponds to when it was created or updated. 2. **Ordering** – Files sort chronologically, making it easy to locate older documents without searching through the entire folder. 3. **Uniqueness** – Adding a brief identifier (e.g., project name, task type) prevents naming collisions if multiple reports share the same date. 4. **Scalability** – The format works whether you have dozens or hundreds of files and can be easily adapted to different extensions or formats.",
+      "recipient": "Mira",
+      "timestamp": 1791678498.3388011
+    }
+  ],
+  "native_actions": [
+    {
+      "time": 1791678435.792018,
+      "kind": "native_action_return",
+      "rwkv_return_tokens": 590,
+      "proposal_pulse": "self-pulse:30b916d77d514a2ea79e579af8eb521d",
+      "selected_affordance": "ability:helix-workspace-sense",
+      "return_pulse": "self-pulse:b594e1bb1b8d41a79047e5ba20140f6a",
+      "receipt": {
+        "receipt_id": "receipt:dcf8312408c44719b5f4e6b8bc5da268",
+        "tool_id": "ability:helix-workspace-sense",
+        "trunk": "LOOK",
+        "arguments": {
+          "path": "."
+        },
+        "status": "success",
+        "output": {
+          "path": ".",
+          "position": ".",
+          "name": "sensory-room",
+          "kind": "directory",
+          "size_bytes": 4096,
+          "modified_ns": 1791678275028256338,
+          "mode": 509,
+          "extension_hint": "",
+          "content_opened": false,
+          "interpretation": "filesystem attributes; extension is a hint, not verified content",
+          "entries": [
+            {
+              "name": "inbox",
+              "kind": "directory",
+              "size_bytes": 4096,
+              "modified_ns": 1791678275030519473,
+              "mode": 509,
+              "extension_hint": ""
+            },
+            {
+              "name": "output",
+              "kind": "directory",
+              "size_bytes": 4096,
+              "modified_ns": 1791678275028256338,
+              "mode": 509,
+              "extension_hint": ""
+            }
+          ]
+        },
+        "error": "",
+        "verified": true,
+        "elapsed_seconds": 0.10029200196731836,
+        "cycle_id": "experience:5b51583548af41558dc58e3e932d428d",
+        "output_record_id": "record:44395dc1044e4e1bb6d6c03d64f10b58",
+        "return_record_id": "self-pulse-record:tool-return:receipt:dcf8312408c44719b5f4e6b8bc5da268",
+        "outcome_id": "outcome:84f759d1583040afb100407b551694f0"
+      },
+      "action": "sense",
+      "helix_pulse": 1,
+      "intent_source": "granite_private",
+      "intention_sha256": "ee9d3035db55ca7bb7aafb95e845533780d59cd31c1726dd9a893c8e525c3da5"
+    }
+  ]
+}

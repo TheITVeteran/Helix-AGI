@@ -1,0 +1,34 @@
+  Credentials: loaded via dotenv
+Initializing Helix Architecture...
+  Memory: {'total_entries': 116, 'total_memories': 68, 'journal_path': 'data/memory/cognitive_journal.jsonl'}
+  Beliefs: {'total_beliefs': 52, 'with_relations': 38, 'with_memory_refs': 38, 'core': 48, 'deep': 4, 'surface': 0, 'avg_confidence': 0.893, 'schema_version': 4, 'premises': 9, 'propositions': 13, 'preferences': 10, 'people': 2, 'skills': 2, 'desires': 6, 'concepts': 10}
+  Scratchpad: 6 active notes
+  Spatial: pulse=0, γ=0.50
+  SemanticIndex: 0 vectors (numpy_brute)
+  Sentinel: Ω=0.910, severity=critical
+  Spatial bootstrap: 58 beliefs, 47 memories in 8D manifold
+  Contacts: 1 known
+  Tools: executor ready
+  Telegram: enabled
+  Discord: disabled (no token)
+  Slack: disabled (no token)
+  WhatsApp: disabled (no token)
+  Webhook: disabled (no config)
+  Provider: ollama (granite4.1:3b)
+  Pulse mode: standard
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+{"loaded_shard": "model-00001-of-00004.safetensors"}
+{"loaded_shard": "model-00002-of-00004.safetensors"}
+{"loaded_shard": "model-00003-of-00004.safetensors"}
+{"loaded_shard": "model-00004-of-00004.safetensors"}
+  Mindscape: Helix + mRAG + MightyMem/Habitus cortex + RWKV + Context Loom loaded
+  Composition receipt: /home/nemo/Helix_AGI (GitHub Repo) (Public)/data/mindscape/composition-manifest.json
+  Curator LLM: ready (ollama auxiliary route)
+  Pulse loop: Ready
+  Post-pulse hooks: registered (task_inception=observe, workflow_detector, belief_detector, engagement_monitor, co_occurrence_tracker, affect_field)
+Setup initialized. This verifies loading, not agent competence.

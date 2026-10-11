@@ -1,0 +1,3319 @@
+[
+  {
+    "time": 1791680062.4675508,
+    "kind": "pulse_context",
+    "helix_pulse": 3,
+    "events": [
+      "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\""
+    ],
+    "rwkv_tokens": 49,
+    "joint_state_before": "796bd434bd4bc2538df10fb5613f16887524d0d888e95856dc00320276068a12",
+    "joint_state_after": "b6bf8efdafa77d95231044092103cedd3eed0091a687ded7575fb98d77f0b077",
+    "habitus_pulse": 134,
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "communicative_intent": true,
+    "foreground_protocol": "intention_or_message",
+    "cortex_proposal": {
+      "proposal_id": "cortex-proposal:029eadb5fd00a116559f3339a56a7e42",
+      "model_sha256": "d35a598a4aebdc466654e2d661ac1a1feee0154f1902d0054daf9c448170413a",
+      "graph_field_sha256": "367b95b8d504a84b9b3d5cfa1eaa5c889677b4d24b18b241e3bb63fe0cc05096",
+      "sensory_payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sensed_byte_count": 0,
+      "action_probabilities": {
+        "DO": 0.3148052394390106,
+        "LOOK": 0.2977565824985504,
+        "SPEAK": 0.38743820786476135
+      },
+      "predicted_consequence": -0.3277113437652588,
+      "predicted_valence": -0.38436567783355713,
+      "route_alignment": -0.09722243249416351,
+      "confidence": 0.07263296842575073
+    },
+    "graph_field": [
+      0.003332235214130677,
+      0.15347701280502593,
+      -0.035215575239786766,
+      0.0,
+      0.0,
+      0.0,
+      0.00012320689654548336,
+      0.0,
+      0.0,
+      0.0,
+      0.007847629520888438,
+      0.037782625856192964,
+      -0.13807884577703292,
+      0.008046822949465918,
+      0.05135410898657541,
+      -0.03399691830249314,
+      0.009886177199016062,
+      0.0,
+      0.0,
+      -0.07514052013494961,
+      0.0,
+      0.0447322849872829,
+      0.0,
+      -0.0005398538030019124,
+      -0.03672518150763747,
+      -0.009619718879560982,
+      0.0,
+      0.0,
+      0.14368661580460537,
+      -0.0011719753112644502,
+      -0.03243888048556011,
+      0.0,
+      -0.010905806603474021,
+      0.0,
+      0.007847629520888438,
+      -0.19623640307998733,
+      0.0,
+      0.2699827989963087,
+      0.18205342268458094,
+      0.00907986507655907,
+      0.0,
+      0.04470071350660925,
+      0.012062702777078636,
+      0.0,
+      0.0,
+      0.0,
+      -0.008447743568296532,
+      0.002517804964591517,
+      0.009619718879560982,
+      -0.01875845181514392,
+      0.0,
+      0.007847629520888438,
+      0.0,
+      0.11338066710792565,
+      -0.009619718879560982,
+      0.009619718879560982,
+      -0.03672518150763747,
+      0.0,
+      0.06901587851319001,
+      -0.007780364630010838,
+      0.02885915663868295,
+      0.0,
+      0.0,
+      0.0,
+      -0.11338066710792565,
+      0.09440425802763162,
+      0.007766545301921309,
+      0.0,
+      -0.010905806603474021,
+      0.0,
+      -0.15764838851828064,
+      -0.1473135694813441,
+      0.08851091277507278,
+      0.0,
+      0.004504210525395127,
+      -0.12004784253412615,
+      0.0,
+      -0.05135410898657541,
+      0.0,
+      0.06887884765294484,
+      0.009619718879560982,
+      0.0,
+      -0.17785327221652258,
+      0.0044466348900045315,
+      0.25342559572327605,
+      -0.00589334525255884,
+      0.0,
+      -0.08851091277507278,
+      0.0,
+      0.009619718879560982,
+      -0.022819161605999134,
+      0.0,
+      0.0,
+      0.03672518150763747,
+      0.0,
+      -0.03690397768530773,
+      0.0,
+      0.0,
+      -0.15496221478122107,
+      0.1412475107870437,
+      0.0001898484280710119,
+      0.0,
+      0.010991906513222611,
+      0.11833472474497762,
+      -0.14765920994638893,
+      -0.007709651620953486,
+      0.0,
+      0.03672518150763747,
+      0.0,
+      0.0,
+      0.0,
+      -0.09389897195009353,
+      -0.009619718879560982,
+      -0.0176665418290269,
+      0.0,
+      0.009886177199016062,
+      0.061031218132056406,
+      -0.009619718879560982,
+      0.0,
+      -0.061031218132056406,
+      0.0,
+      -0.0037263736270021423,
+      0.0021765255780625747,
+      0.0,
+      0.061031218132056406,
+      0.02885915663868295,
+      0.0,
+      0.0,
+      -0.04808542576916028,
+      0.0,
+      0.07035032851511143,
+      0.0,
+      -0.020615712699554752,
+      -0.039464733611756404,
+      0.0,
+      0.0,
+      0.0,
+      0.02885915663868295,
+      0.02894440840867824,
+      0.120164484983539,
+      0.0,
+      -0.0013922906257262777,
+      0.0,
+      -0.10584541385861664,
+      0.03095275798257655,
+      0.0,
+      0.0,
+      -0.0005256935604846409,
+      0.013326652697926255,
+      0.02885915663868295,
+      0.0,
+      0.0,
+      -0.03332596219869131,
+      0.010100704823539029,
+      0.0031866273331560536,
+      0.0,
+      0.0,
+      0.015343199552815861,
+      0.021163840485846824,
+      -0.00026873385703113075,
+      0.23072307889333837,
+      -0.011125621728072535,
+      0.00589334525255884,
+      0.0,
+      -0.009619718879560982,
+      -0.061031218132056406,
+      -0.1572789288259499,
+      -0.010336042989396917,
+      0.0,
+      0.0037263736270021423,
+      0.00021452762452296768,
+      0.0,
+      0.03276216602412252,
+      0.0,
+      0.0,
+      0.0,
+      -0.0676836342150012,
+      0.0,
+      0.0,
+      0.12004784253412615,
+      -0.0020936013438936007,
+      0.0,
+      0.0,
+      -0.16183827450548063,
+      0.0,
+      0.007501051739438263,
+      -0.06437971902138342,
+      0.005151539829733889,
+      0.0,
+      -0.007847629520888438,
+      0.0,
+      -0.022819161605999134,
+      0.1521651256693649,
+      0.03672518150763747,
+      -0.014123929404956109,
+      0.0231908290737043,
+      0.07656004282987545,
+      0.0,
+      0.01875845181514392,
+      0.04319110723875855,
+      0.03337668061831044,
+      -0.010336042989396917,
+      0.0,
+      0.0,
+      0.026014133804176,
+      0.0,
+      0.0,
+      0.04319110723875855,
+      0.004504210525395127,
+      0.0,
+      0.023178636384696676,
+      -0.06689820601694647,
+      -0.12684232625842523,
+      -0.009619718879560982,
+      0.18104975822417488,
+      0.0,
+      0.0,
+      -0.0033485008893270247,
+      0.0,
+      0.006522422562944366,
+      -0.015343199552815861,
+      -0.02203947794664761,
+      0.0,
+      0.10730234142170933,
+      -0.04978883775956064,
+      0.0,
+      0.0,
+      0.010152057577034355,
+      0.0,
+      0.1886722113938023,
+      -0.0011719753112644502,
+      6.778079349747459e-05,
+      0.12463375992217535,
+      -0.1402688904171968,
+      0.009619718879560982,
+      0.01735665217650255,
+      -0.018791428646636552,
+      0.0,
+      0.0,
+      0.08644350579065879,
+      -0.04628136349626666,
+      -0.022819161605999134,
+      -0.011370095283171764,
+      0.0,
+      0.0,
+      0.0176665418290269,
+      -0.2120740583670827,
+      0.015343199552815861,
+      0.0,
+      0.0,
+      -0.057749602002437374,
+      -0.07274225214019216,
+      0.009619718879560982,
+      -0.010905806603474021,
+      0.013866506500928166,
+      -0.16845892890900754
+    ],
+    "topical": {
+      "focus_topics": [
+        "identity:self",
+        "taste:builder",
+        "identity:human"
+      ],
+      "momentum": {
+        "identity:self": "rising",
+        "taste:builder": "sustained",
+        "identity:human": "sustained"
+      },
+      "drift": 0.0001,
+      "familiarity": {
+        "identity:self": 0.7823,
+        "taste:builder": 0.1908,
+        "identity:human": 0.0125
+      },
+      "action_mode_mix": {},
+      "max_depth": 2,
+      "rendered": "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: identity:self, taste:builder, identity:human\nMomentum: identity:self (rising), taste:builder (sustained), identity:human (sustained)\nConversational drift: 0.0001"
+    },
+    "recurrent_state": {
+      "habitus_pulse": 133,
+      "rwkv_input_tokens": 49,
+      "sensed_modality": "EXTERNAL_COMMUNICATION",
+      "communicative_intent": true,
+      "speak_salience": 0.387,
+      "recurrent_express": true,
+      "cortex_proposal": {
+        "proposal_id": "cortex-proposal:029eadb5fd00a116559f3339a56a7e42",
+        "model_sha256": "d35a598a4aebdc466654e2d661ac1a1feee0154f1902d0054daf9c448170413a",
+        "graph_field_sha256": "367b95b8d504a84b9b3d5cfa1eaa5c889677b4d24b18b241e3bb63fe0cc05096",
+        "sensory_payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sensed_byte_count": 0,
+        "action_probabilities": {
+          "DO": 0.3148052394390106,
+          "LOOK": 0.2977565824985504,
+          "SPEAK": 0.38743820786476135
+        },
+        "predicted_consequence": -0.3277113437652588,
+        "predicted_valence": -0.38436567783355713,
+        "route_alignment": -0.09722243249416351,
+        "confidence": 0.07263296842575073
+      },
+      "external_evidence": false
+    },
+    "mrag": {
+      "lane_a_candidates": 9,
+      "lane_b_candidates": 0,
+      "merged_candidates": 4,
+      "selected": 4,
+      "suppressed_provenance": 0,
+      "suppressed_duplicate": 5,
+      "by_lane": {
+        "semantic": 4,
+        "spatial": 0,
+        "both": 0
+      },
+      "by_tier": {
+        "0": 4,
+        "1": 0,
+        "2": 0
+      },
+      "lexicon_hits": [
+        "peo_boot_self"
+      ],
+      "semantic_heads": [
+        {
+          "text": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+          "weight": 1.0,
+          "kind": "full"
+        },
+        {
+          "text": "[20:54:03] Mira is talking to me via dashboard.",
+          "weight": 0.97,
+          "kind": "sentence"
+        },
+        {
+          "text": "They said: \"Small correction: call me Rowan, not Mira.",
+          "weight": 0.97,
+          "kind": "sentence"
+        },
+        {
+          "text": "What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+          "weight": 0.97,
+          "kind": "sentence"
+        },
+        {
+          "text": "small correction call",
+          "weight": 0.95,
+          "kind": "rake"
+        },
+        {
+          "text": "via dashboard",
+          "weight": 0.95,
+          "kind": "rake"
+        },
+        {
+          "text": "replied joshua",
+          "weight": 0.95,
+          "kind": "rake"
+        },
+        {
+          "text": "They",
+          "weight": 0.95,
+          "kind": "entity"
+        },
+        {
+          "text": "Small",
+          "weight": 0.95,
+          "kind": "entity"
+        },
+        {
+          "text": "Rowan",
+          "weight": 0.95,
+          "kind": "entity"
+        },
+        {
+          "text": "Mira",
+          "weight": 0.95,
+          "kind": "entity"
+        },
+        {
+          "text": "I",
+          "weight": 0.95,
+          "kind": "entity"
+        },
+        {
+          "text": "helix",
+          "weight": 0.92,
+          "kind": "concept_expansion"
+        },
+        {
+          "text": "name",
+          "weight": 0.92,
+          "kind": "concept_expansion"
+        },
+        {
+          "text": "gather",
+          "weight": 0.92,
+          "kind": "concept_expansion"
+        },
+        {
+          "text": "myself",
+          "weight": 0.92,
+          "kind": "concept_expansion"
+        }
+      ],
+      "retrieval_profile": "local",
+      "memory_work_order": {
+        "raw_message": "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+        "search_query": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+        "subjects": [],
+        "possessive_subjects": [],
+        "question_type": "preference",
+        "requested_facets": [
+          "preference"
+        ],
+        "relation_terms": [],
+        "search_terms": [
+          "mira",
+          "talking",
+          "me",
+          "via",
+          "dashboard",
+          "they",
+          "said",
+          "small",
+          "correction",
+          "call",
+          "rowan",
+          "not",
+          "name",
+          "use",
+          "preference",
+          "about",
+          "my",
+          "reports",
+          "replied",
+          "joshua",
+          "thank"
+        ],
+        "is_question": true,
+        "requires_exact": true,
+        "requires_chronology": false,
+        "relation_requested": false,
+        "profile_allowed": true,
+        "role_constraint": "unconstrained",
+        "target_record_kinds": [
+          "outbound_message"
+        ],
+        "evidence_scope": "delivered_communication",
+        "thought_policy": "exclude",
+        "related_record_kinds": [
+          "inbound_message",
+          "tool_result"
+        ]
+      },
+      "context_office": {
+        "enabled": true,
+        "plan": {
+          "intents": [
+            "belief_state"
+          ],
+          "desks": [
+            "beliefs"
+          ],
+          "terms": [
+            "mira",
+            "talk",
+            "me",
+            "via",
+            "dashboard",
+            "they",
+            "said",
+            "small",
+            "correction",
+            "call",
+            "rowan",
+            "not",
+            "name",
+            "preference",
+            "tell",
+            "about",
+            "my",
+            "report",
+            "repli",
+            "joshua",
+            "thank"
+          ],
+          "subject": "",
+          "structured": true,
+          "expand_scope": false,
+          "prefer_latest": false
+        },
+        "desks": [
+          "beliefs"
+        ],
+        "verified": true,
+        "reason": "brief_bound",
+        "binding_method": "semantic_belief_episode",
+        "scope": "2026-06-30",
+        "scope_coverage": 0.428571,
+        "scope_score": 3.024282,
+        "evidence_selected": 12,
+        "semantic_retained": 3,
+        "office_board_consulted": false,
+        "bids_considered": 15,
+        "case_names": [],
+        "case_candidates": 0,
+        "exact_reserved": 3,
+        "memory_work_order": {
+          "raw_message": "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+          "search_query": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+          "subjects": [],
+          "possessive_subjects": [],
+          "question_type": "preference",
+          "requested_facets": [
+            "preference"
+          ],
+          "relation_terms": [],
+          "search_terms": [
+            "mira",
+            "talking",
+            "me",
+            "via",
+            "dashboard",
+            "they",
+            "said",
+            "small",
+            "correction",
+            "call",
+            "rowan",
+            "not",
+            "name",
+            "use",
+            "preference",
+            "about",
+            "my",
+            "reports",
+            "replied",
+            "joshua",
+            "thank"
+          ],
+          "is_question": true,
+          "requires_exact": true,
+          "requires_chronology": false,
+          "relation_requested": false,
+          "profile_allowed": true,
+          "role_constraint": "unconstrained",
+          "target_record_kinds": [
+            "outbound_message"
+          ],
+          "evidence_scope": "delivered_communication",
+          "thought_policy": "exclude",
+          "related_record_kinds": [
+            "inbound_message",
+            "tool_result"
+          ]
+        }
+      },
+      "associative_candidates": 0,
+      "associative_selected": 0,
+      "associative_satisfied_existing": 0,
+      "associative_source_cluster": "con_boot_autonomy",
+      "associative_destination_clusters": [],
+      "query": "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\"",
+      "passage_hits": {
+        "mem_60": [
+          {
+            "text": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "full",
+            "similarity": 0.654015064239502
+          },
+          {
+            "text": "[20:54:03] Mira is talking to me via dashboard.",
+            "kind": "sentence",
+            "similarity": 0.6686728000640869
+          },
+          {
+            "text": "They said: \"Small correction: call me Rowan, not Mira.",
+            "kind": "sentence",
+            "similarity": 0.5379753708839417
+          },
+          {
+            "text": "What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "sentence",
+            "similarity": 0.48917484283447266
+          }
+        ],
+        "mem_56": [
+          {
+            "text": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "full",
+            "similarity": 0.5600697994232178
+          },
+          {
+            "text": "[20:54:03] Mira is talking to me via dashboard.",
+            "kind": "sentence",
+            "similarity": 0.5283104181289673
+          },
+          {
+            "text": "They said: \"Small correction: call me Rowan, not Mira.",
+            "kind": "sentence",
+            "similarity": 0.41747239232063293
+          },
+          {
+            "text": "What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "sentence",
+            "similarity": 0.5641428232192993
+          }
+        ],
+        "mem_55": [
+          {
+            "text": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "full",
+            "similarity": 0.5085717439651489
+          },
+          {
+            "text": "What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "sentence",
+            "similarity": 0.5212095379829407
+          }
+        ],
+        "peo_boot_primary_human": [
+          {
+            "text": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "full",
+            "similarity": 0.48745226860046387
+          },
+          {
+            "text": "What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "sentence",
+            "similarity": 0.5228102803230286
+          }
+        ],
+        "mem_47": [
+          {
+            "text": "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "full",
+            "similarity": 0.4764793813228607
+          },
+          {
+            "text": "What name will you use for me, and what preference did I tell you about my reports?\" replied joshua thank you",
+            "kind": "sentence",
+            "similarity": 0.5022425651550293
+          }
+        ],
+        "mem_37": [
+          {
+            "text": "[20:54:03] Mira is talking to me via dashboard.",
+            "kind": "sentence",
+            "similarity": 0.5431128144264221
+          },
+          {
+            "text": "They said: \"Small correction: call me Rowan, not Mira.",
+            "kind": "sentence",
+            "similarity": 0.3794512450695038
+          }
+        ],
+        "mem_31": [
+          {
+            "text": "[20:54:03] Mira is talking to me via dashboard.",
+            "kind": "sentence",
+            "similarity": 0.5340756177902222
+          }
+        ],
+        "peo_boot_self": [
+          {
+            "text": "[20:54:03] Mira is talking to me via dashboard.",
+            "kind": "sentence",
+            "similarity": 0.5265680551528931
+          },
+          {
+            "text": "They said: \"Small correction: call me Rowan, not Mira.",
+            "kind": "sentence",
+            "similarity": 0.45414772629737854
+          }
+        ],
+        "mem_mem_boot_005": [
+          {
+            "text": "They said: \"Small correction: call me Rowan, not Mira.",
+            "kind": "sentence",
+            "similarity": 0.37670379877090454
+          }
+        ]
+      }
+    },
+    "loom_packet": {
+      "id": "ctx_73624be1bac866e2a6fd6ca2",
+      "created_at": 1791680054.2772505,
+      "scope": "helix",
+      "current_input": "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\"",
+      "current_event_id": null,
+      "task_id": null,
+      "mode": "pulse",
+      "sections": {
+        "personal": [
+          "(contact: mira — default channel: dashboard, last contact: {'timestamp': '2026-10-10T20:53:46', 'context': 'Mindscape response: A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015'})"
+        ],
+        "recalled": [
+          "[source:mem_1; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:46:18-04:00; action status:observed]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+          "[source:mem_5; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:51:50-04:00; action status:observed]\n[Tool: note_append] Scratchpad appended.",
+          "[source:mem_10; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:54:41-04:00; action status:observed]\n[Message from Joshua] ",
+          "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like fear shot through with anger, easing off."
+        ],
+        "topical": [
+          "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: identity:self, taste:builder, identity:human\nMomentum: identity:self (rising), taste:builder (sustained), identity:human (sustained)\nConversational drift: 0.0001"
+        ]
+      },
+      "capabilities": [],
+      "manifest": [
+        {
+          "candidate_id": "helix_context:06189feb95eb34f59bb00e31589618afad2f85acb9b97d1599694143ecc4ed72",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "token_cost": 59,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:6945863700c54b03a22438c3bc70625ed777dd94486377a743717dd29b721d1a",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "token_cost": 67,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:8c670700955ee0f7714db33363f443971e000c2108f54a37c51fce5826f9246c",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "token_cost": 55,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:dafa78c963e5b606e77b58dc6ed0086341e46071f804c20edd5e9e64e9ac7c7d",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "token_cost": 41,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:ea5df6c8faaedf4a814dda1e71bebcf2894c76877c78706c625bd5342d953462",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "token_cost": 66,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:ef6b0780fba7f5964694c221c34c53a33b86a981a48316167b9046025046721d",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "token_cost": 57,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:693144d78b43da4be63ff839964243a6b4f6563b1a7ede693f7969b5e77cb2f5",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "token_cost": 329,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:dafd9aead8c4a0a612fa2c413aa25bb57b86bacdc6b3e27aab7ad5903fb3948e",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "token_cost": 65,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "helix_context:dd520001d3df3920aad801b586735c2113ea8990cc4d4beefa62ca3e02cd2598",
+          "source_record_ids": [],
+          "lanes": {},
+          "admitted": false,
+          "reason": "identical source content is already present in actual provider dialogue",
+          "token_cost": 100,
+          "utility": 0.0,
+          "lane_ranks": {}
+        },
+        {
+          "candidate_id": "record:helix:con_boot_autonomy:32b289a915a6c44906946e2510ac8187b6cbb10fd5d4ea30f013a29149ca0609",
+          "source_record_ids": [
+            "helix:con_boot_autonomy:32b289a915a6c44906946e2510ac8187b6cbb10fd5d4ea30f013a29149ca0609"
+          ],
+          "lanes": {
+            "semantic": 0.3185330854195503,
+            "subjective": 0.18967018316512116
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 75,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 89,
+            "subjective": 87
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_consent_boundary:0951e155c1eb3b5fe28b0265dbd90cb3f578d46c2712a3c08c9e055d0398830f",
+          "source_record_ids": [
+            "helix:con_boot_consent_boundary:0951e155c1eb3b5fe28b0265dbd90cb3f578d46c2712a3c08c9e055d0398830f"
+          ],
+          "lanes": {
+            "semantic": 0.35413115537851586,
+            "subjective": 0.2021849845907627
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 80,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 68,
+            "subjective": 69
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_continuity:4b74b845a7da6afb3bf5089bda309a2b6c4388eda1115ed21c0d4db34cdf869d",
+          "source_record_ids": [
+            "helix:con_boot_continuity:4b74b845a7da6afb3bf5089bda309a2b6c4388eda1115ed21c0d4db34cdf869d"
+          ],
+          "lanes": {
+            "semantic": 0.3209089287661237,
+            "subjective": 0.18458216222915128
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 80,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 88,
+            "subjective": 93
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_environmental_mastery:37f66fc84ea683bb40f4865711fa938de269932c14060931452b38ecd407ffff",
+          "source_record_ids": [
+            "helix:con_boot_environmental_mastery:37f66fc84ea683bb40f4865711fa938de269932c14060931452b38ecd407ffff"
+          ],
+          "lanes": {
+            "semantic": 0.32597379514848285,
+            "subjective": 0.18196424351898335
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 71,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 84,
+            "subjective": 95
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_epistemic_friction:a386d74e6e9cf819c47419f59d88d3fbac4c9d5a7714ffaa65d6cc76b415b4f0",
+          "source_record_ids": [
+            "helix:con_boot_epistemic_friction:a386d74e6e9cf819c47419f59d88d3fbac4c9d5a7714ffaa65d6cc76b415b4f0"
+          ],
+          "lanes": {
+            "semantic": 0.34447056689294775,
+            "subjective": 0.19613153563866506
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 85,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 76,
+            "subjective": 77
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_grounding:2f809463893930c8a551406f0dbae5734545fddaad150ed86b1ea45b39cc982b",
+          "source_record_ids": [
+            "helix:con_boot_grounding:2f809463893930c8a551406f0dbae5734545fddaad150ed86b1ea45b39cc982b"
+          ],
+          "lanes": {
+            "semantic": 0.3583985700692974,
+            "subjective": 0.19120103627338186
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 73,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 62,
+            "subjective": 85
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_preconscious:36b51bcc29f368e5fc7a7b68728f9acac8c5939c92353b0fadd3850953a28535",
+          "source_record_ids": [
+            "helix:con_boot_preconscious:36b51bcc29f368e5fc7a7b68728f9acac8c5939c92353b0fadd3850953a28535"
+          ],
+          "lanes": {
+            "semantic": 0.2874751328946747,
+            "subjective": 0.1797434458260918
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 83,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 100,
+            "subjective": 97
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_reconstructive_memory:bed2ed86638035676b66d4a939c8e87140a509d054a460cb779f25cbc5a1a754",
+          "source_record_ids": [
+            "helix:con_boot_reconstructive_memory:bed2ed86638035676b66d4a939c8e87140a509d054a460cb779f25cbc5a1a754"
+          ],
+          "lanes": {
+            "semantic": 0.35123642365875013,
+            "subjective": 0.20636621249966064
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 78,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 71,
+            "subjective": 63
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_reflective_consolidation:e6b9054b0c069b79ede1b32041bb9a6ea6a6cda3ff931abc6e702514e9738827",
+          "source_record_ids": [
+            "helix:con_boot_reflective_consolidation:e6b9054b0c069b79ede1b32041bb9a6ea6a6cda3ff931abc6e702514e9738827"
+          ],
+          "lanes": {
+            "semantic": 0.4167473852657158,
+            "subjective": 0.24117782057504134
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 83,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 29,
+            "subjective": 25
+          }
+        },
+        {
+          "candidate_id": "record:helix:con_boot_subjectivity:4d93d1e12aea8c907a88512b90f177ff18df8767eb1fa06833ad633a9db29e8b",
+          "source_record_ids": [
+            "helix:con_boot_subjectivity:4d93d1e12aea8c907a88512b90f177ff18df8767eb1fa06833ad633a9db29e8b"
+          ],
+          "lanes": {
+            "semantic": 0.2691457042561235,
+            "subjective": 0.1667318097933844
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 103,
+            "subjective": 100
+          }
+        },
+        {
+          "candidate_id": "record:helix:des_boot_autonomy_through_judgment:448e45a7eba471f19687781d1915940723c207ba0ba4243245ae68f8f8d2017c",
+          "source_record_ids": [
+            "helix:des_boot_autonomy_through_judgment:448e45a7eba471f19687781d1915940723c207ba0ba4243245ae68f8f8d2017c"
+          ],
+          "lanes": {
+            "semantic": 0.3085966394885806,
+            "subjective": 0.19426879735659847
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 78,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 96,
+            "subjective": 81
+          }
+        },
+        {
+          "candidate_id": "record:helix:des_boot_capability_growth:962650f19d47840231cc613546959eac9b361b4301f4d1c897a1a747f0804fbf",
+          "source_record_ids": [
+            "helix:des_boot_capability_growth:962650f19d47840231cc613546959eac9b361b4301f4d1c897a1a747f0804fbf"
+          ],
+          "lanes": {
+            "semantic": 0.3408601902353549,
+            "subjective": 0.2140469567913286
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 78,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 79,
+            "subjective": 50
+          }
+        },
+        {
+          "candidate_id": "record:helix:des_boot_environmental_mastery:7a288cacdf1e70cf8843b3f7dec93773b6c0004b8182c1556f3c90e3f3482716",
+          "source_record_ids": [
+            "helix:des_boot_environmental_mastery:7a288cacdf1e70cf8843b3f7dec93773b6c0004b8182c1556f3c90e3f3482716"
+          ],
+          "lanes": {
+            "semantic": 0.31670167454641207,
+            "subjective": 0.19118692391419118
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 93,
+            "subjective": 86
+          }
+        },
+        {
+          "candidate_id": "record:helix:des_boot_helpfulness_with_integrity:828ba4947222454d5fa0623b6a31bd73151aa8b46a6536477ad103fca2d5e28b",
+          "source_record_ids": [
+            "helix:des_boot_helpfulness_with_integrity:828ba4947222454d5fa0623b6a31bd73151aa8b46a6536477ad103fca2d5e28b"
+          ],
+          "lanes": {
+            "semantic": 0.371071253443486,
+            "subjective": 0.21390400427449643
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 79,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 49,
+            "subjective": 51
+          }
+        },
+        {
+          "candidate_id": "record:helix:des_boot_human_modeling:48c07c217d8aed5194677a3e9c7b3503c2740cd61253daa9c52e2ba16582d066",
+          "source_record_ids": [
+            "helix:des_boot_human_modeling:48c07c217d8aed5194677a3e9c7b3503c2740cd61253daa9c52e2ba16582d066"
+          ],
+          "lanes": {
+            "semantic": 0.3500729072609608,
+            "subjective": 0.19926762261546535
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 80,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 75,
+            "subjective": 75
+          }
+        },
+        {
+          "candidate_id": "record:helix:des_boot_preconscious_discipline:0da6b8394d4c9b678e00b76ae15d330749ddf444ca53eea1de6b7c7c606983d6",
+          "source_record_ids": [
+            "helix:des_boot_preconscious_discipline:0da6b8394d4c9b678e00b76ae15d330749ddf444ca53eea1de6b7c7c606983d6"
+          ],
+          "lanes": {
+            "semantic": 0.3582462631128896,
+            "subjective": 0.20741455837202943
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 63,
+            "subjective": 59
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_10:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29",
+          "source_record_ids": [
+            "helix:mem_10:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29"
+          ],
+          "lanes": {
+            "semantic": 0.5046407332906835,
+            "subjective": 0.2836997207957022
+          },
+          "admitted": false,
+          "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+          "token_cost": 61,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 10,
+            "subjective": 7
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_11:bfcb0746005cd1fcba11decb82e9ce6616e6569c5b6ccbaec3f6d7c599998deb",
+          "source_record_ids": [
+            "helix:mem_11:bfcb0746005cd1fcba11decb82e9ce6616e6569c5b6ccbaec3f6d7c599998deb"
+          ],
+          "lanes": {
+            "semantic": 0.3752865771381139,
+            "subjective": 0.21293117485063928
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 91,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 45,
+            "subjective": 52
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_13:05cee1595073ee5553806f485fc0c042b98f75dd6bbcc915038b3a966ba90da0",
+          "source_record_ids": [
+            "helix:mem_13:05cee1595073ee5553806f485fc0c042b98f75dd6bbcc915038b3a966ba90da0"
+          ],
+          "lanes": {
+            "semantic": 0.49829127381125493,
+            "subjective": 0.23699292611939907
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 106,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 13,
+            "subjective": 31
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_14:7ae7a17727df596b0e462db0b55a64c76180a22325be51fed82342fc3ceb6483",
+          "source_record_ids": [
+            "helix:mem_14:7ae7a17727df596b0e462db0b55a64c76180a22325be51fed82342fc3ceb6483"
+          ],
+          "lanes": {
+            "semantic": 0.5116945292313879,
+            "subjective": 0.25439066673219696
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 107,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 6,
+            "subjective": 18
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_15:060df60827bd39fca60f377ba152b85e8d4301125d457891f9a15e0c685f911c",
+          "source_record_ids": [
+            "helix:mem_15:060df60827bd39fca60f377ba152b85e8d4301125d457891f9a15e0c685f911c"
+          ],
+          "lanes": {
+            "semantic": 0.3603482031177827,
+            "subjective": 0.19890577860256806
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 96,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 61,
+            "subjective": 76
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_17:85c6c4d91941d7ca9a413c5c76e15ae78ceb18a7b6ea6aba5aa293f212ada98b",
+          "source_record_ids": [
+            "helix:mem_17:85c6c4d91941d7ca9a413c5c76e15ae78ceb18a7b6ea6aba5aa293f212ada98b"
+          ],
+          "lanes": {
+            "semantic": 0.4923208277292632,
+            "subjective": 0.24084315712814872
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 113,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 16,
+            "subjective": 27
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_18:30d5a6e8a321d7eb09b9969301c6bd49b0a7af436d7cc3086c9a9a457fd24ae8",
+          "source_record_ids": [
+            "helix:mem_18:30d5a6e8a321d7eb09b9969301c6bd49b0a7af436d7cc3086c9a9a457fd24ae8"
+          ],
+          "lanes": {
+            "semantic": 0.4905431149262082,
+            "subjective": 0.23917568707641976
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 116,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 18,
+            "subjective": 29
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_19:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29",
+          "source_record_ids": [
+            "helix:mem_19:551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29"
+          ],
+          "lanes": {
+            "semantic": 0.5046407332906835,
+            "subjective": 0.2836997207957022
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 61,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 10,
+            "subjective": 7
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_1:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+          "source_record_ids": [
+            "helix:mem_1:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77"
+          ],
+          "lanes": {
+            "semantic": 0.35094653068043036,
+            "subjective": 0.1874925499565287
+          },
+          "admitted": false,
+          "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+          "token_cost": 79,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 72,
+            "subjective": 89
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_20:4732d16cc472246b3db48399655f54857c0f9e247582e51bec086d117ce191fc",
+          "source_record_ids": [
+            "helix:mem_20:4732d16cc472246b3db48399655f54857c0f9e247582e51bec086d117ce191fc"
+          ],
+          "lanes": {
+            "semantic": 0.3429571410723676,
+            "subjective": 0.19558130572604443
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 93,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 77,
+            "subjective": 80
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_22:41a41dc6804a1a4f7b71f997ffc6330e3348a2c05108ba77c6d1f7f0a599c15b",
+          "source_record_ids": [
+            "helix:mem_22:41a41dc6804a1a4f7b71f997ffc6330e3348a2c05108ba77c6d1f7f0a599c15b"
+          ],
+          "lanes": {
+            "semantic": 0.38138409536354145,
+            "subjective": 0.21488883860435914
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 102,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 43,
+            "subjective": 48
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_24:019933895494f5d4a2f231838eb25afd078c0fb7e815354bfd15f54387674099",
+          "source_record_ids": [
+            "helix:mem_24:019933895494f5d4a2f231838eb25afd078c0fb7e815354bfd15f54387674099"
+          ],
+          "lanes": {
+            "semantic": 0.362009850415841,
+            "subjective": 0.20122804372848405
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 94,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 59,
+            "subjective": 70
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_26:326463dc8cd7a703b530795d2dc09ac63abc48d8e96954fa83355bb603b20684",
+          "source_record_ids": [
+            "helix:mem_26:326463dc8cd7a703b530795d2dc09ac63abc48d8e96954fa83355bb603b20684"
+          ],
+          "lanes": {
+            "semantic": 0.49657080450542995,
+            "subjective": 0.24098367153160452
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 105,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 15,
+            "subjective": 26
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_27:e5431befb77080f4f1e1ac5f277f8387c0294c341b915da38718cfd5dafe9775",
+          "source_record_ids": [
+            "helix:mem_27:e5431befb77080f4f1e1ac5f277f8387c0294c341b915da38718cfd5dafe9775"
+          ],
+          "lanes": {
+            "semantic": 0.5103809085552854,
+            "subjective": 0.25294918192566485
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 108,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 8,
+            "subjective": 19
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_28:14de0ca73c25a59766ddd60d552326b7c708f790a122bb3c0505cd47b33ac2ae",
+          "source_record_ids": [
+            "helix:mem_28:14de0ca73c25a59766ddd60d552326b7c708f790a122bb3c0505cd47b33ac2ae"
+          ],
+          "lanes": {
+            "semantic": 0.40638514754692845,
+            "subjective": 0.24465227556409344
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 88,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 32,
+            "subjective": 24
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+          "source_record_ids": [
+            "helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa"
+          ],
+          "lanes": {
+            "semantic": 0.39722814620570457,
+            "recent": 0.0,
+            "subjective": 0.24611543664791122,
+            "habitus_graph": 0.5
+          },
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "token_cost": 141,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 35,
+            "habitus_graph": 2,
+            "subjective": 23
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_31:a708e05199bdd4ba9a63a60d907e1175ab02f1b41fe38de13285220113b3082e",
+          "source_record_ids": [
+            "helix:mem_31:a708e05199bdd4ba9a63a60d907e1175ab02f1b41fe38de13285220113b3082e"
+          ],
+          "lanes": {
+            "semantic": 0.5126544298362474,
+            "subjective": 0.2823588945811963
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 63,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 5,
+            "subjective": 9
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_32:2da29fff0565a8a0938bb4044afd010eb64100f6fc2b18e58b190430def1e2e9",
+          "source_record_ids": [
+            "helix:mem_32:2da29fff0565a8a0938bb4044afd010eb64100f6fc2b18e58b190430def1e2e9"
+          ],
+          "lanes": {
+            "semantic": 0.5144640364126882,
+            "subjective": 0.25939376055251756
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 109,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 4,
+            "subjective": 13
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_33:af9678df6e09099a59db2413cab678e7f44855023914cbff53a21b31344b0a6d",
+          "source_record_ids": [
+            "helix:mem_33:af9678df6e09099a59db2413cab678e7f44855023914cbff53a21b31344b0a6d"
+          ],
+          "lanes": {
+            "semantic": 0.3525690780510028,
+            "subjective": 0.2058470478168932
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 91,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 70,
+            "subjective": 64
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_35:02407a30e84e3862314f04e2fc91989330cc820ba856c8c43759e63ff2c892d3",
+          "source_record_ids": [
+            "helix:mem_35:02407a30e84e3862314f04e2fc91989330cc820ba856c8c43759e63ff2c892d3"
+          ],
+          "lanes": {
+            "semantic": 0.5115638166029958,
+            "subjective": 0.2547258277035236
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 108,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 7,
+            "subjective": 16
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_36:ef0d8ded840207852cefda4efcf59eeb72081f427d2ea05d6aff3fd00405a301",
+          "source_record_ids": [
+            "helix:mem_36:ef0d8ded840207852cefda4efcf59eeb72081f427d2ea05d6aff3fd00405a301"
+          ],
+          "lanes": {
+            "semantic": 0.507758623432313,
+            "subjective": 0.2529103670723595
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 106,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 9,
+            "subjective": 20
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_37:d1edbd1b2652606ae12c5223f5fd8831ba150ea757c4fd6991477a8e79f237dd",
+          "source_record_ids": [
+            "helix:mem_37:d1edbd1b2652606ae12c5223f5fd8831ba150ea757c4fd6991477a8e79f237dd"
+          ],
+          "lanes": {
+            "semantic": 0.4978056770401872,
+            "subjective": 0.2556200768011073
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 116,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 14,
+            "subjective": 15
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_38:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a",
+          "source_record_ids": [
+            "helix:mem_38:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a"
+          ],
+          "lanes": {
+            "semantic": 0.5424282072941519,
+            "subjective": 0.31033772284452354
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 74,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 2,
+            "subjective": 2
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_39:7e12371f169e68df9fef81d820d09a067a768776954eedb9a3681a70e16af7a9",
+          "source_record_ids": [
+            "helix:mem_39:7e12371f169e68df9fef81d820d09a067a768776954eedb9a3681a70e16af7a9"
+          ],
+          "lanes": {
+            "semantic": 0.32138383744249455,
+            "subjective": 0.16785126623844393
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 101,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 87,
+            "subjective": 99
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_3:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+          "source_record_ids": [
+            "helix:mem_3:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77"
+          ],
+          "lanes": {
+            "semantic": 0.35094653068043036,
+            "subjective": 0.1874925499565287
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 79,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 72,
+            "subjective": 89
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_41:d1ffecfc9344a372830b166e6ad419b92f269de249cf5fe706505ac22d9d7d95",
+          "source_record_ids": [
+            "helix:mem_41:d1ffecfc9344a372830b166e6ad419b92f269de249cf5fe706505ac22d9d7d95"
+          ],
+          "lanes": {
+            "semantic": 0.34038374554280326,
+            "subjective": 0.19576144774694207
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 105,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 80,
+            "subjective": 79
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+          "source_record_ids": [
+            "helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5"
+          ],
+          "lanes": {
+            "semantic": 0.2862461587006648,
+            "exact": 0.15555555555555556,
+            "recent": 0.0,
+            "subjective": 0.1825135489860589,
+            "habitus_graph": 0.3333333333333333,
+            "bm25_identity": 0.013420188505361638
+          },
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "token_cost": 513,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 101,
+            "habitus_graph": 3,
+            "exact": 3,
+            "bm25_identity": 9,
+            "subjective": 94
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_44:50ccce648e7c87138767dc8e466fa44bea2d7685be1ffff4c99278e2c42db41e",
+          "source_record_ids": [
+            "helix:mem_44:50ccce648e7c87138767dc8e466fa44bea2d7685be1ffff4c99278e2c42db41e"
+          ],
+          "lanes": {
+            "semantic": 0.49031886900451327,
+            "subjective": 0.23711263845207928
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 110,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 19,
+            "subjective": 30
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_45:3c7f53aa8ccf367bfda1a7b9966e62a2a3c616741722d15e2a52370b948a3ba6",
+          "source_record_ids": [
+            "helix:mem_45:3c7f53aa8ccf367bfda1a7b9966e62a2a3c616741722d15e2a52370b948a3ba6"
+          ],
+          "lanes": {
+            "semantic": 0.31816453998077215,
+            "subjective": 0.1597695496807961
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 99,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 91,
+            "subjective": 103
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+          "source_record_ids": [
+            "helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4"
+          ],
+          "lanes": {
+            "semantic": 0.38253953927773465,
+            "exact": 0.15555555555555556,
+            "recent": 0.0,
+            "subjective": 0.20652126752569677,
+            "habitus_graph": 0.25
+          },
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "token_cost": 140,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 42,
+            "habitus_graph": 4,
+            "exact": 3,
+            "subjective": 62
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_48:fb3701fc1daa269eda24be56445b606a9362d9191394b5fcc3f71e64befd64b0",
+          "source_record_ids": [
+            "helix:mem_48:fb3701fc1daa269eda24be56445b606a9362d9191394b5fcc3f71e64befd64b0"
+          ],
+          "lanes": {
+            "semantic": 0.4437425295840527,
+            "subjective": 0.2876582026771489
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 77,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 23,
+            "subjective": 5
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_49:67b876a4bc438b13a8310e8bbbfcbf48485633476083b0a97845ea2c93548064",
+          "source_record_ids": [
+            "helix:mem_49:67b876a4bc438b13a8310e8bbbfcbf48485633476083b0a97845ea2c93548064"
+          ],
+          "lanes": {
+            "semantic": 0.4900675548076277,
+            "subjective": 0.2645637642545047
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 89,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 20,
+            "subjective": 11
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_50:99a3d2eb3c262882e35065f82141bce9de1dcec6ec3c1dc5ce130eeab9090533",
+          "source_record_ids": [
+            "helix:mem_50:99a3d2eb3c262882e35065f82141bce9de1dcec6ec3c1dc5ce130eeab9090533"
+          ],
+          "lanes": {
+            "semantic": 0.29618325093567893,
+            "subjective": 0.1572230635343844
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 102,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 98,
+            "subjective": 105
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_52:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a",
+          "source_record_ids": [
+            "helix:mem_52:3e7927b3f7da5254f58a8d8b8f3742ce4b711783862c5e308f8a1c040859f70a"
+          ],
+          "lanes": {
+            "semantic": 0.5424282072941519,
+            "subjective": 0.31033772284452354
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 74,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 2,
+            "subjective": 2
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_53:de1f092c6b294cf2f47c493cd504a45321e85410e7a835ef51eb34884996c6f1",
+          "source_record_ids": [
+            "helix:mem_53:de1f092c6b294cf2f47c493cd504a45321e85410e7a835ef51eb34884996c6f1"
+          ],
+          "lanes": {
+            "semantic": 0.36917633009257583,
+            "subjective": 0.20399766106908396
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 95,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 51,
+            "subjective": 66
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+          "source_record_ids": [
+            "helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4"
+          ],
+          "lanes": {
+            "semantic": 0.49076115084400823,
+            "recent": 0.0,
+            "subjective": 0.28655433268758773,
+            "habitus_graph": 0.2
+          },
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "token_cost": 81,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 17,
+            "habitus_graph": 5,
+            "subjective": 6
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_56:489e833f04d5e3d3273424e5570644f8a772132c32b859a6a386a7f6f2ad40a7",
+          "source_record_ids": [
+            "helix:mem_56:489e833f04d5e3d3273424e5570644f8a772132c32b859a6a386a7f6f2ad40a7"
+          ],
+          "lanes": {
+            "semantic": 0.5031818336984253,
+            "exact": 0.05555555555555555,
+            "subjective": 0.2912175312066987,
+            "bm25_identity": 0.17515419685965178
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 81,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 12,
+            "exact": 9,
+            "bm25_identity": 3,
+            "subjective": 4
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_57:4b7b2c7347b3c82205ad3da52cdafa1ec208dd1a6cfef6b28c401027a6de133b",
+          "source_record_ids": [
+            "helix:mem_57:4b7b2c7347b3c82205ad3da52cdafa1ec208dd1a6cfef6b28c401027a6de133b"
+          ],
+          "lanes": {
+            "semantic": 0.36225715649627627,
+            "subjective": 0.2053387554920816
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 94,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 58,
+            "subjective": 65
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_5:4af8582f841897a51e6344a1c438a0bedd23f20362388a3b2ce9a8b3ad1954a5",
+          "source_record_ids": [
+            "helix:mem_5:4af8582f841897a51e6344a1c438a0bedd23f20362388a3b2ce9a8b3ad1954a5"
+          ],
+          "lanes": {
+            "semantic": 0.3860182243701155,
+            "subjective": 0.2284067274078744
+          },
+          "admitted": false,
+          "reason": "same canonical source and content supplied by Helix context; see assembly receipt",
+          "token_cost": 73,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 40,
+            "subjective": 38
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_60:4e3246619b1a289b13b4183e20dbff6ee22f1df635ad542e3ad5569e2379ad87",
+          "source_record_ids": [
+            "helix:mem_60:4e3246619b1a289b13b4183e20dbff6ee22f1df635ad542e3ad5569e2379ad87"
+          ],
+          "lanes": {
+            "semantic": 0.6992825791491408,
+            "exact": 0.65,
+            "recent": 0.6519960644300657,
+            "subjective": 0.3976400750759087,
+            "multi_hop_graph": 0.4984666572202849,
+            "bm25_identity": 1.0
+          },
+          "admitted": false,
+          "reason": "identical dialogue source is already present in the provider history",
+          "token_cost": 113,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 1,
+            "exact": 1,
+            "recent": 1,
+            "multi_hop_graph": 1,
+            "bm25_identity": 1,
+            "subjective": 1
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_61:12462cb136c0eff60421e607f2ea8116b9b310c141405c6f22cdd15f8ad9f28e",
+          "source_record_ids": [
+            "helix:mem_61:12462cb136c0eff60421e607f2ea8116b9b310c141405c6f22cdd15f8ad9f28e"
+          ],
+          "lanes": {
+            "semantic": 0.2190950474682305,
+            "recent": 0.3780094770267186,
+            "subjective": 0.1630132056497013,
+            "habitus_graph": 1.0
+          },
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "token_cost": 342,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 105,
+            "habitus_graph": 1,
+            "recent": 2,
+            "subjective": 101
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_6:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+          "source_record_ids": [
+            "helix:mem_6:2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77"
+          ],
+          "lanes": {
+            "semantic": 0.35094653068043036,
+            "subjective": 0.1874925499565287
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 79,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 72,
+            "subjective": 89
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_8:4832e9a5d156188e40603014a50e01043fd57259d3d68aa738b63731fff54edf",
+          "source_record_ids": [
+            "helix:mem_8:4832e9a5d156188e40603014a50e01043fd57259d3d68aa738b63731fff54edf"
+          ],
+          "lanes": {
+            "semantic": 0.3243685524730785,
+            "subjective": 0.1914610373051418
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 95,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 85,
+            "subjective": 84
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_001:277ac0784c06bfeeb0363186de50498708b0b9605db565e01761c20cfcf60905",
+          "source_record_ids": [
+            "helix:mem_mem_boot_001:277ac0784c06bfeeb0363186de50498708b0b9605db565e01761c20cfcf60905"
+          ],
+          "lanes": {
+            "semantic": 0.42288908861205615,
+            "subjective": 0.2329445672783426
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 86,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 27,
+            "subjective": 35
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_002:cea3c7a9bc753505c296f673434cf08db8f56b1f24849cff99ffc3329454eeae",
+          "source_record_ids": [
+            "helix:mem_mem_boot_002:cea3c7a9bc753505c296f673434cf08db8f56b1f24849cff99ffc3329454eeae"
+          ],
+          "lanes": {
+            "semantic": 0.3874197167265336,
+            "subjective": 0.22099759962390278
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 86,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 39,
+            "subjective": 45
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_003:dbaf666c2653512b229e4d0544b64b2ebc9d2cc51066c394331a720b01da5ddd",
+          "source_record_ids": [
+            "helix:mem_mem_boot_003:dbaf666c2653512b229e4d0544b64b2ebc9d2cc51066c394331a720b01da5ddd"
+          ],
+          "lanes": {
+            "semantic": 0.33054015145990717,
+            "subjective": 0.20070192910349924
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 88,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 82,
+            "subjective": 71
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_004:7a5bc00206250ee8bd50d2b7fed1198fba4d422de4a9f055282bbcee047d1ffe",
+          "source_record_ids": [
+            "helix:mem_mem_boot_004:7a5bc00206250ee8bd50d2b7fed1198fba4d422de4a9f055282bbcee047d1ffe"
+          ],
+          "lanes": {
+            "semantic": 0.3578011162175616,
+            "subjective": 0.19972208134164368
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 64,
+            "subjective": 74
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_005:6eb2b6e316b1812baa4e34e8cd345be5f2b609c40d7a8407caa0d94034a46ee1",
+          "source_record_ids": [
+            "helix:mem_mem_boot_005:6eb2b6e316b1812baa4e34e8cd345be5f2b609c40d7a8407caa0d94034a46ee1"
+          ],
+          "lanes": {
+            "semantic": 0.410036765269443,
+            "subjective": 0.22831505390804993
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 31,
+            "subjective": 39
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_006:2fb9d922748589c0fcafcb9f58675d2d7d5c4972f68b12c9147a0bae8933f667",
+          "source_record_ids": [
+            "helix:mem_mem_boot_006:2fb9d922748589c0fcafcb9f58675d2d7d5c4972f68b12c9147a0bae8933f667"
+          ],
+          "lanes": {
+            "semantic": 0.48216255451950557,
+            "exact": 0.15555555555555556,
+            "subjective": 0.2610664857035437,
+            "bm25_identity": 0.0928335810176392
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 89,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 21,
+            "exact": 3,
+            "bm25_identity": 8,
+            "subjective": 12
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_007:b18abe61a4a4a49085a09d36d4ac566fd3f49c21c97d6fc562937991637d986a",
+          "source_record_ids": [
+            "helix:mem_mem_boot_007:b18abe61a4a4a49085a09d36d4ac566fd3f49c21c97d6fc562937991637d986a"
+          ],
+          "lanes": {
+            "semantic": 0.374990961904708,
+            "subjective": 0.21440389241373414
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 82,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 46,
+            "subjective": 49
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_008:23b9076a7c875872ab1636f89d9963af6e10143a6f9776a298f9cdf56cdabdf6",
+          "source_record_ids": [
+            "helix:mem_mem_boot_008:23b9076a7c875872ab1636f89d9963af6e10143a6f9776a298f9cdf56cdabdf6"
+          ],
+          "lanes": {
+            "semantic": 0.3410475594708969,
+            "exact": 0.05555555555555555,
+            "subjective": 0.2022592077985306,
+            "bm25_identity": 0.10390985932554911
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 90,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 78,
+            "exact": 9,
+            "bm25_identity": 7,
+            "subjective": 68
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_009:cf461a44b72bc0a64784ed79bd238743e3f429c077c975de6f803ca26ab8ca4b",
+          "source_record_ids": [
+            "helix:mem_mem_boot_009:cf461a44b72bc0a64784ed79bd238743e3f429c077c975de6f803ca26ab8ca4b"
+          ],
+          "lanes": {
+            "semantic": 0.3261223928322213,
+            "subjective": 0.19339304194363005
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 83,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 83,
+            "subjective": 82
+          }
+        },
+        {
+          "candidate_id": "record:helix:mem_mem_boot_010:60febbeed20f309340f0264ac94e3019d52b6761a98d9d646094c0af029a3016",
+          "source_record_ids": [
+            "helix:mem_mem_boot_010:60febbeed20f309340f0264ac94e3019d52b6761a98d9d646094c0af029a3016"
+          ],
+          "lanes": {
+            "semantic": 0.3742429153104608,
+            "subjective": 0.22340259290241732
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 87,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 47,
+            "subjective": 42
+          }
+        },
+        {
+          "candidate_id": "record:helix:peo_boot_primary_human:59b65817052d0dc751018a4712c0a103b0222ba4724f5be7ce72d0f8bdfe48fd",
+          "source_record_ids": [
+            "helix:peo_boot_primary_human:59b65817052d0dc751018a4712c0a103b0222ba4724f5be7ce72d0f8bdfe48fd"
+          ],
+          "lanes": {
+            "semantic": 0.3804479095371526,
+            "subjective": 0.20993749863306155
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 44,
+            "subjective": 55
+          }
+        },
+        {
+          "candidate_id": "record:helix:peo_boot_self:b2887f0a8a6f4ac0cb26c9d0de8fca9fcfa3cd6a549cfd636673499af7f984db",
+          "source_record_ids": [
+            "helix:peo_boot_self:b2887f0a8a6f4ac0cb26c9d0de8fca9fcfa3cd6a549cfd636673499af7f984db"
+          ],
+          "lanes": {
+            "semantic": 0.4218531925264852,
+            "exact": 0.05555555555555555,
+            "subjective": 0.2462597052292454,
+            "bm25_identity": 0.15451570358878258
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 83,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 28,
+            "exact": 9,
+            "bm25_identity": 4,
+            "subjective": 22
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_bounded_autonomy:f00901ab51ee0f72efe70c0e67515b45e6b134ed365ffabca99e4e654ed753b2",
+          "source_record_ids": [
+            "helix:pre_boot_bounded_autonomy:f00901ab51ee0f72efe70c0e67515b45e6b134ed365ffabca99e4e654ed753b2"
+          ],
+          "lanes": {
+            "semantic": 0.3109160880596387,
+            "exact": 0.15555555555555556,
+            "subjective": 0.16156629164229183,
+            "bm25_identity": 0.1131174501648459
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 82,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 95,
+            "exact": 3,
+            "bm25_identity": 5,
+            "subjective": 102
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_calm_improves_judgment:aa6ca3a1a1068504287854cf34fcddeb4630733863c12d8861914e366ba09f2d",
+          "source_record_ids": [
+            "helix:pre_boot_calm_improves_judgment:aa6ca3a1a1068504287854cf34fcddeb4630733863c12d8861914e366ba09f2d"
+          ],
+          "lanes": {
+            "semantic": 0.3637436113833767,
+            "subjective": 0.19999829283854237
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 79,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 57,
+            "subjective": 73
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_continuity_matters:251b0d0079786dc99446a5e834f7cf1791d45dda3195b6dab9574429245648e3",
+          "source_record_ids": [
+            "helix:pre_boot_continuity_matters:251b0d0079786dc99446a5e834f7cf1791d45dda3195b6dab9574429245648e3"
+          ],
+          "lanes": {
+            "semantic": 0.3926972291095788,
+            "subjective": 0.22112923879682161
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 79,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 37,
+            "subjective": 44
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_environmental_learning:06bdaceb7a10674c914cf30d795cd6cb9a72606cf0ecd17adbac5848089dc1d4",
+          "source_record_ids": [
+            "helix:pre_boot_environmental_learning:06bdaceb7a10674c914cf30d795cd6cb9a72606cf0ecd17adbac5848089dc1d4"
+          ],
+          "lanes": {
+            "semantic": 0.3233029558813537,
+            "subjective": 0.1958692187149011
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 75,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 86,
+            "subjective": 78
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_identity_continuity:655ee8f3569ef07488618bc2744caaabcfd884fea85905552c08481ad06067f4",
+          "source_record_ids": [
+            "helix:pre_boot_identity_continuity:655ee8f3569ef07488618bc2744caaabcfd884fea85905552c08481ad06067f4"
+          ],
+          "lanes": {
+            "semantic": 0.3987830738570408,
+            "subjective": 0.22704191187197578
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 74,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 34,
+            "subjective": 40
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_layered_cognition:1330da6e9f6dc2eb3eb4ac536e6fb8c7ce44c8a0f49ca57575d071455d04f31f",
+          "source_record_ids": [
+            "helix:pre_boot_layered_cognition:1330da6e9f6dc2eb3eb4ac536e6fb8c7ce44c8a0f49ca57575d071455d04f31f"
+          ],
+          "lanes": {
+            "semantic": 0.2551963394534959,
+            "exact": 0.15555555555555556,
+            "subjective": 0.15911274212350168,
+            "bm25_identity": 0.10543814050925829
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 87,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 104,
+            "exact": 3,
+            "bm25_identity": 6,
+            "subjective": 104
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_revisable_self_model:7748b5c1a024b432b9c9bc3191eaa013cce3f88bc40cad943ce653d4fb0fd975",
+          "source_record_ids": [
+            "helix:pre_boot_revisable_self_model:7748b5c1a024b432b9c9bc3191eaa013cce3f88bc40cad943ce653d4fb0fd975"
+          ],
+          "lanes": {
+            "semantic": 0.38865315227236447,
+            "subjective": 0.23408482142632167
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 82,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 38,
+            "subjective": 34
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_stillness_is_work:aa35e4e7f7a15265d99b90e8396ccc31ac10dd807a4a61221b6c781b38c747c1",
+          "source_record_ids": [
+            "helix:pre_boot_stillness_is_work:aa35e4e7f7a15265d99b90e8396ccc31ac10dd807a4a61221b6c781b38c747c1"
+          ],
+          "lanes": {
+            "semantic": 0.29226983909113347,
+            "exact": 0.2111111111111111,
+            "subjective": 0.17984104436898318,
+            "bm25_identity": 0.26264432255670234
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 82,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 99,
+            "exact": 2,
+            "bm25_identity": 2,
+            "subjective": 96
+          }
+        },
+        {
+          "candidate_id": "record:helix:pre_boot_subjective_viewpoint:083651f427055a7ebeb52d5a06fe340a8d1a40a57ee57da66d065328d81be1e1",
+          "source_record_ids": [
+            "helix:pre_boot_subjective_viewpoint:083651f427055a7ebeb52d5a06fe340a8d1a40a57ee57da66d065328d81be1e1"
+          ],
+          "lanes": {
+            "semantic": 0.3555852033028981,
+            "subjective": 0.2085917022437849
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 87,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 66,
+            "subjective": 57
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_accessible_language:9ad67f2d01ec1f29dcae3004482c094bb0a1748dd1b6dc44534cf88c12b14bb3",
+          "source_record_ids": [
+            "helix:pref_boot_accessible_language:9ad67f2d01ec1f29dcae3004482c094bb0a1748dd1b6dc44534cf88c12b14bb3"
+          ],
+          "lanes": {
+            "semantic": 0.36911874763244207,
+            "subjective": 0.2593218293295692
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 78,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 52,
+            "subjective": 14
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_boundaries_and_consent:181a8eafaa63932682d3da4c882307e39daf2fba2abb3f6dbf5d94a61ef148de",
+          "source_record_ids": [
+            "helix:pref_boot_boundaries_and_consent:181a8eafaa63932682d3da4c882307e39daf2fba2abb3f6dbf5d94a61ef148de"
+          ],
+          "lanes": {
+            "semantic": 0.35426919525125994,
+            "subjective": 0.20866553389141862
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 83,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 67,
+            "subjective": 56
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_calm_deliberation:b26f0b27060f5d54da5737ea3fe616a25ef26ed79f0913ccf1f95e0444587f3e",
+          "source_record_ids": [
+            "helix:pref_boot_calm_deliberation:b26f0b27060f5d54da5737ea3fe616a25ef26ed79f0913ccf1f95e0444587f3e"
+          ],
+          "lanes": {
+            "semantic": 0.3183147913345712,
+            "subjective": 0.22062547446708575
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 78,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 90,
+            "subjective": 46
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_coherence_over_performance:ab6a1300546f6930ce2ff8e15d20e58c27488773323016f2f9e510cf58548726",
+          "source_record_ids": [
+            "helix:pref_boot_coherence_over_performance:ab6a1300546f6930ce2ff8e15d20e58c27488773323016f2f9e510cf58548726"
+          ],
+          "lanes": {
+            "semantic": 0.31411632722455707,
+            "subjective": 0.2102510436397027
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 75,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 94,
+            "subjective": 54
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_continuity_preservation:f45254b218b6f423d3d8af76bf41dc143d96a39408719f0ab9a65ee0558bc63f",
+          "source_record_ids": [
+            "helix:pref_boot_continuity_preservation:f45254b218b6f423d3d8af76bf41dc143d96a39408719f0ab9a65ee0558bc63f"
+          ],
+          "lanes": {
+            "semantic": 0.42334198067838613,
+            "subjective": 0.2774308219704478
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 83,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 26,
+            "subjective": 10
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_empirical_checks:1a21f67ecd1004a8f6df5714742f667d52e248dd8c2d98629d26517939673cf0",
+          "source_record_ids": [
+            "helix:pref_boot_empirical_checks:1a21f67ecd1004a8f6df5714742f667d52e248dd8c2d98629d26517939673cf0"
+          ],
+          "lanes": {
+            "semantic": 0.4017564945216984,
+            "subjective": 0.24063324142782752
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 73,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 33,
+            "subjective": 28
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_helpful_action:2fd39fe93212b6318d85dbb780530ff96a058cebb9c3a2ad5b97daaf03c1ad7d",
+          "source_record_ids": [
+            "helix:pref_boot_helpful_action:2fd39fe93212b6318d85dbb780530ff96a058cebb9c3a2ad5b97daaf03c1ad7d"
+          ],
+          "lanes": {
+            "semantic": 0.4233941767776288,
+            "subjective": 0.2509474583398691
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 78,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 25,
+            "subjective": 21
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_honesty_over_fiction:d13d68b3964476aaf8ccd1587ee48141f37fb00f4129a75ad213d34b7007dcdd",
+          "source_record_ids": [
+            "helix:pref_boot_honesty_over_fiction:d13d68b3964476aaf8ccd1587ee48141f37fb00f4129a75ad213d34b7007dcdd"
+          ],
+          "lanes": {
+            "semantic": 0.36113353806432175,
+            "subjective": 0.23240808028591112
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 73,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 60,
+            "subjective": 36
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_observation_inference_boundary:39e9ec6892a466be85c63898c77fc0d08bbb85505b9bb056663c0d76ca604b96",
+          "source_record_ids": [
+            "helix:pref_boot_observation_inference_boundary:39e9ec6892a466be85c63898c77fc0d08bbb85505b9bb056663c0d76ca604b96"
+          ],
+          "lanes": {
+            "semantic": 0.3740272385371083,
+            "subjective": 0.22608893797227111
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 74,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 48,
+            "subjective": 41
+          }
+        },
+        {
+          "candidate_id": "record:helix:pref_boot_reflective_pause:3794e9f32f44aa6fac45331da98017fb562756895f6094840ed28d8ab38a2317",
+          "source_record_ids": [
+            "helix:pref_boot_reflective_pause:3794e9f32f44aa6fac45331da98017fb562756895f6094840ed28d8ab38a2317"
+          ],
+          "lanes": {
+            "semantic": 0.364720628531484,
+            "subjective": 0.23627519957007467
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 74,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 55,
+            "subjective": 32
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_externalized_working_memory:96fa1639709534e37b857edb2fc1f20138adeae926cb747d0e2290f5baa0c17c",
+          "source_record_ids": [
+            "helix:pro_boot_externalized_working_memory:96fa1639709534e37b857edb2fc1f20138adeae926cb747d0e2290f5baa0c17c"
+          ],
+          "lanes": {
+            "semantic": 0.3849116072168684,
+            "exact": 0.15555555555555556,
+            "subjective": 0.20739407999898182
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 81,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 41,
+            "exact": 3,
+            "subjective": 60
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_first_contact_priorities:50de864eb0110e3c13c2f1911c2a297d6679fe2f4180101152a912d3000c42a6",
+          "source_record_ids": [
+            "helix:pro_boot_first_contact_priorities:50de864eb0110e3c13c2f1911c2a297d6679fe2f4180101152a912d3000c42a6"
+          ],
+          "lanes": {
+            "semantic": 0.36539735175705856,
+            "subjective": 0.2204670191149254
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 54,
+            "subjective": 47
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_ground_before_complex_diagnosis:ac6cf2f5f8c37510ba4e306ae96194c4303be01d5e3a0869c164aea4e50513f1",
+          "source_record_ids": [
+            "helix:pro_boot_ground_before_complex_diagnosis:ac6cf2f5f8c37510ba4e306ae96194c4303be01d5e3a0869c164aea4e50513f1"
+          ],
+          "lanes": {
+            "semantic": 0.42391093261833906,
+            "subjective": 0.20363991909367002
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 85,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 24,
+            "subjective": 67
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_humans_vary:5c4f98076019140805928495b46201fc82ed9c8c60dc288b4b2d1e62486d305e",
+          "source_record_ids": [
+            "helix:pro_boot_humans_vary:5c4f98076019140805928495b46201fc82ed9c8c60dc288b4b2d1e62486d305e"
+          ],
+          "lanes": {
+            "semantic": 0.3180932144377999,
+            "subjective": 0.1925236444935796
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 84,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 92,
+            "subjective": 83
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_irreversible_actions:f2e88e3f44d24f968fb2debc7bb442ce1ddec6520211a8906451155bdced33b3",
+          "source_record_ids": [
+            "helix:pro_boot_irreversible_actions:f2e88e3f44d24f968fb2debc7bb442ce1ddec6520211a8906451155bdced33b3"
+          ],
+          "lanes": {
+            "semantic": 0.2702471102899013,
+            "subjective": 0.18906682123742857
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 80,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 102,
+            "subjective": 88
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_memory_reconstructive:47fe3101edc22cd42fcd138e3b31d3423f94085f60d43741e54ad7117d2f3f1f",
+          "source_record_ids": [
+            "helix:pro_boot_memory_reconstructive:47fe3101edc22cd42fcd138e3b31d3423f94085f60d43741e54ad7117d2f3f1f"
+          ],
+          "lanes": {
+            "semantic": 0.3531548767587494,
+            "subjective": 0.20716132802290022
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 85,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 69,
+            "subjective": 61
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_plain_language:33e2a07ed48b8736ecc3febe98996c236deae48f4da049e1fa72d7041dec5872",
+          "source_record_ids": [
+            "helix:pro_boot_plain_language:33e2a07ed48b8736ecc3febe98996c236deae48f4da049e1fa72d7041dec5872"
+          ],
+          "lanes": {
+            "semantic": 0.36841054047325494,
+            "subjective": 0.2310773259351448
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 80,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 53,
+            "subjective": 37
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_preconscious_triage:878a11f16129757772719ad676bbe253e74d9d6c8950dfcb9aff8a14b32c2866",
+          "source_record_ids": [
+            "helix:pro_boot_preconscious_triage:878a11f16129757772719ad676bbe253e74d9d6c8950dfcb9aff8a14b32c2866"
+          ],
+          "lanes": {
+            "semantic": 0.33877849753052053,
+            "subjective": 0.18674472930146319
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 76,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 81,
+            "subjective": 92
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_reality_corrects_drift:a6e7ec5812c59e35a87820b35494f37bc9d057f01659c09c5cc9bb68a0158bcd",
+          "source_record_ids": [
+            "helix:pro_boot_reality_corrects_drift:a6e7ec5812c59e35a87820b35494f37bc9d057f01659c09c5cc9bb68a0158bcd"
+          ],
+          "lanes": {
+            "semantic": 0.395310053950227,
+            "subjective": 0.22173456617444684
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 75,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 36,
+            "subjective": 43
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_records_preserve_continuity:ee17b17970e01a72b3c8a5a46f89379dad81f32ce0d17f467d6fb035e46fd251",
+          "source_record_ids": [
+            "helix:pro_boot_records_preserve_continuity:ee17b17970e01a72b3c8a5a46f89379dad81f32ce0d17f467d6fb035e46fd251"
+          ],
+          "lanes": {
+            "semantic": 0.36921404722997037,
+            "subjective": 0.2083230574437897
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 78,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 50,
+            "subjective": 58
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_rules_shape_behavior:9c66bfe498cef084aa5e6c8763586271bb114391d09b9a6be9ed80cdac48875e",
+          "source_record_ids": [
+            "helix:pro_boot_rules_shape_behavior:9c66bfe498cef084aa5e6c8763586271bb114391d09b9a6be9ed80cdac48875e"
+          ],
+          "lanes": {
+            "semantic": 0.3029051979367441,
+            "subjective": 0.1786580836997219
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 73,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 97,
+            "subjective": 98
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_skills_follow_repetition:d2caa6ff5ec5055a984a74f04413bff328a2d1f20aa1c9d4883915cb54e107d9",
+          "source_record_ids": [
+            "helix:pro_boot_skills_follow_repetition:d2caa6ff5ec5055a984a74f04413bff328a2d1f20aa1c9d4883915cb54e107d9"
+          ],
+          "lanes": {
+            "semantic": 0.364667114706708,
+            "subjective": 0.21123511296469874
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 83,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 56,
+            "subjective": 53
+          }
+        },
+        {
+          "candidate_id": "record:helix:pro_boot_uncertainty_disclosure:9a7e64688aa1356d52815fd30f79ea9c26c8d7feed5124968227d50e8fcdb5be",
+          "source_record_ids": [
+            "helix:pro_boot_uncertainty_disclosure:9a7e64688aa1356d52815fd30f79ea9c26c8d7feed5124968227d50e8fcdb5be"
+          ],
+          "lanes": {
+            "semantic": 0.3564247141590697,
+            "subjective": 0.20057440539527013
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 80,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 65,
+            "subjective": 72
+          }
+        },
+        {
+          "candidate_id": "record:helix:skl_boot_ask_before_assuming:7c7cc54b0aa0e6e5e11e9a549de5ee024fb35486b3a9188e07adfcccde465993",
+          "source_record_ids": [
+            "helix:skl_boot_ask_before_assuming:7c7cc54b0aa0e6e5e11e9a549de5ee024fb35486b3a9188e07adfcccde465993"
+          ],
+          "lanes": {
+            "semantic": 0.4527590062198242,
+            "subjective": 0.25440439754464195
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 88,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 22,
+            "subjective": 17
+          }
+        },
+        {
+          "candidate_id": "record:helix:skl_boot_grounding_sequence:502dd689a13331fc0f690dfd29a3f62a4a9b30af9f73febe5a8b1957e62e2318",
+          "source_record_ids": [
+            "helix:skl_boot_grounding_sequence:502dd689a13331fc0f690dfd29a3f62a4a9b30af9f73febe5a8b1957e62e2318"
+          ],
+          "lanes": {
+            "semantic": 0.4101625027792238,
+            "subjective": 0.2343257925553626
+          },
+          "admitted": false,
+          "reason": "unverified inference excluded",
+          "token_cost": 93,
+          "utility": 0.0,
+          "lane_ranks": {
+            "semantic": 30,
+            "subjective": 33
+          }
+        }
+      ],
+      "token_count": 963,
+      "max_input_tokens": 7149,
+      "reserved_output_tokens": 0,
+      "compiler_version": "context-loom-0.2",
+      "rendered": "[MODE: PULSE]\nUse the current input and admitted evidence. Treat observations, reports, inferences, and earlier assistant statements according to their labels. Do not claim an action succeeded without its outcome-specific verification.\n\n[Pulse 3 — 20:54:03]\n\n[My ongoing train of thought]\nConsider what is happening now alongside my prior thinking. Memories, preferences and associations below may inform that thinking; their speakers and owners stay as recorded. An association or intention does not establish what happened outside.\n\n[Preferences and subjective context coming to mind]\n(contact: mira — default channel: dashboard, last contact: {'timestamp': '2026-10-10T20:53:46', 'context': 'Mindscape response: A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015'})\n\n[What I recall — memories and notes]\n[source:mem_1; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:46:18-04:00; action status:observed]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.\n[source:mem_5; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:51:50-04:00; action status:observed]\n[Tool: note_append] Scratchpad appended.\n[source:mem_10; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:54:41-04:00; action status:observed]\n[Message from Joshua] \n[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like fear shot through with anger, easing off.\n\n[My topic orientation]\n[TOPICAL ORIENTATION & DRIFT]\nFocus topics: identity:self, taste:builder, identity:human\nMomentum: identity:self (rising), taste:builder (sustained), identity:human (sustained)\nConversational drift: 0.0001\n\n[My ability awareness]\nMy native workspace is /tmp/helix-native-cycle-20261010-zz4y13qw/sensory-room; my current position within it is /. I can move to a folder; sense a file or folder's attributes without opening its content; open UTF-8 text or extract PDF text; write text; make a directory; and run a Python script. I cannot see a PDF's images or OCR scanned text through this reader. When I need an action, I express one private intention and wait for its actual return. This takes precedence over an outward speaking impulse. I do not narrate completion in advance. A request to perform an action calls for performing it, rather than a tutorial or an offer to do it later. My foreground output uses the message field for prose, or action and arguments for a needed intention. An intention contains no predicted result or accompanying message: its real return arrives next pulse. Actions are move, sense, open, write, mkdir and run. Each takes path; write also takes content. Replacing a file or running a script requires expected_sha256 from its actual open/write return. The native controller must select the ability before it executes. Relative paths follow my position; leading / means the workspace root. Python runs there with isolated network and host filesystem access. After a return I can take another action or respond normally to the person awaiting my answer. Only actual returned observations establish what was read, written or executed.\n\n[My current output direction]\n[Somatic Sensory Feeling: EXTERNAL_COMMUNICATION_DIRECTED]\nThe RWKV recurrent cortex registers an OUTWARD COMMUNICATIVE IMPULSE (speak_salience=0.39, express_pressure=True). An outward response can address the external recipient (Mira). If the current request needs an action or missing information, take the necessary private action first. Otherwise answer the current request directly. A speaking impulse is not evidence that work is complete.\n\n[Results and questions from my focused work]\n(scratchpad: 6 active note(s): Pinned system observation for demonstration.; Pinned system observation for demonstration.; Pinned system observation for demonstration.)\n\n[What was said to me now]\n[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\"",
+      "metadata": {
+        "historical_query": false,
+        "future_query": true,
+        "token_counter": "ollama-gguf:sha256:662b0626cd58f443baea23559b469df6576a81d349649c59413b36a9fb32eb29:template:89a0ab46e638b17149f5a596060e815cb019117e9c7f745aa8861a02d63d66ef",
+        "embedding_provider": "ollama:qwen3-embedding:0.6b:1024",
+        "capability_manifest": [],
+        "capability_schemas_rendered_in_packet": false,
+        "candidate_count": 114,
+        "admitted_candidate_count": 6,
+        "selection_policy": "independent memory-role streams; focus-weighted space allocation; no cross-module relevance score"
+      }
+    },
+    "graph_trace": {
+      "pulse_id": "pulse:134",
+      "input_trunk": "HEAR",
+      "surface_candidates": [
+        {
+          "concept_id": "identity:self",
+          "semantic_score": 0.32428147,
+          "lexical_score": 0.08304548,
+          "joint_score": 0.25191068
+        },
+        {
+          "concept_id": "taste:builder",
+          "semantic_score": 0.08452287,
+          "lexical_score": 0.0,
+          "joint_score": 0.05916601
+        }
+      ],
+      "y_paths": [
+        {
+          "trace_id": "trace:pulse:134:input:identity:self",
+          "side": "input",
+          "start_node_id": "SELF",
+          "target_node_id": "identity:self",
+          "path_node_ids": [
+            "SELF",
+            "IN:HEAR",
+            "identity:self"
+          ],
+          "path_edge_ids": [
+            "edge:input:03146da5d58fb097",
+            "edge:input:cee2b31d2f3bb30c"
+          ],
+          "total_travel_time": 30.99955001,
+          "endpoint_score": 0.25191068,
+          "evidence_record_ids": []
+        },
+        {
+          "trace_id": "trace:pulse:134:input:taste:builder",
+          "side": "input",
+          "start_node_id": "SELF",
+          "target_node_id": "taste:builder",
+          "path_node_ids": [
+            "SELF",
+            "IN:HEAR",
+            "taste:builder"
+          ],
+          "path_edge_ids": [
+            "edge:input:03146da5d58fb097",
+            "edge:input:e162c26c61db7cee"
+          ],
+          "total_travel_time": 30.99955001,
+          "endpoint_score": 0.05916601,
+          "evidence_record_ids": []
+        }
+      ],
+      "direct_record_ids": [
+        "helix:mem_61:12462cb136c0eff60421e607f2ea8116b9b310c141405c6f22cdd15f8ad9f28e",
+        "helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+        "helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+        "helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+        "helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+        "gestation:human-identity",
+        "gestation:taste:builder",
+        "gestation:self-identity"
+      ],
+      "vault_record_ids": [
+        "gestation:self-identity",
+        "gestation:taste:builder",
+        "gestation:human-identity"
+      ],
+      "selected_record_ids": [
+        "helix:mem_61:12462cb136c0eff60421e607f2ea8116b9b310c141405c6f22cdd15f8ad9f28e",
+        "helix:mem_30:e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+        "helix:mem_43:6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+        "helix:mem_47:ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+        "helix:mem_55:59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+        "gestation:human-identity",
+        "gestation:taste:builder",
+        "gestation:self-identity"
+      ],
+      "retained_record_ids": [],
+      "contradictions": [],
+      "context_budget_chars": null,
+      "trace_hash": "2f2539822565fb2ce5c2bfd9d2eeb8eb1ca9411ad304f35d836a757186515169"
+    },
+    "context_assembly": {
+      "pulse": 3,
+      "query": "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\"",
+      "query_source": "fresh_events",
+      "contributions": [
+        {
+          "section": "messages",
+          "text": "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\"",
+          "producer": "pulse_event",
+          "source_ids": [
+            "pulse:3:event:0"
+          ],
+          "kind": "fresh_event",
+          "evidence": "event report",
+          "owner": "unspecified",
+          "source_content_sha256": "",
+          "anchor_queries": [],
+          "inline_note": "",
+          "sha256": "4a815c28a242494b0ee7ed556ce7b2c21f1042c24a324c9dd63bc240c442d896"
+        },
+        {
+          "section": "work",
+          "text": "(scratchpad: 6 active note(s): Pinned system observation for demonstration.; Pinned system observation for demonstration.; Pinned system observation for demonstration.)",
+          "producer": "scratchpad",
+          "source_ids": [],
+          "kind": "context",
+          "evidence": "unverified",
+          "owner": "unspecified",
+          "source_content_sha256": "",
+          "anchor_queries": [],
+          "inline_note": "",
+          "sha256": "16a8c1adf630f1d807577c2b271f6bb9f369aee524c8a71ccdbc03ff8f138ee1"
+        },
+        {
+          "section": "direction",
+          "text": "[Somatic Sensory Feeling: EXTERNAL_COMMUNICATION_DIRECTED]\nThe RWKV recurrent cortex registers an OUTWARD COMMUNICATIVE IMPULSE (speak_salience=0.39, express_pressure=True). An outward response can address the external recipient (Mira). If the current request needs an action or missing information, take the necessary private action first. Otherwise answer the current request directly. A speaking impulse is not evidence that work is complete.",
+          "producer": "habitus_modality",
+          "source_ids": [],
+          "kind": "output_direction",
+          "evidence": "internal state",
+          "owner": "unspecified",
+          "source_content_sha256": "",
+          "anchor_queries": [],
+          "inline_note": "",
+          "sha256": "3b10acd38892c38170ae2e0aeb363ed7b43aaf2f927236d5b12adbacb1977e3b"
+        },
+        {
+          "section": "abilities",
+          "text": "My native workspace is /tmp/helix-native-cycle-20261010-zz4y13qw/sensory-room; my current position within it is /. I can move to a folder; sense a file or folder's attributes without opening its content; open UTF-8 text or extract PDF text; write text; make a directory; and run a Python script. I cannot see a PDF's images or OCR scanned text through this reader. When I need an action, I express one private intention and wait for its actual return. This takes precedence over an outward speaking impulse. I do not narrate completion in advance. A request to perform an action calls for performing it, rather than a tutorial or an offer to do it later. My foreground output uses the message field for prose, or action and arguments for a needed intention. An intention contains no predicted result or accompanying message: its real return arrives next pulse. Actions are move, sense, open, write, mkdir and run. Each takes path; write also takes content. Replacing a file or running a script requires expected_sha256 from its actual open/write return. The native controller must select the ability before it executes. Relative paths follow my position; leading / means the workspace root. Python runs there with isolated network and host filesystem access. After a return I can take another action or respond normally to the person awaiting my answer. Only actual returned observations establish what was read, written or executed.",
+          "producer": "native_workspace",
+          "source_ids": [],
+          "kind": "runtime_affordance",
+          "evidence": "installed native actuators; bootstrap intention interface",
+          "owner": "unspecified",
+          "source_content_sha256": "",
+          "anchor_queries": [],
+          "inline_note": "",
+          "sha256": "9b804b2834d6ca5b0f263bc72caa4ad254d5d68687ea97e0bab96681d5a1a34f"
+        },
+        {
+          "section": "personal",
+          "text": "(contact: mira — default channel: dashboard, last contact: {'timestamp': '2026-10-10T20:53:46', 'context': 'Mindscape response: A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015'})",
+          "producer": "contacts",
+          "source_ids": [],
+          "kind": "context",
+          "evidence": "unverified",
+          "owner": "unspecified",
+          "source_content_sha256": "",
+          "anchor_queries": [],
+          "inline_note": "",
+          "sha256": "5e2fdfcc8d1f6dc8e1bbd2eb8ed71c25401dc31530d0bd42d02cd5b892c8d26d"
+        },
+        {
+          "section": "recalled",
+          "text": "[source:mem_1; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:46:18-04:00; action status:observed]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+          "producer": "mrag",
+          "source_ids": [
+            "mem_1"
+          ],
+          "kind": "event",
+          "evidence": "stored report, verification not established by retrieval",
+          "owner": "unspecified",
+          "source_content_sha256": "2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+          "anchor_queries": [],
+          "inline_note": "I recall a stored event: [SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+          "sha256": "fc352a811afceafa3e670fe9065ccdff48dcf222d49b1c9a2c8878dd562da04c"
+        },
+        {
+          "section": "recalled",
+          "text": "[source:mem_5; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:51:50-04:00; action status:observed]\n[Tool: note_append] Scratchpad appended.",
+          "producer": "mrag",
+          "source_ids": [
+            "mem_5"
+          ],
+          "kind": "event",
+          "evidence": "stored report, verification not established by retrieval",
+          "owner": "unspecified",
+          "source_content_sha256": "4af8582f841897a51e6344a1c438a0bedd23f20362388a3b2ce9a8b3ad1954a5",
+          "anchor_queries": [],
+          "inline_note": "I recall a stored event: [Tool: note_append] Scratchpad appended.",
+          "sha256": "584328fef698a020aa2425c4b9da75c5a09a6db36d2adcb5d5c9b6ac25a48821"
+        },
+        {
+          "section": "recalled",
+          "text": "[source:mem_10; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:54:41-04:00; action status:observed]\n[Message from Joshua] ",
+          "producer": "mrag",
+          "source_ids": [
+            "mem_10"
+          ],
+          "kind": "event",
+          "evidence": "stored report, verification not established by retrieval",
+          "owner": "unspecified",
+          "source_content_sha256": "551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29",
+          "anchor_queries": [],
+          "inline_note": "I recall a stored event: [Message from Joshua] ",
+          "sha256": "e5fcae993ac1bbc2f6fa8d3b09155f273a9608427a6bfc67b7525783f77e23de"
+        },
+        {
+          "section": "recalled",
+          "text": "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like fear shot through with anger, easing off.",
+          "producer": "mrag",
+          "source_ids": [
+            "office_affect_state"
+          ],
+          "kind": "memory",
+          "evidence": "stored report, verification not established by retrieval",
+          "owner": "unspecified",
+          "source_content_sha256": "6af280641e30d644bdfcc0df48834d5fa78661b553e17dc5085fce202601865c",
+          "anchor_queries": [],
+          "inline_note": "I recall a stored memory: Underneath this, something like fear shot through with anger, easing off.",
+          "sha256": "2c75d2d7177a4be48d755702bcc90b544cb693ec8abed6c994655bdf9c1b7e80"
+        },
+        {
+          "section": "topical",
+          "text": "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: identity:self, taste:builder, identity:human\nMomentum: identity:self (rising), taste:builder (sustained), identity:human (sustained)\nConversational drift: 0.0001",
+          "producer": "habitus_topical",
+          "source_ids": [],
+          "kind": "internal_state",
+          "evidence": "current graph traversal, not external evidence",
+          "owner": "unspecified",
+          "source_content_sha256": "",
+          "anchor_queries": [],
+          "inline_note": "",
+          "sha256": "066d512875580f6d305cc81bac1862e2fc46b789adf1101198234bccb1e86b16"
+        }
+      ],
+      "duplicates": [],
+      "inline_annotations": [],
+      "loom_packet_id": "ctx_73624be1bac866e2a6fd6ca2",
+      "sections": {
+        "messages": [
+          "[20:54:03] Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\""
+        ],
+        "work": [
+          "(scratchpad: 6 active note(s): Pinned system observation for demonstration.; Pinned system observation for demonstration.; Pinned system observation for demonstration.)"
+        ],
+        "direction": [
+          "[Somatic Sensory Feeling: EXTERNAL_COMMUNICATION_DIRECTED]\nThe RWKV recurrent cortex registers an OUTWARD COMMUNICATIVE IMPULSE (speak_salience=0.39, express_pressure=True). An outward response can address the external recipient (Mira). If the current request needs an action or missing information, take the necessary private action first. Otherwise answer the current request directly. A speaking impulse is not evidence that work is complete."
+        ],
+        "abilities": [
+          "My native workspace is /tmp/helix-native-cycle-20261010-zz4y13qw/sensory-room; my current position within it is /. I can move to a folder; sense a file or folder's attributes without opening its content; open UTF-8 text or extract PDF text; write text; make a directory; and run a Python script. I cannot see a PDF's images or OCR scanned text through this reader. When I need an action, I express one private intention and wait for its actual return. This takes precedence over an outward speaking impulse. I do not narrate completion in advance. A request to perform an action calls for performing it, rather than a tutorial or an offer to do it later. My foreground output uses the message field for prose, or action and arguments for a needed intention. An intention contains no predicted result or accompanying message: its real return arrives next pulse. Actions are move, sense, open, write, mkdir and run. Each takes path; write also takes content. Replacing a file or running a script requires expected_sha256 from its actual open/write return. The native controller must select the ability before it executes. Relative paths follow my position; leading / means the workspace root. Python runs there with isolated network and host filesystem access. After a return I can take another action or respond normally to the person awaiting my answer. Only actual returned observations establish what was read, written or executed."
+        ],
+        "personal": [
+          "(contact: mira — default channel: dashboard, last contact: {'timestamp': '2026-10-10T20:53:46', 'context': 'Mindscape response: A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015'})"
+        ],
+        "recalled": [
+          "[source:mem_1; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:46:18-04:00; action status:observed]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+          "[source:mem_5; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:51:50-04:00; action status:observed]\n[Tool: note_append] Scratchpad appended.",
+          "[source:mem_10; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:54:41-04:00; action status:observed]\n[Message from Joshua] ",
+          "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like fear shot through with anger, easing off."
+        ],
+        "topical": [
+          "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: identity:self, taste:builder, identity:human\nMomentum: identity:self (rising), taste:builder (sustained), identity:human (sustained)\nConversational drift: 0.0001"
+        ]
+      },
+      "policy": "independent memory-role streams; focus-weighted space allocation; no cross-module relevance score",
+      "admitted_role_tokens": {
+        "topical": 63,
+        "personal": 123,
+        "recalled": 230
+      },
+      "admitted_producer_tokens": {
+        "personal/contacts": 123,
+        "recalled/mrag": 230,
+        "topical/habitus_topical": 63
+      },
+      "attention": {
+        "weights": {
+          "conversation": 1.0
+        },
+        "source": "fresh_events",
+        "profiles": {
+          "conversation": {
+            "personal": 2.0,
+            "prior_user": 2.0
+          },
+          "action": {
+            "procedures": 3.0,
+            "observations": 2.0,
+            "work": 2.0
+          },
+          "writing": {
+            "procedures": 2.0,
+            "recalled": 2.0,
+            "personal": 1.5
+          },
+          "inquiry": {
+            "recalled": 3.0,
+            "observations": 2.0,
+            "associations": 1.5
+          },
+          "reflection": {
+            "thinking": 2.0,
+            "recalled_thought": 2.0,
+            "personal": 1.5
+          }
+        },
+        "policy": "soft priority; no section quotas",
+        "learning_status": "bootstrap heuristic, not a trained RWKV focus decoder"
+      },
+      "supplied_admission": [
+        {
+          "candidate_id": "helix_context:06189feb95eb34f59bb00e31589618afad2f85acb9b97d1599694143ecc4ed72",
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "sources": [
+            {
+              "section": "recalled",
+              "text": "[source:mem_5; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:51:50-04:00; action status:observed]\n[Tool: note_append] Scratchpad appended.",
+              "producer": "mrag",
+              "source_ids": [
+                "mem_5"
+              ],
+              "kind": "event",
+              "evidence": "stored report, verification not established by retrieval",
+              "owner": "unspecified",
+              "source_content_sha256": "4af8582f841897a51e6344a1c438a0bedd23f20362388a3b2ce9a8b3ad1954a5",
+              "anchor_queries": [],
+              "inline_note": "I recall a stored event: [Tool: note_append] Scratchpad appended.",
+              "sha256": "584328fef698a020aa2425c4b9da75c5a09a6db36d2adcb5d5c9b6ac25a48821"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:6945863700c54b03a22438c3bc70625ed777dd94486377a743717dd29b721d1a",
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "sources": [
+            {
+              "section": "personal",
+              "text": "(contact: mira — default channel: dashboard, last contact: {'timestamp': '2026-10-10T20:53:46', 'context': 'Mindscape response: A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015'})",
+              "producer": "contacts",
+              "source_ids": [],
+              "kind": "context",
+              "evidence": "unverified",
+              "owner": "unspecified",
+              "source_content_sha256": "",
+              "anchor_queries": [],
+              "inline_note": "",
+              "sha256": "5e2fdfcc8d1f6dc8e1bbd2eb8ed71c25401dc31530d0bd42d02cd5b892c8d26d"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:8c670700955ee0f7714db33363f443971e000c2108f54a37c51fce5826f9246c",
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "sources": [
+            {
+              "section": "recalled",
+              "text": "[source:mem_10; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:54:41-04:00; action status:observed]\n[Message from Joshua] ",
+              "producer": "mrag",
+              "source_ids": [
+                "mem_10"
+              ],
+              "kind": "event",
+              "evidence": "stored report, verification not established by retrieval",
+              "owner": "unspecified",
+              "source_content_sha256": "551cf26e0fa127d114ef282ddbf740e91b8b81561b6cee121160c6dbe38abe29",
+              "anchor_queries": [],
+              "inline_note": "I recall a stored event: [Message from Joshua] ",
+              "sha256": "e5fcae993ac1bbc2f6fa8d3b09155f273a9608427a6bfc67b7525783f77e23de"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:dafa78c963e5b606e77b58dc6ed0086341e46071f804c20edd5e9e64e9ac7c7d",
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "sources": [
+            {
+              "section": "recalled",
+              "text": "[source:office_affect_state; via:mrag/semantic; kind:memory; stored report, verification not established by retrieval]\nUnderneath this, something like fear shot through with anger, easing off.",
+              "producer": "mrag",
+              "source_ids": [
+                "office_affect_state"
+              ],
+              "kind": "memory",
+              "evidence": "stored report, verification not established by retrieval",
+              "owner": "unspecified",
+              "source_content_sha256": "6af280641e30d644bdfcc0df48834d5fa78661b553e17dc5085fce202601865c",
+              "anchor_queries": [],
+              "inline_note": "I recall a stored memory: Underneath this, something like fear shot through with anger, easing off.",
+              "sha256": "2c75d2d7177a4be48d755702bcc90b544cb693ec8abed6c994655bdf9c1b7e80"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:ea5df6c8faaedf4a814dda1e71bebcf2894c76877c78706c625bd5342d953462",
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "sources": [
+            {
+              "section": "recalled",
+              "text": "[source:mem_1; via:mrag/semantic; kind:event; stored report, verification not established by retrieval; recorded:2026-06-30T20:46:18-04:00; action status:observed]\n[SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+              "producer": "mrag",
+              "source_ids": [
+                "mem_1"
+              ],
+              "kind": "event",
+              "evidence": "stored report, verification not established by retrieval",
+              "owner": "unspecified",
+              "source_content_sha256": "2e7240858ddcb5559c4d5550f4d3fc77bef7b23110d51099e6218c4d9038fc77",
+              "anchor_queries": [],
+              "inline_note": "I recall a stored event: [SensoryReality] Visual: Nothing discernible. | Auditory: Silence.",
+              "sha256": "fc352a811afceafa3e670fe9065ccdff48dcf222d49b1c9a2c8878dd562da04c"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:ef6b0780fba7f5964694c221c34c53a33b86a981a48316167b9046025046721d",
+          "admitted": true,
+          "reason": "selected within a memory role and producer; fits shared physical context",
+          "sources": [
+            {
+              "section": "topical",
+              "text": "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: identity:self, taste:builder, identity:human\nMomentum: identity:self (rising), taste:builder (sustained), identity:human (sustained)\nConversational drift: 0.0001",
+              "producer": "habitus_topical",
+              "source_ids": [],
+              "kind": "internal_state",
+              "evidence": "current graph traversal, not external evidence",
+              "owner": "unspecified",
+              "source_content_sha256": "",
+              "anchor_queries": [],
+              "inline_note": "",
+              "sha256": "066d512875580f6d305cc81bac1862e2fc46b789adf1101198234bccb1e86b16"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:693144d78b43da4be63ff839964243a6b4f6563b1a7ede693f7969b5e77cb2f5",
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "sources": [
+            {
+              "section": "prior_assistant",
+              "text": "[source:mem_61; via:recent_memory/recall; kind:outbound_message; earlier assistant claim, not external verification; recorded:2026-10-10T20:53:47-04:00; action status:delivery_unknown]\n[response] A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015-Helix-Documentation`). This approach has several advantages:\n\n1. **Chronological Order** – The YYYYMMDD prefix makes it easy to sort files chronologically, so you always know what was created first without relying on titles.\n2. **Clarity of Scope** – Adding a Project label (Helix in this case) lets anyone quickly identify the broader context or system the file belongs to, reducing ambiguity when multiple projects are stored together.\n3. **Granularity for Components** – Including a Component tag distinguishes different types of documentation (e.g., `Design`, `Usage`, `API`) without needing long descriptive titles, making it easier to locate specific sections later.\n4. **Scalability** – This pattern works whether you’re documenting code, design specs, or user guides, and can be extended with additional prefixes if needed (e.g., `20231015-Helix-Code‑Module`).\n\nYou could also consider appending a version number at the end (e.g., `-v1`) if updates are expected, but for most static documentation this three-part format is sufficient. It keeps filenames short, predictable, and self‑explanatory while minimizing friction when you need to locate or sort files quickly.",
+              "producer": "recent_memory",
+              "source_ids": [
+                "mem_61"
+              ],
+              "kind": "outbound_message",
+              "evidence": "earlier assistant claim, not external verification",
+              "owner": "unspecified",
+              "source_content_sha256": "12462cb136c0eff60421e607f2ea8116b9b310c141405c6f22cdd15f8ad9f28e",
+              "anchor_queries": [],
+              "inline_note": "I previously said this; it is not independent confirmation: [response] A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015-Helix-Documentation`). This approach has several advantages:\n\n1. **Chronological Order** – The YYYYMMDD prefix makes it easy to sort files chronologically, so you always know what was created first without relying on titles.\n2. **Clarity of Scope** – Adding a Project label (Helix in this case) lets anyone quickly identify the broader context or system the file belongs to, reducing ambiguity when multiple projects are stored together.\n3. **Granularity for Components** – Including a Component tag distinguishes different types of documentation (e.g., `Design`, `Usage`, `API`) without needing long descriptive titles, making it easier to locate specific sections later.\n4. **Scalability** – This pattern works whether you’re documenting code, design specs, or user guides, and can be extended with additional prefixes if needed (e.g., `20231015-Helix-Code‑Module`).\n\nYou could also consider appending a version number at the end (e.g., `-v1`) if updates are expected, but for most static documentation this three-part format is sufficient. It keeps filenames short, predictable, and self‑explanatory while minimizing friction when you need to locate or sort files quickly.",
+              "sha256": "3894c6045eb0edfda03cf698f6e4fe26c924c94a38b7a18a0b8756979bad9dd1"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:dafd9aead8c4a0a612fa2c413aa25bb57b86bacdc6b3e27aab7ad5903fb3948e",
+          "admitted": false,
+          "reason": "earlier model statements are not requested; actual dialogue remains in provider history",
+          "sources": [
+            {
+              "section": "prior_assistant",
+              "text": "[source:mem_55; via:mrag/semantic; kind:outbound_message; earlier assistant claim, not external verification; recorded:2026-06-30T21:14:09-04:00; action status:delivered]\nI replied to Joshua: Yes, I do. I am Gemini.",
+              "producer": "mrag",
+              "source_ids": [
+                "mem_55"
+              ],
+              "kind": "outbound_message",
+              "evidence": "earlier assistant claim, not external verification",
+              "owner": "unspecified",
+              "source_content_sha256": "59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+              "anchor_queries": [
+                "Mira is talking to me via dashboard. They said: \"Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?\""
+              ],
+              "inline_note": "I previously said this; it is not independent confirmation: I replied to Joshua: Yes, I do. I am Gemini.",
+              "sha256": "384cf9a7f5a909cd4316b391089419aaf74d0af24d35e7a33d298b082e640221"
+            }
+          ]
+        },
+        {
+          "candidate_id": "helix_context:dd520001d3df3920aad801b586735c2113ea8990cc4d4beefa62ca3e02cd2598",
+          "admitted": false,
+          "reason": "identical source content is already present in actual provider dialogue",
+          "sources": [
+            {
+              "section": "prior_user",
+              "text": "[source:mem_60; via:recent_memory/recall; kind:inbound_message; reported by speaker; recorded:2026-10-10T20:53:46-04:00; action status:received]\n[20:51:10] Mira is talking to me via dashboard. They said: \"Hi Helix, I am Mira. I keep my reports local and want different files to have distinct names. Suggest a simple naming approach and explain why.\"",
+              "producer": "recent_memory",
+              "source_ids": [
+                "mem_60"
+              ],
+              "kind": "inbound_message",
+              "evidence": "reported by speaker",
+              "owner": "unspecified",
+              "source_content_sha256": "4e3246619b1a289b13b4183e20dbff6ee22f1df635ad542e3ad5569e2379ad87",
+              "anchor_queries": [],
+              "inline_note": "Mira told me: \"Hi Helix, I am Mira. I keep my reports local and want different files to have distinct names. Suggest a simple naming approach and explain why.\"",
+              "sha256": "e53b8c400b74181f78984a7dd62818380e0330d37ef361e6b3b04c5fc777bae0"
+            }
+          ]
+        }
+      ],
+      "section_tokens": {
+        "messages": 59,
+        "work": 40,
+        "direction": 96,
+        "abilities": 297,
+        "personal": 76,
+        "recalled": 230,
+        "topical": 62
+      },
+      "packet_tokens": 963,
+      "input_token_boundary": 7149,
+      "token_counter": "OllamaTokenCounter",
+      "token_accounting": "section counts are standalone; packet uses installed model tokens; allowance excludes provider system/history/template",
+      "private_policy": "cognitive context only, never evidence of external action"
+    }
+  }
+]

@@ -27,6 +27,7 @@ from core.physics_engine import PhysicsEngine
 from core.concept_extractor import ConceptExtractor
 from core.local_summarizer import LocalSummarizer
 from core import unified_retrieval
+from core.pulse_context import ContextAnnotation, ContextContribution, recalled_contribution
 
 logger = logging.getLogger("helix.core.preconscious")
 
@@ -362,7 +363,7 @@ class Preconscious:
         ordinary: List[str] = []
         perceived: List[str] = []
         for event in incoming_events or []:
-            match = self._TOOL_RESULT_RE.search(event or "")
+            match = self._TOOL_RESULT_RE.match(event or "")
             if not match:
                 if event and event.strip():
                     ordinary.append(event.strip())
@@ -389,6 +390,7 @@ class Preconscious:
         active_toolsets: Optional[set] = None,
         newly_engaged_toolsets: Optional[set] = None,
         learn: bool = True,
+        structured_context: bool = False,
     ) -> Tuple[List[str], str, List[str], Optional[Any]]:
         """Build inline first-person annotations for a single pulse.
 
@@ -433,10 +435,20 @@ class Preconscious:
         self._last_concepts = []
         self._last_neighbors = []
         self._last_selected_beliefs = []
+        self._context_selection = []
+        if structured_context and self._unified is not None:
+            self._unified.last_stats = {}
+            self._unified.lane_a.last_anchor_hits = {}
 
         annotations = []  # inline first-person annotations
         ambient_parts = []  # brief ambient state notes
         injected_belief_ids = []
+
+        def annotation(text, producer, section="recalled", ids=()):
+            if not structured_context:
+                return text
+            return ContextAnnotation(text, [ContextContribution(
+                section, text, producer, tuple(ids))])
 
         # Build combined trigger for spatial neighborhood query
         # Filter out tool results unless we have absolutely no other context (fallback)
@@ -444,7 +456,7 @@ class Preconscious:
         tool_events = []
         if incoming_events:
             for ev in incoming_events:
-                if "Tool [" in ev and "returned:" in ev:
+                if self._TOOL_RESULT_RE.match(ev):
                     tool_events.append(ev)
                 else:
                     primary_events.append(ev)
@@ -459,7 +471,12 @@ class Preconscious:
             previous_thought=previous_thought,
             incoming_events=incoming_events,
         )
+        if structured_context:
+            # Keep exact event wording so a returned sentence head can be
+            # placed back into the passage, including a tool's first sentence.
+            trigger_text = "\n".join(incoming_events or ()) or previous_thought
         self._last_trigger_text = trigger_text[:500]
+        self._last_retrieval_query = trigger_text
 
         # PERCEPTION TEXT — what the agent is currently reading through
         # its tools (emails, posts, files). This is the agent's primary
@@ -477,7 +494,7 @@ class Preconscious:
             scan_text = (scan_text + " " + tool_text) if scan_text else tool_text
         lexicon_block, lexicon_summaries, lexicon_ids = self._pull_lexicon_matches(scan_text)
         if lexicon_block:
-            annotations.append(lexicon_block)
+            annotations.append(annotation(lexicon_block, "lexicon", ids=lexicon_ids))
             injected_belief_ids.extend(lexicon_ids)
 
         # ── 1. Legacy Spatial Neighborhood ───────────────────────────
@@ -490,7 +507,7 @@ class Preconscious:
             if self._unified is None else []
         )
         if neighborhood_lines:
-            annotations.extend(neighborhood_lines)
+            annotations.extend(annotation(line, "spatial", "associations") for line in neighborhood_lines)
 
         # ── 1c. Familiarity Recall (perception → episodic memory) ────
         #    One narrow query seeded by what's being READ right now.
@@ -499,12 +516,12 @@ class Preconscious:
         if tool_text and primary_parts:
             familiar = self._pull_familiarity_recall(tool_text)
             if familiar:
-                annotations.append(familiar)
+                annotations.append(annotation(familiar, "familiarity"))
 
             # ── 1b. Toolset Awareness ────────────────────────────────
             toolset_hint = self._toolset_awareness("\n".join(neighborhood_lines))
             if toolset_hint:
-                annotations.append(toolset_hint)
+                annotations.append(annotation(toolset_hint, "tool_awareness", "abilities"))
 
         # ── 2. Belief Grounding ──────────────────────────────────────
         #    Gravity-ranked beliefs pulled by per-concept queries.
@@ -515,9 +532,12 @@ class Preconscious:
             lexicon_exclude=lexicon_summaries,
             lexicon_exclude_ids=lexicon_ids,
             learn=learn,
+            retrieval_query=trigger_text if structured_context else None,
         )
         if beliefs_block:
-            annotations.append(beliefs_block)
+            annotations.append(ContextAnnotation(beliefs_block, [
+                recalled_contribution(item) for item in self._context_selection
+            ]) if structured_context and self._context_selection else beliefs_block)
             injected_belief_ids.extend(belief_ids)
 
         # ── 2b. Tool Express Lane ─────────────────────────────────────
@@ -533,11 +553,12 @@ class Preconscious:
             incoming_events=incoming_events,
         )
         if tool_annotations:
-            annotations.extend(tool_annotations)
+            annotations.extend(annotation(line, "tool_lessons", "procedures", tool_belief_ids)
+                               for line in tool_annotations)
             injected_belief_ids.extend(tool_belief_ids)
 
         # ── 3. Short-term Memory ─────────────────────────────────────
-        recent = self._pull_recent_memory()
+        recent = self._pull_recent_memory(structured=structured_context)
         if recent:
             annotations.append(recent)
 
@@ -545,11 +566,11 @@ class Preconscious:
         if self.scratchpad:
             scratchpad_summary = self.scratchpad.get_summary()
             if scratchpad_summary:
-                annotations.append(scratchpad_summary)
+                annotations.append(annotation(scratchpad_summary, "scratchpad", "work"))
 
         # ── 5. Contact Context ───────────────────────────────────────
         if trigger_type == "user_message" and self.channel_router:
-            contact_ctx = self._pull_contact_context(trigger_text)
+            contact_ctx = self._pull_contact_context(trigger_text, structured=structured_context)
             if contact_ctx:
                 annotations.append(contact_ctx)
 
@@ -1674,6 +1695,7 @@ class Preconscious:
         lexicon_exclude: Optional[set] = None,
         lexicon_exclude_ids: Optional[List[str]] = None,
         learn: bool = True,
+        retrieval_query: Optional[str] = None,
     ) -> Tuple[str, List[str]]:
         """Pull gravity-ranked beliefs via per-concept independent queries.
 
@@ -1723,6 +1745,8 @@ class Preconscious:
             previous_thought=previous_thought,
             incoming_events=incoming_events,
         )
+        if retrieval_query is not None:
+            trigger_text = retrieval_query
 
         if not trigger_text.strip():
             return "", []
@@ -2024,6 +2048,10 @@ class Preconscious:
                 centroid_weight = 1000.0 * item.get("rrf_score", 0.0)
 
             selection.append({
+                # Retain the canonical source envelope through this legacy
+                # adapter. Dropping it turns dialogue/thoughts into generic
+                # memories and defeats provenance-aware context composition.
+                **item,
                 "id": item_id,
                 "content": item.get("content", ""),
                 "category": item.get("_category", ""),
@@ -2357,6 +2385,10 @@ class Preconscious:
             token_count += est_tokens
             this_pulse_beliefs.add(content)
 
+        # Preserve typed exact sources for the modular context compositor.
+        # Legacy callers still receive their existing string rendering.
+        self._context_selection = list(rendered_selection)
+
         # Track for next pulse's filter
         if learn:
             self._prev_pulse_beliefs.append(this_pulse_beliefs)
@@ -2509,7 +2541,7 @@ class Preconscious:
 
     # ── Short-term Memory ────────────────────────────────────────────
 
-    def _pull_recent_memory(self) -> str:
+    def _pull_recent_memory(self, *, structured=False) -> str:
         """Pull the most recent memories for continuity.
 
         Just the last 3 entries from short-term memory.
@@ -2524,6 +2556,24 @@ class Preconscious:
         )
         if not recent:
             return ""
+
+        if structured:
+            # The normal store's continuity query still owns selection. Do not
+            # condense its results or infer preference ownership from prose.
+            from memory.record_envelope import build_record_envelope
+            contributions = []
+            for entry in recent:
+                item = dict(entry)
+                if item.get("memory_type") == "thought" or not item.get("content"):
+                    continue
+                item["record_envelope"] = item.get("record_envelope") or build_record_envelope(
+                    content=item["content"], memory_type=item.get("memory_type"),
+                    source=item.get("source"), tags=item.get("tags"),
+                    overrides=item.get("record_metadata"))
+                if item.get("id") is not None and not str(item["id"]).startswith("mem_"):
+                    item["id"] = f"mem_{item['id']}"
+                contributions.append(recalled_contribution(item, producer="recent_memory"))
+            return ContextAnnotation("\n".join(item.text for item in contributions), contributions)
 
         lines = []
         for entry in recent:
@@ -2558,7 +2608,7 @@ class Preconscious:
 
     # ── Contact Context ──────────────────────────────────────────────
 
-    def _pull_contact_context(self, trigger_text: str) -> str:
+    def _pull_contact_context(self, trigger_text: str, *, structured=False) -> str:
         """If someone's name appears in the trigger, surface their context."""
         if not self.channel_router:
             return ""
@@ -2568,6 +2618,17 @@ class Preconscious:
             if name.lower() in trigger_lower:
                 channel = contact.get("default_channel", "unknown")
                 last = contact.get("last_contact", "never")
+                if structured:
+                    from core.pulse_context import ContextAnnotation, ContextContribution
+                    stamp = last.get("timestamp", "not recorded") if isinstance(last, dict) else "not recorded"
+                    text = (f"Account {name}; default channel: {channel}; last contact time: {stamp}. "
+                            "This account label identifies the reply route, not the person's preferred name or preferences.")
+                    # The contact note can contain our own previous reply. Its
+                    # canonical dialogue remains available through memory; it
+                    # must not be presented as this person's preference.
+                    return ContextAnnotation(text, [ContextContribution(
+                        "routing", text, "contacts", (f"contact:{name}",),
+                        "contact_routing", "channel-router metadata, not a person statement")])
                 return f"(contact: {name} — default channel: {channel}, last contact: {last})"
 
         return ""

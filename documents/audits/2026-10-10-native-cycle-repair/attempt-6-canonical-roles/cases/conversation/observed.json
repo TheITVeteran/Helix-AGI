@@ -1,0 +1,32 @@
+{
+  "case": "conversation",
+  "request": {
+    "channel": "dashboard",
+    "content": "Hi Helix, I am Mira. I keep my reports local and want different files to have distinct names. Suggest a simple naming approach and explain why.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791679294.8811998,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791679453.5078151,
+  "first_pulse": 2,
+  "final_pulse": 2,
+  "foreground": {
+    "time": 1791679451.553686,
+    "kind": "foreground_return",
+    "helix_pulse": 2,
+    "thought": "A simple naming convention you can use is to combine the project name or category with a timestamp in YYYYMMDD format (e.g., `Report_ProjectName_YYYYMMDD.ext`). This approach ensures each file has a distinct identifier, makes sorting chronological easy, and clearly indicates the purpose of the report. For example: `MeetingNotes_QA20231015.pdf`. The rationale is that timestamps uniquely order files over time while the project/category prefix groups related content together without needing complex hierarchical folders.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "A simple naming convention you can use is to combine the project name or category with a timestamp in YYYYMMDD format (e.g., `Report_ProjectName_YYYYMMDD.ext`). This approach ensures each file has a distinct identifier, makes sorting chronological easy, and clearly indicates the purpose of the report. For example: `MeetingNotes_QA20231015.pdf`. The rationale is that timestamps uniquely order files over time while the project/category prefix groups related content together without needing complex hierarchical folders.",
+      "recipient": "Mira",
+      "timestamp": 1791679438.5281444
+    }
+  ],
+  "native_actions": []
+}

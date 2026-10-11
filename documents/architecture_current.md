@@ -1,8 +1,157 @@
 # Helix Current Technical Architecture
 
-**Status:** canonical current architecture · **Last verified against source:** 2026-08-15 · **Applies to:** `feature/typed-memory-retrieval`
+**Status:** current source architecture; functional readiness unproven · **Mindscape source review:** 2026-10-10 · **Base branch:** `feature/typed-memory-retrieval`
 
 This document is the shortest authoritative description of the live Helix runtime. Historical audits and benchmark reports are intentionally not updated to imitate this design; see the [documentation index](README.md) for their status.
+
+## Explicit local mindscape composition (2026-10-09)
+
+`setup.py --composition mindscape` selects the integration in
+`core/mindscape.py`; the normal `main.py -> setup_helix -> PulseLoop` remains
+authoritative. Native Helix preconscious/mRAG, Context Office and 8D physics
+remain active. The adapter gestates or resumes MightyMem's `ContinualMind`
+(RWKV plus the 18,016,166-parameter Habitus cortex and its graph), projects
+canonical Helix memories into that graph and Context Loom, and compiles each
+pulse's context through Loom before the local Granite foreground call.
+
+RWKV consumes incoming events, the foreground's own private intentions and real
+action returns, and participates in the native recurrent cortex bridge. Granite
+retains foreground language. The current action bootstrap uses a complete private
+intention from Granite; the existing native SELF kernel must select the requested
+ability before its workspace actuator executes. Its actual sensory return closes
+the native experience cycle and enters the next Helix pulse. This is explicitly
+**not a trained RWKV filesystem intent decoder**. Startup and restart receipts
+must not be used as file-sensing or agent competence results. See [the launch contract](mindscape_launch.md) for the exact
+scope, source selection, persistence, and remaining validation requirements.
+
+The bootstrap foreground uses a JSON wire format with separate intention and
+message variants. This is an internal serialization boundary, not an Ollama tool
+call or an action authorization. Prose quoting an intention cannot execute it.
+An explicit workspace request stays pending without an actual native return.
+While that observation gate is active, the foreground grammar accepts only a
+private intention; after an actual return, intention and message variants are
+both available. This makes the serialization match the existing delivery rule
+without preselecting an action or authorizing execution. Prose that dispatched
+nothing receives interface feedback. This initial gate
+does not yet verify completion of every step in a multi-action request.
+
+As of 2026-10-10, the standard pulse renderer uses populated source sections for
+fresh messages, sensations, recalled context and internal state. The Mindscape
+Loom presentation adapter additionally separates recalled human statements from
+earlier unverified assistant statements. Empty sections are omitted. This is a
+presentation change; improved attention and non-tool action competence remain
+unverified. See the [attention diagnosis](audits/2026-10-10-attention-focus/README.md).
+
+The Mindscape composition now also keeps retrieval input separate from rendered
+context. Fresh messages/sensations/tool returns drive mRAG and Loom; only an idle
+continuation uses the last complete private thought. Outward replies stay in
+conversation history. mRAG retains which sentence head returned each source and
+searches every nonempty sentence view in this composition. The final compositor
+can place an italic `[recollection ...]` aside immediately after a uniquely
+matched passage, leaving the original source unchanged in storage. A source ID,
+content hash and original passage offsets accompany every placement. Unanchored
+material retains conditional source headings; subjective associations and
+preferences can accompany the private thought stream. Ownership and evidence
+status come from records, not pronouns or retrieval scores.
+
+This is source-aware presentation, not automatic contradiction verification.
+Loom and mRAG query independently. Focus now weights admission of their nominated
+material; raw mRAG similarity is not blended with Loom scores. The combined `context_assembly` receipt
+accounts for Helix-supplied material alongside Loom's own admission manifest.
+Private thoughts may be admitted as cognitive context, never as factual/action
+evidence. The actual-launch trials have not established coherent conversation or
+file-action competence. Provider-history accounting is now checked with the
+installed tokenizer; document/task cursors, historical record classification and
+action completion still need end-to-end validation. Details and
+implementation checks are in the [context weave audit](audits/2026-10-10-context-weave/README.md).
+
+### Activity-sensitive context and procedural knowledge (2026-10-10)
+
+**Required architectural correction, clarified by the user:** the memory
+modules have different responsibilities and must not compete directly in one
+cross-module candidate ranking. Each memory function selects material within
+its own role; the compositor preserves those roles and places their contributions
+in the relevant parts of the context. Current focus can change their space and
+placement within the selected model's physical context boundary. This does not
+make a factual recollection, a subjective association and a learned procedure
+interchangeable candidates. Headers alone do not establish this separation.
+
+The new `MindscapeContextCompiler` composes independent memory-role/producer
+streams. Each producer retains its own candidate order; raw similarity and
+graph scores do not compete across modules. Focus priorities allocate actual
+accepted token space among roles, with unused space available to other populated
+roles. A rejected contribution consumes no allocation. Native trust, correction
+and source-version rules remain in force. The MightyMem compiler exposes default
+preserving ordering/admission hooks for this composition. Narrow regression
+checks establish the selection contract; coherent product behavior still requires
+the actual launcher trial. See the [context stability diagnosis](audits/2026-10-10-context-stability/README.md)
+and [repair evidence](audits/2026-10-10-native-cycle-repair/README.md).
+
+`core/context_focus.py` supplies mixed activity preferences for conversation,
+action, writing, inquiry and reflection. Fresh input or the private continuation
+provides lexical starting signals; recalled material cannot classify its own
+next retrieval query. These are inspectable bootstrap rules, **not learned RWKV
+attention**. The recurrent controller continues to own its existing modality
+signals and does not acquire new action authority from these preferences.
+
+`MindscapeContextCompiler` admits complete Helix recollections and native Loom
+candidates at the same packet boundary. Section priorities change the available
+space they receive through weighted admission; there are no fixed section
+quotas, new result counts, or source-body truncation. Empty sections consume no
+reserved allocation. Current events, private continuation, output direction,
+current state and applicable ability awareness remain required. Oversize required
+content raises explicitly. Optional memory exclusions retain full source and
+reason receipts. Existing passage-linked recollections still use exact anchors.
+The installed Granite GGUF vocabulary and its pinned chat template now count the
+whole provider request, including system text and actual dialogue history. The
+compiler receives only the remaining input allowance. Retrieved pulse snapshots
+are transient; they never become earlier user utterances. A provider token-count
+mismatch or a length-ended generation is an explicit failure, not a delivered
+answer. Summaries are labeled fallible and unavailable summaries preserve the
+original dialogue.
+
+`mindscape.context_focus_profiles` overrides positive section priorities; its
+resolved values, focus signals, actual section counts, total packet count and
+admission decisions appear in runtime receipts. The entry point remains the
+wizard and normal `main.py` pulse path; no alternate evaluation composition is
+introduced.
+
+The foreground receives relevant situation/action/outcome descriptions from
+connected dispatch routes. A registered or dormant handler is insufficient.
+Local API-only Ollama does not receive a claim that Gemini tools can execute its
+intentions. The native profile supplies awareness from its own installed body:
+move, metadata-only sense, open UTF-8/PDF text, write with read-back, mkdir, and
+isolated Python execution of a hash-identified script. These use native LOOK/DO
+authorization and actual returns, rather than the foreground provider's tool API.
+The legacy local-tag and orchestrated routes remain separate compositions.
+
+`ProceduralMemory` now retains immutable receipt snapshots and outcome IDs,
+does not count replayed outcomes again, and requires explicit verification plus
+matching runtime receipts before recommending a route. Legacy success counters
+remain preserved but cannot establish supported experience. Longer verified
+sequences retain references to shorter verified sequences they contain. This
+relation records structural reuse, not logical entailment or proof of a more
+general belief. Available supported procedures can enter the normal pulse's
+procedure section; the runtime performs the evidence check without another LLM
+self-validation turn. The native workspace body is now connected, but its
+receipt bridge into this Helix procedural learner is still pending. Native
+experience-cycle returns alone do not establish procedural promotion or RWKV
+gradient learning.
+
+See the [implementation audit](audits/2026-10-10-procedural-focus/README.md).
+No post-change full-product competence result exists.
+
+The subsequent [actual launcher recheck](audits/2026-10-10-operational-recheck/README.md)
+confirmed successful wizard setup, full local initialization and message
+delivery, but all four requested replies remained on an old unrelated topic.
+No native file sensing, reading or script execution occurred. Two wake-up defects
+were repaired; the final direct launcher initializes successfully. This is not
+a functional-readiness pass, and it does not establish the cause of the attention
+failure or the effectiveness of the preceding context changes.
+
+The earlier sections below describe the underlying Helix runtime and separate
+optional routes. The `mindscape` profile requires the standard preconscious
+route and rejects incompatible Office-first or dual-provider settings.
 
 ## Runtime at a Glance
 
@@ -104,6 +253,26 @@ All canonical journal memories are decorated at runtime with a `RecordEnvelope` 
 | 7 | Associative transition | Directed cluster prototypes in separate 8D overlay | Surfaces lateral follow-ons based on repeated attention transitions |
 | 8 | Working state | Stability, Lagrangian snapshot, scratchpad | Preserved for somatic echo and rendering |
 
+## Subconscious Inquiry Dreaming & Gravitational Tension Queue
+
+During nightly DORMANT phases or voluntary sleep cycles, the Curator processes belief clusters using a **Gravitational Tension Queue**:
+- **Tension Queue Sorting:** Clusters are evaluated by mean 8D binding gravity ($\vec{g}$) and sorted densest-first, with the queue capped at the top 5 eligible candidates.
+- **Subconscious Reflection Inquiries:** Replaces generic summaries with targeted subconscious inquiry prompts (*"What information can be gleaned, or what conclusions, if any, can be drawn from the following belief fragments?"*).
+- **Meta-Prefix Sanitization:** LLM output parsing strips conversational intros (`"what information can be gleaned is..."`) to ensure clean Layer-2 concept anchors.
+
+## Somatic Engine & Voluntary `sleep` Tool
+
+To support non-linguistic internal state perception and autonomous sleep cycles:
+- **Somatic Engine (`core/somatic_engine.py`):** Expresses internal fatigue and cognitive tension via non-language **Somatic Tokens** (`SOMATIC:FATIGUE_HIGH`, `COGNITIVE:TENSION_HIGH`, `IMPULSE:REST_SUGGESTED`).
+- **Voluntary `sleep()` Internal Tool (`tools/internal_sleep_tool.py`):** Allows the agent to initiate a sleep/consolidation cycle when experiencing high cluster tension or fatigue. Returns a verified **Somatic Confirmation Receipt** (`[somatic receipt: voluntary sleep cycle executed...]`) that resets fatigue metrics without interrupting the conversational flow.
+
+## Dual-Manifold Physics Substrate
+
+Helix's physical memory dynamics operate on a dual-manifold architecture:
+- **Static Spatial Manifold:** Standard 384D/8D physical spatial embeddings for episodic memories and belief clusters.
+- **Fluid Habitus Graph Manifold (`core/habitus_graph_manifold.py`):** Tracks dynamic real-time graph node/edge activations $\vec{a}_t$.
+- **Temporal Hedonic Resonance $W(e)$:** Habitually matches current graph activation signatures against historical positive-valence memories over time, delivering non-conscious preference nudges (`(subconscious preference: familiar positive graph pathway — valence +0.85)`) to guide trajectory without forcing rigid logic.
+
 ## Provider Ecosystem
 
 | Provider | Intended use | Tool behavior |
@@ -124,6 +293,8 @@ All canonical journal memories are decorated at runtime with a `RecordEnvelope` 
 | Belief categories | `data/beliefs/*.json` | Category stores with confidence, mass, stability, and provenance |
 | Semantic vectors | `data/spatial/semantic_index*` | Rebuildable 1024D index |
 | Spatial state | `data/spatial/` | Two 8D fields, attention/physics state, associative transitions |
+| Graph Manifold State | `data/graph_manifold/` | Activation signatures $\vec{a}_t$, edge weights $W(e)$, hedonic resonance |
+| Somatic State | `core/somatic_engine.py` | Fatigue scores, tension metrics, somatic receipts |
 | Scratchpad | `data/scratchpad/` | Explicit working notes |
 | Task cognition | `data/tasks/` | Atomic task records, action plans, procedures, and orchestrators |
 | Entity cases | `data/cases/office_board.json` | Source references and session membership |
