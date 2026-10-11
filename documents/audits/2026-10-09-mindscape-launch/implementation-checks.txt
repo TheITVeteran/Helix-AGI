@@ -1,0 +1,51 @@
+$ ['venv/bin/python', '-m', 'unittest', 'tests.test_mindscape_setup', 'tests.test_codex_agent_setup', '-v']
+test_atomic_receipt_rejects_nonfinite_state (tests.test_mindscape_setup.CompositionContractTests.test_atomic_receipt_rejects_nonfinite_state) ... ok
+test_checkpoint_policy_is_validated (tests.test_mindscape_setup.CompositionContractTests.test_checkpoint_policy_is_validated) ... ok
+test_dual_mode_cannot_silently_replace_full_composition (tests.test_mindscape_setup.CompositionContractTests.test_dual_mode_cannot_silently_replace_full_composition) ... ok
+test_full_defaults_select_all_local_sources (tests.test_mindscape_setup.CompositionContractTests.test_full_defaults_select_all_local_sources) ... ok
+test_human_input_keeps_reported_status (tests.test_mindscape_setup.CompositionContractTests.test_human_input_keeps_reported_status) ... ok
+test_legacy_config_is_explicitly_separate (tests.test_mindscape_setup.CompositionContractTests.test_legacy_config_is_explicitly_separate) ... ok
+test_missing_package_fails_before_neural_initialization (tests.test_mindscape_setup.CompositionContractTests.test_missing_package_fails_before_neural_initialization) ... ok
+test_private_thought_does_not_become_a_fact (tests.test_mindscape_setup.CompositionContractTests.test_private_thought_does_not_become_a_fact) ... ok
+test_remote_provider_cannot_replace_local_foreground (tests.test_mindscape_setup.CompositionContractTests.test_remote_provider_cannot_replace_local_foreground) ... ok
+test_source_identity_and_versions_survive_projection (tests.test_mindscape_setup.CompositionContractTests.test_source_identity_and_versions_survive_projection) ... ok
+test_success_label_does_not_verify_historical_action (tests.test_mindscape_setup.CompositionContractTests.test_success_label_does_not_verify_historical_action) ... ok
+test_typo_cannot_silently_launch_a_smaller_system (tests.test_mindscape_setup.CompositionContractTests.test_typo_cannot_silently_launch_a_smaller_system) ... ok
+test_wizard_foreground_cannot_disagree_with_composition (tests.test_mindscape_setup.CompositionContractTests.test_wizard_foreground_cannot_disagree_with_composition) ... ok
+test_claude_remains_observe_until_focus_transport_is_supported (tests.test_codex_agent_setup.CodexAgentSetupTests.test_claude_remains_observe_until_focus_transport_is_supported) ... ok
+test_codex_subscription_enables_modular_agent_mode (tests.test_codex_agent_setup.CodexAgentSetupTests.test_codex_subscription_enables_modular_agent_mode) ... ok
+test_env_upsert_preserves_unrelated_secrets (tests.test_codex_agent_setup.CodexAgentSetupTests.test_env_upsert_preserves_unrelated_secrets) ... ok
+test_readiness_probe_checks_app_server_not_login_alone (tests.test_codex_agent_setup.CodexAgentSetupTests.test_readiness_probe_checks_app_server_not_login_alone) ... ok
+test_readiness_probe_surfaces_handshake_failure (tests.test_codex_agent_setup.CodexAgentSetupTests.test_readiness_probe_surfaces_handshake_failure) ... Codex App Server probe failed: unsupported app-server
+ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.005s
+
+OK
+
+exit_code=0
+
+$ ['venv/bin/python', '-m', 'compileall', '-q', 'main.py', 'setup.py', 'core/mindscape.py', 'core/mindscape_config.py', 'core/mindscape_lanes.py', 'core/pulse_loop.py', 'wizard/app.py', 'wizard/pages/summary.py', 'wizard/pages/credentials.py']
+
+exit_code=0
+
+$ ['venv/bin/python', '-c', 'import wizard.app; print("Wizard module import passed")']
+Wizard module import passed
+
+exit_code=0
+
+$ ['venv/bin/python', '-m', 'pip', 'check']
+No broken requirements found.
+WARNING: The directory '/home/nemo/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+
+exit_code=0
+
+$ ['bash', '-n', 'install.sh']
+
+exit_code=0
+
+$ ['git', 'diff', '--check']
+
+exit_code=0
+

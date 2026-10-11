@@ -15,6 +15,17 @@ import time
 import logging
 import logging.handlers
 import numpy as np
+import threading
+
+_shutdown_requested = threading.Event()
+
+# Select dependency source and neural device before imports can initialize torch.
+import json
+from pathlib import Path
+from core.mindscape_config import activate as activate_mindscape
+_config_path = Path(__file__).resolve().parent / "config/config.json"
+_startup_config = json.loads(_config_path.read_text()) if _config_path.exists() else {}
+_mindscape_settings = activate_mindscape(_startup_config)
 
 # ── Logging Setup ────────────────────────────────────────────────────
 # All logger.info/debug calls across the codebase route here.
@@ -52,6 +63,9 @@ def _load_credentials():
     GITHUB_TOKEN, GEMINI_API_KEY, ANTHROPIC_API_KEY, etc.
     """
     cred_path = os.path.expanduser("~/.config/helix/credentials.env")
+    if not os.path.exists(cred_path) and _mindscape_settings is not None:
+        # The full local composition needs no cloud/channel credentials.
+        return
     if not os.path.exists(cred_path):
         print("\n" + "="*70)
         print("  ⚠  HELIX AGI IS NOT CONFIGURED YET!")
@@ -127,9 +141,13 @@ def on_delivery(recipient: str, message: str):
     print(f"\n  📤 → {recipient}: {message}")
 
 
-def setup_helix(data_dir: str = "data"):
+def setup_helix(data_dir: str = "data", *, start_sensors: bool = True):
     """Initialize the complete Helix cognitive architecture."""
     print("Initializing Helix Architecture...")
+    local_models = None
+    if _mindscape_settings is not None:
+        from core.mindscape_config import local_model_receipt
+        local_models = local_model_receipt(_mindscape_settings)
 
     # Load configuration
     import json as _json
@@ -164,7 +182,7 @@ def setup_helix(data_dir: str = "data"):
     print(f"  Beliefs: {belief_stats}")
     print(f"  Scratchpad: {len(scratchpad.get_active_notes())} active notes")
 
-    # ── 2. Physics Engine (8D manifold + 384D semantic index) ──────────
+    # ── 2. Physics Engine (stable 8D manifold + 1024D semantic index) ──
     spatial_dir = os.path.join(data_dir, "spatial")
     physics = PhysicsEngine(data_dir=spatial_dir)
     memory_manager.set_physics(physics)
@@ -215,8 +233,9 @@ def setup_helix(data_dir: str = "data"):
         print(f"  Tool notes: load failed ({e})")
     
     # Sensory Cortex (Passive Background Vision/Audio)
-    sensory_cortex = SensoryCortex(camera_device=0)
-    sensory_cortex.start_passive_sensing()
+    sensory_cortex = SensoryCortex(camera_device=0) if start_sensors else None
+    if start_sensors:
+        sensory_cortex.start_passive_sensing()
     tool_executor._vision_cortex = sensory_cortex
     
     print(f"  Contacts: {len(channel_router.contacts)} known")
@@ -259,11 +278,23 @@ def setup_helix(data_dir: str = "data"):
     # _cfg is already loaded at the start of setup_helix()
     pulse_mode = _cfg.get("pulse_mode", "standard")
 
-    provider_config = detect_available_provider()
+    if _mindscape_settings is not None:
+        context = int(_mindscape_settings["local_context_window"])
+        provider_config = ProviderConfig(provider_type="ollama",
+            model=_mindscape_settings["local_model"], context_window=context,
+            options={"num_ctx": context, "url": _cfg.get("ollama_url", "http://localhost:11434")})
+    else:
+        provider_config = detect_available_provider()
     if provider_config:
         print(f"  Provider: {provider_config.provider_type} ({provider_config.model})")
     else:
         print("  Provider: NONE — running without LLM")
+
+    # One provider-aware subconscious route for classification, compression,
+    # belief formatting/consolidation, and Curator synthesis.  Codex/local
+    # providers use isolated sessions; API fallback remains Gemini Flash.
+    from core.auxiliary_llm import init_auxiliary_client
+    auxiliary_llm = init_auxiliary_client(provider_config)
 
     # ── 6. Pulse Loop ────────────────────────────────────────────
     journal_dir = "journals"
@@ -393,6 +424,13 @@ def setup_helix(data_dir: str = "data"):
             sensory_cortex=sensory_cortex,
         )
 
+    if _mindscape_settings is not None:
+        from core.mindscape import Mindscape
+        pulse_loop.mindscape = Mindscape(_mindscape_settings, data_dir, preconscious, local_models=local_models)
+        auxiliary_llm.context_counter = pulse_loop.mindscape.token_counter
+        print("  Mindscape: Helix + mRAG + MightyMem/Habitus cortex + RWKV + Context Loom loaded")
+        print(f"  Composition receipt: {pulse_loop.mindscape.directory / 'composition-manifest.json'}")
+
     # Wire comms bots to pulse loop for inbound messages
     telegram_bot.set_pulse_loop(pulse_loop)
     discord_bot.set_pulse_loop(pulse_loop)
@@ -433,37 +471,26 @@ def setup_helix(data_dir: str = "data"):
     # ── 7. Background Daemon (Dream Engine) ────────────────────────
     #    The Curator needs an llm_client with .generate(prompt, system_instruction)
     #    for Phase 2 (belief extraction) and Phase 3 (compound synthesis).
-    curator_llm = None
-    try:
-        from google import genai as _genai
-        _curator_client = _genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
+    class _CuratorResponse:
+        def __init__(self, text: str):
+            self.text = text or ""
 
-        class _CuratorLLM:
-            """Lightweight wrapper giving the Curator a .generate() interface."""
-            _model = "gemini-2.5-flash"
-            def generate(self, prompt: str, system_instruction: str = ""):
-                from google.genai import types as _types
-                config = _types.GenerateContentConfig(
-                    system_instruction=system_instruction or None,
-                    temperature=0.3,
-                    max_output_tokens=8192,
-                )
-                resp = _curator_client.models.generate_content(
-                    model=self._model,
-                    contents=[_types.Content(role="user", parts=[_types.Part(text=prompt)])],
-                    config=config,
-                )
-                # Return the full response: .text concatenates ALL text
-                # parts. Returning parts[0] handed the Curator only the
-                # first part of a multi-part (thinking-model) response,
-                # so every Phase 2 batch failed JSON parsing on
-                # truncated output.
-                return resp
+    class _CuratorLLM:
+        """Adapt AuxiliaryLLM text results to Curator's response interface."""
+        def generate(self, prompt: str, system_instruction: str = ""):
+            text = auxiliary_llm.generate(
+                prompt,
+                system_instruction=system_instruction,
+                temperature=0.3,
+                max_output_tokens=8192,
+            )
+            return _CuratorResponse(text or "")
 
-        curator_llm = _CuratorLLM()
-        print("  Curator LLM: ready (gemini-2.5-flash)")
-    except Exception as e:
-        print(f"  Curator LLM: unavailable ({e})")
+    curator_llm = _CuratorLLM()
+    curator_route = (
+        provider_config.provider_type if provider_config else "gemini fallback"
+    )
+    print(f"  Curator LLM: ready ({curator_route} auxiliary route)")
 
     daemon = BackgroundDaemon(
         physics_engine=physics,
@@ -471,6 +498,11 @@ def setup_helix(data_dir: str = "data"):
         memory_manager=memory_manager,
         llm_client=curator_llm,
         data_dir=data_dir,
+        case_office=getattr(
+            getattr(getattr(preconscious, "_unified", None), "context_office", None),
+            "cases",
+            None,
+        ),
     )
 
     print("  Pulse loop: Ready")
@@ -486,6 +518,30 @@ def setup_helix(data_dir: str = "data"):
     # ── 8. Post-Pulse Hooks (Subconscious Background Tasks) ──────────
     from core.post_pulse_hooks import register_hook
     from core.workflow_detector import workflow_pattern_hook, set_dependencies
+
+    # Natural thought -> durable task inception. In observe mode this records
+    # and audits intentions while legacy action execution remains intact. In
+    # active mode the main consciousness becomes thought-only and bounded,
+    # identity-shared focus threads receive task-specific capabilities.
+    from core.task_cognition.controller import TaskCognitionController
+
+    task_controller = TaskCognitionController(
+        data_dir=data_dir,
+        mode=_cfg.get("task_cognition_mode", "observe"),
+        pulse_loop=pulse_loop,
+        belief_store=belief_store,
+        memory_manager=memory_manager,
+        physics_engine=physics,
+        provider_config=provider_config,
+        tool_executor=tool_executor,
+        max_workers=_cfg.get("task_focus_workers", 2),
+        max_depth=_cfg.get("task_focus_max_depth", 4),
+    )
+    if hasattr(pulse_loop, "set_task_cognition_controller"):
+        pulse_loop.set_task_cognition_controller(task_controller)
+    else:
+        pulse_loop._task_cognition = task_controller
+    register_hook(task_controller.observe_pulse, name="task_inception")
 
     set_dependencies(memory_manager, physics, sentinel=sentinel)
     register_hook(workflow_pattern_hook, name="workflow_detector")
@@ -522,14 +578,21 @@ def setup_helix(data_dir: str = "data"):
         data_dir="data",
     )
 
-    print("  Post-pulse hooks: registered (workflow_detector, belief_detector, engagement_monitor, co_occurrence_tracker, affect_field)")
+    print(
+        "  Post-pulse hooks: registered "
+        f"(task_inception={task_controller.mode}, workflow_detector, "
+        "belief_detector, engagement_monitor, co_occurrence_tracker, affect_field)"
+    )
 
     return pulse_loop, orchestrator, daemon, memory_manager, belief_store, scratchpad, telegram_bot, discord_bot, slack_bot, whatsapp_bot, webhook_channel, sentinel
 
 
-def main_loop():
+def main_loop(data_dir="data", interactive=False):
     """Interactive loop — user messages are events in the pulse stream."""
-    pulse_loop, orchestrator, daemon, memory, beliefs, scratchpad, telegram_bot, discord_bot, slack_bot, whatsapp_bot, webhook_channel, sentinel = setup_helix()
+    pulse_loop, orchestrator, daemon, memory, beliefs, scratchpad, telegram_bot, discord_bot, slack_bot, whatsapp_bot, webhook_channel, sentinel = setup_helix(data_dir)
+    if _shutdown_requested.is_set():
+        pulse_loop.stop()
+        return
 
     print("\n--- Helix Pulse System ---")
     print("Commands: 'exit', 'stats', 'core', 'recent', 'beliefs', 'notes', 'dream'")
@@ -582,13 +645,12 @@ def main_loop():
 
     # Detect if running headless (no terminal attached)
     import sys
-    headless = not sys.stdin.isatty()
+    headless = not sys.stdin.isatty() and not interactive
 
     if headless:
         print("Running in headless/daemon mode (Telegram only).")
         try:
-            while True:
-                time.sleep(60)
+            _shutdown_requested.wait()
         except KeyboardInterrupt:
             pass
     else:
@@ -681,4 +743,19 @@ def main_loop():
 
 
 if __name__ == "__main__":
-    main_loop()
+    import argparse
+    import signal
+    # A launcher shutdown must let initialization or the active pulse finish
+    # saving its joint state, including when the process has no terminal.
+    signal.signal(signal.SIGTERM, lambda *_: _shutdown_requested.set())
+    parser = argparse.ArgumentParser(description="Run the configured Helix composition")
+    parser.add_argument("--data-dir", default="data")
+    parser.add_argument("--check-setup", action="store_true", help="Load the actual composition, sync/checkpoint, then exit")
+    parser.add_argument("--interactive", action="store_true", help="Force interactive CLI mode even without TTY")
+    args = parser.parse_args()
+    if args.check_setup:
+        components = setup_helix(args.data_dir, start_sensors=False)
+        components[0].stop()
+        print("Setup initialized. This verifies loading, not agent competence.")
+    else:
+        main_loop(args.data_dir, interactive=args.interactive)

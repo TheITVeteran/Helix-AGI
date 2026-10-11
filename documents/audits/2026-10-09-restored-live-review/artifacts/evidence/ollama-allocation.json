@@ -1,0 +1,42 @@
+{
+  "models": [
+    {
+      "name": "qwen3-embedding:0.6b",
+      "model": "qwen3-embedding:0.6b",
+      "size": 2371270737,
+      "digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "595.78M",
+        "quantization_level": "Q8_0"
+      },
+      "expires_at": "2026-10-09T12:47:13.969260552-04:00",
+      "size_vram": 0,
+      "context_length": 4096
+    },
+    {
+      "name": "granite4.1:3b",
+      "model": "granite4.1:3b",
+      "size": 7886623209,
+      "digest": "6fd349357287c7ffc9e38189a93b48ea175d24fc566b38f09cfc564fb7f303eb",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "granite",
+        "families": [
+          "granite"
+        ],
+        "parameter_size": "3.4B",
+        "quantization_level": "Q4_K_M"
+      },
+      "expires_at": "2026-10-09T12:36:47.231333796-04:00",
+      "size_vram": 0,
+      "context_length": 64000
+    }
+  ]
+}

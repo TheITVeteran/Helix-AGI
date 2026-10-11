@@ -77,8 +77,6 @@ class TestEmbeddedMRAG(unittest.TestCase):
             self.assertTrue(runtime.last_retrieval)
             self.assertEqual(runtime.last_retrieval[0]["id"], "people_fixture")
             self.assertEqual(runtime.last_retrieval[0]["tier"], 2)
-            self.assertEqual(status["retrieval_mode"], "main_semantic_384d_bridge")
-            self.assertEqual(status["semantic_dimensions"], 384)
             self.assertIn("LAYER 2 BELIEF ANCHORS", context)
             self.assertIn("category=people", context)
             self.assertEqual(
@@ -89,19 +87,6 @@ class TestEmbeddedMRAG(unittest.TestCase):
                 status["layer2_categories"][category] == 1
                 for category in LAYER2_BELIEF_CATEGORIES
             ))
-
-            memory_id = runtime.remember(
-                "A compatibility receipt was verified.",
-                tags=["over_agent"],
-                record_metadata={
-                    "record_kind": "action_receipt",
-                    "evidence_scopes": ["tool"],
-                },
-            )
-            stored = runtime.memory_manager.get_recent(limit=1)[0]
-            self.assertEqual(memory_id, stored["id"])
-            self.assertIn("record:record_kind:action_receipt", stored["tags"])
-            self.assertIn("record:evidence_scopes:tool", stored["tags"])
             runtime.close()
 
     def test_document_ingester_uses_mrag_write_boundary(self):

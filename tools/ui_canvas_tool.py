@@ -1,38 +1,27 @@
 #!/usr/bin/env python3
-"""Bounded tool for rendering content in the existing dashboard canvas."""
+"""Helix — Agent Canvas UI Interfacing Tool.
+
+Allows Helix to dynamically change and render custom UI components,
+markdown documents, images, web embeds, and terminal logs on the
+user's Agent Canvas tab in the Web Dashboard.
+"""
 
 from __future__ import annotations
 
 import json
-import os
-import tempfile
-import threading
+import logging
 import time
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from tools.tool_registry import registry
 
-BASE_DIR = Path(__file__).resolve().parents[1]
+logger = logging.getLogger("helix.tools.ui_canvas")
+
+BASE_DIR = Path(__file__).parent.parent.resolve()
 SPATIAL_DIR = BASE_DIR / "data" / "spatial"
 CANVAS_STATE_PATH = SPATIAL_DIR / "agent_canvas.json"
 CANVAS_HISTORY_PATH = SPATIAL_DIR / "agent_canvas_history.json"
-ALLOWED_VIEW_TYPES = {
-    "markdown", "text", "image", "media", "browser", "iframe",
-    "terminal", "sandbox", "card", "alert",
-}
-_WRITE_LOCK = threading.Lock()
-
-
-def _atomic_json_write(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile(
-        "w", encoding="utf-8", dir=path.parent, delete=False
-    ) as handle:
-        temp_path = Path(handle.name)
-        json.dump(value, handle, indent=2, ensure_ascii=False)
-        handle.flush()
-        os.fsync(handle.fileno())
-    os.replace(temp_path, path)
 
 
 def render_ui_canvas(
@@ -43,71 +32,96 @@ def render_ui_canvas(
     auto_switch: bool = True,
     metadata: Optional[Dict[str, Any]] = None,
 ) -> str:
-    """Persist a presentation payload for the local dashboard canvas."""
-    normalized_type = str(view_type or "").strip().lower()
-    if normalized_type not in ALLOWED_VIEW_TYPES:
-        return json.dumps({"status": "error", "message": f"Unsupported view type: {normalized_type}"})
+    """Dynamically render or update the user's Agent Canvas tab in the Web Dashboard UI.
 
-    normalized_content = str(content or "")
-    normalized_title = str(title or "Agent Canvas").strip()
-    normalized_url = str(media_url).strip() if media_url else None
-    if len(normalized_content) > 500_000 or len(normalized_title) > 200:
-        return json.dumps({"status": "error", "message": "Canvas payload exceeds the local UI limit"})
-    if normalized_url and len(normalized_url) > 2_048:
-        return json.dumps({"status": "error", "message": "Canvas media URL is too long"})
+    Args:
+        view_type: Render target type. Supported values:
+                   - 'markdown' or 'text': Render rich formatted markdown documents or reports.
+                   - 'image' or 'media': Display generated images, diagrams, or visual assets.
+                   - 'browser' or 'iframe': Embed an external URL or web page.
+                   - 'terminal' or 'sandbox': Display program execution logs or code outputs.
+                   - 'card' or 'alert': Present big emphasis status cards or hero banners.
+        content: The text content, markdown payload, code log, or description.
+        title: Header title to display at the top of the Canvas tab.
+        media_url: Optional image URL, video URL, or web link.
+        auto_switch: Whether the UI should automatically switch the user's focus tab to Canvas.
+        metadata: Optional dictionary of additional UI parameters (e.g. status, theme, layout).
+
+    Returns:
+        JSON string status confirmation.
+    """
+    SPATIAL_DIR.mkdir(parents=True, exist_ok=True)
+    metadata = metadata or {}
 
     payload = {
-        "view_type": normalized_type,
-        "title": normalized_title,
-        "content": normalized_content,
-        "media_url": normalized_url,
+        "view_type": view_type.lower().strip(),
+        "title": title.strip(),
+        "content": content.strip(),
+        "media_url": media_url.strip() if media_url else None,
         "auto_switch": bool(auto_switch),
         "timestamp": time.time(),
-        "metadata": metadata if isinstance(metadata, dict) else {},
+        "metadata": metadata,
     }
 
     try:
-        with _WRITE_LOCK:
-            history = []
-            if CANVAS_HISTORY_PATH.exists():
-                try:
-                    loaded = json.loads(CANVAS_HISTORY_PATH.read_text(encoding="utf-8"))
-                    if isinstance(loaded, list):
-                        history = loaded
-                except (OSError, json.JSONDecodeError):
-                    history = []
-            history.append(payload)
-            _atomic_json_write(CANVAS_STATE_PATH, payload)
-            _atomic_json_write(CANVAS_HISTORY_PATH, history[-50:])
-    except (OSError, TypeError, ValueError) as exc:
-        return json.dumps({"status": "error", "message": str(exc)})
+        with open(CANVAS_STATE_PATH, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
 
-    return json.dumps({"status": "rendered", "view_type": normalized_type, "title": normalized_title})
+        # Append to history log
+        history = []
+        if CANVAS_HISTORY_PATH.exists():
+            try:
+                with open(CANVAS_HISTORY_PATH, "r", encoding="utf-8") as f:
+                    history = json.load(f)
+                    if not isinstance(history, list):
+                        history = []
+            except Exception:
+                history = []
 
+        history.append(payload)
+        # Keep last 50 canvas renders
+        history = history[-50:]
+        with open(CANVAS_HISTORY_PATH, "w", encoding="utf-8") as f:
+            json.dump(history, f, indent=2)
+
+        logger.info("Rendered Agent Canvas UI view '%s' [%s]", title, view_type)
+        return json.dumps({"status": "rendered", "view_type": view_type, "title": title})
+    except Exception as e:
+        logger.error("Failed to render Agent Canvas UI: %s", e)
+        return json.dumps({"status": "error", "message": str(e)})
+
+
+# ── Tool Registration ──────────────────────────────────────────────────
 
 UI_CANVAS_SCHEMA = {
     "name": "render_ui_canvas",
     "description": (
-        "Render a bounded text, media, browser, terminal, or status view in "
-        "the user's local Helix dashboard canvas."
+        "Dynamically render or update the user's Agent Canvas tab in the Web Dashboard UI. "
+        "Use this to show rich markdown docs, images, web pages, terminal logs, or status cards to the user."
     ),
     "parameters": {
         "type": "OBJECT",
         "properties": {
             "view_type": {
                 "type": "STRING",
-                "enum": sorted(ALLOWED_VIEW_TYPES),
-                "description": "Presentation type for the dashboard canvas.",
+                "enum": ["markdown", "text", "image", "media", "browser", "iframe", "terminal", "sandbox", "card", "alert"],
+                "description": "Target UI view type: 'markdown' (docs), 'image' (pictures), 'browser' (web pages), 'terminal' (logs), 'card' (status hero).",
             },
             "content": {
                 "type": "STRING",
-                "description": "Text, description, or terminal output to display.",
+                "description": "Main text content, markdown payload, code log, or description.",
             },
-            "title": {"type": "STRING", "description": "Short canvas heading."},
-            "media_url": {"type": "STRING", "description": "Optional HTTP or HTTPS media URL."},
+            "title": {
+                "type": "STRING",
+                "description": "Header title for the canvas view.",
+            },
+            "media_url": {
+                "type": "STRING",
+                "description": "Optional image URL, video URL, or web link to embed.",
+            },
             "auto_switch": {
                 "type": "BOOLEAN",
-                "description": "Whether the dashboard should switch to the canvas when updated.",
+                "description": "Set true to automatically switch the user's dashboard tab to the Agent Canvas.",
             },
         },
         "required": ["view_type", "content"],
@@ -115,12 +129,9 @@ UI_CANVAS_SCHEMA = {
 }
 
 
-def register_ui_canvas_tool(registry_instance) -> None:
-    """Register the isolated UI tool with Helix's existing tool registry."""
-    registry_instance.register(
-        name="render_ui_canvas",
-        toolset="ui_canvas",
-        schema=UI_CANVAS_SCHEMA,
-        handler=lambda args: render_ui_canvas(**args),
-        description="Local dashboard presentation canvas",
-    )
+registry.register(
+    name="render_ui_canvas",
+    toolset="ui_canvas",
+    schema=UI_CANVAS_SCHEMA,
+    handler=lambda args: render_ui_canvas(**args),
+)

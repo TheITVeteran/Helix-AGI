@@ -9,6 +9,8 @@ import os
 import json
 import urllib.request
 import logging
+import shutil
+import subprocess
 from pathlib import Path
 
 logger = logging.getLogger("helix.wizard.model_detector")
@@ -44,7 +46,10 @@ DEFAULT_MODELS = {
         "llama3",
         "mistral"
     ],
-    "llama_cpp": []
+    "llama_cpp": [],
+    # Empty model selection means the authenticated account default.  The
+    # friendly label is normalized by CodexCliSession before thread/start.
+    "codex_cli": ["account-default"],
 }
 
 
@@ -109,3 +114,49 @@ def fetch_gemini_models(api_key: str) -> list:
     except Exception as e:
         logger.warning(f"Failed to fetch Gemini models: {e}")
         return []
+
+
+def codex_login_status() -> str:
+    """Return the local Codex authentication status, or an empty string."""
+    executable = shutil.which("codex")
+    if not executable:
+        return ""
+    try:
+        proc = subprocess.run(
+            [executable, "login", "status"],
+            capture_output=True,
+            text=True,
+            timeout=8,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return ""
+    output = (proc.stdout or proc.stderr or "").strip()
+    return output if proc.returncode == 0 else ""
+
+
+def codex_app_server_probe(timeout: int = 20) -> tuple[bool, str]:
+    """Verify login plus the App Server initialize/thread handshake.
+
+    Login status alone does not prove that the installed CLI supports the
+    production transport Helix uses.  This opens no turn, calls no host tool,
+    and closes the ephemeral read-only thread immediately.
+    """
+    login = codex_login_status()
+    if not login:
+        return False, "Install the Codex CLI and run `codex login`."
+    session = None
+    try:
+        from core.self_state import identity_kernel
+        from llm.providers.codex_cli_provider import CodexCliSession
+
+        session = CodexCliSession(
+            system_instruction=identity_kernel("I am Helix."),
+            options={"timeout": timeout, "thought_only": True, "effort": "low"},
+        )
+        return True, f"{login}\nCodex App Server handshake: ready."
+    except Exception as exc:
+        logger.warning("Codex App Server probe failed: %s", exc)
+        return False, f"Codex login is present, but App Server failed: {exc}"
+    finally:
+        if session is not None:
+            session.close()

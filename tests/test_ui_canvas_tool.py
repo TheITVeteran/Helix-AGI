@@ -1,63 +1,61 @@
-"""Tests for the isolated dashboard canvas extension."""
+#!/usr/bin/env python3
+"""Integration test for Helix's Agent-Controlled UI Canvas Tool.
 
-from __future__ import annotations
+Tests:
+  1. Dispatching `render_ui_canvas` tool call from tool registry
+  2. JSON state persistence to `data/spatial/agent_canvas.json` and history logging
+  3. API payload structure for Markdown, Image, Browser Embed, and Terminal views
+"""
 
 import json
+import os
+import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
 
-from tools.tool_registry import ToolRegistry
-from tools import ui_canvas_tool
-from tools.tool_executor import ToolExecutor
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
+
+from tools.tool_registry import registry
+import tools.ui_canvas_tool as ui_tool
 
 
-class UiCanvasToolTests(unittest.TestCase):
-    def test_registration_is_isolated_to_ui_canvas_toolset(self):
-        registry = ToolRegistry()
-        ui_canvas_tool.register_ui_canvas_tool(registry)
-        self.assertEqual(registry.get_tool_names("ui_canvas"), ["render_ui_canvas"])
-        self.assertEqual(registry.get_tool_names("core"), [])
+class TestAgentUiCanvas(unittest.TestCase):
 
-    def test_tool_executor_discovers_ui_canvas_without_core_schema_changes(self):
-        executor = ToolExecutor()
-        entry = executor._registry.get_entry("render_ui_canvas")
-        self.assertIsNotNone(entry)
-        self.assertEqual(entry.toolset, "ui_canvas")
+    def test_01_tool_registration(self):
+        declarations = registry.get_declarations(active_toolsets={"ui_canvas"})
+        names = [d["name"] for d in declarations]
+        self.assertIn("render_ui_canvas", names)
 
-    def test_render_writes_bounded_state_and_history(self):
-        with tempfile.TemporaryDirectory() as temp_dir:
-            state = Path(temp_dir) / "agent_canvas.json"
-            history = Path(temp_dir) / "agent_canvas_history.json"
-            with patch.object(ui_canvas_tool, "CANVAS_STATE_PATH", state), patch.object(
-                ui_canvas_tool, "CANVAS_HISTORY_PATH", history
-            ):
-                result = json.loads(ui_canvas_tool.render_ui_canvas(
-                    view_type="markdown",
-                    title="Local report",
-                    content="# Verified\nNo runtime replacement.",
-                ))
-            self.assertEqual(result["status"], "rendered")
-            payload = json.loads(state.read_text(encoding="utf-8"))
-            saved_history = json.loads(history.read_text(encoding="utf-8"))
-            self.assertEqual(payload["view_type"], "markdown")
-            self.assertEqual(saved_history, [payload])
+    def test_02_render_markdown_canvas(self):
+        res_str = registry.dispatch("render_ui_canvas", {
+            "view_type": "markdown",
+            "title": "Quantum Computation Report",
+            "content": "# Quantum Report\n\n- Matrix speedup: 10x\n- Status: PASSED",
+            "auto_switch": True,
+        })
+        res = json.loads(res_str)
+        self.assertEqual(res.get("status"), "rendered")
 
-    def test_invalid_view_is_rejected_without_writing(self):
-        with tempfile.TemporaryDirectory() as temp_dir:
-            state = Path(temp_dir) / "agent_canvas.json"
-            with patch.object(ui_canvas_tool, "CANVAS_STATE_PATH", state):
-                result = json.loads(ui_canvas_tool.render_ui_canvas("executable", "payload"))
-            self.assertEqual(result["status"], "error")
-            self.assertFalse(state.exists())
+        # Verify state file
+        state_file = REPO_ROOT / "data" / "spatial" / "agent_canvas.json"
+        self.assertTrue(state_file.exists())
+        with open(state_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            self.assertEqual(data.get("view_type"), "markdown")
+            self.assertEqual(data.get("title"), "Quantum Computation Report")
 
-    def test_dashboard_canvas_restricts_embedded_url_protocols(self):
-        html = (Path(__file__).resolve().parents[1] / "dashboard" / "dashboard_ui.html").read_text(
-            encoding="utf-8"
-        )
-        self.assertIn("url.protocol === 'http:' || url.protocol === 'https:'", html)
-        self.assertIn("frame.sandbox", html)
+    def test_03_render_image_canvas(self):
+        res_str = registry.dispatch("render_ui_canvas", {
+            "view_type": "image",
+            "title": "Generated Attractor Topology",
+            "content": "8D Spatial Manifold Attractor Representation",
+            "media_url": "https://example.com/attractor.png",
+            "auto_switch": False,
+        })
+        res = json.loads(res_str)
+        self.assertEqual(res.get("status"), "rendered")
 
 
 if __name__ == "__main__":

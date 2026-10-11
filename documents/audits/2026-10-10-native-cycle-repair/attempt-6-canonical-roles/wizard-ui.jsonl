@@ -1,0 +1,19 @@
+{"time": 1791679226.0164473, "event": "status", "page": 0, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791679226.0945444, "event": "click", "page": 0, "button": "Get Started  \u2192"}
+{"time": 1791679227.013896, "event": "status", "page": 1, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791679227.067572, "event": "click", "page": 1, "button": "Next  \u2192"}
+{"time": 1791679228.0145843, "event": "status", "page": 2, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791679228.0537622, "event": "click", "page": 2, "button": "Next  \u2192"}
+{"time": 1791679229.0141401, "event": "status", "page": 3, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791679229.0323546, "event": "selected_tools", "tools": ["core", "files"]}
+{"time": 1791679229.0504751, "event": "click", "page": 3, "button": "Next  \u2192"}
+{"time": 1791679230.0139441, "event": "status", "page": 4, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791679230.052298, "event": "click", "page": 4, "button": "Next  \u2192"}
+{"time": 1791679231.0138493, "event": "status", "page": 5, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791679231.055991, "event": "click", "page": 5, "button": "Next  \u2192"}
+{"time": 1791679232.0139525, "event": "status", "page": 6, "install_rc": null, "status": "", "child_pid": null}
+{"time": 1791679232.05519, "event": "click", "page": 6, "button": "\ud83d\ude80  Create Helix"}
+{"time": 1791679253.0136168, "event": "status", "page": 6, "install_rc": 0, "status": "", "child_pid": null}
+{"time": 1791679255.2482688, "event": "status", "page": 6, "install_rc": 0, "status": "Loading the configured agent composition\u2026", "child_pid": 1842570}
+{"time": 1791679295.0140011, "event": "status", "page": 6, "install_rc": 0, "status": "Mindscape loaded: Helix \u00b7 mRAG \u00b7 MightyMem/Habitus \u00b7 RWKV \u00b7 Context Loom", "child_pid": 1842570}
+{"time": 1791679664.0140636, "event": "close_requested"}

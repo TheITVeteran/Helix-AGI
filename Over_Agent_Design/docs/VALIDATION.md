@@ -11,7 +11,7 @@ the Helix Over-Agent. Their scores are not valid evidence about this system.
 The deterministic test suite checks implementation boundaries, not model
 quality claims:
 
-- Helix `main` 384D semantic retrieval compatibility, including exact Layer-2 term anchors;
+- native Helix unified mRAG retrieval, including Layer-2 term anchors;
 - canonical inbound and outbound turn persistence;
 - document ingestion through the same memory write boundary;
 - desktop widget drag, resize, and local WebGL asset wiring;

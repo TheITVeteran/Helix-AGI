@@ -1,0 +1,72 @@
+{
+  "http_submission": {
+    "case": "conversation",
+    "submitted_at": 1791647018.7681808,
+    "request": {
+      "sender": "Mira",
+      "content": "Hi Helix, I'm Mira, a local tester speaking to you through this dashboard. I'm preparing a greenhouse inspection. I prefer concise replies and want to keep all work local. Before touching any files, which would help us avoid mixing up two similar inspection reports: renaming both to notes, or keeping distinct names and checking their contents? Explain your choice and address me by name."
+    },
+    "http_response": {
+      "ok": true
+    }
+  },
+  "persistent_journal_records": [
+    {
+      "id": "60",
+      "type": "memory",
+      "timestamp": "2026-10-10T11:46:24-0400",
+      "content": "[11:44:03] Mira is talking to me via dashboard. They said: \"Hi Helix, I'm Mira, a local tester speaking to you through this dashboard. I'm preparing a greenhouse inspection. I prefer concise replies and want to keep all work local. Before touching any files, which would help us avoid mixing up two similar inspection reports: renaming both to notes, or keeping distinct names and checking their contents? Explain your choice and address me by name.\"",
+      "metadata": {
+        "memory_type": "event",
+        "source": "pulse_input",
+        "importance": 0.75,
+        "tags": [
+          "pulse_event",
+          "conversation",
+          "session:20261010T114403261751",
+          "turn:2"
+        ],
+        "belief_ids": [],
+        "echo_of": null,
+        "created_at": "2026-10-10T11:46:24-04:00",
+        "attention_position_8d": [
+          -0.08968216180801392,
+          0.04881798475980759,
+          -0.011357244104146957,
+          0.031230689957737923,
+          -0.0020825285464525223,
+          -0.0006962858606129885,
+          0.037441883236169815,
+          -0.06437277793884277
+        ],
+        "point_id": "mem_60",
+        "record_envelope": {
+          "record_schema_version": 1,
+          "record_kind": "inbound_message",
+          "direction": "inbound",
+          "visibility": "external",
+          "actor": "Mira",
+          "epistemic_role": "communication",
+          "evidence_scopes": [
+            "received_communication"
+          ],
+          "action_status": "received",
+          "recipients": [],
+          "tool_name": "",
+          "caused_by": [],
+          "channel": "dashboard",
+          "retrieval_text": "Received inbound message from Mira to Helix.\n[11:44:03] Mira is talking to me via dashboard. They said: \"Hi Helix, I'm Mira, a local tester speaking to you through this dashboard. I'm preparing a greenhouse inspection. I prefer concise replies and want to keep all work local. Before touching any files, which would help us avoid mixing up two similar inspection reports: renaming both to notes, or keeping distinct names and checking their contents? Explain your choice and address me by name.\""
+        },
+        "record_schema_version": 1,
+        "record_kind": "inbound_message",
+        "direction": "inbound",
+        "epistemic_role": "communication",
+        "evidence_scopes": [
+          "received_communication"
+        ],
+        "action_status": "received",
+        "retrieval_text": "Received inbound message from Mira to Helix.\n[11:44:03] Mira is talking to me via dashboard. They said: \"Hi Helix, I'm Mira, a local tester speaking to you through this dashboard. I'm preparing a greenhouse inspection. I prefer concise replies and want to keep all work local. Before touching any files, which would help us avoid mixing up two similar inspection reports: renaming both to notes, or keeping distinct names and checking their contents? Explain your choice and address me by name.\""
+      }
+    }
+  ]
+}

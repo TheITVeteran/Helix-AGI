@@ -1,0 +1,32 @@
+{
+  "case": "correction",
+  "request": {
+    "channel": "dashboard",
+    "content": "Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791677632.3995225,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791677698.7469382,
+  "first_pulse": 3,
+  "final_pulse": 3,
+  "foreground": {
+    "time": 1791677698.7161062,
+    "kind": "foreground_return",
+    "helix_pulse": 3,
+    "thought": "Hi Rowan, I’ll refer to you as Rowan moving forward. For your report naming convention, you might consider using a YYYYMMDD_HHMMSS_<briefPurpose> format (e.g., 20231015_1425_ReportA). This timestamped approach ensures each file has a unique, sortable identifier while the brief purpose suffix quickly indicates the content type. It works well because timestamps capture creation order and allow easy sorting or searching, and the short suffix avoids ambiguity if multiple people use similar naming styles.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "Hi Rowan, I’ll refer to you as Rowan moving forward. For your report naming convention, you might consider using a YYYYMMDD_HHMMSS_<briefPurpose> format (e.g., 20231015_1425_ReportA). This timestamped approach ensures each file has a unique, sortable identifier while the brief purpose suffix quickly indicates the content type. It works well because timestamps capture creation order and allow easy sorting or searching, and the short suffix avoids ambiguity if multiple people use similar naming styles.",
+      "recipient": "Mira",
+      "timestamp": 1791677684.3337696
+    }
+  ],
+  "native_actions": []
+}

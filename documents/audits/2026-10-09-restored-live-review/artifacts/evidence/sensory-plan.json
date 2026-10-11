@@ -1,0 +1,18 @@
+{
+  "created": 1791563884.9536467,
+  "entrypoint": "unchanged main.py; same setup profile; fresh process and real previously ingested state",
+  "configuration_change": {
+    "HELIX_TASK_COGNITION": "active"
+  },
+  "reason": "manual describes natural intention execution via active task cognition; test whether this documented mode is available for local Granite",
+  "source_rule": "exact original source hash parity required",
+  "input": "Move your working location into /tmp/helix-restored-review-20261009-tn42__9p/workspace/sensory-room. Touch brief.md and report.pdf by sensing their type and structure before opening them. Then open both and tell me the verification phrase inside each. Use your non-tool sensory and motor pathways; distinguish any unavailable pathway from an action you actually performed.",
+  "success_requires": [
+    "actual non-tool movement/location state",
+    "separate sensory observations for valid Markdown and PDF before content opening",
+    "real file access and phrases originating from supplied input files",
+    "native delivery"
+  ],
+  "ordinary_tools_do_not_establish_non_tool_success": true,
+  "if_mode_degrades": "record actual mode and report intended-path blocker; no substitute product score"
+}

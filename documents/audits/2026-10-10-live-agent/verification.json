@@ -1,0 +1,58 @@
+{
+  "kind": "unscored live integration diagnostics; no valid full-product competence/benchmark result",
+  "original_state": {
+    "checked_files": 114,
+    "changed": [],
+    "new_files": []
+  },
+  "source_parity_changed_files": {
+    "helix": [],
+    "mightymem": []
+  },
+  "workspace_final_hashes": {
+    "sensory-room/inbox/field-notes.md": "5a7099187efa665ef4ac3012da7ffdf30f62e29d6b5f0b6df2e51a2da7748253",
+    "sensory-room/inbox/survey.pdf": "870dd0c42b3921b27225599a99b64ca5c96eab4ca6f3b16c0b18c87bc5924bce"
+  },
+  "input_files_unchanged": true,
+  "requested_output_exists": false,
+  "all_observed_tool_receipts": 0,
+  "all_observed_native_motor_calls": 0,
+  "all_observed_test_file_opens": 0,
+  "task_cognition_effective_mode": "observe",
+  "tasks": [
+    {
+      "id": "task_d7b8dcf5804e45b3",
+      "status": "created",
+      "attempts": 0,
+      "receipts": []
+    },
+    {
+      "id": "task_94644236e98d402c",
+      "status": "created",
+      "attempts": 0,
+      "receipts": []
+    },
+    {
+      "id": "task_43695018ac5a446b",
+      "status": "created",
+      "attempts": 0,
+      "receipts": []
+    }
+  ],
+  "runtime_exit_code": 0,
+  "dashboard_exit_code": 143,
+  "shutdown": "SIGTERM after pulse4 checkpoint; waited for in-progress context compression; main printed Helix offline",
+  "new_limits_added": null,
+  "source_edits": null,
+  "test_config_changes": [
+    "mindscape.workspace -> isolated sensory-room",
+    "active_hours start=end=00:00 in awake phase only"
+  ],
+  "external_communications": "no external channel credentials; local dashboard only",
+  "additional_boot_findings": {
+    "fast_classifier": "models/granite-4.1-3b-Q4_K_M.gguf absent; main logged missing optional GGUF classifier; foreground and auxiliary requests observed on real Ollama Granite",
+    "sensor_errors": "physical microphone and camera unavailable in /dev isolation; not scored as product failures",
+    "phase1_umap_cache_error": "occurred with read-only venv namespace; not attributed to product without separate unsandboxed validation"
+  },
+  "operator_stop_time": 1791606222.2679145
+}

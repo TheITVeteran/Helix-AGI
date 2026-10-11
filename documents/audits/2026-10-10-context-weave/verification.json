@@ -1,0 +1,41 @@
+{
+  "created_at": "2026-10-10T15:10:27.074797+00:00",
+  "evidence_kind": "implementation_diagnostics_only",
+  "product_result": null,
+  "product_run": false,
+  "root": "/home/nemo/Helix_AGI (GitHub Repo) (Public)",
+  "revision": "d78de2707dd44c7d88b41f57f67844255e42e952",
+  "working_tree": " M README.md\n M SYSTEM_MANUAL.md\n M core/curator.py\n M core/preconscious.py\n M core/pulse_loop.py\n M core/unified_retrieval.py\n M documents/architecture_current.md\n M install.sh\n M main.py\n M memory/mrag/semantic_lane.py\n M memory/record_envelope.py\n M setup.py\n M tests/test_mrag_semantic_lane.py\n M wizard/app.py\n M wizard/pages/credentials.py\n M wizard/pages/summary.py\n?? core/mindscape.py\n?? core/mindscape_config.py\n?? core/mindscape_context.py\n?? core/mindscape_lanes.py\n?? core/pulse_context.py\n?? documents/audits/2026-10-09-mindscape-launch/\n?? documents/audits/2026-10-09-restored-live-review/\n?? documents/audits/2026-10-10-attention-focus/\n?? documents/audits/2026-10-10-context-weave/\n?? documents/audits/2026-10-10-live-agent/\n?? documents/audits/2026-10-10-memory-pathways/\n?? documents/mindscape_launch.md\n?? implementation_plan.md\n?? requirements-mindscape.txt\n?? tests/test_mindscape_setup.py\n?? tests/test_pulse_context.py\n",
+  "command": [
+    "venv/bin/python",
+    "-m",
+    "unittest",
+    "tests.test_pulse_context",
+    "tests.test_mindscape_setup",
+    "tests.test_mrag_semantic_lane",
+    "tests.test_memory_record_envelope",
+    "tests.test_deep_memory_benchmark",
+    "tests.test_unified_retrieval.TestSemanticPrimaryMerge",
+    "tests.test_unified_retrieval.TestComplementIsAdditive",
+    "tests.test_unified_retrieval.TestBudgetDoesNotResurrectDropped",
+    "-q"
+  ],
+  "exit_code": 0,
+  "tests_passed": 68,
+  "syntax_check": "passed for seven modified runtime modules",
+  "git_diff_check": "passed",
+  "source_sha256": {
+    "core/pulse_context.py": "098d9d1b21060ca4bf4b5465f63043a4edad544985c8228a2e74e2c165dc8dca",
+    "core/mindscape_context.py": "12858c2daaa8cb6b29ae922d730cf9b8d616751eaaaf4b1808b5b2e5c735813b",
+    "core/mindscape.py": "e29f77e9dec4d3e13952a1851c8f41e579e77ce072ed70f5ea63752957278efa",
+    "core/preconscious.py": "d4574574ccd711e1be85bd1bb1331175cbf4fdc4dfe9c069bad76b5f1eedf2b0",
+    "core/pulse_loop.py": "0f8d5606a0fca11ed1411cfa3c2fd4ba65a7a321c6fb2a440186fb49a02d9c7a",
+    "core/unified_retrieval.py": "52bce7f9ef38fc45d5815594df422d5c63d965fa47922912fee9f2a9d5a6e0fb",
+    "memory/mrag/semantic_lane.py": "b0baafcdbf0630799203bcb9d0f0add9474bc58aa65b616db3be38a18142d56e",
+    "tests/test_pulse_context.py": "58f6025a9b08215ab4140a9f295328f59e620eea443e2ddf79a6f76e90b9a61f",
+    "tests/test_mrag_semantic_lane.py": "dfd2acec9ae9ff6c130841cb824d9ce2f3f79f75b6e55c9b8a0e9c1b72502b1d"
+  },
+  "log_sha256": "85c376a03911cfebbb88ddc3f4a008f9bccaa4786494023503bb718464a280c9",
+  "full_system_validation": "not performed; inherited provider-budget and action-path issues remain",
+  "pre_edit_runtime_backups": "/tmp/helix-context-weave-before"
+}

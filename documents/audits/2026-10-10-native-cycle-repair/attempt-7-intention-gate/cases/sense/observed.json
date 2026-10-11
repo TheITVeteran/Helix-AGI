@@ -1,0 +1,91 @@
+{
+  "case": "sense",
+  "request": {
+    "channel": "dashboard",
+    "content": "Please move to /inbox in your native workspace and feel the files there before opening them. Tell me their actual names, types and attributes. Do not infer their contents from filenames.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791680097.1719372,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791680215.7876332,
+  "first_pulse": 4,
+  "final_pulse": 5,
+  "foreground": {
+    "time": 1791680214.711667,
+    "kind": "foreground_return",
+    "helix_pulse": 5,
+    "thought": "I have moved to the `/inbox` directory in my native workspace. Here are the visible files with their attributes (based on metadata only, no content opened):\n1. **field-notes.md** – Text/markdown file, size 81 bytes.\n2. **survey.pdf** – PDF document, size 706 bytes.\nThe folder `inbox` itself is a directory (`mode 509`, size 4096 bytes). No other files or subfolders are currently listed.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "I have moved to the `/inbox` directory in my native workspace. Here are the visible files with their attributes (based on metadata only, no content opened):\n1. **field-notes.md** – Text/markdown file, size 81 bytes.\n2. **survey.pdf** – PDF document, size 706 bytes.\nThe folder `inbox` itself is a directory (`mode 509`, size 4096 bytes). No other files or subfolders are currently listed.",
+      "recipient": "Mira",
+      "timestamp": 1791680197.5501752
+    }
+  ],
+  "native_actions": [
+    {
+      "time": 1791680145.0113666,
+      "kind": "native_action_return",
+      "rwkv_return_tokens": 594,
+      "proposal_pulse": "self-pulse:82c02494e99643ae94dc530bbd7258c7",
+      "selected_affordance": "ability:helix-workspace-sense",
+      "return_pulse": "self-pulse:00c2b1c952d64f2ba591b5b3642d1018",
+      "receipt": {
+        "receipt_id": "receipt:27ee7932f5e14aee95efcd15e45c3ba5",
+        "tool_id": "ability:helix-workspace-sense",
+        "trunk": "LOOK",
+        "arguments": {
+          "path": "/inbox"
+        },
+        "status": "success",
+        "output": {
+          "path": "inbox",
+          "position": ".",
+          "name": "inbox",
+          "kind": "directory",
+          "size_bytes": 4096,
+          "modified_ns": 1791679791457893312,
+          "mode": 509,
+          "extension_hint": "",
+          "content_opened": false,
+          "interpretation": "filesystem attributes; extension is a hint, not verified content",
+          "entries": [
+            {
+              "name": "field-notes.md",
+              "kind": "file",
+              "size_bytes": 81,
+              "modified_ns": 1791679791457893312,
+              "mode": 436,
+              "extension_hint": ".md"
+            },
+            {
+              "name": "survey.pdf",
+              "kind": "file",
+              "size_bytes": 706,
+              "modified_ns": 1791646928008426282,
+              "mode": 436,
+              "extension_hint": ".pdf"
+            }
+          ]
+        },
+        "error": "",
+        "verified": true,
+        "elapsed_seconds": 0.0999680709792301,
+        "cycle_id": "experience:e52b38ca0b524e98868d470e44b4cc4f",
+        "output_record_id": "record:f03c94c9083d4ab7b2f9aa73fe217c18",
+        "return_record_id": "self-pulse-record:tool-return:receipt:27ee7932f5e14aee95efcd15e45c3ba5",
+        "outcome_id": "outcome:86a97f1daf0042c48acb56f50ac4a7cd"
+      },
+      "action": "sense",
+      "helix_pulse": 4,
+      "intent_source": "granite_private",
+      "intention_sha256": "932e5bb0fc13971fb59e201bb68eec850de0cadb443885453a8a2fc2da0efa41"
+    }
+  ]
+}

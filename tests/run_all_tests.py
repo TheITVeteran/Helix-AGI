@@ -91,6 +91,18 @@ class TestSuiteRunner:
             ("test_belief_operations.py", "Belief Operations Tests"),
             ("test_channel_router.py", "Channel Router Tests"),
             ("test_preconscious_injection.py", "Preconscious Context Builder Tests"),
+            ("test_mrag_semantic_lane.py", "mRAG Multi-Head Semantic Tests"),
+            ("test_semantic_encoder.py", "1024D Semantic Encoder Tests"),
+            ("test_unified_retrieval.py", "Unified Retrieval Lane-Separation Tests"),
+            ("test_context_office.py", "Context Office Specialist Tests"),
+            ("test_case_memory_office.py", "Case and Maintained Memory-Log Tests"),
+            ("test_office_runtime.py", "Office-First Context Runtime Tests"),
+            ("test_associative_transitions.py", "Associative Transition Tests"),
+            ("test_deep_memory_benchmark.py", "Progressive Deep-Memory Benchmark Tests"),
+            ("test_longmemeval_sandbox.py", "LongMemEval Sandbox Tests"),
+            ("test_ragoffice_parity_sandbox.py", "RAGOffice Parity Sandbox Tests"),
+            ("test_codex_cli_provider.py", "Codex App Server Provider Tests"),
+            ("test_task_cognition.py", "Event-Driven Task Cognition Tests"),
             ("test_crash_reporter.py", "Crash Reporter Tests"),
             ("test_emc2_retrieval.py", "E=mc² Retrieval Tests"),
             
@@ -105,7 +117,7 @@ class TestSuiteRunner:
         
         if quick_mode:
             # Run only validation and core tests
-            test_scripts = test_scripts[:8]
+            test_scripts = test_scripts[:18]
         
         passed = 0
         failed = 0

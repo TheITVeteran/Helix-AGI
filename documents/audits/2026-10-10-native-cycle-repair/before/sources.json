@@ -1,0 +1,9 @@
+{
+  "core/mindscape.py": "c34c530880f9582c1549c07bfd140bb96d40ed969b68a8bb804b26ff0ae52763",
+  "core/mindscape_context.py": "b8b9bac95c1e9f8bd5fef3812fb4dec2695c75fda28769daa9ceb06e4ccceb68",
+  "core/mindscape_lanes.py": "c803eb5b29d49134d0a576c81af4297d6a46d5cdc77457b449c8d0e71a55616a",
+  "core/pulse_context.py": "e1d75936b790d18fa8decac211ad283361343a8b70db376000d23c2ffa3ea229",
+  "core/context_compressor.py": "c6bd509af40c231f5d19e43d8aa09000b14367cd508117b5a46251f3c148faa5",
+  "core/pulse_loop.py": "2f673862b8e97f40af34bfe5d5d28da6dab833d656ed81f4bfc00a10eb35844b",
+  "llm/providers/ollama_provider.py": "a762379592596b8adfd3260353543932f08175f2bf63d5fa8be763ccaef1f0cc"
+}

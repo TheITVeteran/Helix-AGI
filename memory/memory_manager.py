@@ -9,13 +9,25 @@ is preserved via the migration script (to be added later).
 import json
 import logging
 import os
+import threading
+from functools import wraps
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from memory.cognitive_journal import CognitiveJournal
+from memory.record_envelope import build_record_envelope, envelope_from_metadata
 
 logger = logging.getLogger("helix.memory.manager")
+
+
+def _serialized_store(method):
+    """Serialize memory ingest across conscious and task-focus threads."""
+    @wraps(method)
+    def wrapped(self, *args, **kwargs):
+        with self._store_lock:
+            return method(self, *args, **kwargs)
+    return wrapped
 
 
 def _now_iso() -> str:
@@ -53,8 +65,9 @@ class MemoryManager:
         # In‑memory counter to emulate short‑term IDs for compatibility
         self._st_counter = self._initialize_counter()
         # Physics engine reference (injected after construction)
-        # Provides access to the 384D SemanticIndex for conscious recall
+        # Provides access to the 1024D SemanticIndex for conscious recall
         self._physics = None
+        self._store_lock = threading.RLock()
         logger.info(f"MemoryManager initialized with journal at {self.journal.path}")
 
     def _initialize_counter(self) -> int:
@@ -85,14 +98,14 @@ class MemoryManager:
         return point_id
 
     def set_physics(self, physics_engine):
-        """Wire the physics engine for 384D semantic search.
+        """Wire the physics engine for native 1024D semantic search.
 
         Called during setup_helix() after both MemoryManager and PhysicsEngine
         are constructed. Enables semantic anchoring, contextual recall,
         and somatic-echo retrieval.
         """
         self._physics = physics_engine
-        logger.info("MemoryManager: physics engine wired for 384D semantic search")
+        logger.info("MemoryManager: physics engine wired for 1024D semantic search")
 
     def _find_reinforcement_target(
         self,
@@ -176,7 +189,8 @@ class MemoryManager:
         meta = entry.get("metadata", {})
         memory_id = str(entry.get("id", ""))
         created_at = meta.get("created_at") or entry.get("timestamp")
-        return {
+        envelope = envelope_from_metadata(entry.get("content", ""), meta)
+        formatted = {
             "id": memory_id,
             "point_id": meta.get("point_id", self.point_id(memory_id)),
             "content": entry.get("content", ""),
@@ -194,8 +208,12 @@ class MemoryManager:
             "embedding_384d": entry.get("embedding_384d"),
             "lagrangian_snapshot": entry.get("lagrangian", {}),
         }
+        formatted.update(envelope)
+        formatted["record_envelope"] = envelope
+        return formatted
 
     # ── Primary Write ────────────────────────────────────────────────
+    @_serialized_store
     def store(
         self,
         content: str,
@@ -207,16 +225,19 @@ class MemoryManager:
         belief_ids: Optional[List[str]] = None,
         position_8d: Optional[List[float]] = None,
         embedding_384d: Optional[List[float]] = None,
+        semantic_embedding_1024d: Optional[List[float]] = None,
         pulse_id: Optional[int] = None,
+        record_metadata: Optional[Dict[str, Any]] = None,
     ) -> int:
         """Append a memory entry to the journal.
 
         Returns a generated short‑term ID (incrementing integer) for backward
         compatibility. No SQLite or ChromaDB writes are performed.
 
-        If embedding_384d is provided, it is persisted in the journal for
-        SemanticIndex rebuilds and also registered in the 384D index for
-        immediate searchability.
+        ``embedding_384d`` is the stable spatial representation persisted for
+        8D rebuilds. ``semantic_embedding_1024d`` optionally supplies a
+        separately batch-computed native semantic vector; ordinary callers
+        omit it and the PhysicsEngine encodes the content itself.
         """
         tags = list(dict.fromkeys(tags or []))
         belief_ids = belief_ids or []
@@ -229,6 +250,14 @@ class MemoryManager:
             actual_pulse_id = getattr(self._physics, "_pulse_count", 0)
         if actual_pulse_id is None:
             actual_pulse_id = 0
+
+        record_envelope = build_record_envelope(
+            content=content,
+            memory_type=memory_type,
+            source=source,
+            tags=tags,
+            overrides=record_metadata,
+        )
 
         reinforcement_target = self._find_reinforcement_target(
             content=content,
@@ -262,9 +291,12 @@ class MemoryManager:
                 lagrangian_snapshot=lagrangian_snapshot,
                 pulse_id=actual_pulse_id,
                 embedding_384d=embedding_384d,
+                semantic_embedding_1024d=semantic_embedding_1024d,
                 position_8d=canonical_position,
                 tags=tags,
                 belief_ids=belief_ids,
+                retrieval_text=record_envelope["retrieval_text"],
+                record_envelope=record_envelope,
             )
 
         self.journal.append_memory(
@@ -283,6 +315,14 @@ class MemoryManager:
                 "created_at": now,
                 "attention_position_8d": position_8d or [],
                 "point_id": self.point_id(st_id),
+                "record_envelope": record_envelope,
+                "record_schema_version": record_envelope["record_schema_version"],
+                "record_kind": record_envelope["record_kind"],
+                "direction": record_envelope["direction"],
+                "epistemic_role": record_envelope["epistemic_role"],
+                "evidence_scopes": record_envelope["evidence_scopes"],
+                "action_status": record_envelope["action_status"],
+                "retrieval_text": record_envelope["retrieval_text"],
             },
             embedding_384d=canonical_embedding,
         )
@@ -399,7 +439,7 @@ class MemoryManager:
         filter_fn=None,
         return_embeddings: bool = False,
     ) -> List[Dict[str, Any]]:
-        """Search the 384D SemanticIndex for memories matching a query.
+        """Search the 1024D SemanticIndex for memories matching a query.
 
         Uses cosine similarity in native embedding space for precise
         semantic matching. Falls back gracefully if the physics engine
@@ -464,6 +504,12 @@ class MemoryManager:
                     "similarity": r.get("similarity", 0.0),
                     "encoding_omega": meta.get("encoding_omega", 0.5),
                 })
+                if "record_kind" not in formatted:
+                    envelope = envelope_from_metadata(
+                        formatted.get("content", ""), meta,
+                    )
+                    formatted.update(envelope)
+                    formatted["record_envelope"] = envelope
                 if "embedding" in r:
                     formatted["embedding"] = r["embedding"]
                 normalized.append(formatted)

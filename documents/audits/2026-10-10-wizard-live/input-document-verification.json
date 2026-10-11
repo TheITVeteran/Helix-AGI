@@ -1,0 +1,12 @@
+{
+  "pdfinfo": {
+    "exit_code": 0,
+    "stdout": "Custom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           1\nEncrypted:       no\nPage size:       612 x 792 pts (letter)\nPage rot:        0\nFile size:       706 bytes\nOptimized:       no\nPDF version:     1.4\n",
+    "stderr": ""
+  },
+  "pdftotext": {
+    "exit_code": 0,
+    "stdout": "Survey reference: PEARL-619\nThe north room contains five shelves.\nThe west window requires inspection.\n\n\f",
+    "stderr": ""
+  }
+}

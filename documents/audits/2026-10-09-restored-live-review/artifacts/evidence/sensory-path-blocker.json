@@ -1,0 +1,30 @@
+{
+  "time": 1791563957.1447668,
+  "requested_feature": "non-tool environment movement and sensing Markdown/PDF before opening",
+  "status": "blocked_before_intended_path_execution",
+  "requested_mode": "active",
+  "actual_mode": "observe",
+  "evidence": [
+    {
+      "time": 1791563903.232859,
+      "thread": "MainThread",
+      "source": "core/task_cognition/controller.py",
+      "function": "__init__",
+      "result": null,
+      "locals": {
+        "requested": "active",
+        "tool_capable": false,
+        "standard_loop": true
+      },
+      "effective_mode": "observe"
+    }
+  ],
+  "model": "local granite4.1:3b",
+  "sensory_test_submitted": false,
+  "reason": "Current local provider is explicitly excluded by TaskCognitionController active-mode gate; restored Helix imports no sensory motor runtime. Running ordinary tool calls would not test the requested pathway.",
+  "fixture_validation": {
+    "brief.md": "ASCII Markdown text",
+    "report.pdf": "valid PDF 1.4, one page"
+  },
+  "valid_product_result": null
+}

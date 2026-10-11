@@ -1,0 +1,32 @@
+{
+  "kind": "implementation_diagnostics_only",
+  "recorded_at": "2026-10-10T17:15:12.478312+00:00",
+  "source_revision": "d78de2707dd44c7d88b41f57f67844255e42e952",
+  "working_tree": " M README.md\n M SYSTEM_MANUAL.md\n M core/curator.py\n M core/preconscious.py\n M core/pulse_loop.py\n M core/task_cognition/capabilities.py\n M core/task_cognition/controller.py\n M core/task_cognition/procedures.py\n M core/unified_retrieval.py\n M documents/architecture_current.md\n M install.sh\n M main.py\n M memory/mrag/semantic_lane.py\n M memory/record_envelope.py\n M setup.py\n M tests/test_mrag_semantic_lane.py\n M tests/test_task_cognition.py\n M wizard/app.py\n M wizard/pages/credentials.py\n M wizard/pages/schedule.py\n M wizard/pages/summary.py\n?? core/context_focus.py\n?? core/mindscape.py\n?? core/mindscape_config.py\n?? core/mindscape_context.py\n?? core/mindscape_lanes.py\n?? core/pulse_context.py\n?? documents/audits/2026-10-09-mindscape-launch/\n?? documents/audits/2026-10-09-restored-live-review/\n?? documents/audits/2026-10-10-attention-focus/\n?? documents/audits/2026-10-10-context-weave/\n?? documents/audits/2026-10-10-live-agent/\n?? documents/audits/2026-10-10-memory-pathways/\n?? documents/audits/2026-10-10-procedural-focus/\n?? documents/audits/2026-10-10-wizard-live/\n?? documents/mindscape_launch.md\n?? implementation_plan.md\n?? requirements-mindscape.txt\n?? tests/test_context_focus.py\n?? tests/test_mindscape_setup.py\n?? tests/test_pulse_context.py\n",
+  "command": "venv/bin/python -m unittest tests.test_context_focus tests.test_pulse_context tests.test_task_cognition tests.test_mindscape_setup tests.test_action_protocol tests.test_mrag_semantic_lane -q",
+  "observed_result": {
+    "tests_run": 97,
+    "exit_code": 0,
+    "output": "Ran 97 tests in 0.463s\n\nOK"
+  },
+  "additional_checks": {
+    "git_diff_check": "passed",
+    "ast_parsed_files": 12
+  },
+  "source_sha256": {
+    "core/context_focus.py": "b5390691509df08aaa904bcbdca634a6aa6e88f627824e142f010347ba9e726f",
+    "core/pulse_context.py": "e1d75936b790d18fa8decac211ad283361343a8b70db376000d23c2ffa3ea229",
+    "core/mindscape_context.py": "b8b9bac95c1e9f8bd5fef3812fb4dec2695c75fda28769daa9ceb06e4ccceb68",
+    "core/mindscape_config.py": "e630027ffc468024ab067e29e8f717f06ad13005da909dae85f905be8e4c748f",
+    "core/mindscape.py": "c34c530880f9582c1549c07bfd140bb96d40ed969b68a8bb804b26ff0ae52763",
+    "core/pulse_loop.py": "097709d45e6131beeec92af2e53f47fcf0e5e1ae8753c553216964d3c3f2837b",
+    "core/task_cognition/controller.py": "753b1f6828ece734c8ca8b33805a17cbf5715c9a9b517401594d57b20640c1b2",
+    "core/task_cognition/procedures.py": "ff1fb40ab739690810d6e628b23164b8d4f8d464333a20004b9be232ca5b93a7",
+    "core/task_cognition/capabilities.py": "7d086cb0754705a0c0047155861fee33bba4b8c197c2ee91416f96063f59e86f",
+    "tests/test_context_focus.py": "15c90b43e9f3d76f3f9393d3803f37200fd03ca689956b6195f2534fc13b840f",
+    "tests/test_pulse_context.py": "03261b0023f1657e2eec2053bc4369d426638512f047e1557fce4e38e9c4371c",
+    "tests/test_task_cognition.py": "cdbda7d59fe5b407a1a7d889c903f19c2519f6cf8bb269889aec5f8fde57693d"
+  },
+  "product_result": null,
+  "evaluation_scope": "Temporary stores and constructed input; no model inference, product launch, competence claim or product score."
+}

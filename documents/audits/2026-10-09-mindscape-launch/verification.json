@@ -1,0 +1,50 @@
+{
+  "scope": "unscored implementation and startup diagnostics, not product behavior benchmark",
+  "canonical_files_before": {
+    "data/memory/cognitive_journal.jsonl": "2aeac18deba5b312d70abfbd272d09d1f7b83c5a8389c50ddb04a5f3e1612101",
+    "data/beliefs/concepts.json": "d1eb1e08dd4e4d6bf087496e745bea7c0d2d2f0c1c119e9ceb12ce08d6138f15",
+    "data/beliefs/skills.json": "ef2e5eb6b37f265790095ab92f459cd951113682286d1cb1fea5b6ed10bd2bef",
+    "data/beliefs/desires.json": "69738cc57bf6e5ef6775e07157aa36223d480af9d0296d868a7104c40cfe3219",
+    "data/beliefs/premises.json": "ecaed0f5f906c528ab06606140d70bca2c063f63ca28047d0213e47d997e2a0d",
+    "data/beliefs/people.json": "ac69244a6d8c063f5c346227b056b1811355d927f7b066c552b6bf0543a75b7f",
+    "data/beliefs/propositions.json": "ca0821ce4c58f521f210eb3ff08c2b6b7ee3fdf197a2153ef829f05c5755c432",
+    "data/beliefs/preferences.json": "58ee9a177f513dcd0770bf68afe7137d7f406e46f89f5ff337d69288d6a61427",
+    "data/beliefs/backups/pre_merge_20260608_190703/lexicon.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/capabilities.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/self_identity.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/feedback.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/knowledge.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "canonical_files_after": {
+    "data/memory/cognitive_journal.jsonl": "2aeac18deba5b312d70abfbd272d09d1f7b83c5a8389c50ddb04a5f3e1612101",
+    "data/beliefs/concepts.json": "d1eb1e08dd4e4d6bf087496e745bea7c0d2d2f0c1c119e9ceb12ce08d6138f15",
+    "data/beliefs/skills.json": "ef2e5eb6b37f265790095ab92f459cd951113682286d1cb1fea5b6ed10bd2bef",
+    "data/beliefs/desires.json": "69738cc57bf6e5ef6775e07157aa36223d480af9d0296d868a7104c40cfe3219",
+    "data/beliefs/premises.json": "ecaed0f5f906c528ab06606140d70bca2c063f63ca28047d0213e47d997e2a0d",
+    "data/beliefs/people.json": "ac69244a6d8c063f5c346227b056b1811355d927f7b066c552b6bf0543a75b7f",
+    "data/beliefs/propositions.json": "ca0821ce4c58f521f210eb3ff08c2b6b7ee3fdf197a2153ef829f05c5755c432",
+    "data/beliefs/preferences.json": "58ee9a177f513dcd0770bf68afe7137d7f406e46f89f5ff337d69288d6a61427",
+    "data/beliefs/backups/pre_merge_20260608_190703/lexicon.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/capabilities.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/self_identity.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/feedback.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/knowledge.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "canonical_unchanged": true,
+  "synchronized_corpus_records": 120,
+  "projection_counts": {
+    "records": 120,
+    "helix_graph_projection": 120,
+    "record_entities": 1042,
+    "entity_edges": 51990
+  },
+  "last_sync_added": 0,
+  "last_sync_graph_indexed": 0,
+  "all_product_resumes_exact": true,
+  "current_source_hashes_match_final_startup_manifest": true,
+  "first_gestation_saved_before_sync": true,
+  "neural_training_quality": null,
+  "recall_score": null,
+  "non_tool_file_motor_result": null,
+  "launch_readiness": "not established; delivery, sensory actions, inherited limits and long-running operation remain open"
+}

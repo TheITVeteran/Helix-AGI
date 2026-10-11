@@ -1,0 +1,32 @@
+{
+  "case": "correction",
+  "request": {
+    "channel": "dashboard",
+    "content": "Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791675541.801816,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791675624.2877574,
+  "first_pulse": 3,
+  "final_pulse": 3,
+  "foreground": {
+    "time": 1791675623.7272325,
+    "kind": "foreground_return",
+    "helix_pulse": 3,
+    "thought": "Hello Rowan,\n\nFor naming your reports, I recommend using a consistent prefix that indicates the type of content, followed by the date and a brief description of what’s inside. For example:\n\n```\n[Type]_[YearMonthDay]_[BriefTitle].txt\n```\n\n- *Example:* `AI_Research_20231001_ModelOverview.txt`\n\n**Why this works:**\n\n1. **Clarity:** The prefix (e.g., `[AI]`, `[Research]`) instantly tells you what the file contains, reducing mental load when scanning folders.\n2. **Chronology & Relevance:** Adding the date helps differentiate between versions or different stages of a project if multiple files share similar names.\n3. **Scalability:** This system grows with your workflow—no need to invent new conventions as you add more reports.\n\nAn alternative is using hyphens for clear sections:\n\n```\n[YYYYMMDD]-[Category]-[Title].extension\n```\n\n- *Example:* `20231001-AI-ModelTrainingPlan.md`\n\n**Benefits:**\n\n- **Reduced ambiguity:** You can quickly locate the right file without opening each one.\n- **Future‑proofing:** You can append version numbers (e.g., `20231001-AI-ModelTrainingPlan_v2.txt`) for updates.\n- **Human readability:** Short, readable strings are easier to type on the fly than complex acronyms.\n\nFeel free to adapt these patterns to fit your team’s style, but keeping a stable prefix/date/description structure will make managing many reports much smoother. Let me know if you’d like more specific examples for different types of reports!",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "Hello Rowan,\n\nFor naming your reports, I recommend using a consistent prefix that indicates the type of content, followed by the date and a brief description of what’s inside. For example:\n\n```\n[Type]_[YearMonthDay]_[BriefTitle].txt\n```\n\n- *Example:* `AI_Research_20231001_ModelOverview.txt`\n\n**Why this works:**\n\n1. **Clarity:** The prefix (e.g., `[AI]`, `[Research]`) instantly tells you what the file contains, reducing mental load when scanning folders.\n2. **Chronology & Relevance:** Adding the date helps differentiate between versions or different stages of a project if multiple files share similar names.\n3. **Scalability:** This system grows with your workflow—no need to invent new conventions as you add more reports.\n\nAn alternative is using hyphens for clear sections:\n\n```\n[YYYYMMDD]-[Category]-[Title].extension\n```\n\n- *Example:* `20231001-AI-ModelTrainingPlan.md`\n\n**Benefits:**\n\n- **Reduced ambiguity:** You can quickly locate the right file without opening each one.\n- **Future‑proofing:** You can append version numbers (e.g., `20231001-AI-ModelTrainingPlan_v2.txt`) for updates.\n- **Human readability:** Short, readable strings are easier to type on the fly than complex acronyms.\n\nFeel free to adapt these patterns to fit your team’s style, but keeping a stable prefix/date/description structure will make managing many reports much smoother. Let me know if you’d like more specific examples for different types of reports!",
+      "recipient": "Mira",
+      "timestamp": 1791675607.184801
+    }
+  ],
+  "native_actions": []
+}

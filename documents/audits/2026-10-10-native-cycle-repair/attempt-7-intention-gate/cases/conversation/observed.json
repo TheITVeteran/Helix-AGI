@@ -1,0 +1,32 @@
+{
+  "case": "conversation",
+  "request": {
+    "channel": "dashboard",
+    "content": "Hi Helix, I am Mira. I keep my reports local and want different files to have distinct names. Suggest a simple naming approach and explain why.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791679870.2245297,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791680042.9065719,
+  "first_pulse": 2,
+  "final_pulse": 2,
+  "foreground": {
+    "time": 1791680041.793145,
+    "kind": "foreground_return",
+    "helix_pulse": 2,
+    "thought": "A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015-Helix-Documentation`). This approach has several advantages:\n\n1. **Chronological Order** – The YYYYMMDD prefix makes it easy to sort files chronologically, so you always know what was created first without relying on titles.\n2. **Clarity of Scope** – Adding a Project label (Helix in this case) lets anyone quickly identify the broader context or system the file belongs to, reducing ambiguity when multiple projects are stored together.\n3. **Granularity for Components** – Including a Component tag distinguishes different types of documentation (e.g., `Design`, `Usage`, `API`) without needing long descriptive titles, making it easier to locate specific sections later.\n4. **Scalability** – This pattern works whether you’re documenting code, design specs, or user guides, and can be extended with additional prefixes if needed (e.g., `20231015-Helix-Code‑Module`).\n\nYou could also consider appending a version number at the end (e.g., `-v1`) if updates are expected, but for most static documentation this three-part format is sufficient. It keeps filenames short, predictable, and self‑explanatory while minimizing friction when you need to locate or sort files quickly.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "A simple naming convention you can use is the **YYYYMMDD‑Project‑Component** format (e.g., `20231015-Helix-Documentation`). This approach has several advantages:\n\n1. **Chronological Order** – The YYYYMMDD prefix makes it easy to sort files chronologically, so you always know what was created first without relying on titles.\n2. **Clarity of Scope** – Adding a Project label (Helix in this case) lets anyone quickly identify the broader context or system the file belongs to, reducing ambiguity when multiple projects are stored together.\n3. **Granularity for Components** – Including a Component tag distinguishes different types of documentation (e.g., `Design`, `Usage`, `API`) without needing long descriptive titles, making it easier to locate specific sections later.\n4. **Scalability** – This pattern works whether you’re documenting code, design specs, or user guides, and can be extended with additional prefixes if needed (e.g., `20231015-Helix-Code‑Module`).\n\nYou could also consider appending a version number at the end (e.g., `-v1`) if updates are expected, but for most static documentation this three-part format is sufficient. It keeps filenames short, predictable, and self‑explanatory while minimizing friction when you need to locate or sort files quickly.",
+      "recipient": "Mira",
+      "timestamp": 1791680026.4224079
+    }
+  ],
+  "native_actions": []
+}

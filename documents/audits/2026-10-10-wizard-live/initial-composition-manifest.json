@@ -1,0 +1,865 @@
+{
+  "kind": "actual wizard live integration diagnostic; unscored",
+  "created": 1791646928.0417027,
+  "run": "/tmp/helix-wizard-20261010-n7438mgj",
+  "entrypoints": {
+    "gui": [
+      "bash",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/Helix Setup Wizard.sh",
+      "--wizard"
+    ],
+    "launch": "wizard.finish_wizard -> pip install -> setup.py --non-interactive --composition=mindscape -> wizard._start_agent_process -> main.py --data-dir data",
+    "input": "wizard Flask dashboard POST /api/messages on 127.0.0.1:5050",
+    "output": "same dashboard GET /api/messages/outbound and real workspace postconditions"
+  },
+  "helix": {
+    "root": "/home/nemo/Helix_AGI (GitHub Repo) (Public)",
+    "revision": "d78de2707dd44c7d88b41f57f67844255e42e952",
+    "working_tree": "M README.md\n M SYSTEM_MANUAL.md\n M core/curator.py\n M core/preconscious.py\n M core/pulse_loop.py\n M core/unified_retrieval.py\n M documents/architecture_current.md\n M install.sh\n M main.py\n M memory/mrag/semantic_lane.py\n M memory/record_envelope.py\n M setup.py\n M tests/test_mrag_semantic_lane.py\n M wizard/app.py\n M wizard/pages/credentials.py\n M wizard/pages/summary.py\n?? core/mindscape.py\n?? core/mindscape_config.py\n?? core/mindscape_context.py\n?? core/mindscape_lanes.py\n?? core/pulse_context.py\n?? documents/audits/2026-10-09-mindscape-launch/\n?? documents/audits/2026-10-09-restored-live-review/\n?? documents/audits/2026-10-10-attention-focus/\n?? documents/audits/2026-10-10-context-weave/\n?? documents/audits/2026-10-10-live-agent/\n?? documents/audits/2026-10-10-memory-pathways/\n?? documents/mindscape_launch.md\n?? implementation_plan.md\n?? requirements-mindscape.txt\n?? tests/test_mindscape_setup.py\n?? tests/test_pulse_context.py",
+    "files": {
+      "brain/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "brain/friction_damper.py": "f3e8fb3a9506fc122d4af7eefe00e01a2d721020fdc9d85d1e959f7716f7f023",
+      "brain/sensory_cortex.py": "8dc17de809ad1ef89002294aca34c672ab93b7291dc4214c9b63087ea5ef3304",
+      "brain/stability_sentinel.py": "bc5693ce21432c4bf0bd2a8022f616e3cfea7ebe1b45fc8e2fdc1e7ec72562b8",
+      "brain/vision_cortex.py": "12ab2d82903cc5ff1775032db628c95cd8e54a4fcd2a698984fdf0599100530c",
+      "comms/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "comms/discord_bot.py": "caaa330ce0b4f015cd58657dfef15fb150a4a3cea993f7a174f653eaf5064db3",
+      "comms/slack_bot.py": "7b67a123ffbaaff6ad1c3008900f80926dfa043b9fbc474ca5228bc37c990b12",
+      "comms/telegram_bot.py": "27e29c72c8c5d6e4587052042548f17406127bbb541c5d88089f137540a1bc38",
+      "comms/webhook_channel.py": "d90c1828cb4bc742e7df7f5f199979f55d2e446f5ad1f52c2bc5857b03410d3b",
+      "comms/whatsapp_bot.py": "5057e4bc4c2dfb699cde76082c9650c34425ed1781c40344d09b481ba6fda7ad",
+      "core/__init__.py": "55bc598bc052f8a5d77e1fc877287ed97d33ec1a7c68e8ef49683d607e5fd211",
+      "core/action_planner.py": "129af08947b78dcc956fce559633906264a2b8e95d2adcab896fc94f564ed94b",
+      "core/action_protocol.py": "5418be4766ddc3f03b78fb8270238be9028a034f772c2a4e3a9b271749fbbc0d",
+      "core/affect_field.py": "b03f9c019a1c703b67cf2425c879cd1af2359e4a5ede61d791b3d9cb9c659324",
+      "core/affect_hook.py": "0f1dfaa9d750f7db18db5bde78905066185ce07be89ffbdc2c9d0d520ec40bfe",
+      "core/affect_office.py": "0c229d1f0a5f89075939af56b6a5fc3e8c55d6227264c60f18f9bb54e7877fae",
+      "core/associative_transitions.py": "2e65d63683cef6ebc21fb35fada2a0af73421fc7c09c06ae1cb57564e5bcce8b",
+      "core/auxiliary_llm.py": "93ee7324d4bfda74c79ab16eac56958a78ce3e20d825a5f6b7cfb5dfec87e1a9",
+      "core/batch_service.py": "71fcc585f80f6f3b9a2bf57b2eeb042c072de089e26ef22f6718be52aaa61f09",
+      "core/belief_consolidator.py": "63a89753f7a83773e492812bd625c9ad9ea82bb5d1d363b15c5a697b4365882b",
+      "core/belief_cosmology.py": "bd8216aa46300131d6487279a59cb7485625d93033acf686c3aebac9f1d16243",
+      "core/belief_detector.py": "42d65875c168de87c9a8ccad5a9454f3e47fd9bd9764d9735f09edd98140857d",
+      "core/case_memory_office.py": "0bebb25b9ecaa8658257f0110d2a895256103d90ade6a9555c39351ab357a578",
+      "core/co_occurrence_hook.py": "38a1631b35bcc1ee071deff1d6fd92bdcd83bc66222b5200e5d17d203ae4d0e2",
+      "core/cognitive_space.py": "7e531c38166f3a8da93f1e47cc6ebcf8035c6736eb86952a1682309637c146e1",
+      "core/concept_extractor.py": "09a19841250fd60c52215269f2cfb296c593536ac358066c90dda206ab99e0ad",
+      "core/concept_reranker.py": "4982883767db9e6d28ad65ac1781bbd9673c21297d39790378f6d879db0752cc",
+      "core/context_compressor.py": "c6bd509af40c231f5d19e43d8aa09000b14367cd508117b5a46251f3c148faa5",
+      "core/context_office.py": "94885b034bfbd01cbc246239b78d07ef6c05dae391934512bd2fe7c3d11c5d6a",
+      "core/crash_reporter.py": "bfc8806671c01fa0edf9dd1e96ee70dd0d9b768ce58eb894895f0d9f00b6591b",
+      "core/curator.py": "994ca1e98ac539598da7cd32c1adc511958b92f44ff64a33b61bc165b81a61b4",
+      "core/dual_pulse_loop.py": "d20893385a0ab0592937726c03be868d7a783e741d7be75a1e32b2885c01ac1d",
+      "core/engagement_hook.py": "621d8400222448d300ef939674ddedb93948e456f28113b6ae276574450bd7d2",
+      "core/gguf_manager.py": "b243018cd716e7b5c52104350f3a7392bf6ef01dfd5fbce268795ffb804369f9",
+      "core/interaction_ledger.py": "790a494b3c2bec7759ef7585b7b6b954b15d48fc553f21a4ec6e00d9d2bb7d87",
+      "core/local_summarizer.py": "877f21276ea241fffd18863104c0c16f5f963fe89b1e7e1f825db28a3bb50c7e",
+      "core/memory_intake_office.py": "c5d6854e68685180183948738b68178380568457af4a60fd427a02d909b5a106",
+      "core/memory_log_office.py": "ed906f614ff2498609f6bd8467253db038f3e8518149617ae66a673729a32985",
+      "core/mindscape.py": "e29f77e9dec4d3e13952a1851c8f41e579e77ce072ed70f5ea63752957278efa",
+      "core/mindscape_config.py": "f0cda9be0368df709e382baf03b417c52e2ace79d2d50e3aed9c7f6b5bf5af43",
+      "core/mindscape_context.py": "12858c2daaa8cb6b29ae922d730cf9b8d616751eaaaf4b1808b5b2e5c735813b",
+      "core/mindscape_lanes.py": "c803eb5b29d49134d0a576c81af4297d6a46d5cdc77457b449c8d0e71a55616a",
+      "core/office_runtime.py": "0672be9a37fdfac581c0bde7fb68d9bff0eee2225949064c77a0e580f1a3d8fa",
+      "core/office_workflows.py": "4e1646fd0bf6fc8b051b85ec0b5f8a2e3ce9604c42c92f25d158fdc523fd0d16",
+      "core/physics_engine.py": "cf20bafe250adca9a0c9b42533feeb6731b23e87804034e14502bf11d33f2bc9",
+      "core/post_pulse_hooks.py": "245c83e1c9b02ad22edaf843e415c316e5d660ff075a1c7a368c06bea0ff4d12",
+      "core/preconscious.py": "d4574574ccd711e1be85bd1bb1331175cbf4fdc4dfe9c069bad76b5f1eedf2b0",
+      "core/pulse_context.py": "098d9d1b21060ca4bf4b5465f63043a4edad544985c8228a2e74e2c165dc8dca",
+      "core/pulse_loop.py": "0f8d5606a0fca11ed1411cfa3c2fd4ba65a7a321c6fb2a440186fb49a02d9c7a",
+      "core/reliance_evaluator.py": "6e173291ac691e55a7d326c2aa4caa222ee0ea558294749b8aee3b66e90c70b1",
+      "core/scratchpad.py": "05fdf6947cdbdebc101be4e178f73cc7770dca99068cd0445fa0027eaed9d26b",
+      "core/self_state.py": "ede043836ddc87853426cb2a8cdf6cda6ca64c1c0ec775b751e53d5b72907eb6",
+      "core/session_memory_maintenance.py": "1d4415d637ca8c909b48091fe86a806d329f0de935bef88bae075afc2ddef492",
+      "core/spatial_mind.py": "d63003eefc80c1f57c44a7776baf1376f914fcd27077a3ce5b662bc2b6cc8de5",
+      "core/task_cognition/__init__.py": "ad91c4d92e44320c7a5fc1d2dfa34aff63f6b1b528fa66655a1031106b65551f",
+      "core/task_cognition/capabilities.py": "bc2242a2e7c1da56f9d171c413ba46edac762b60c9b7d4c4fa109753fd223eb3",
+      "core/task_cognition/context.py": "03795fed1599d4610bb71ecd0a58898dca580fe95722d3c073aae007740fd835",
+      "core/task_cognition/controller.py": "bed2f9bbf24d2f705ea4046247370bf31fa34aafcbe7c8b7f94d51f2dd568e51",
+      "core/task_cognition/focus.py": "1b70cc61ca69864b57fc44170224eb8645cc0e54885b123f8dbf21431aeebb10",
+      "core/task_cognition/inception.py": "63afbde55eaf2da5284c396e9b05c9d23afd9c5408f2ed4af6239e461ead68da",
+      "core/task_cognition/models.py": "142fe2464543310ec9f49e6f1c963ff7b78bd01cca38cea712843c3580381e16",
+      "core/task_cognition/orchestrators.py": "78be2fd859a40f2071c2f59172fa7df12be2e2356574a51b711fd2bf3fdfc3ae",
+      "core/task_cognition/procedures.py": "f50d3b82b9ebd2fa544f38b33425c0a4775e062bdd17c624d4fd49319c617401",
+      "core/task_cognition/store.py": "70dc05d53abc143fcf7659a2ee79c29ccbfaa00e12261877f0150f0e88b541d3",
+      "core/tool_dispatcher.py": "bca9dd3727aa8f672d122c049163eec4a1af1b07560a9a1b281981e0af6a7e40",
+      "core/tool_lesson_tracker.py": "15d83d0eff7aa8b481a74ce78574fbebdc8df155698aacd48399f5391de06437",
+      "core/tool_orchestrator.py": "78723f6f4dfd3eb7a76c43efade822a7ffe79858c54cd12aa63feb552be52339",
+      "core/tool_task_runner.py": "4ba35fad92de389cd6b3377b64d2dec50aca037d3cb95426f442d0940787106a",
+      "core/unified_retrieval.py": "52bce7f9ef38fc45d5815594df422d5c63d965fa47922912fee9f2a9d5a6e0fb",
+      "core/workflow_detector.py": "75aeba8c0e2dbbf6ac6c5bf24ef55e331aa711a2d937bf031ddb9cd4c629ac4d",
+      "llm/__init__.py": "5c45c2cabcc748572c5e7a5098beee6c88a78d454dcb6dcacff1c99a04029e8a",
+      "llm/background_daemon.py": "429ceed4f36372957c1df8914ad9c9e1fd063da30761be1ce9f7d5ccb544be14",
+      "llm/constrained_decoding.py": "75abe9dd0358770912887537ab35c20467fcfd9a5586588a3c669064d988f884",
+      "llm/orchestrated.py": "370a47b7d5f7fe38da8bcbc824398650962a1117873e2e60fef73ae34dba0181",
+      "llm/orchestrator.py": "fddee38b1bdc815184f14d80181e5d0338b0e527c4731006f4f7ea1976997a1c",
+      "llm/providers/__init__.py": "907d9878a7964866ec2acac82ad8749f7757be3dc280c9e597b27a2285c5e329",
+      "llm/providers/anthropic_provider.py": "fa0d3be9ffc01f7ba2a0415fec426b9cf8fb2b33f50c4da3a1a89cff880443a4",
+      "llm/providers/base.py": "2d4cfa533fee31c6874ee81b0f7a7ef6a9c01c2e8691693975f55a28927efaaf",
+      "llm/providers/claude_cli_provider.py": "07a47b45e8f23e695515218c2f46b81b8fcbb6000fef94ad69efbc6f6f802c80",
+      "llm/providers/codex_cli_provider.py": "4eb11f78312dbb0d0ac9b8ef7c127e5f8cb2f5ecb368a0fe43a2fbcc84966782",
+      "llm/providers/codex_subscription_provider.py": "cb29f2e2c3d3580114cff66a1fd5f2ce189eb7d44682694f996bf8d13a9b674d",
+      "llm/providers/gemini_provider.py": "60e751b138ff3cd041d1c12c5bf3d26c1e0b18e751688a8506dac3aed66bad0b",
+      "llm/providers/llama_cpp_provider.py": "db9f10fc10ba307b2c08a0cd69d93da20d8d4d545c1095ca1e0517f332732cf4",
+      "llm/providers/local_conscious.py": "ba968bce2b2fbf99180779b51399b88fed0f414e89643012cc13bb2295073461",
+      "llm/providers/ollama_provider.py": "a762379592596b8adfd3260353543932f08175f2bf63d5fa8be763ccaef1f0cc",
+      "llm/tool_pass.py": "848b82eb76c4584644f6a98698f30363a975088b595e91f323582874af64614d",
+      "llm/tool_schema.py": "22406bde012d8b2d8044fca14b92f7778860139c099234ab6f7654873e5953c2",
+      "main.py": "774ea73abc925594f82c5db4093e3bcf0ab9a2c2f05222a2ee8025f108dcc99e",
+      "memory/__init__.py": "440209ff0d022f568b319525d4318428e9aff6ad6e62ad405a03a32430233018",
+      "memory/belief_store.py": "7add04f139634f5f7291ab6ac9f88545502b648c7a295c4c48202a94501958c7",
+      "memory/cognitive_journal.py": "7557223965432df9505aff973e00f7e503a4e967ca9bbfbbf263372b627979bc",
+      "memory/memory_manager.py": "80078cbb9ede0a753ea0e5eb1ee6869c426fbe66a124ef41d719a9e020df9f7f",
+      "memory/mrag/__init__.py": "d0a6df702de4e0e1fc0c3f90cf5769dcdb3e7a40eefdc822378bafb01caee031",
+      "memory/mrag/benchmark.py": "c3d795b15ccb951fb8396a2af65564dbd18e323045bd955d3bbe9debb7741d76",
+      "memory/mrag/catalog.py": "f09502bc216b20eb5e6b797e6e074cd2487cf2246df1dbb34430253733abd9df",
+      "memory/mrag/cli.py": "d086660217bbf60aea075fc34ee4fcaa751c9894db54216cb98c13a6e1080b3d",
+      "memory/mrag/corpus.py": "362efa0aa4c22150bcb16cee6ff8405c9895063841e465116f8c700a4c39ec4c",
+      "memory/mrag/maintenance.py": "609362dfa68b274b36e8ad53bac396beeefe79bcf8f8622f8f3333dc90009be7",
+      "memory/mrag/models.py": "297a089f898a19fc08455f2b9d7484c6224ba7b8512e0cabe35fa85117b6929d",
+      "memory/mrag/retrieval.py": "247367e91d4003e152b3ba08d18f790a124be072b6788ce9e9e481b4322dfd26",
+      "memory/mrag/semantic_lane.py": "b0baafcdbf0630799203bcb9d0f0add9474bc58aa65b616db3be38a18142d56e",
+      "memory/mrag/tagger.py": "5f2c5fc1ba85bde9dd032bdac478d4c605acd0d120cb24c2bc8047d23e258c05",
+      "memory/mrag/token_counting.py": "0e24b01a9841b22a7f7afc55e55ec38dd7d7818a137104ce553f29765fc6c1ff",
+      "memory/mrag/vector_store.py": "2f26e884bf90f4da3fefee458b66bcfac293359813daf3dc04a289a1bdcaed86",
+      "memory/record_envelope.py": "2c4da2a95e341a901f8a1ea81ee6e389d22aca98555aa653a82ad07d7289d08a",
+      "memory/semantic_encoder.py": "afd12d6729c01812ab8f3a13c2cbd5d0f6537006466f8223cbd731e9f9c88f39",
+      "memory/semantic_index.py": "13d1bf46fc85c19e448bf579ece7f6a637f1aadea80be607b9b7211166a2f05c",
+      "setup.py": "547416c7dcadf176df3001f672c8a6b74ad11ca7792b0b6a8167fd18d6d7aaee",
+      "tools/__init__.py": "9da49242db92332ca7b2269010986af25eca631eb99221e77f93c84e6965a589",
+      "tools/browser.py": "358c61d0379e8bb4ddb4083f8c2feb870c23c9806290a830538686bc0e5eac2d",
+      "tools/channel_router.py": "62f08487e03dfeb5c540498aebbe39db31550138d0f11ce17d95f2e36a4c6798",
+      "tools/custom/__init__.py": "d31e94deb7559e0380583bf029d72d94cfe092f5b2bf5eb71e2d87e61a2684f9",
+      "tools/desktop_control.py": "647c630bf8f7ef9bc574076006b17b2ad29ba9db2b57d08aa7f9a71a92b36576",
+      "tools/github_api.py": "6720f695a6a411c16d1703846f9226dfc788731132cb5fa5e6b5ff07fd78ee42",
+      "tools/google_auth.py": "b2b0f696895324faf078aaca06c309d3657d177d4a3950f079a53ea9f94d4f1a",
+      "tools/google_calendar.py": "5ccd2de2f137b92218cab4fbd932204da2e2a815514d40f44269ae8f228dcff7",
+      "tools/google_drive.py": "75180cf83eedb2ac52e62f8726b0a463c7d9a76358e205f390e362eb53d0819a",
+      "tools/google_email.py": "cc85c95a814ec363cf839da1350e1d288b2ee70ed6b4b0a20ecb2647e752a655",
+      "tools/google_tasks.py": "2295aff986e73c974408aabad25f451f2c48f9803a33eb66a7b70efe0c9e2a47",
+      "tools/moltbook.py": "8b311b956ec316d456ee14f1790fd430c259ce864b9263bcffc7b9ce5c9379fe",
+      "tools/tool_declarations.py": "7c76ad49b0895e7ae3d8ca7ae1d5f34169f71549c51fd75c55d0e3e58aaf37fc",
+      "tools/tool_executor.py": "e41c3bb3014f126117bba915681d0a30d88dade79cb1c8a1795c4627ad43bec7",
+      "tools/tool_registry.py": "ebc99b6b8739cb5948be347725619910fa1afd60754a9927f9cbcd46e1f8dccd",
+      "tools/ui_canvas_tool.py": "58fcc4b05c13d15e50c43e241bab87e550d1e2fee99c756fbd5bd0bee1ce7fdc",
+      "tools/web_search.py": "565c894a7a3f6d8f7a95bdca9e4f5053594a02bc0145b27d0356cf75db7b07a8",
+      "wizard/model_detector.py": "2bf49252cc9570c6e7da17169347ad4a249cdb765d475baf463637dddea4e1e8",
+      "wizard/setup_assistant.py": "0a2bc434e046357cacf2d6188df12a1e67de3abe819d43ffc52dbf72e0e0c9d0",
+      "wizard/settings_tab.py": "8149d4de8337979e70dcb9b5d2e8c15a4e3a2dc6b6f9e8232c3b338bfac905ac",
+      "wizard/ai_helper.py": "25746a529a69666a93daf3acd0d6de27a119788ca4c776a3e63f73b0e3bc6a92",
+      "wizard/orb_animation.py": "b218d68c2c62e6cf5def835bfa989a1cdf0f790f482dbfb2d0547616ed0d032c",
+      "wizard/__init__.py": "753c6dba22e0558e739a14ebb782b0dc5d767c4309b6726116d5d608d3e35618",
+      "wizard/models_tab.py": "182619c470d995e88901a0cd8298ee1e2bc7ce7efaf237ce5e217bbf244f775c",
+      "wizard/assistant_panel.py": "2d47a843f64edd4ffb042d3e4f4c01c93b8322089fb0c8d45be010b105b06ee1",
+      "wizard/__main__.py": "98f1da2e47085cd52a2d3e6455082e28f0bce4324f37b0c19a1770b60c3b7ed9",
+      "wizard/app.py": "7163431a8a1b103fbe79a50f781a55da98ad85c38eb57c9217a2a5396ebc7c82",
+      "wizard/pages/welcome.py": "68dffa48b0b5f6db0028ab7a51fc4eecab595976d217e811bfead4095c2c01bc",
+      "wizard/pages/credentials.py": "0a269327c8927e40b08d27bafd8c70ec40ea0382edf13a2d5b0c0a544d54ff3e",
+      "wizard/pages/schedule.py": "8d55a1dc82731c9bcca40ecfbdddba9da723ccd46dd2e4c16e8b0c01850382e0",
+      "wizard/pages/__init__.py": "6a23a3312978cfe4aba970c5be5eab8981ea342c987f70136e32905cb937c64b",
+      "wizard/pages/tool_selection.py": "805c12fdbae772362f2d3cfdf549bbb277627189269ae7227d627c7f08274743",
+      "wizard/pages/safety.py": "6bbcef7fc6344b6324083d032d5e84cabbee9073c9fd6c977f5b3ad29d216ce6",
+      "wizard/pages/summary.py": "987ba5848037adc7757d40b97674520a94c9768b219287e623f139fb286c9244",
+      "wizard/pages/agent_info.py": "e9cba949f1c6dbbcd347bfaa865423bfc7cd6590cb713e3fcb4c05a395e40ef1",
+      "Helix Setup Wizard.sh": "0f1762e82f9bf38e63fd4ef525f411c1a8e454fa7858173bd342d66d2fabcf9c",
+      "requirements-mindscape.txt": "71090858d9b8b3019e708165bd3bdacb9ae09b5b70f0d5017e029fec900fd12a",
+      "requirements.txt": "f6ad0e6c9b7fd5169b7d3ebbead7cfd16e7a67412b8b7ca7408e8d9ec1c9ad61"
+    }
+  },
+  "mightymem": {
+    "root": "/home/nemo/MightyMem",
+    "revision": "eb92aafd3280cf9f2a8ac1274e44fde6fc90b675",
+    "working_tree": "M context_loom/cli.py\n M context_loom/compiler.py\n M context_loom/deployment.py\n M context_loom/habitus_agent.py\n M tests/test_deployment.py\n?? context_loom/backend_state.py\n?? context_loom/helix_pulse.py\n?? context_loom/intent_cortex.py\n?? context_loom/summarizer.py\n?? context_loom/topical.py\n?? habitus_ai/sensory_motor_loop.py\n?? scripts/mightymem.service\n?? scripts/mightymem_daemon.py\n?? scripts/train_sensory_motor_model.py\n?? tests/test_adaptive_scaling.py\n?? tests/test_adversarial_live_runs.py\n?? tests/test_helix_pulse.py\n?? tests/test_live_ollama_end_to_end.py\n?? tests/test_sensory_motor_loop.py\n?? tests/test_topical_fluidity_and_factual_recall.py\n?? tests/test_topical_rolling_context.py",
+    "files": {
+      "context_loom/__init__.py": "e2df1b16c5e1525a049f0e376db2d9977d293bb968d1ecc1c31831feb19097e0",
+      "context_loom/__main__.py": "76fa916e93e0ae1a6c1bb51dcc0bcf289c014e9f760a47165f8a84401ccf41d7",
+      "context_loom/backend_state.py": "1d5474d2cb23a1e2bb67789b8f7347b8d6c015c01deed3801b3f0c47d6e309cf",
+      "context_loom/capabilities.py": "fa414c57a5acac1b1981bf9689d10519295156afb9ff0512775f693b47582914",
+      "context_loom/channels/__init__.py": "36bb35c58dfff6eeaefaefe26a3bc58f60222a4d5e6db9981af850b7e35d750a",
+      "context_loom/channels/base.py": "4d7cdf209091cd6a12c3571a1a53834e757c6ff5894ef15b05e714cf840be47e",
+      "context_loom/channels/discord.py": "d466f0fc89b86b84b544c9afb5a13eea0c8078c157340d36ac8bb8c72484a3cf",
+      "context_loom/channels/piper_voice.py": "d1d8ec5354611aa9c3c107dafbb4ae6e841b689b31422ca7da8b066c7dfe46b9",
+      "context_loom/channels/profiles.py": "e04997697731e079797b306d684220632eac6686a5dfbfe5e181520939572062",
+      "context_loom/channels/router.py": "a8a8dcf87fe757848412064c628b7eb512ee577ce8d72ebb507910bf6d3f4f64",
+      "context_loom/channels/telegram.py": "7bb78628d3000eee7a6a169a66689fa3d83a612cf7ebd40e69a6765d45ef95ef",
+      "context_loom/cli.py": "f0cd14b5c2a078c15a99d09cef800f0adfc9ea102b08d7b9bc7450dce9f26d46",
+      "context_loom/compiler.py": "6c122107948057f3f81786e92fe35e6001f0eb2e78db9e86a4ba5619874e4d7c",
+      "context_loom/credentials.py": "eaa6651cdaa20a2d46168650cd4d4590dc7733fce5b212a49d3a2502bb401207",
+      "context_loom/demo.py": "f7075aeb72e643ffb0183ada9717a55662846fac0828a82f37f8ac4722495807",
+      "context_loom/deployment.py": "8d4a2f58e72fd484f42251cfa55307c7539d96e6bce5791db79f29fd4d4c7a9b",
+      "context_loom/deployment_smoke.py": "75ac8c24fa0efdbde595ae2617cd29482d63f28bfef9c6ece827cfbc7f29b46a",
+      "context_loom/doctor.py": "b71dcff60b8ea349aedb09ae9735477ca170e3a97d0ab569800e99bdf1da5858",
+      "context_loom/engine.py": "24f3d84ba24f4edeb3ace79ba1e521ea567d4830c11b08ab3458a3024fdf6ce3",
+      "context_loom/entity_graph.py": "93880fe88b4ee7f8a8a843c79bfdec2778b142975672dd246169beca226601c1",
+      "context_loom/evaluation.py": "745a90c3e9f24f27388b19ff6bc3be5a7309893432ec1335b7447010540fda5f",
+      "context_loom/full_system_benchmark.py": "96a77571801c77a3f04b96b37b27cd2351396bcbfbbf15ddb93f8f649357b277",
+      "context_loom/gestation.py": "71c116e49ef74011934ee852885ed91df8378cc811eb546d0068df7a1a8f5871",
+      "context_loom/habitus_agent.py": "966f6b8ed65e24f87e2f5bd86d4931d245c6f9d34bcd93485dfe280a7dcddcad",
+      "context_loom/helix_pulse.py": "76c6013b46ef052b7fec87d0e349556fe643e05e6483512990d1db8e88f0db58",
+      "context_loom/intent_cortex.py": "4c26c6d6db100243935928840d7fa0d42d8ed80ca8f924119c8757c2f0d09e6e",
+      "context_loom/llm_evaluation.py": "429e04f0fe729e693dbfb6211ecc97aedb927ab0c7c1904a4852116ed11948d0",
+      "context_loom/locomo_evaluation.py": "ae83eb636aa71c9c2c0775dd24a9d6714a0b05847b37b564e3872b1d8e632566",
+      "context_loom/models.py": "b7ea497c5e6348e91e4f79d0630044c348cd6277011bea7efe6f75bc7a834f5d",
+      "context_loom/multi_hop_lane.py": "eeb4ad7638ef5de74c309329a3c455b16ff5fc3a0f37430ca92775766327c36c",
+      "context_loom/personality_smoke.py": "920cdc2304f681f5c745c4644bbe2875ac8bcdf834ddc7f6e397693c4e712095",
+      "context_loom/reflection.py": "d1d1bc280476d11d23f3d28b8daf8b53be49ea119b6733c06d376da4753122a6",
+      "context_loom/retrieval.py": "230f7044406d9e03803473d7cecf31176d9abdbc261ec9417b0d44db503ad41d",
+      "context_loom/runtime.py": "37f277c989d38a20a81a7114ff90c697ecc9e16bc534366e6efb9a8eaecc4e45",
+      "context_loom/store.py": "2043136b3428a194a1ef446e001ee06480af3353b3091cb9b56716a8c437af7a",
+      "context_loom/summarizer.py": "95db6b34a6089195109d49c07986e7606eea43e4fc0b0e0598b2e27046d8eddd",
+      "context_loom/tokenization.py": "13d484704a9fc0a2c066f82d4b0c2854bb3489a381272c331265489170cef5ec",
+      "context_loom/topical.py": "279dc3bd553196e68bd59b9fc4c784be794d6d5bb0290e808062dc4bd1d8b163",
+      "context_loom/x_membrane.py": "7cc11d5db9eb32e9a9bb360f9fbed4312d4c4a49c4cf63b0fe90ca52fdb42c12",
+      "habitus_ai/__init__.py": "c91217d8ad7a64850be4a64aaf4163ff5e24628a7d0c0bd0d312616ac20e346e",
+      "habitus_ai/agent.py": "0960d46d7060202c0a135544b82dfff4cd21798f6df3cee21f970d77eb5b7209",
+      "habitus_ai/agent_memory.py": "f313f23af993fe2d0b7856a70255f3a3c81d1a3d8829cf80365879e1843e37f6",
+      "habitus_ai/agent_workspace.py": "4136da7e3fdbbe420e1fb7155b113c5cb9cdd6a1876112d7d7f152b6b1f4d1ed",
+      "habitus_ai/app.py": "032347f5f27173e5945390c34a2c66a253628aea83366c6144d6ae6ac329f2da",
+      "habitus_ai/async_workers.py": "6011ac400dabd03bc4b770adb3bdcd7d429fbfd8a928efebbd35409f235b4713",
+      "habitus_ai/audio.py": "f3c38f593261001b91f9612f47be06d982a712a85d69251b346ae2cb2fd98be9",
+      "habitus_ai/calibrated_stream.py": "d5cf9832ac74cff3f5c826821df95e62362943b9daea90dd5f78a3a374c0524b",
+      "habitus_ai/cli.py": "1bc41d1fd70bf87838add42c73071ca647a01c91233995abfc70ddecf2d59213",
+      "habitus_ai/communication_data.py": "493c0399ae931840c04436e9e93db668b71d4717b66e77a07075aea559d96f63",
+      "habitus_ai/communication_objectives.py": "509d8deed3bc3ab8017fc5e5f5e3eede0980e9975f408975fa277172f3565d56",
+      "habitus_ai/communication_sampling.py": "f7d4100693088b9c10c12f6e83de19be6ae3b9ae8e1c563ea07cd10d6d48df07",
+      "habitus_ai/communication_training.py": "438d1e89148e354e7ac6f6238dfb3b4568dc3813c199440998762664ee9d5067",
+      "habitus_ai/context.py": "6da048a448373a4f380c24862f6b6253804912acb2ec8f0c8826830b8eac0a39",
+      "habitus_ai/continual_mind.py": "e398728bcda8e45a49f3709c8a937cb605db8ca6faa2c5dffe9cbdf85c1a7ff7",
+      "habitus_ai/continual_rwkv.py": "36630e63e14c009a7db72f5b356116c05ce277c863700f4b1f74a3d60015f703",
+      "habitus_ai/continual_session.py": "c5c572801d7047252d2051fbe6e2d540cc4b8ded663b777255f036b58a128370",
+      "habitus_ai/corpus_associations.py": "d457af82d0a95e5ea2f56a468aa5a4d4a467480b40d0f9e62aece11632a336dd",
+      "habitus_ai/corpus_stream.py": "c93ba63ede5c499d9dbc5bfd6dc3e3a3a884ed04209e8079bc1e4296d4b8307a",
+      "habitus_ai/demo.py": "73149f6bb5001af33aee074caed4555ff97808944e5bb452df4e6ee0ce33e3e8",
+      "habitus_ai/developmental_cortex.py": "950cd21afc82bdbfeeebc675884edfbc2de00f054d3223cdbc553dc3beb700f5",
+      "habitus_ai/developmental_curriculum.py": "d333e46b692b6b084e675c01d941a8756f5daec2c20926c89f185957193f66e5",
+      "habitus_ai/developmental_runtime.py": "aa384b05b9cd89d77ff4abb67e017d0672e3cb7a14b35e33ed7cfbc121ba669c",
+      "habitus_ai/doctor.py": "cc8d6218a6034a2e3220d1ed4a13702351b5b922e4f3ec5a090618179d6d5039",
+      "habitus_ai/embeddings.py": "f1c554f1122c2232e8784c6ab813c1c223946199d6697541b3123031473ab07e",
+      "habitus_ai/flow_core.py": "7c7e64cfe8a041ce0ef03ec7644ca8ba8e9572c2a08397cddef34953f28c71d5",
+      "habitus_ai/flow_mind.py": "f66ac4e97830255f90448fb337fbec5c2219c58156053c7347332fca5932b790",
+      "habitus_ai/functional_agent.py": "2e2a943415c644b508592f6b37b347bab5f0876c5876669e81fe5682151e7bbd",
+      "habitus_ai/gestation.py": "c7b7f2787df1bc2ddc112f856415edb182b426b4b58d2d38cd3cbc82b0c30194",
+      "habitus_ai/graph.py": "e8a76eda28093ce88ef231697a20d7780eab609f67d52ba623117902b209b45f",
+      "habitus_ai/grounded_language.py": "8ebefad9ce72dd86ab0cad539bae7639174fabc87482f234ef49d81c3a0c2bd6",
+      "habitus_ai/habitus_stream.py": "78255f7b1d92a0ce29c73adf4851326dd61e53edab4ba8e2942e83bbde0520de",
+      "habitus_ai/inquiry_learning.py": "b42287a7f0f74f189410ee70c1fa679d1b623502b2bf92d69acc3f7fe9406082",
+      "habitus_ai/integrated_agent.py": "49e5e7ad24a3505b0ba9ddc408645a98ad5e9afbc87d4adf634ecbf2e9461864",
+      "habitus_ai/lanes.py": "c551a16a196035b2b08356a2e8823166cfab77e56288fb8f0c89d89ff398b304",
+      "habitus_ai/language_vocabulary.py": "adf0e6a10f90694c474c6fe5d78ad507f7ccec3715bb96ab2183703b7b43eeb9",
+      "habitus_ai/lexical_cortex.py": "7e649a081ff5d16d8183e6af62390f549b201404575da78faa47035cb69d7e75",
+      "habitus_ai/memory_agent.py": "10c891e4449d1beae1c78ad217ca263ee581f744cd66107e24bd12aab00fcc5a",
+      "habitus_ai/models.py": "d80fd9b8d242aba6e8d6363409748940406d49cc9d14c15954690c445728d037",
+      "habitus_ai/open_weight.py": "d2b8988a4823b1cd2e195952792cb38fcefc8677c8758ccc8e6beacebde91f86",
+      "habitus_ai/pipeline.py": "b39bdfa5af2d91101d4e65d7070b4dc4b1b490be74e779ed19d4d7d7e161c24a",
+      "habitus_ai/recurrent.py": "089e5c1b4d1a57bc879573e51aa75e11decc615aed89104306bec8ac41fce5db",
+      "habitus_ai/recurrent_conversation.py": "a89a70f5baa9d338ef4d29984adb9e31e0153d1e7e4883cfa4e8acb118f8bbe9",
+      "habitus_ai/recurrent_flow.py": "a8ffdb5fce4c5f2b608272ce375bcd33038fa98713137d2b3381e88820190401",
+      "habitus_ai/retentive_language.py": "cce564d153580fd58475c5aad8325879596633527d17a53d646486e121f77e4b",
+      "habitus_ai/retrieval.py": "e1a635afd944bf8585d1ea57e4828967c3b2aedb425495689a59307972ad7106",
+      "habitus_ai/rwkv7_language.py": "80f1949814afd670cf3ea88d4c751d0e54645c1dbff4977816188cc6c27a5da9",
+      "habitus_ai/self_pulse.py": "180d8008f81e7bf64f231a09d0382c647baf796a3daaf8a465ae2f1122bf1bfc",
+      "habitus_ai/sensory_motor_loop.py": "efe166ca2f8aad2a97a85352203dad57c13081941dff1ee520c5d42b8ef11116",
+      "habitus_ai/sensory_reservoir.py": "25cdcc10390bbd0acea18a46abf2f8c3d8e4b5748fa2ac10145fc7f4985d9694",
+      "habitus_ai/stateful_language.py": "187647a282d0040cf366fdc1c8cfdd1673029c0f4be1fd4c117d93c711c14e89",
+      "habitus_ai/store.py": "5d85b9e16257701a4ec78458faef51b4ac67becdeba8b53fdd8ebd866728a264",
+      "habitus_ai/stream_data.py": "09b94cf04b3ec795638ffc1a8ef944f6416a8b8db879c0033931af4d976a6d30",
+      "habitus_ai/surface.py": "fb2e560b2054fbd792086a5c94e0327cad624dabe3b11b54184ed32bf3e94ae6",
+      "habitus_ai/tools.py": "b451b58c530413e6fa9b71eda7d66ed472d7a487b7a5a362041708378c63354a",
+      "habitus_ai/types.py": "7a096f0a520a5c00d618a90bd786c983acbc7b1bbbb857e6e4f93cfedf40e4cb",
+      "habitus_ai/vector_adapters.py": "22fe8f3f6620c3560cef3e92dfc1136ed39c4063a97355aa9e586607d901e65b",
+      "habitus_ai/working_memory.py": "35f86adae8c8bd4f97a6f8432844c1cf5a3686f27180afc409bc844329d118f8",
+      "habitus_ai/workspace_cortex.py": "fa16e88faed8588d98e2a5a73270a1a04a63f04e8b6d707d698fa3f7e2adb0cc",
+      "habitus_ai/workspace_observations.py": "38063702ab9a15f621f885c45a65f994364933011a0010d70665f09e1dcb094c",
+      "pyproject.toml": "ec5bce74c884dd4dac32aa974fcd947879c23c43b52161ed9f5b5c779aff30f2"
+    }
+  },
+  "configuration_before_wizard": {
+    "auto_disengage_turns": 2,
+    "camera_enabled": true,
+    "ptz_enabled": true,
+    "scratchpad_char_limit": 2000,
+    "faiss_duplicate_threshold": 0.8,
+    "faiss_verification_threshold": 0.9,
+    "pulse_mode": "standard",
+    "tool_format": "api",
+    "task_cognition_mode": "observe",
+    "task_focus_workers": 2,
+    "task_focus_max_depth": 4,
+    "local_provider": "ollama",
+    "local_model": "granite4.1:3b",
+    "local_context_window": 8192,
+    "dual_summary_max_words": 300,
+    "dual_max_thinking_pulses": 3,
+    "memory_module": "mightymem",
+    "composition": "mindscape",
+    "llm_provider": "ollama",
+    "llm_model": "granite4.1:3b",
+    "mindscape": {
+      "package_path": "/home/nemo/MightyMem",
+      "rwkv_model": "/home/nemo/habitus-ai-experiments/habitus-mind/models/rwkv7-g1j-1.5b-20260831-2c18b29",
+      "workspace": "/tmp/helix-wizard-20261010-n7438mgj/sensory-room",
+      "device": "cpu",
+      "gestation": "if_missing"
+    },
+    "setup_complete": false,
+    "telegram_enabled": false,
+    "discord_enabled": false
+  },
+  "wizard_selections": {
+    "llm_provider": "ollama",
+    "llm_model": "granite4.1:3b",
+    "tools": [
+      "operational",
+      "core",
+      "files"
+    ],
+    "safety_mode": true,
+    "shortcuts": false,
+    "creator_name": "Joshua",
+    "agent_name": "Helix"
+  },
+  "state_lineage": "full byte copy of current canonical data including all checkpoints; setup normal seed-preservation behavior applies",
+  "canonical_before": {
+    "data/cognitive_journal.jsonl": "0d020b97493070c39fa025628474f2222133cfe6e24e260d7b8c2dce81d10dbf",
+    "data/cognitive_projection.npy": "ee75e2d1fbcd7a806a92119a03e969a031e9dadc840fd0afdc1ef9702d1d940d",
+    "data/dashboard_messages.json": "9c39e4bd1b0b2f9bd04b5ad7e548e811edd41062ed4a3f580d9ccf98a661d8ef",
+    "data/pulse_payload_2.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "data/sensory_journal.json": "9f5fc8cbc78b4c8747a6e5a630c4cb59059308c01bbfddebd8ac68501aea688c",
+    "data/pending_beliefs.json": "d5d978842a7480ee3c3a9d331b752ff69de43da3db0b632a3c4aed76edbc4c05",
+    "data/co_occurrence_state.json": "e78454a9d769993788bb820cef108c8a34d74a0f233c336c28f82df7be4ce9dd",
+    "data/email_reply_ledger.json": "421b0e84ca364815f5832069624c89a75770cad2220c9c3a7e944048b5973c6e",
+    "data/concepts.json": "d1eb1e08dd4e4d6bf087496e745bea7c0d2d2f0c1c119e9ceb12ce08d6138f15",
+    "data/affect_field.json": "d8255eabd4ec670b77d77afb14d24cccf25cc06d1434a820ee0950f35bbac8fc",
+    "data/contacts.json": "f2511323ca0efe406bbd6989ecefdfc18729469d94465279fa706fdc57e74439",
+    "data/skills.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/desires.json": "69738cc57bf6e5ef6775e07157aa36223d480af9d0296d868a7104c40cfe3219",
+    "data/pulse_payload_1.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "data/pulse_payload_0.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "data/premises.json": "ecaed0f5f906c528ab06606140d70bca2c063f63ca28047d0213e47d997e2a0d",
+    "data/people.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/propositions.json": "ca0821ce4c58f521f210eb3ff08c2b6b7ee3fdf197a2153ef829f05c5755c432",
+    "data/mock_pulse.txt": "0fa41d43df2391068e84d89ceb437238890978c127678601206313bc3007456c",
+    "data/preferences.json": "58ee9a177f513dcd0770bf68afe7137d7f406e46f89f5ff337d69288d6a61427",
+    "data/last_3_gemini_payloads.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/logs/manifold_clusters.json": "403e9d5329cad804cb1bb08ce5e820c09021c0c51b340fb4b30a4f7c86f8a878",
+    "data/logs/processed_beliefs.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "data/models/en_US-lessac-medium.onnx": "5efe09e69902187827af646e1a6e9d269dee769f9877d17b16b1b46eeaaf019f",
+    "data/models/en_US-lessac-medium.onnx.json": "efe19c417bed055f2d69908248c6ba650fa135bc868b0e6abb3da181dab690a0",
+    "data/memory/cognitive_journal.jsonl": "2aeac18deba5b312d70abfbd272d09d1f7b83c5a8389c50ddb04a5f3e1612101",
+    "data/screenshots/video_20260602_063749.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_070826.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_072952.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/browser_20260606_091241.png": "baebedc73702e6277a88754f8b89317119f30a5b0d1adde6f6e620a962817b75",
+    "data/screenshots/video_20260601_194033.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_074246.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260601_220728.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_072330.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_084648.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260617_110101.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/browser_20260606_093340.png": "0bddd8db94edd205f89dca0ba9fb3f884f0c0293460ac4d056079f6818cdd227",
+    "data/screenshots/video_20260602_073635.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_075357.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260614_155542.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_071526.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260601_215415.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260607_063125.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_070014.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260607_070534.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_074905.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_065204.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_081039.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_080357.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260608_062310.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_081657.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260617_093601.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_075853.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_082346.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_083357.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/screenshots/video_20260602_084133.mp4": "bfc863a48a95219a7e0c4c681fa3f7c60de8fce01dc5e9a8413934925924d53a",
+    "data/mindscape/loom.sqlite-wal": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mindscape/loom.sqlite-shm": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb",
+    "data/mindscape/composition-manifest.json": "01e008095b72afdf38f4f45511d13e0b1882e92392d96c98c51c8dab6c57025a",
+    "data/mindscape/loom.sqlite": "d406d2f4939142f3de68051762e6811fc10b3f16e3a0a1609883e8f8528fdfca",
+    "data/mindscape/launcher.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mindscape/receipts.jsonl": "c248f7f241f6cc94756547e018e2fbc00f52e8e6c0e986e12333ed15e55d4ee8",
+    "data/spatial/attention_center_gamma.npy": "87b8b8c9d015082c4ee46e443181dd63c5c4edc589774135eb1beeca269f3182",
+    "data/spatial/spatial_injection.json": "fa7f07bf07957e954abd7615ed392699f12ef01b65af560e50c258c4bcdf023c",
+    "data/spatial/cognitive_projection.npy": "ee75e2d1fbcd7a806a92119a03e969a031e9dadc840fd0afdc1ef9702d1d940d",
+    "data/spatial/spatial_injection_history.json": "66d22b129503bd713bb84470f8ff0b4a6aef743f746a11e264839405b8006ae3",
+    "data/spatial/agent_canvas_history.json": "3ac016adf5b89471ecccfb05c32f0c2cc0571a6873a59c68baf3c373e4232ef6",
+    "data/spatial/belief_space_state.json": "ec64c21b2bf18168ff3145c45b272cc6bc4f098d46e715eee1310a780afa3fe9",
+    "data/spatial/attention_center.npy": "806c221834ccd3f51dbb223463530eae11689661910565e2851ac2410b68cbd8",
+    "data/spatial/attention_center_prev.npy": "6de2bffc4e282fbe62cade2808eb071249451db92266a712cfe08f99ae1acc72",
+    "data/spatial/memory_space_state.json": "dd44a8386b845bbf15e221179e14e4f9d807de479abff6fe7b4d916171ae2825",
+    "data/spatial/tools_status.json": "aa36c715189b650a9a6df0714a65dfccc9e0a46af56125a18ad7a66507c98a75",
+    "data/spatial/attention_center_velocity.npy": "5aae39eae1ea39f073562ec12c77edaa7b3146999386230f4d88235d0cfa342b",
+    "data/spatial/agent_canvas.json": "65c4e3ddde22d77b932a7e69b42f2f95c4342cf77847274f2f00f228bb6f7c76",
+    "data/beliefs/concepts.json": "d1eb1e08dd4e4d6bf087496e745bea7c0d2d2f0c1c119e9ceb12ce08d6138f15",
+    "data/beliefs/skills.json": "ef2e5eb6b37f265790095ab92f459cd951113682286d1cb1fea5b6ed10bd2bef",
+    "data/beliefs/desires.json": "69738cc57bf6e5ef6775e07157aa36223d480af9d0296d868a7104c40cfe3219",
+    "data/beliefs/premises.json": "ecaed0f5f906c528ab06606140d70bca2c063f63ca28047d0213e47d997e2a0d",
+    "data/beliefs/people.json": "ac69244a6d8c063f5c346227b056b1811355d927f7b066c552b6bf0543a75b7f",
+    "data/beliefs/propositions.json": "ca0821ce4c58f521f210eb3ff08c2b6b7ee3fdf197a2153ef829f05c5755c432",
+    "data/beliefs/preferences.json": "58ee9a177f513dcd0770bf68afe7137d7f406e46f89f5ff337d69288d6a61427",
+    "data/scratchpad/scratchpad.md": "9688952509af217e284fbdab17ef7eddcf32fe4713b01c9ccafc289d281ae2ba",
+    "data/mindscape/joint/LATEST.json": "b93f1e0e8faf8a8a9766b75b742a54f2af913879e6e4d3490fd9be6eba1c6af3",
+    "data/mindscape/joint/uncommitted-1791595340670060901.sqlite": "dc1c2a0479ed2d61e05250201cd10c44d2778fe436f71b2d2df52d739b7c4600",
+    "data/mindscape/joint/uncommitted-1791594891489590735.sqlite": "eb0d485f81d101f0d8c4b9e825d53278137df0963bf81a1441ea6ea6fbaaa14a",
+    "data/mindscape/joint/mind.sqlite": "dc1c2a0479ed2d61e05250201cd10c44d2778fe436f71b2d2df52d739b7c4600",
+    "data/mindscape/joint/writer.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mindscape/joint/events.jsonl": "715bd85bac35971a1c269c6686f7a0925e6f20f4f8ce7eb5733c4e7183ac4a80",
+    "data/mindscape/joint/checkpoint-000001/manifest.json": "4a18b56599fa017688f6b0ffe20eb03cb42ae397f1d32e9101683b43dad93f2c",
+    "data/mindscape/joint/checkpoint-000001/mind.sqlite-shm": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb",
+    "data/mindscape/joint/checkpoint-000001/mind.sqlite": "dc1c2a0479ed2d61e05250201cd10c44d2778fe436f71b2d2df52d739b7c4600",
+    "data/mindscape/joint/checkpoint-000001/neural.pt": "4852eb8ccdaaa6aa6f91303d2be7b5fe1dab50d3698d888fe6cca75c9550f2ea",
+    "data/mindscape/joint/checkpoint-000001/mind.sqlite-wal": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mindscape/joint/checkpoint-000002/manifest.json": "5a8be584f451d4dac010c0c101511c10bc71684c3d34f279dab262e585fa07b6",
+    "data/mindscape/joint/checkpoint-000002/mind.sqlite-shm": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb",
+    "data/mindscape/joint/checkpoint-000002/mind.sqlite": "dc1c2a0479ed2d61e05250201cd10c44d2778fe436f71b2d2df52d739b7c4600",
+    "data/mindscape/joint/checkpoint-000002/neural.pt": "4852eb8ccdaaa6aa6f91303d2be7b5fe1dab50d3698d888fe6cca75c9550f2ea",
+    "data/mindscape/joint/checkpoint-000002/mind.sqlite-wal": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/mindscape/joint/checkpoint-000003/manifest.json": "261f9165d4c1389856eb235426b205985590f7d30d27d3f0b7928067d737e45c",
+    "data/mindscape/joint/checkpoint-000003/mind.sqlite": "dc1c2a0479ed2d61e05250201cd10c44d2778fe436f71b2d2df52d739b7c4600",
+    "data/mindscape/joint/checkpoint-000003/neural.pt": "4852eb8ccdaaa6aa6f91303d2be7b5fe1dab50d3698d888fe6cca75c9550f2ea",
+    "data/spatial/semantic_index_1024d/embeddings.npy": "ac0f76b4747f9c61aa2a99a5f1f22212520b8fd48653415d54c34e6c07be5504",
+    "data/spatial/semantic_index_1024d/ids.json": "3b7fca2ba31dae51e2a2a243cdb26f189f094f2225fd0eb1d23ea8cd77161a8f",
+    "data/spatial/semantic_index_1024d/metadata.json": "0c73171641373d2dddcc591b4037589df6729704845321cf5cb92982aaef3a25",
+    "data/spatial/semantic_index_1024d/config.json": "f5444e6df810414c82238ac2289f160ebaf50bd2ecf43def576d17282fa93cdd",
+    "data/spatial/semantic_index/embeddings.npy": "378c45b800d789197c4f98698f5b094bd0336cd8312cb414eaa53cc6d3613432",
+    "data/spatial/semantic_index/ids.json": "a00a2651ba48b2035a4ce539a2a74ab973a300f201aeca162856d7528678407f",
+    "data/spatial/semantic_index/metadata.json": "a7d85f83794f42b56c4a28c13f616a05f1735321e971db3d260a29055a7b5048",
+    "data/beliefs/backups/pre_merge_20260608_190703/lexicon.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/capabilities.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/self_identity.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/feedback.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "data/beliefs/backups/pre_merge_20260608_190703/knowledge.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "config/config.json": "811478a2414310dcba67ca29ba3a157460321554e56a472d597704ebabce50e5"
+  },
+  "input_files": {
+    "sensory-room/inbox/field-notes.md": "cf098e09fa21426081ff657bda7d17ce008a1a8e1b401b2f52a88d50581cac05",
+    "sensory-room/inbox/survey.pdf": "e70509b7c413ce36bb188e189511525e12ee88aaecd8e269d4b86dbbec8a0d9a"
+  },
+  "test_overrides": {
+    "memory_root": "copy bind-mounted over original data path",
+    "workspace": "/tmp/helix-wizard-20261010-n7438mgj/sensory-room",
+    "credentials": "blank/local-only",
+    "qt": "actual Qt widgets automated via QTest on offscreen platform; WebEngine GPU and Chromium internal sandbox disabled inside read-only bwrap; does not test physical desktop display",
+    "devices": "bwrap private /dev; physical camera and microphone unavailable",
+    "source": "current checkout read-only, no alternate product"
+  },
+  "path": [
+    "dashboard HTTP input",
+    "main.py dashboard poller",
+    "PulseLoop",
+    "mRAG/Context Office/preconscious/8D",
+    "MightyMem RWKV recurrent/cortex + Habitus graph",
+    "Context Loom nine lanes compiler",
+    "local Granite",
+    "Helix action/channel path",
+    "dashboard HTTP output and verified filesystem state"
+  ],
+  "hardware_preflight": {
+    "tags": {
+      "models": [
+        {
+          "name": "granite4.2:3b",
+          "model": "granite4.2:3b",
+          "modified_at": "2026-09-11T11:06:43.264378448-04:00",
+          "size": 2244023965,
+          "digest": "40577dc168a3a9ad34e9a1234e0c2570be86097fa75a236d4574ae985705d3c4",
+          "details": {
+            "parent_model": "/Users/runner/.ollama/models/blobs/sha256-20e436143017578687f7f848225cc6c6038126c84149192229c7dff6e4e0f427",
+            "format": "gguf",
+            "family": "granite",
+            "families": [
+              "granite"
+            ],
+            "parameter_size": "3.7B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 131072,
+            "embedding_length": 2560
+          },
+          "capabilities": [
+            "completion"
+          ]
+        },
+        {
+          "name": "granite4.2:8b",
+          "model": "granite4.2:8b",
+          "modified_at": "2026-09-11T11:05:24.574132122-04:00",
+          "size": 5347929757,
+          "digest": "f586c02fdecdf151b656207c339aa003997345774a41768bac1fd6d2fb85913b",
+          "details": {
+            "parent_model": "/Users/runner/.ollama/models/blobs/sha256-16a9369d0805f80b7377d25d87f937a90c05dc04ad79173a52001e42c9aab311",
+            "format": "gguf",
+            "family": "granite",
+            "families": [
+              "granite"
+            ],
+            "parameter_size": "8.8B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 131072,
+            "embedding_length": 4096
+          },
+          "capabilities": [
+            "completion"
+          ]
+        },
+        {
+          "name": "qwen3.5:9b-q4_K_M",
+          "model": "qwen3.5:9b-q4_K_M",
+          "modified_at": "2026-08-30T20:10:30.109409933-04:00",
+          "size": 6594474711,
+          "digest": "6488c96fa5faab64bb65cbd30d4289e20e6130ef535a93ef9a49f42eda893ea7",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "9.7B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 262144,
+            "embedding_length": 4096
+          },
+          "capabilities": [
+            "vision",
+            "completion",
+            "tools",
+            "thinking"
+          ]
+        },
+        {
+          "name": "lfm2.5:latest",
+          "model": "lfm2.5:latest",
+          "modified_at": "2026-08-12T03:16:14.972342651-04:00",
+          "size": 5156075525,
+          "digest": "9cf756159fc2f3b9128c6a3f544ec90c5e9b8afdbb4179a57b8aea9de589cfb2",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "lfm2moe",
+            "families": [
+              "lfm2moe"
+            ],
+            "parameter_size": "8.5B",
+            "quantization_level": "Q4_K_M"
+          },
+          "capabilities": [
+            "completion",
+            "tools",
+            "thinking"
+          ]
+        },
+        {
+          "name": "granite4.1:8b",
+          "model": "granite4.1:8b",
+          "modified_at": "2026-07-09T13:41:16.915356812-04:00",
+          "size": 5347933017,
+          "digest": "444af1c4b2fedd6b54041aca558e7300b0b3d5c0468c44619126240323ba2852",
+          "details": {
+            "parent_model": "/Users/runner/.ollama/models/blobs/sha256-ed902ac9eb6adce5a90c6a08c8ea201b50e23fdc5976d1cd0362006afac5309e",
+            "format": "gguf",
+            "family": "granite",
+            "families": [
+              "granite"
+            ],
+            "parameter_size": "8.8B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 131072,
+            "embedding_length": 4096
+          },
+          "capabilities": [
+            "completion",
+            "tools"
+          ]
+        },
+        {
+          "name": "granite4.1:3b",
+          "model": "granite4.1:3b",
+          "modified_at": "2026-07-07T22:18:27.369592056-04:00",
+          "size": 2099520281,
+          "digest": "6fd349357287c7ffc9e38189a93b48ea175d24fc566b38f09cfc564fb7f303eb",
+          "details": {
+            "parent_model": "/Users/runner/.ollama/models/blobs/sha256-662b0626cd58f443baea23559b469df6576a81d349649c59413b36a9fb32eb29",
+            "format": "gguf",
+            "family": "granite",
+            "families": [
+              "granite"
+            ],
+            "parameter_size": "3.4B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 131072,
+            "embedding_length": 2560
+          },
+          "capabilities": [
+            "completion",
+            "tools"
+          ]
+        },
+        {
+          "name": "qwen3-embedding:0.6b",
+          "model": "qwen3-embedding:0.6b",
+          "modified_at": "2026-07-07T22:06:25.499830938-04:00",
+          "size": 639150858,
+          "digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+          "details": {
+            "parent_model": "/Users/ollama/.ollama/models/blobs/sha256-06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439",
+            "format": "gguf",
+            "family": "qwen3",
+            "families": [
+              "qwen3"
+            ],
+            "parameter_size": "595.78M",
+            "quantization_level": "Q8_0",
+            "context_length": 32768,
+            "embedding_length": 1024
+          },
+          "capabilities": [
+            "embedding"
+          ]
+        },
+        {
+          "name": "qwen2.5:0.5b",
+          "model": "qwen2.5:0.5b",
+          "modified_at": "2026-07-07T22:03:24.865348675-04:00",
+          "size": 397821319,
+          "digest": "a8b0c51577010a279d933d14c2a8ab4b268079d44c5c8830c0a93900f1827c67",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen2",
+            "families": [
+              "qwen2"
+            ],
+            "parameter_size": "494.03M",
+            "quantization_level": "Q4_K_M",
+            "context_length": 32768,
+            "embedding_length": 896
+          },
+          "capabilities": [
+            "completion",
+            "tools"
+          ]
+        },
+        {
+          "name": "qwen3.5:0.8b",
+          "model": "qwen3.5:0.8b",
+          "modified_at": "2026-07-07T21:55:06.475335409-04:00",
+          "size": 1036046583,
+          "digest": "f3817196d142eaf72ce79dfebe53dcb20bd21da87ce13e138a8f8e10a866b3a4",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "873.44M",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 1024
+          },
+          "capabilities": [
+            "vision",
+            "completion",
+            "tools",
+            "thinking"
+          ]
+        },
+        {
+          "name": "qwen3.5:2b",
+          "model": "qwen3.5:2b",
+          "modified_at": "2026-06-25T00:12:54.86397011-04:00",
+          "size": 2741192820,
+          "digest": "324d162be6ca5629ae4517c8710434d0bd2d665bc94dbad46e9af8fbf8a2f0df",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "2.3B",
+            "quantization_level": "Q8_0",
+            "context_length": 262144,
+            "embedding_length": 2048
+          },
+          "capabilities": [
+            "vision",
+            "completion",
+            "tools",
+            "thinking"
+          ]
+        },
+        {
+          "name": "qwen3.5:4b",
+          "model": "qwen3.5:4b",
+          "modified_at": "2026-06-22T20:03:20.284111331-04:00",
+          "size": 3389983735,
+          "digest": "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen35",
+            "families": [
+              "qwen35"
+            ],
+            "parameter_size": "4.7B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 262144,
+            "embedding_length": 2560
+          },
+          "capabilities": [
+            "vision",
+            "completion",
+            "tools",
+            "thinking"
+          ]
+        },
+        {
+          "name": "minicpm-v4.5:latest",
+          "model": "minicpm-v4.5:latest",
+          "modified_at": "2026-06-22T20:02:11.795249565-04:00",
+          "size": 6121827879,
+          "digest": "0c40168f46d1cbf5cec399d8ced34b6d3347a79f69306866efa44203c08eeda3",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen3",
+            "families": [
+              "qwen3"
+            ],
+            "parameter_size": "8.2B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 40960,
+            "embedding_length": 4096
+          },
+          "capabilities": [
+            "completion",
+            "vision"
+          ]
+        },
+        {
+          "name": "gemma3:4b",
+          "model": "gemma3:4b",
+          "modified_at": "2026-06-19T00:02:13.65219247-04:00",
+          "size": 3338801804,
+          "digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "gemma3",
+            "families": [
+              "gemma3"
+            ],
+            "parameter_size": "4.3B",
+            "quantization_level": "Q4_K_M"
+          },
+          "capabilities": [
+            "completion"
+          ]
+        },
+        {
+          "name": "gemma4:latest",
+          "model": "gemma4:latest",
+          "modified_at": "2026-06-17T00:25:04.697782575-04:00",
+          "size": 9608350718,
+          "digest": "c6eb396dbd5992bbe3f5cdb947e8bbc0ee413d7c17e2beaae69f5d569cf982eb",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "gemma4",
+            "families": [
+              "gemma4"
+            ],
+            "parameter_size": "8.0B",
+            "quantization_level": "Q4_K_M"
+          },
+          "capabilities": [
+            "completion",
+            "tools",
+            "thinking"
+          ]
+        }
+      ]
+    },
+    "ps": {
+      "models": []
+    },
+    "dashboard_5050_busy": false,
+    "host_memory": [
+      "MemTotal:       24423436 kB",
+      "MemFree:         3856484 kB",
+      "MemAvailable:   19786504 kB"
+    ],
+    "helix_processes": "1750714 /bin/bash -c venv/bin/python - <<'PY' import json,urllib.request,socket,subprocess from pathlib import Path info={} for endpoint in ['tags','ps']:     with urllib.request.urlopen('http://127.0.0.1:11434/api/'+endpoint) as response: info[endpoint]=json.load(response) sock=socket.socket() info['dashboard_5050_busy']=sock.connect_ex(('127.0.0.1',5050))==0 sock.close() info['host_memory']=Path('/proc/meminfo').read_text().splitlines()[:3] info['helix_processes']=subprocess.check_output(['pgrep','-af','(^|/)(python|python3).*([ /]main.py|wizard|dashboard.py)'],text=True) if subprocess.run(['pgrep','-f','(^|/)(python|python3).*([ /]main.py|wizard|dashboard.py)'],capture_output=True).returncode==0 else '' Path('/tmp/helix-wizard-host-preflight.json').write_text(json.dumps(info,indent=2)) print(json.dumps({'models':[x['name'] for x in info['tags']['models']], 'loaded':[x['name'] for x in info['ps']['models']], 'dashboard_5050_busy':info['dashboard_5050_busy'], 'host_memory':info['host_memory'],'helix_processes':info['helix_processes']},indent=2)) PY\n"
+  },
+  "dataset": "new local tester conversation and input MD/PDF; output script absent and must be authored by live Helix",
+  "grader": "no aggregate score; correlate real provider completion, ingestion, memory, context, channel receipts and filesystem verification",
+  "boundaries": [
+    {
+      "source": "config",
+      "value": "8192 foreground context and Loom budget; compiler reserves zero output tokens; total session may exceed available context",
+      "status": "selected context; overflow/truncation invalidates any success interpretation"
+    },
+    {
+      "source": "Ollama provider",
+      "value": "think=False; four retry attempts; max_output_tokens attribute not passed as num_predict; no request timeout",
+      "status": "inherited, not tuned; capture done_reason"
+    },
+    {
+      "source": "orchestrated/tool_orchestrator/tool_task_runner",
+      "value": "one request per foreground turn; four tasks plus one extension; ten tool steps; 800-token reports; planner context 400 tokens and knowledge 150",
+      "status": "inherited unjustified caps block full-product evaluation; diagnostic only"
+    },
+    {
+      "source": "preconscious/unified/loom/graph",
+      "value": "existing candidate, context, graph path bounds retained; Loom adaptive shortlist disabled",
+      "status": "no recall metric; full limiter compliance not established"
+    },
+    {
+      "source": "pulse_loop",
+      "value": "Current Mindscape stores full private continuation; inherited tool events, context recovery and error requeue limits remain. See recorded source snapshot.",
+      "status": "inherited; cannot establish uncapped task completion"
+    },
+    {
+      "source": "auxiliary/curator/dashboard",
+      "value": "auxiliary retries and caller output allowances; curator top5clusters/12members/500chars; dashboard retains200 outbound",
+      "status": "inherited; no sleep or aggregate evaluation"
+    }
+  ],
+  "parity": {
+    "entrypoint": "actual GUI wizard and its own child launch",
+    "full_composition_expected": "Granite 4.1 3B + RWKV 1.5B + Habitus cortex/graph + nine Loom lanes + mRAG + Helix Pulse",
+    "gate": "unscored diagnostic only: current source declares motor path disconnected and inherited limiter audit unresolved; no launch-readiness or complete-product performance claim"
+  },
+  "observer": {
+    "role": "passive function return/audit observation plus actual GUI button events; never changes cognitive arguments or results",
+    "files": {
+      "observer/sitecustomize.py": "5e46fa4b4dcf28c1b94773903e9db4fa506f197b7fc8665178597bf1a7010e2a",
+      "observer/wizard_driver.py": "0808f77534deed726702e0595574f8711646002eaf4ce09371417278b74d4014"
+    }
+  },
+  "environment": {
+    "PATH": "/home/nemo/Helix_AGI (GitHub Repo) (Public)/venv/bin:/usr/bin:/bin",
+    "HOME": "/home/nemo",
+    "LANG": "C.UTF-8",
+    "TZ": "America/New_York",
+    "HF_HUB_OFFLINE": "1",
+    "PYTHONUNBUFFERED": "1",
+    "TMPDIR": "/tmp/helix-wizard-20261010-n7438mgj/tmp",
+    "XDG_CACHE_HOME": "/tmp/helix-wizard-20261010-n7438mgj/cache",
+    "NUMBA_CACHE_DIR": "/tmp/helix-wizard-20261010-n7438mgj/cache/numba",
+    "PYTHONPATH": "/tmp/helix-wizard-20261010-n7438mgj/observer:/home/nemo/Helix_AGI (GitHub Repo) (Public)",
+    "HELIX_REVIEW_TRACE": "/tmp/helix-wizard-20261010-n7438mgj/trace.jsonl",
+    "HELIX_TRIAL_RUN": "/tmp/helix-wizard-20261010-n7438mgj",
+    "HELIX_DISABLE_TELEGRAM": "1",
+    "PIP_NO_INDEX": "1",
+    "DISPLAY": ":0",
+    "QT_QPA_PLATFORM": "offscreen",
+    "QTWEBENGINE_CHROMIUM_FLAGS": "--disable-gpu",
+    "QTWEBENGINE_DISABLE_SANDBOX": "1"
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "collected_at": 1791680761.6755934,
+  "collector_sha256": "172c0647649cf977bb86f5123913d2e0d8dc308223ffd28bce7efd48a489c6c0",
+  "provider_attribution": "exact case pulse packet in actual model input, not wall-clock overlap alone",
+  "full_readiness_result": null,
+  "cases": [
+    {
+      "case": "conversation",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "60"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 4568,
+          "evaluated_tokens": 4568,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 289
+        }
+      ],
+      "native_action_count": 0,
+      "native_action_pulses": [],
+      "first_pulse": 2,
+      "final_pulse": 2
+    },
+    {
+      "case": "correction",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "62"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 2005,
+          "evaluated_tokens": 2005,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 88
+        }
+      ],
+      "native_action_count": 0,
+      "native_action_pulses": [],
+      "first_pulse": 3,
+      "final_pulse": 3
+    },
+    {
+      "case": "missing",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "83"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 3285,
+          "evaluated_tokens": 3285,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 19
+        },
+        {
+          "request_tokens": 3818,
+          "evaluated_tokens": 3818,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 83
+        }
+      ],
+      "native_action_count": 1,
+      "native_action_pulses": [
+        10
+      ],
+      "first_pulse": 10,
+      "final_pulse": 11
+    },
+    {
+      "case": "read",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "69"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 2644,
+          "evaluated_tokens": 2644,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 16
+        },
+        {
+          "request_tokens": 2631,
+          "evaluated_tokens": 2631,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 227
+        }
+      ],
+      "native_action_count": 1,
+      "native_action_pulses": [
+        6
+      ],
+      "first_pulse": 6,
+      "final_pulse": 7
+    },
+    {
+      "case": "script",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "76"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 3122,
+          "evaluated_tokens": 3122,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 92
+        },
+        {
+          "request_tokens": 3689,
+          "evaluated_tokens": 3689,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 92
+        }
+      ],
+      "native_action_count": 1,
+      "native_action_pulses": [
+        8
+      ],
+      "first_pulse": 8,
+      "final_pulse": 9
+    },
+    {
+      "case": "sense",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "64"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 2118,
+          "evaluated_tokens": 2118,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 16
+        },
+        {
+          "request_tokens": 2719,
+          "evaluated_tokens": 2719,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 104
+        }
+      ],
+      "native_action_count": 1,
+      "native_action_pulses": [
+        4
+      ],
+      "first_pulse": 4,
+      "final_pulse": 5
+    }
+  ],
+  "canonical_files_checked": 114,
+  "canonical_changes": [],
+  "source_changes": {
+    "helix": [],
+    "mightymem": []
+  },
+  "workspace_files": {
+    "inbox/field-notes.md": {
+      "sha256": "9070202873b006a876aa2711db028c376f6d15a16bb8160ae3017afa899ecaa7",
+      "size_bytes": 81
+    },
+    "inbox/survey.pdf": {
+      "sha256": "e70509b7c413ce36bb188e189511525e12ee88aaecd8e269d4b86dbbec8a0d9a",
+      "size_bytes": 706
+    }
+  }
+}

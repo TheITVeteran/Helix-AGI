@@ -1,0 +1,87 @@
+{
+  "collected_at": 1791678121.180384,
+  "full_readiness_result": null,
+  "cases": [
+    {
+      "case": "conversation",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "60"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 2099,
+          "evaluated_tokens": 2099,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 18
+        },
+        {
+          "request_tokens": 2901,
+          "evaluated_tokens": 2901,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 136
+        }
+      ],
+      "native_action_count": 0,
+      "native_action_pulses": [],
+      "first_pulse": 2,
+      "final_pulse": 2
+    },
+    {
+      "case": "correction",
+      "completed_output_chain": true,
+      "canonical_input_ids": [
+        "63"
+      ],
+      "context_packets_reached_provider": true,
+      "provider_checks": [
+        {
+          "request_tokens": 3210,
+          "evaluated_tokens": 3210,
+          "full_input_accounted": true,
+          "done_reason": "stop",
+          "generated_tokens": 111
+        }
+      ],
+      "native_action_count": 0,
+      "native_action_pulses": [],
+      "first_pulse": 3,
+      "final_pulse": 3
+    },
+    {
+      "case": "missing",
+      "completed_output_chain": false
+    },
+    {
+      "case": "read",
+      "completed_output_chain": false
+    },
+    {
+      "case": "script",
+      "completed_output_chain": false
+    },
+    {
+      "case": "sense",
+      "completed_output_chain": false
+    }
+  ],
+  "canonical_files_checked": 114,
+  "canonical_changes": [],
+  "source_changes": {
+    "helix": [],
+    "mightymem": []
+  },
+  "workspace_files": {
+    "inbox/field-notes.md": {
+      "sha256": "d8d077a7978451ee9bdd01ad04f0d72556c69728e4b51dab4f56a3f7bb71f1f0",
+      "size_bytes": 81
+    },
+    "inbox/survey.pdf": {
+      "sha256": "e70509b7c413ce36bb188e189511525e12ee88aaecd8e269d4b86dbbec8a0d9a",
+      "size_bytes": 706
+    }
+  }
+}

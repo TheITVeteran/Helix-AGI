@@ -1,0 +1,49 @@
+{
+  "kind": "unscored integration diagnostic through main.py",
+  "purpose": "Detect integration exceptions and prove per-pulse component wiring after actual startup",
+  "composition": "data/mindscape/composition-manifest.json",
+  "behavioral_score": null,
+  "input": "Please acknowledge this launcher wiring check.",
+  "inherited_boundaries": {
+    "remaining_boundaries": [
+      {
+        "source": "main.py setup_helix",
+        "boundary": "8192 tokens selected in configuration and passed as Ollama num_ctx",
+        "status": "configuration discrepancy repaired; persistent session/context lifecycle remains unaudited"
+      },
+      {
+        "source": "llm/providers/ollama_provider.py",
+        "boundary": "think=False, four attempts; package branch does not pass max_output_tokens or inspect done_reason",
+        "status": "inherited; not an uncapped product benchmark"
+      },
+      {
+        "source": "core/preconscious.py and core/unified_retrieval.py",
+        "boundary": "bounded heads, candidate counts, rendered context and spatial complements as architecture describes",
+        "status": "inherited retrieval policy; no tuning or performance score"
+      },
+      {
+        "source": "llm/orchestrated.py, core/tool_orchestrator.py, core/tool_task_runner.py",
+        "boundary": "one request per turn (MAX_REQUESTS_PER_TURN=1), four tasks plus one extension, ten tool steps, bounded planner/context/observation text",
+        "status": "inherited limits; observe small direct task only, do not claim uncapped completion"
+      },
+      {
+        "source": "core/pulse_loop.py",
+        "boundary": "previous-thought prefix 500 characters, tool-event text 3000 characters, overflow recovery truncation",
+        "status": "inherited; any limit reached invalidates successful case interpretation"
+      },
+      {
+        "source": "core/curator.py",
+        "boundary": "five-cluster limit in current uncommitted source; belief text 12 members, generated 500 characters",
+        "status": "not reached/tested by startup and simple interaction; no sleep competence claim"
+      },
+      {
+        "source": "core/auxiliary_llm.py",
+        "boundary": "two retries and caller token allowances",
+        "status": "inherited; per-response completion to be observed"
+      }
+    ]
+  },
+  "changes_to_boundaries": "Configured 8192 foreground context is now honored; Loom adaptive cap disabled, no added action/reasoning/retry ceilings.",
+  "limitation": "Inherited Helix constraints are not accepted as product tuning or competence evidence.",
+  "prior_manifest_correction": "Earlier boundary transcription said three requests; current source defines one. No behavioral score was produced."
+}

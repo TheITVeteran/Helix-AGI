@@ -6,7 +6,7 @@ Implements asynchronous background execution and offloads synthesis to a lightwe
 
 Key Architectural Upgrades:
 1. Background Execution: Runs asynchronously to avoid blocking the main pulse loop.
-2. Auxiliary Model: Uses a faster, cheaper model (e.g., Gemini Flash) for synthesis.
+2. Auxiliary Model: Uses an isolated provider-aware session for synthesis.
 3. Strict Belief Spec: Validates output against the belief_format_spec (15-250 chars, specific categories).
 4. Co-Occurrence Wiring: Real-time Hebbian wiring via post-pulse hooks replaces batch UMAP/HDBSCAN.
    Nightly Phase 3 reads pre-built relation clusters for compound synthesis.
@@ -53,11 +53,13 @@ class Curator:
         memory_manager,
         llm_client,
         data_dir: str = "data",
+        case_office=None,
     ):
         self.physics = physics_engine
         self.beliefs = belief_store
         self.memory = memory_manager
         self.llm_client = llm_client  # Auxiliary client (e.g., Gemini Flash)
+        self.case_office = case_office
         self.data_dir = Path(data_dir)
         
         self.log_dir = self.data_dir / "logs"
@@ -98,6 +100,13 @@ class Curator:
         }
         
         try:
+            logger.info("Curator Phase 0: Entity Case Maintenance")
+            try:
+                stats["case_maintenance"] = self._run_case_maintenance()
+            except Exception as e:
+                logger.error("Entity case maintenance failed (continuing): %s", e)
+                stats["case_maintenance"] = {"errors": 1}
+
             logger.info("Curator Phase 1: Collecting Raw Memories")
             raw_memories = self._collect_raw_memories()
             
@@ -187,6 +196,79 @@ class Curator:
             logger.info("Curator cycle finished.")
             
         return stats
+
+    def _run_case_maintenance(self) -> Dict[str, Any]:
+        """File recent exact inputs/outputs and form source-linked summaries."""
+        if self.case_office is None:
+            return {"status": "disabled", "cycles": 0}
+        from core.session_memory_maintenance import SessionMemoryMaintenance
+
+        recent = []
+        for item in self.case_office.corpus.all_items():
+            if item.get("tier") != 0 or item.get("source") not in {
+                "pulse_input", "pulse_output", "office_speaker", "focus_worker",
+                "helix_outbound", "tool_use", "task_cognition",
+            }:
+                continue
+            created = str(item.get("created_at") or "")
+            try:
+                parsed = datetime.fromisoformat(created.replace("Z", "+00:00"))
+                if parsed.tzinfo is not None:
+                    parsed = parsed.astimezone().replace(tzinfo=None)
+                if parsed < datetime.now() - timedelta(hours=24):
+                    continue
+            except (TypeError, ValueError):
+                pass
+            recent.append(item)
+        if not recent:
+            return {"status": "empty", "cycles": 0}
+
+        grouped: Dict[str, List[Dict[str, Any]]] = {}
+        for item in recent:
+            session_id = str(
+                item.get("session_id") or item.get("scope_id") or "recent"
+            )
+            grouped.setdefault(session_id, []).append(item)
+
+        def worker(request):
+            if not self.llm_client:
+                return {}
+            response = self.llm_client.generate(
+                prompt=json.dumps(request, ensure_ascii=False),
+                system_instruction=(
+                    "Organize the session using explicit support only. Return JSON with "
+                    "people, session, and views. People contain source-linked facets. "
+                    "Session contains a concise overture and key_details. Views contain "
+                    "subject/topic/relation kind, key, overture, key_details, and source_ids. "
+                    "Every derived item cites source_ids; max two items per facet."
+                ),
+            )
+            text = self._strip_code_fences(getattr(response, "text", "") or "")
+            parsed = json.loads(text)
+            return parsed if isinstance(parsed, dict) else {}
+
+        maintenance = SessionMemoryMaintenance(
+            cases=self.case_office,
+            belief_store=self.beliefs,
+            worker=worker if self.llm_client else None,
+        )
+        cycle_stats = []
+        # The coordinator, not individual desks, bounds board work.
+        for session_id in sorted(grouped)[-32:]:
+            cycle_stats.append(maintenance.run(session_id, grouped[session_id]))
+        return {
+            "status": "complete",
+            "cycles": len(cycle_stats),
+            "references_linked": sum(
+                int(item.get("references_linked", 0)) for item in cycle_stats
+            ),
+            "profiles_written": sum(
+                int(item.get("profiles_written", 0)) for item in cycle_stats
+            ),
+            "worker_failures": sum(
+                1 for item in cycle_stats if item.get("worker_error")
+            ),
+        }
 
     # ── Entity Profile Maintenance ────────────────────────────────────
 
@@ -553,11 +635,12 @@ class Curator:
                     "total_mass": total_mass,
                 })
 
-        # Sort by binding gravity (densest first)
+        # Sort by binding gravity (densest first) and cap to top 5 candidates
         candidates.sort(key=lambda x: -x["mean_gravity"])
+        candidates = candidates[:5]
 
         logger.info(
-            "Phase 3.5: %d clusters exceed threshold (%.2f), %d eligible",
+            "Phase 3.5: %d clusters exceed threshold (%.2f), %d eligible (capped at 5)",
             sum(1 for c in cluster_audit if c["exceeds_threshold"]),
             threshold,
             len(candidates),
@@ -571,17 +654,15 @@ class Curator:
             member_pos = cand["member_pos"]
             member_masses = cand["member_masses"]
 
-            # Build precipitation prompt
+            # Build subconscious inquiry prompt
             belief_texts = [m.get("content", "") for m in members[:12]]
             prompt = (
-                "These beliefs have been gravitationally clustering in my "
-                "cognitive field. They represent fragments of a single deeper "
-                "understanding. Collapse them into ONE dense realization — "
-                "the concept beneath the language.\n\n"
+                "What information can be gleaned, or what conclusions, if any, "
+                "can be drawn from the following belief fragments?\n\n"
                 "BELIEFS:\n"
                 + "\n".join(f"- {t}" for t in belief_texts)
                 + "\n\nRules:\n"
-                "- Extract the UNDERLYING CONCEPT, not a summary\n"
+                "- State the core insight concisely without meta-commentary or conversational intro\n"
                 "- Max 500 chars, plain text, no markdown\n"
                 "- Assign category:\n"
                 "    concepts: A consolidated conceptual understanding\n"
@@ -590,15 +671,15 @@ class Curator:
                 "    desires: A deep aspiration or long-term goal\n\n"
                 "Output EXACTLY 2 lines:\n"
                 "CATEGORY: [category]\n"
-                "CONTENT: [the precipitated belief]\n"
+                "CONTENT: [the derived insight]\n"
             )
 
             try:
                 response = self.llm_client.generate(
                     prompt=prompt,
                     system_instruction=(
-                        "You collapse belief clusters into dense conceptual "
-                        "anchors. Output exactly 2 lines: CATEGORY and CONTENT."
+                        "You answer subconscious inquiry questions to extract dense conceptual "
+                        "anchors from belief fragments. Output exactly 2 lines: CATEGORY and CONTENT."
                     ),
                 )
                 raw = response.text.strip()
@@ -617,6 +698,21 @@ class Curator:
                         category = cat
                 elif line.upper().startswith("CONTENT:"):
                     content = line.split(":", 1)[1].strip().strip('"')
+
+            if content:
+                meta_prefixes = [
+                    "what can be gleaned is",
+                    "what information can be gleaned is",
+                    "the conclusion drawn is",
+                    "the main conclusion is",
+                    "from the following belief fragments",
+                    "based on these beliefs",
+                ]
+                content_lower = content.lower()
+                for prefix in meta_prefixes:
+                    if content_lower.startswith(prefix):
+                        content = content[len(prefix):].strip(" :-,.")
+                        break
 
             if not category or not content or len(content) < 15:
                 logger.warning("Phase 3.5: Failed to parse LLM output: %s", raw[:200])

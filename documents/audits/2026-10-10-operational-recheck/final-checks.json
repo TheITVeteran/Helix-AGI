@@ -1,0 +1,17 @@
+{
+  "created": 1791656220.1266716,
+  "test_agent_closed_normally": true,
+  "wizard_exit_code": 0,
+  "direct_launcher_command": "Launch Helix Agent.sh --check-setup",
+  "direct_launcher_exit_code": 0,
+  "direct_launcher_scope": "loading and checkpoint resume only; no action or conversation competence",
+  "implementation_tests": {
+    "count": 76,
+    "exit_code": 0,
+    "command": "venv/bin/python -m unittest tests.test_pulse_wake tests.test_context_focus tests.test_pulse_context tests.test_task_cognition tests.test_mindscape_setup -q"
+  },
+  "after_final_preflight_canonical_changes": [],
+  "after_final_preflight_canonical_additions": [],
+  "final_pulse_loop_sha256": "2f673862b8e97f40af34bfe5d5d28da6dab833d656ed81f4bfc00a10eb35844b",
+  "full_system_ready": false
+}

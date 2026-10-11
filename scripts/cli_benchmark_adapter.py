@@ -61,7 +61,11 @@ def _load_helix_credentials(target_env: Optional[Dict[str, str]] = None) -> Opti
             line = line.strip()
             if line and not line.startswith("#") and "=" in line:
                 key, value = line.split("=", 1)
-                env[key] = value
+                # A saved default must never override an explicit runtime
+                # selection such as HELIX_PROVIDER=ollama. Besides violating
+                # normal environment precedence, that could silently route a
+                # local-only benchmark to a metered provider.
+                env.setdefault(key, value)
     return creds_path
 
 
@@ -1248,9 +1252,16 @@ class HelixFullAgent(BenchAgent):
         raw = session.send_message(prompt)
         parsed = parse_agent_turn(raw)
         parsed.raw_response = raw
-        
+
+        incoming_text = "\n".join(events).strip() if events else prompt
+        thought_text = parsed.assistant_response or raw
+        self.adapter.step_physics(
+            thought_text=thought_text,
+            incoming_text=incoming_text,
+        )
+
         # Save monologue / thought for next turn context injection
-        self.last_thought = parsed.assistant_response
+        self.last_thought = thought_text
 
         return parsed
 

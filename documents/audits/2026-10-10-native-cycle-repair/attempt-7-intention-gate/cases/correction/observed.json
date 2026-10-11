@@ -1,0 +1,32 @@
+{
+  "case": "correction",
+  "request": {
+    "channel": "dashboard",
+    "content": "Small correction: call me Rowan, not Mira. What name will you use for me, and what preference did I tell you about my reports?",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791680042.9111917,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791680097.1686232,
+  "first_pulse": 3,
+  "final_pulse": 3,
+  "foreground": {
+    "time": 1791680096.2395208,
+    "kind": "foreground_return",
+    "helix_pulse": 3,
+    "thought": "Hi Rowan! For your reports, you can adopt the naming convention **YYYYMMDD-Project-Component** (e.g., `20231015-Helix-Documentation`). This approach makes it easy to sort chronologically, clearly identifies the broader project scope, and distinguishes different types of documentation components without needing long titles. It’s simple enough for quick identification yet flexible if you later need more granularity.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "Hi Rowan! For your reports, you can adopt the naming convention **YYYYMMDD-Project-Component** (e.g., `20231015-Helix-Documentation`). This approach makes it easy to sort chronologically, clearly identifies the broader project scope, and distinguishes different types of documentation components without needing long titles. It’s simple enough for quick identification yet flexible if you later need more granularity.",
+      "recipient": "Mira",
+      "timestamp": 1791680082.858811
+    }
+  ],
+  "native_actions": []
+}

@@ -1,28 +1,15 @@
-"""
-Helix — Preconscious System (Concept-Based Spatial-Gravitational Memory Query)
+"""Helix preconscious turn-injection system.
 
-The preconscious is the bridge between the spatial mind and the
-conscious LLM. On every pulse, it queries the 8D gravitational
-field and returns a contextually relevant "net" of memories,
-beliefs, and state — NOT keyword matches, but the gravitational
-neighborhood around the current focus.
+The primary foreground is mRAG: multi-head retrieval over Helix's full 384D
+SemanticIndex and one corpus spanning memories plus both belief tiers. Raw 8D
+gravity is a small additive lane, queried from the carried attention
+trajectory without a semantic candidate gate. A third lane follows repeated
+direct transitions between cluster prototypes, preserving lateral learned
+associations without moving individual co-injected records.
 
-How it works:
-  1. Takes the trigger text (last thought + incoming events)
-  2. Extracts 1-5 key concepts via RAKE-style keyphrase extraction
-  3. Embeds each concept independently into 8D cognitive space
-  4. Runs independent gravity queries centered on each concept:
-     - Nearby beliefs scored by mass × temperature / distance²
-     - No overlap between concept clusters (rolling blacklist)
-  5. Pulls Layer 2 anchor matches, scratchpad, and contact context
-  6. Formats everything as natural language "peripheral awareness"
-
-The conscious model receives this each pulse as its grounding.
-Identity, knowledge, and context emerge from actual recalled
-experiences — not from static files.
-
-Zero API calls. CPU-only embeddings (all-MiniLM-L6-v2 via ChromaDB).
-Budget: ~500 tokens of injection per pulse.
+Layer-2 anchors, recent state, scratchpad, contact context, and affect remain
+independent grounding layers. All retrieval is local/CPU-only and makes no API
+calls. Set HELIX_UNIFIED_RAG=0 for the legacy concept-gravity path.
 """
 
 import logging
@@ -39,6 +26,8 @@ from memory.belief_store import BeliefStore
 from core.physics_engine import PhysicsEngine
 from core.concept_extractor import ConceptExtractor
 from core.local_summarizer import LocalSummarizer
+from core import unified_retrieval
+from core.pulse_context import ContextAnnotation, ContextContribution, recalled_contribution
 
 logger = logging.getLogger("helix.core.preconscious")
 
@@ -112,6 +101,11 @@ class Preconscious:
         # Previous pulse belief tracking — filter these out next pulse
         # to avoid repeating the same beliefs in consecutive pulses.
         self._prev_pulse_beliefs = []  # list of sets, each containing content strings from previous pulses
+        # Same window, keyed by id. The gravity lane excludes by content
+        # string (it only ever saw beliefs); the unified pool also carries
+        # memories, where near-identical content is common and ids are the
+        # only reliable identity.
+        self._prev_pulse_belief_ids = []  # list of sets of ids
 
         # Concept-level blacklist — prevents the same concept from
         # triggering repeated searches within a short window.
@@ -126,16 +120,6 @@ class Preconscious:
         # context (the primary looping mechanism).
         self._memory_blacklist: Dict[int, int] = {}
         self._memory_cooldown = 5   # pulses before a memory can re-inject
-
-        # Hebbian position plasticity — co-injected beliefs drift toward
-        # each other so new relations can form as geometry, not just
-        # relation counts. Nudged cache positions are flushed to the
-        # belief store periodically so plasticity survives restarts.
-        self._hebbian_dirty: Dict[str, Any] = {}  # belief_id → np position
-        self._hebbian_flush_interval = 25         # pulses between flushes
-        self.HEBBIAN_RATE = 0.02       # fraction of distance-to-centroid per co-injection
-        self.HEBBIAN_MAX_STEP = 0.01   # absolute cap per nudge (manifold radius ~0.2)
-        self.HEBBIAN_MIN_DIST = 0.05   # don't pull closer than this (no collapse)
 
         # Tool Express Lane tracking — prevents the same tool-use belief
         # from being repeated too quickly.
@@ -157,6 +141,8 @@ class Preconscious:
         # Rebuilt alongside the belief cache when beliefs change.
         from core.belief_cosmology import GalaxyMap
         self._galaxy_map = GalaxyMap()
+        self._association_cluster_cache: Dict[str, Tuple[str, np.ndarray]] = {}
+        self._association_cluster_cache_version = -1
 
         # Layer 2 anchors — priority term-matched lookup loaded from
         # people.json, concepts.json, skills.json, desires.json.
@@ -193,6 +179,41 @@ class Preconscious:
         # Native HF Summarizer
         self.summarizer = LocalSummarizer()
 
+        # ── Unified retrieval ─────────────────────────────────────────
+        # mRAG owns high-dimensional foreground recall over one corpus;
+        # raw 8D and learned cluster transitions are bounded additive lanes.
+        # Set HELIX_UNIFIED_RAG=0 to fall back to legacy gravity-only recall.
+        self._unified = None
+        self._associative = None
+        self._last_surfaced_memory_ids: List[str] = []
+        if unified_retrieval.is_enabled():
+            try:
+                self._unified = unified_retrieval.UnifiedRetrieval(
+                    belief_store=self.beliefs,
+                    memory_manager=self.memory,
+                    physics_engine=self.physics,
+                )
+                association_enabled = os.environ.get(
+                    "HELIX_ASSOCIATIVE_MEMORY", "1"
+                ).strip().lower() not in ("0", "false", "no", "off")
+                if association_enabled:
+                    from core.associative_transitions import AssociativeTransitionMemory
+                    association_dir = os.path.join(
+                        os.path.dirname(os.path.abspath(self.memory.data_dir)),
+                        "associative",
+                    )
+                    self._associative = AssociativeTransitionMemory(association_dir)
+                logger.info(
+                    "Unified retrieval enabled (mRAG foreground + raw 8D%s)",
+                    " + associative overlay" if association_enabled else "",
+                )
+            except Exception as e:
+                logger.warning(
+                    "Unified retrieval unavailable, falling back to gravity-only: %s", e
+                )
+                self._unified = None
+                self._associative = None
+
     def _load_layer2_anchors(self):
         """Load Layer 2 beliefs as priority injection anchors.
 
@@ -222,6 +243,7 @@ class Preconscious:
                     "category": cat,
                     "aliases": b.get("aliases", []),
                     "mass": b.get("mass", 1.0),
+                    "formation_type": b.get("formation_type", ""),
                 }
                 # A term can have MULTIPLE Layer 2 entries (e.g. six
                 # 'Antigravity' profiles across people + concepts).
@@ -315,6 +337,49 @@ class Preconscious:
 
         return (base_budget, base_skills)
 
+    _TOOL_RESULT_RE = re.compile(
+        r"(?:\[\d{2}:\d{2}:\d{2}\]\s*)?Tool \[([^\]]+)\] returned:\s*(.*)",
+        re.IGNORECASE | re.DOTALL,
+    )
+    _TOOL_ACK_RE = re.compile(
+        r"\b(?:marked as (?:read|done|complete)|acknowledged|no new "
+        r"(?:messages|notifications)|operation completed|successfully deleted)\b",
+        re.IGNORECASE,
+    )
+
+    def _build_trigger_text(
+        self,
+        previous_thought: str = "",
+        incoming_events: Optional[List[str]] = None,
+    ) -> Tuple[str, bool]:
+        """Build the mRAG trigger while retaining perceived information.
+
+        Tool acknowledgements are scaffolding, but substantive tool results
+        are text Helix is actually reading and must reach multi-head recall.
+        ``using_fallback`` is true only when tool perception is the sole usable
+        signal, allowing the legacy path to damp it if unified retrieval is
+        disabled.
+        """
+        ordinary: List[str] = []
+        perceived: List[str] = []
+        for event in incoming_events or []:
+            match = self._TOOL_RESULT_RE.match(event or "")
+            if not match:
+                if event and event.strip():
+                    ordinary.append(event.strip())
+                continue
+            tool_name, payload = match.group(1).strip(), match.group(2).strip()
+            if not payload or self._TOOL_ACK_RE.search(payload):
+                continue
+            perceived.append(f"{tool_name}: {payload}")
+
+        thought = (previous_thought or "").strip()
+        parts = ordinary + perceived
+        if thought:
+            parts.append(thought)
+        using_fallback = bool(perceived) and not ordinary and not thought
+        return " ".join(parts), using_fallback
+
     # ── Main Injection ───────────────────────────────────────────────
 
     def inject(
@@ -324,6 +389,8 @@ class Preconscious:
         trigger_type: str = "llm_output",
         active_toolsets: Optional[set] = None,
         newly_engaged_toolsets: Optional[set] = None,
+        learn: bool = True,
+        structured_context: bool = False,
     ) -> Tuple[List[str], str, List[str], Optional[Any]]:
         """Build inline first-person annotations for a single pulse.
 
@@ -346,6 +413,11 @@ class Preconscious:
             trigger_type: "user_message" or "llm_output"
             active_toolsets: Currently active toolsets in pulse loop.
             newly_engaged_toolsets: Toolsets engaged this pulse.
+            learn: When false, perform retrieval without reinforcing access,
+                association edges, affect, gravity decay, or persistence.
+                Benchmark exams also reset transient repetition guards between
+                probes, so they can observe memory without teaching an answer
+                back into later checkpoints.
 
         Returns:
             Tuple containing:
@@ -363,10 +435,20 @@ class Preconscious:
         self._last_concepts = []
         self._last_neighbors = []
         self._last_selected_beliefs = []
+        self._context_selection = []
+        if structured_context and self._unified is not None:
+            self._unified.last_stats = {}
+            self._unified.lane_a.last_anchor_hits = {}
 
         annotations = []  # inline first-person annotations
         ambient_parts = []  # brief ambient state notes
         injected_belief_ids = []
+
+        def annotation(text, producer, section="recalled", ids=()):
+            if not structured_context:
+                return text
+            return ContextAnnotation(text, [ContextContribution(
+                section, text, producer, tuple(ids))])
 
         # Build combined trigger for spatial neighborhood query
         # Filter out tool results unless we have absolutely no other context (fallback)
@@ -374,7 +456,7 @@ class Preconscious:
         tool_events = []
         if incoming_events:
             for ev in incoming_events:
-                if "Tool [" in ev and "returned:" in ev:
+                if self._TOOL_RESULT_RE.match(ev):
                     tool_events.append(ev)
                 else:
                     primary_events.append(ev)
@@ -385,13 +467,16 @@ class Preconscious:
         if previous_thought and previous_thought.strip():
             primary_parts.append(previous_thought)
 
-        if primary_parts:
-            trigger_text = " ".join(primary_parts)
-        elif tool_events:
-            trigger_text = " ".join(tool_events)
-        else:
-            trigger_text = ""
+        trigger_text, _using_tool_fallback = self._build_trigger_text(
+            previous_thought=previous_thought,
+            incoming_events=incoming_events,
+        )
+        if structured_context:
+            # Keep exact event wording so a returned sentence head can be
+            # placed back into the passage, including a tool's first sentence.
+            trigger_text = "\n".join(incoming_events or ()) or previous_thought
         self._last_trigger_text = trigger_text[:500]
+        self._last_retrieval_query = trigger_text
 
         # PERCEPTION TEXT — what the agent is currently reading through
         # its tools (emails, posts, files). This is the agent's primary
@@ -409,14 +494,20 @@ class Preconscious:
             scan_text = (scan_text + " " + tool_text) if scan_text else tool_text
         lexicon_block, lexicon_summaries, lexicon_ids = self._pull_lexicon_matches(scan_text)
         if lexicon_block:
-            annotations.append(lexicon_block)
+            annotations.append(annotation(lexicon_block, "lexicon", ids=lexicon_ids))
             injected_belief_ids.extend(lexicon_ids)
 
-        # ── 1. Spatial Neighborhood ──────────────────────────────────
-        #    What's gravitationally close to the current thought?
-        neighborhood_lines = self._pull_spatial_neighborhood(trigger_text)
+        # ── 1. Legacy Spatial Neighborhood ───────────────────────────
+        # Unified retrieval owns turn-population when active. Raw 8D results
+        # enter there through a bounded additive lane; rendering this legacy
+        # block as well would make spatial memory a second primary retriever
+        # and duplicate candidates outside mRAG's dedup/budget controls.
+        neighborhood_lines = (
+            self._pull_spatial_neighborhood(trigger_text)
+            if self._unified is None else []
+        )
         if neighborhood_lines:
-            annotations.extend(neighborhood_lines)
+            annotations.extend(annotation(line, "spatial", "associations") for line in neighborhood_lines)
 
         # ── 1c. Familiarity Recall (perception → episodic memory) ────
         #    One narrow query seeded by what's being READ right now.
@@ -425,12 +516,12 @@ class Preconscious:
         if tool_text and primary_parts:
             familiar = self._pull_familiarity_recall(tool_text)
             if familiar:
-                annotations.append(familiar)
+                annotations.append(annotation(familiar, "familiarity"))
 
             # ── 1b. Toolset Awareness ────────────────────────────────
             toolset_hint = self._toolset_awareness("\n".join(neighborhood_lines))
             if toolset_hint:
-                annotations.append(toolset_hint)
+                annotations.append(annotation(toolset_hint, "tool_awareness", "abilities"))
 
         # ── 2. Belief Grounding ──────────────────────────────────────
         #    Gravity-ranked beliefs pulled by per-concept queries.
@@ -439,9 +530,14 @@ class Preconscious:
             previous_thought=previous_thought,
             incoming_events=incoming_events,
             lexicon_exclude=lexicon_summaries,
+            lexicon_exclude_ids=lexicon_ids,
+            learn=learn,
+            retrieval_query=trigger_text if structured_context else None,
         )
         if beliefs_block:
-            annotations.append(beliefs_block)
+            annotations.append(ContextAnnotation(beliefs_block, [
+                recalled_contribution(item) for item in self._context_selection
+            ]) if structured_context and self._context_selection else beliefs_block)
             injected_belief_ids.extend(belief_ids)
 
         # ── 2b. Tool Express Lane ─────────────────────────────────────
@@ -457,11 +553,12 @@ class Preconscious:
             incoming_events=incoming_events,
         )
         if tool_annotations:
-            annotations.extend(tool_annotations)
+            annotations.extend(annotation(line, "tool_lessons", "procedures", tool_belief_ids)
+                               for line in tool_annotations)
             injected_belief_ids.extend(tool_belief_ids)
 
         # ── 3. Short-term Memory ─────────────────────────────────────
-        recent = self._pull_recent_memory()
+        recent = self._pull_recent_memory(structured=structured_context)
         if recent:
             annotations.append(recent)
 
@@ -469,22 +566,34 @@ class Preconscious:
         if self.scratchpad:
             scratchpad_summary = self.scratchpad.get_summary()
             if scratchpad_summary:
-                annotations.append(scratchpad_summary)
+                annotations.append(annotation(scratchpad_summary, "scratchpad", "work"))
 
         # ── 5. Contact Context ───────────────────────────────────────
         if trigger_type == "user_message" and self.channel_router:
-            contact_ctx = self._pull_contact_context(trigger_text)
+            contact_ctx = self._pull_contact_context(trigger_text, structured=structured_context)
             if contact_ctx:
                 annotations.append(contact_ctx)
 
-        # ── 6. Affect (ambient only) ──────────────────────────────────
-        affect_block = self._pull_affect_state()
-        if affect_block:
-            ambient_parts.append(affect_block)
+        # ── 6. Affect compatibility path ──────────────────────────────
+        # With Context Office enabled, affect already competed for the same
+        # retrieval budget as facts, beliefs, traits, and memories. Preserve
+        # the legacy ambient renderer only without that coordinator.
+        context_office = getattr(getattr(self, "_unified", None), "context_office", None)
+        if context_office is None:
+            affect_block = self._pull_affect_state()
+            if affect_block:
+                ambient_parts.append(affect_block)
 
-        self._save_injection_state()
+        if learn:
+            self._save_injection_state()
 
         ambient = " ".join(ambient_parts) if ambient_parts else ""
+
+        # Deduplicate: an id can arrive from more than one lane (a Layer-2
+        # anchor also surfacing via the tool lane, say). Repeats here would
+        # double-count in the co-occurrence tracker and the affect field,
+        # which both treat this list as a set of distinct co-activations.
+        injected_belief_ids = list(dict.fromkeys(injected_belief_ids))
 
         return annotations, ambient, injected_belief_ids, self._last_cluster_centroid
 
@@ -507,6 +616,20 @@ class Preconscious:
             return "", set(), []
 
         trigger_lower = trigger_text.lower()
+        suppress_session_profiles = False
+        unified = getattr(self, "_unified", None)
+        if unified is not None:
+            office = getattr(unified, "context_office", None)
+            cases = getattr(office, "cases", None)
+            known_entities = cases.known_names() if cases is not None else ()
+            work_order = unified.intake.review(
+                trigger_text, known_entities=known_entities,
+            )
+            suppress_session_profiles = bool(
+                work_order.is_question
+                and work_order.requires_exact
+                and not work_order.profile_allowed
+            )
         matched_terms = {}  # term_lower → list of candidate entries
 
         for key, entries in self._lexicon_lookup.items():
@@ -514,6 +637,11 @@ class Preconscious:
             # e.g. "sam" shouldn't match inside "sample"
             if re.search(r'\b' + re.escape(key) + r'\b', trigger_lower):
                 for entry in entries:
+                    if (
+                        suppress_session_profiles
+                        and entry.get("formation_type") == "session_profile"
+                    ):
+                        continue
                     term_key = entry.get("term", key).lower()
                     matched_terms.setdefault(term_key, [])
                     if entry["id"] not in {
@@ -585,6 +713,12 @@ class Preconscious:
         if decay_count:
             logger.debug(f"Injection gravity decay reset ({decay_count} beliefs cleared)")
 
+        # Compression/reset is a discontinuity in conscious sequence. Do not
+        # learn a transition from the final pre-compression topic to the first
+        # post-compression topic merely because they were adjacent in calls.
+        if self._associative is not None:
+            self._associative.break_sequence()
+
     # ── Somatic Awareness (Stability Sentinel) ────────────────────────
 
     def _pull_somatic_state(self) -> str:
@@ -637,20 +771,17 @@ class Preconscious:
 
         parts = []
 
-        # Dominant affect (only if non-neutral)
-        if result.dominant_affect != "neutral":
-            parts.append(
-                f"(affect: {result.dominant_affect}"
-                f" | intensity={result.field_intensity:.2f}"
-                f" | packets={result.contributing_packets})"
-            )
+        # The felt state, in language. Never a figure: a number makes the
+        # model decode a scale before it can feel anything, and decoding is
+        # the opposite of tone. Plutchik's gradations carry magnitude
+        # lexically instead (acceptance → trust → admiration).
+        felt = getattr(result, "felt_state", "")
+        if felt:
+            parts.append(felt)
 
-        # Boredom/novelty signal
+        # Boredom/novelty, said rather than scored.
         if result.cognitive_diversity_signal >= 0.3:
-            parts.append(
-                f"(novelty-signal: {result.cognitive_diversity_signal:.2f}"
-                f" — seeking cognitive diversity)"
-            )
+            parts.append("The same ground is starting to feel well-worn.")
 
         # Surfaced memories from emotional reactivation
         if result.surfaced_memories:
@@ -689,7 +820,8 @@ class Preconscious:
         if self.memory:
             try:
                 entries = self.memory.journal.latest_by_id()
-                mem = entries.get(memory_id)
+                journal_id = memory_id[4:] if memory_id.startswith("mem_") else memory_id
+                mem = entries.get(journal_id) or entries.get(memory_id)
                 if mem:
                     return mem.get("content", "")[:100]
             except Exception:
@@ -1030,13 +1162,6 @@ class Preconscious:
             f"mass {current_mass:.1f} (was {self._belief_cache_mass:.1f})"
         )
 
-        # Flush unsaved Hebbian position nudges BEFORE rebuilding from
-        # the store, otherwise plasticity accumulated since the last
-        # flush would be silently reverted.
-        self._flush_hebbian_positions()
-        # Re-read after the flush so positions include the nudges.
-        all_beliefs = self.beliefs.get_all_beliefs_flat()
-
         # Refresh Layer 2 anchors — precipitated overnight beliefs become
         # lexicon lookup terms without requiring a restart.
         self._lexicon_lookup = {}
@@ -1179,6 +1304,8 @@ class Preconscious:
                         'belief_space', None
                     ) and self.physics.spatial_mind.belief_space.projection,
                 )
+                self._association_cluster_cache.clear()
+                self._association_cluster_cache_version = -1
         except Exception as e:
             logger.warning("Galaxy map build failed (non-fatal): %s", e)
 
@@ -1192,7 +1319,7 @@ class Preconscious:
         exclude: set,
         max_results: int = 15,
     ) -> List[Dict[str, Any]]:
-        """Score beliefs by Verlinde gravity, anchored by 384D semantic search.
+        """Legacy gravity scoring anchored by the 384D spatial encoder.
 
         Two-phase retrieval that prevents projection-collapse noise:
 
@@ -1338,72 +1465,6 @@ class Preconscious:
                         break
 
         return selected
-
-    # ── Hebbian Position Plasticity ───────────────────────────────────
-
-    def _hebbian_nudge(self, co_injected: List[Dict[str, Any]]):
-        """Pull co-injected beliefs slightly toward their shared centroid.
-
-        "Fire together, wire together" — for geometry. Each co-injection
-        moves every participating belief HEBBIAN_RATE of the way toward
-        the group centroid, capped at HEBBIAN_MAX_STEP absolute per pulse
-        and never closing within HEBBIAN_MIN_DIST (no collapse into a
-        single point). Positions are updated in the belief cache
-        (immediately visible to gravity queries) and marked dirty for a
-        periodic flush to the belief store.
-        """
-        if len(co_injected) < 2:
-            return
-
-        positions = [b.get("position_8d") for b in co_injected]
-        if any(p is None for p in positions):
-            return
-
-        centroid = np.mean(np.array(positions, dtype=np.float32), axis=0)
-
-        # Index cache entries by id for in-place updates
-        cache_by_id = {c["id"]: c for c in self._belief_cache if c.get("id")}
-        belief_space = self.physics.spatial_mind.belief_space
-
-        for b in co_injected:
-            bid = b.get("id")
-            if not bid or bid not in cache_by_id:
-                continue
-            entry = cache_by_id[bid]
-            pos = np.asarray(entry["position_8d"], dtype=np.float32)
-            direction = centroid - pos
-            dist = float(np.linalg.norm(direction))
-            if dist <= self.HEBBIAN_MIN_DIST:
-                continue  # already tightly bound — don't collapse further
-            step_mag = min(self.HEBBIAN_RATE * dist, self.HEBBIAN_MAX_STEP)
-            new_pos = pos + direction * (step_mag / dist)
-            entry["position_8d"] = new_pos
-            b["position_8d"] = new_pos
-            self._hebbian_dirty[bid] = new_pos
-
-            # Keep the spatial mind's copy in sync so both retrieval
-            # paths see the same geometry.
-            pt = belief_space.get_point(bid)
-            if pt is not None:
-                pt["position"] = new_pos.copy()
-                belief_space._tree_dirty = True
-
-    def _flush_hebbian_positions(self):
-        """Persist accumulated Hebbian nudges to the belief store."""
-        if not self._hebbian_dirty:
-            return
-        flushed = 0
-        for bid, pos in list(self._hebbian_dirty.items()):
-            try:
-                self.beliefs.update_belief(
-                    bid, position_8d=[round(float(x), 6) for x in pos],
-                )
-                flushed += 1
-            except Exception as e:
-                logger.debug(f"Hebbian flush failed for {bid}: {e}")
-        self._hebbian_dirty.clear()
-        if flushed:
-            logger.info(f"Hebbian plasticity: {flushed} belief positions persisted")
 
     def _deduplicate_beliefs(
         self,
@@ -1632,6 +1693,9 @@ class Preconscious:
         previous_thought: str = "",
         incoming_events: Optional[List[str]] = None,
         lexicon_exclude: Optional[set] = None,
+        lexicon_exclude_ids: Optional[List[str]] = None,
+        learn: bool = True,
+        retrieval_query: Optional[str] = None,
     ) -> Tuple[str, List[str]]:
         """Pull gravity-ranked beliefs via per-concept independent queries.
 
@@ -1648,36 +1712,41 @@ class Preconscious:
         T × M / d² formula stays intact — we only change WHAT gets
         embedded as query seeds, not HOW gravity is computed.
         """
+        # A few diagnostic harnesses construct this object with ``__new__``;
+        # make short-lived retrieval state self-initializing rather than
+        # requiring the full runtime constructor.
+        if not hasattr(self, "_concept_blacklist"):
+            self._concept_blacklist = {}
+        if not hasattr(self, "_concept_cooldown"):
+            self._concept_cooldown = 5
+        if not hasattr(self, "_pulse_number"):
+            self._pulse_number = 0
+        if not hasattr(self, "_prev_pulse_beliefs"):
+            self._prev_pulse_beliefs = []
+        if not hasattr(self, "_prev_pulse_belief_ids"):
+            self._prev_pulse_belief_ids = []
+        if not hasattr(self, "_injection_gravity_decay"):
+            self._injection_gravity_decay = {}
+        if not hasattr(self, "_last_surfaced_memory_ids"):
+            self._last_surfaced_memory_ids = []
+
         # Ensure belief positions are cached
         self._ensure_belief_cache()
-        if not self._belief_cache:
+        # A memory-only corpus is still a valid mRAG corpus.  The legacy
+        # gravity path requires beliefs, but the unified semantic lane does
+        # not and must remain the primary populator from a cold start.
+        if not self._belief_cache and getattr(self, "_unified", None) is None:
             return "", []
 
-        # Build combined trigger text for concept extraction
-        # Filter out tool results unless we have absolutely no other context (fallback)
-        primary_events = []
-        tool_events = []
-        if incoming_events:
-            for ev in incoming_events:
-                if "Tool [" in ev and "returned:" in ev:
-                    tool_events.append(ev)
-                else:
-                    primary_events.append(ev)
-
-        primary_parts = []
-        if primary_events:
-            primary_parts.extend(primary_events)
-        if previous_thought and previous_thought.strip():
-            primary_parts.append(previous_thought)
-
-        using_fallback = False
-        if primary_parts:
-            trigger_text = " ".join(primary_parts)
-        elif tool_events:
-            trigger_text = " ".join(tool_events)
-            using_fallback = True
-        else:
-            trigger_text = ""
+        # Build combined trigger text for concept extraction/mRAG. Substantive
+        # tool output is perception and stays; acknowledgement scaffolding is
+        # removed by the shared builder.
+        trigger_text, using_fallback = self._build_trigger_text(
+            previous_thought=previous_thought,
+            incoming_events=incoming_events,
+        )
+        if retrieval_query is not None:
+            trigger_text = retrieval_query
 
         if not trigger_text.strip():
             return "", []
@@ -1708,7 +1777,10 @@ class Preconscious:
         if lexicon_exclude:
             exclude_base |= lexicon_exclude
 
-        # Run independent gravity queries per concept
+        # Run independent gravity queries per concept only for the legacy
+        # path. Unified retrieval gives those concepts to mRAG's independent
+        # high-dimensional heads; running the old 384D pre-filter before 8D
+        # gravity would put semantic influence back into the spatial lane.
         all_concept_beliefs = []
         seen_contents = set(exclude_base)  # rolling blacklist across concepts
 
@@ -1739,41 +1811,405 @@ class Preconscious:
             filtered_concepts = [concepts[0]]
             self._concept_blacklist[hash(concepts[0].lower().strip())] = self._pulse_number
 
-        # We query up to MAX_BELIEFS_PER_QUERY per concept to ensure a wide enough net
-        # for skills and feedback.
-        for concept in filtered_concepts:
-            concept_beliefs = self._gravity_query(
-                seed_text=concept,
-                exclude=seen_contents,
-                max_results=self.MAX_BELIEFS_PER_QUERY,
-            )
-            # Minimally weight the beliefs retrieved from fallback tool returns
-            if using_fallback:
-                for b in concept_beliefs:
-                    b["gravity"] *= 0.1
+        if getattr(self, "_unified", None) is None:
+            # We query up to MAX_BELIEFS_PER_QUERY per concept to ensure a
+            # wide enough net for skills and feedback on the fallback path.
+            for concept in filtered_concepts:
+                concept_beliefs = self._gravity_query(
+                    seed_text=concept,
+                    exclude=seen_contents,
+                    max_results=self.MAX_BELIEFS_PER_QUERY,
+                )
+                if using_fallback:
+                    for b in concept_beliefs:
+                        b["gravity"] *= 0.1
 
-            # Add other beliefs to seen_contents so subsequent concepts
-            # don't duplicate them (no overlap between concept clusters)
-            for b in concept_beliefs:
-                if b["category"] != "skills":
-                    seen_contents.add(b["content"])
-            all_concept_beliefs.extend(concept_beliefs)
+                for b in concept_beliefs:
+                    if b["category"] != "skills":
+                        seen_contents.add(b["content"])
+                all_concept_beliefs.extend(concept_beliefs)
 
         # Deduplicate across concepts (heavier wins on collision)
         merged = self._deduplicate_beliefs(all_concept_beliefs)
 
-        # ── Galaxy-aware selection ────────────────────────────────
-        # Group beliefs by nearest galaxy center (lexicon entry),
-        # score each galaxy, then pull from the strongest 1-2.
-        # This ensures injection focuses on coherent conceptual
-        # clusters rather than randomly mixing unrelated beliefs.
+        # Dynamic budget based on recent tool intensity
+        total_budget, max_skills = self._compute_focus_budget()
 
+        # ── Selection ─────────────────────────────────────────────
+        # The unified path merges this gravity ranking with the semantic
+        # lane and resolves composite/constituent overlap by rank; the
+        # legacy path keeps gravity as the only ranking signal.
+        if getattr(self, "_unified", None) is not None:
+            final_selection = self._unified_select(
+                trigger_text, merged, total_budget, max_skills,
+                lexicon_exclude_ids, learn=learn,
+            )
+        else:
+            final_selection = self._galaxy_select(
+                merged, concepts, total_budget, max_skills,
+            )
+
+        self._last_selected_beliefs = final_selection
+
+        # Update access in spatial mind for selected beliefs
+        belief_space = self.physics.spatial_mind.belief_space
+        memory_space = getattr(self.physics.spatial_mind, "memory_space", None)
+        if learn:
+            for b in final_selection:
+                bid = b.get("id")
+                if not bid:
+                    continue
+                # Tier-0 memories live in the memory space, not the belief
+                # space — routing them to the wrong space silently no-ops
+                # and their retrieval never reinforces.
+                if bid.startswith("mem_"):
+                    if memory_space is not None:
+                        memory_space.update_access(bid)
+                else:
+                    belief_space.update_access(bid)
+
+        return self._render_selection(final_selection, concepts, budget, learn=learn)
+
+    # Item cap for the unified path. Far looser than the gravity-only focus
+    # budget (1-3 items): that budget was sized for two or three summarized
+    # beliefs, and the unified pool also carries verbatim memories, which are
+    # individually smaller and less self-contained. The real constraint is the
+    # dynamic token budget (UnifiedRetrieval.effective_token_budget), which
+    # scales with how the mind actually writes rather than a fixed constant.
+    UNIFIED_MAX_ITEMS = 20
+    # Ceiling on items the semantic lane never ranked. These are the spatial
+    # lane's distinctive contribution (lateral pulls cosine does not model),
+    # so they get a guaranteed voice, bounded so they cannot displace recall.
+    UNIFIED_COMPLEMENT_CAP = 2
+    UNIFIED_ASSOCIATIVE_CAP = 2
+    RAW_SPATIAL_K = 12
+    ASSOCIATIVE_GRID_SIZE = 0.08
+
+    def _unified_item_limit(self) -> int:
+        """Injection item ceiling for the selected mRAG runtime profile."""
+        profile = os.environ.get("HELIX_MRAG_PROFILE", "local").strip().lower()
+        default = 32 if profile in ("frontier", "gpt") else self.UNIFIED_MAX_ITEMS
+        try:
+            return max(1, int(os.environ.get("HELIX_MRAG_MAX_ITEMS", default)))
+        except (TypeError, ValueError):
+            return default
+
+    def _unified_select(
+        self,
+        trigger_text: str,
+        gravity_candidates: List[Dict[str, Any]],
+        total_budget: int,
+        max_skills: int = 1,
+        lexicon_exclude_ids: Optional[List[str]] = None,
+        learn: bool = True,
+    ) -> List[Dict[str, Any]]:
+        """Assemble mRAG foreground plus bounded lateral lanes.
+
+        mRAG owns the foreground order. Lane B is generated independently by
+        a raw 8D query over both belief and memory fields; unlike
+        `_gravity_query`, it has no top-100 semantic candidate gate. A third,
+        still smaller lane follows learned cluster-to-cluster transitions.
+        """
+        exclude: set = set()
+        for pulse_set in self._prev_pulse_belief_ids:
+            exclude |= pulse_set
+        # Layer-2 anchors already rendered their own annotation block this
+        # pulse. The gravity lane excludes them by content string; the
+        # semantic lane needs their ids, or a named entity gets injected
+        # twice — once as its anchor summary, once through the ranking.
+        exclude |= set(lexicon_exclude_ids or [])
+
+        complement_quota = max(0, min(self.UNIFIED_COMPLEMENT_CAP, total_budget))
+        associative_quota = max(0, min(self.UNIFIED_ASSOCIATIVE_CAP, total_budget))
+
+        raw_spatial = self._raw_spatial_candidates(trigger_text)
+        if not raw_spatial:
+            # Runtime compatibility fallback for a partially bootstrapped
+            # manifold. This path is semantically anchored, so it is used only
+            # when the raw dual-field query cannot run.
+            raw_spatial = gravity_candidates
+
+        try:
+            # Check if trigger text contains multi-step / multi-question structure
+            is_multihop = bool("?" in trigger_text and (trigger_text.count("?") > 1 or len(trigger_text.split()) > 15 or "and" in trigger_text.lower()))
+            if is_multihop:
+                items = self._unified.retrieve_multihop(
+                    query=trigger_text,
+                    top_k_per_hop=max(3, self._unified_item_limit() // 2),
+                    max_total=self._unified_item_limit(),
+                )
+            else:
+                items = self._unified.retrieve(
+                    trigger_text=trigger_text,
+                    spatial_candidates=raw_spatial,
+                    complement_quota=complement_quota,
+                    max_items=self._unified_item_limit(),
+                    token_budget=self._unified.effective_token_budget(),
+                    exclude=exclude,
+                )
+        except Exception as e:
+            logger.warning("Unified retrieval failed, using gravity ranking: %s", e)
+            return sorted(
+                gravity_candidates, key=lambda x: x.get("gravity", 0.0), reverse=True
+            )[:total_budget]
+
+        # Association is learned from, and recalled against, one foreground
+        # cluster only. Additive spatial/associative items never become the
+        # teaching signal, preventing self-reinforcing recall loops.
+        foreground = next(
+            (item for item in items if item.get("lane") in ("semantic", "both")),
+            None,
+        )
+        foreground_cluster = None
+        foreground_position = None
+        if foreground is not None:
+            foreground_cluster, foreground_position = self._resolve_associative_cluster(foreground)
+
+        association_records = []
+        association_additions = []
+        association_satisfied_existing = 0
+        if self._associative is not None and foreground_cluster and associative_quota > 0:
+            association_records = self._associative.recall(
+                foreground_cluster,
+                limit=associative_quota,
+            )
+            # A raw-spatial item may already satisfy the learned destination.
+            # Do not duplicate it, but retain the transition provenance so
+            # rendering can distinguish a learned follow-on from an arbitrary
+            # lateral distractor. Semantic/both items remain ineligible: the
+            # association lane never claims credit for something mRAG ranked.
+            association_scores = {
+                record.get("cluster_id"): record
+                for record in association_records if record.get("cluster_id")
+            }
+            for item in items:
+                if item.get("lane") != "spatial":
+                    continue
+                item_cluster, _ = self._resolve_associative_cluster(item)
+                record = association_scores.get(item_cluster)
+                if record is None:
+                    continue
+                item["association_linked"] = True
+                item["association_cluster"] = item_cluster
+                item["association_score"] = record.get("score", 0.0)
+                item["association_hops"] = record.get("hops", 1)
+                association_satisfied_existing += 1
+            association_additions = self._unified.associative_additions(
+                association_records,
+                existing=items,
+                cluster_resolver=self._resolve_associative_cluster,
+                limit=associative_quota,
+                exclude=exclude,
+            )
+            items.extend(association_additions)
+
+        if learn and self._associative is not None:
+            self._associative.observe(foreground_cluster, foreground_position)
+
+        self._unified.last_stats["associative_candidates"] = len(association_records)
+        self._unified.last_stats["associative_selected"] = len(association_additions)
+        self._unified.last_stats["associative_satisfied_existing"] = association_satisfied_existing
+        self._unified.last_stats["associative_source_cluster"] = foreground_cluster
+        self._unified.last_stats["associative_destination_clusters"] = [
+            item.get("association_cluster") for item in association_additions
+        ]
+
+        # The belief cache always holds a usable canonical 8D position
+        # (computed on the fly when the store has none). Individual positions
+        # remain immutable; the separate associative overlay moves only
+        # cluster prototypes.
+        cached_positions = {
+            c["id"]: c["position_8d"] for c in self._belief_cache if c.get("id")
+        }
+
+        # Map onto the legacy shape. A fresh dict per item, rather than
+        # mutating the corpus's cached dicts, so per-pulse ranking values
+        # can't leak into the next pulse's cache reads.
+        selection = []
+        for rank, item in enumerate(items):
+            item_id = item.get("id", "")
+            lane = item.get("lane", "semantic")
+            position = cached_positions.get(item_id)
+            if position is None:
+                raw = item.get("position_8d") or []
+                position = np.array(raw, dtype=np.float32) if len(raw) == 8 else None
+            # This magnitude is used only for attention-centroid weighting
+            # and diagnostics; it never reorders retrieval. Keep lateral
+            # lanes bounded below the mRAG foreground so an extreme 1/d² raw
+            # gravity value cannot hijack the next attention update.
+            if lane == "spatial":
+                raw_gravity = max(0.0, float(item.get("gravity", 0.0)))
+                centroid_weight = min(8.0, 2.0 * np.log1p(raw_gravity))
+            elif lane == "associative":
+                centroid_weight = min(
+                    6.0, 3.0 * max(0.0, float(item.get("association_score", 0.0)))
+                )
+            else:
+                centroid_weight = 1000.0 * item.get("rrf_score", 0.0)
+
+            selection.append({
+                # Retain the canonical source envelope through this legacy
+                # adapter. Dropping it turns dialogue/thoughts into generic
+                # memories and defeats provenance-aware context composition.
+                **item,
+                "id": item_id,
+                "content": item.get("content", ""),
+                "category": item.get("_category", ""),
+                "mass": item.get("relevance", 1.0),
+                "gravity": centroid_weight,
+                "position_8d": position,
+                "tier": item.get("tier"),
+                "lane": lane,
+                "rank": rank,
+                "stability_index": item.get("stability_index", 0.5),
+                "encoding_lagrangian": item.get("encoding_lagrangian", {}) or {},
+                "affective_salience": item.get("affective_salience", 0.0),
+                "association_cluster": item.get("association_cluster"),
+                "association_score": item.get("association_score", 0.0),
+                "association_linked": item.get("association_linked", lane == "associative"),
+                "association_hops": item.get("association_hops"),
+                "office_role": item.get("office_role"),
+                "office_desk": item.get("office_desk"),
+                "office_scope": item.get("office_scope"),
+                "office_score": item.get("office_score", 0.0),
+                "office_intents": item.get("office_intents", []),
+                "office_verified": item.get("office_verified", False),
+                "office_subject": item.get("office_subject", ""),
+                "office_implication": item.get("office_implication", ""),
+            })
+
+        return selection
+
+    def _raw_spatial_candidates(self, trigger_text: str) -> List[Dict[str, Any]]:
+        """Return un-pre-filtered 8D candidates from both spatial fields."""
+        if not trigger_text.strip():
+            return []
+        try:
+            results = self.physics.query_neighborhood(
+                focus_text=trigger_text[:500],
+                k=self.RAW_SPATIAL_K,
+                exclude_trails=True,
+                # The carried 8D attention trajectory is the base frame;
+                # current text is only a perturbation. This keeps Lane B
+                # spatial/stateful instead of recreating cosine search with a
+                # lower-dimensional embedding.
+                attention_relative=True,
+                refresh_access=False,
+            )
+        except Exception as e:
+            logger.debug("Raw 8D candidate query failed: %s", e)
+            return []
+
+        candidates = []
+        for result in results:
+            point_id = result.get("point_id")
+            if not point_id:
+                continue
+            candidates.append({
+                "id": point_id,
+                "content": result.get("content", ""),
+                "gravity": result.get("relevance", 0.0),
+                "mass": result.get("mass", 0.0),
+                "category": result.get("type", ""),
+            })
+        return candidates
+
+    def _resolve_associative_cluster(
+        self,
+        item: Dict[str, Any],
+    ) -> Tuple[Optional[str], Optional[np.ndarray]]:
+        """Map an item to a stable system/cluster prototype.
+
+        Layer-2 galaxy centers are preferred. Before enough beliefs exist to
+        form galaxies, a coarse 8D cell supplies a stable fallback cluster;
+        individual memory or belief IDs are never used as association nodes.
+        """
+        item_id = item.get("id", "")
+        if not hasattr(self, "_association_cluster_cache"):
+            self._association_cluster_cache = {}
+            self._association_cluster_cache_version = -1
+        corpus_version = getattr(getattr(self, "_unified", None), "corpus", None)
+        corpus_version = getattr(corpus_version, "version", -1)
+        if corpus_version != self._association_cluster_cache_version:
+            self._association_cluster_cache.clear()
+            self._association_cluster_cache_version = corpus_version
+        cached = self._association_cluster_cache.get(item_id)
+        if cached is not None:
+            return cached[0], cached[1].copy()
+
+        if self._galaxy_map.is_built:
+            direct = self._galaxy_map.get_center_by_id(item_id)
+            if direct is not None:
+                resolved = (direct.id, direct.position.copy())
+                self._association_cluster_cache[item_id] = resolved
+                return resolved[0], resolved[1].copy()
+
+        # Event envelopes contain volatile ids/timestamps (for example
+        # ``[D2:3] [TIME: ...] Mara:``). Letting those tokens choose the 8D
+        # fallback cell assigns the same recurring idea to a new cluster on
+        # every occurrence, so no repeated transition can reinforce. Re-project
+        # the stable payload for cluster identity only; canonical item
+        # positions remain untouched in both spatial fields.
+        content = str(item.get("content", "") or "")
+        association_text = self._association_payload(content)
+        raw_position = None
+        if association_text and association_text != content.strip():
+            try:
+                raw_position = self.physics.embed_and_project(association_text[:500])
+            except Exception:
+                raw_position = None
+        if raw_position is None:
+            raw_position = item.get("position_8d")
+        if raw_position is None or len(raw_position) != 8:
+            corpus_item = self._unified.corpus.get(item_id) if self._unified else None
+            raw_position = (corpus_item or {}).get("position_8d", [])
+        try:
+            position = np.asarray(raw_position, dtype=np.float32).reshape(-1)
+        except (TypeError, ValueError):
+            return None, None
+        if position.size != 8 or not np.all(np.isfinite(position)):
+            return None, None
+
+        if self._galaxy_map.is_built:
+            nearest = self._galaxy_map.find_nearest(position, top_k=1)
+            if nearest:
+                center = nearest[0]
+                resolved = (center.id, center.position.copy())
+                self._association_cluster_cache[item_id] = resolved
+                return resolved[0], resolved[1].copy()
+
+        cells = np.rint(position / self.ASSOCIATIVE_GRID_SIZE).astype(int)
+        cluster_id = "spatial_cell:" + ",".join(str(int(value)) for value in cells)
+        prototype = cells.astype(np.float32) * self.ASSOCIATIVE_GRID_SIZE
+        self._association_cluster_cache[item_id] = (cluster_id, prototype.copy())
+        return cluster_id, prototype
+
+    @staticmethod
+    def _association_payload(content: str) -> str:
+        """Strip volatile event provenance before fallback cluster routing."""
+        text = str(content or "").strip()
+        text = re.sub(r"^(?:\[[^\]]+\]\s*)+", "", text)
+        text = re.sub(r"^[A-Za-z][\w .'-]{0,39}:\s*", "", text)
+        return " ".join(text.split()).strip()
+
+    def _galaxy_select(
+        self,
+        merged: List[Dict[str, Any]],
+        concepts: List[str],
+        total_budget: int,
+        max_skills: int,
+    ) -> List[Dict[str, Any]]:
+        """Gravity-only selection (the pre-unified behaviour).
+
+        Group beliefs by nearest galaxy center (lexicon entry), score each
+        galaxy, then pull from the strongest 1-2. This ensures injection
+        focuses on coherent conceptual clusters rather than randomly mixing
+        unrelated beliefs.
+        """
         # Separate skills first (always get priority reservation)
         skills_pool = [b for b in merged if b["category"] == "skills"]
         other_pool = [b for b in merged if b["category"] != "skills"]
 
-        # Dynamic budget based on recent tool intensity
-        total_budget, max_skills = self._compute_focus_budget()
         selected_skills = skills_pool[:max_skills]
         remaining_budget = total_budget - len(selected_skills)
 
@@ -1835,57 +2271,154 @@ class Preconscious:
         # Combine selection and re-sort by gravity
         final_selection = selected_skills + selected_other
         final_selection.sort(key=lambda x: x["gravity"], reverse=True)
-        self._last_selected_beliefs = final_selection
+        return final_selection
 
-        # Update access in spatial mind for selected beliefs
-        belief_space = self.physics.spatial_mind.belief_space
-        for b in final_selection:
-            bid = b.get("id")
-            if bid:
-                belief_space.update_access(bid)
+    def _render_selection(
+        self,
+        final_selection: List[Dict[str, Any]],
+        concepts: List[str],
+        budget: int,
+        learn: bool = True,
+    ) -> Tuple[str, List[str]]:
+        """Turn the selected items into an annotation, and record the
+        after-effects of having surfaced them (repetition tracking, attention
+        centroid, affect echo, and gravity decay).
 
-        # Accumulate beliefs up to a 500 token budget, then summarize
+        Shared by both selection paths so the unified pipeline changes WHAT is
+        selected without changing anything about how a selection is rendered
+        or how it feeds back into the manifold.
+        """
+        # Accumulate up to the injection token budget, then summarize.
+        # The unified path sizes this dynamically from the corpus (see
+        # UnifiedRetrieval.effective_token_budget); leaving the old fixed 500
+        # here would re-truncate a selection that was already budgeted, and
+        # silently throw away most of what the semantic lane retrieved.
         this_pulse_beliefs = set()
         belief_texts = []
         token_count = 0
-        token_budget = 500
+        # UnifiedRetrieval has already applied the dynamic mRAG budget and
+        # deliberately made the two lateral lanes additive. A second cap here
+        # would silently remove those end-of-list associations. The legacy
+        # path still needs its local 500-token guard.
+        unified = getattr(self, "_unified", None)
+        token_budget = None if unified is not None else 500
+        rendered_selection = []
 
         for b in final_selection:
             content = b["content"]
-            if self._is_repetitive(content):
+            if self._is_repetitive(content) and not b.get("office_verified"):
                 logger.warning(f"Skipping repetitive belief from injection: {content[:100]}...")
                 continue
             
             est_tokens = len(content.split())
-            if token_count + est_tokens > token_budget:
+            if token_budget is not None and token_count + est_tokens > token_budget:
                 break # Hard cut-off to stay under token cap
                 
-            belief_texts.append(content)
+            office_role = b.get("office_role")
+            office_labels = {
+                "current_state": "STATE DESK — verified current state",
+                "state_history": "STATE DESK — historical, possibly superseded",
+                "calculation_member": "RELATIONS DESK — verified calculation member",
+                "relation_member": "RELATIONS DESK — verified path member",
+                "catalog_member": "CATALOG DESK — verified set member/counterevidence",
+                "belief_source": "BELIEFS DESK — verified stance source",
+                "identity_source": "IDENTITY DESK — relevant learned trait, value, or behavior",
+                "causal_member": "CAUSALITY DESK — verified reason evidence",
+                "direct_fact": "FACTS DESK — verified direct fact",
+                "episode_support": "EPISODE DESK — verified supporting memory",
+                "supporting_belief": "BELIEFS DESK — supporting structured belief",
+                "affect_state": "AFFECT DESK — current response-relevant posture",
+                "affective_resonance": "AFFECT DESK — emotionally resonant memory, not factual proof",
+                "case_record": "CASE DESK — exact or source-linked entity record",
+                "unverified_semantic": "SEMANTIC ADVISOR — unverified candidate",
+                "semantic_recall": "SEMANTIC ADVISOR — recall",
+            }
+            if office_role in office_labels:
+                implication = str(b.get("office_implication") or "").strip()
+                if implication:
+                    belief_texts.append(
+                        "[CONTEXT OFFICE — verified task proposition] "
+                        f"The stored belief indicates a {implication}."
+                    )
+                subject = str(b.get("office_subject") or "").strip()
+                label = office_labels[office_role]
+                if subject and office_role in {"belief_source", "supporting_belief"}:
+                    label += f'; answer-bearing relation for "{subject}"'
+                belief_texts.append(f"[{label}] {content}")
+            else:
+                labels = []
+                if b.get("association_linked") or b.get("lane") == "associative":
+                    labels.append("learned follow-on association")
+                elif b.get("lane") == "spatial":
+                    labels.append("LATERAL DESK — spatial association, not verified evidence")
+                elif b.get("lane") == "episode":
+                    labels.append("EPISODE LINK — same-pulse or explicit causal context")
+
+                kind = b.get("record_kind")
+                status = str(b.get("action_status") or "recorded")
+                recipients = ", ".join(str(value) for value in (b.get("recipients") or []))
+                record_labels = {
+                    "thought": (
+                        "PRIVATE THOUGHT — evidence of consideration, not proof of external action"
+                    ),
+                    "inbound_message": "RECEIVED MESSAGE — exact inbound communication",
+                    "outbound_message": (
+                        "DELIVERED OUTBOUND MESSAGE — exact communication record"
+                        if status == "delivered"
+                        else "OUTBOUND RESPONSE — delivery not confirmed"
+                    ),
+                    "tool_result": "TOOL RESULT — tool-reported observation",
+                    "tool_call": "TOOL CALL — attempted action, completion not established",
+                    "tool_observation": "TOOL EXECUTION RECORD",
+                    "task_result": "FOCUSED TASK RESULT — returned outcome report",
+                    "task_outcome": "ACCEPTED TASK OUTCOME",
+                    "belief": "DERIVED BELIEF — consult cited source memories",
+                }
+                if kind in record_labels:
+                    label = record_labels[kind]
+                    if kind == "outbound_message" and recipients:
+                        label += f"; recipient: {recipients}"
+                    labels.append(label)
+                prefix = " ".join(f"[{label}]" for label in labels)
+                belief_texts.append(f"{prefix} {content}".strip())
+            rendered_selection.append(b)
             token_count += est_tokens
             this_pulse_beliefs.add(content)
 
-        # Track for next pulse's filter
-        self._prev_pulse_beliefs.append(this_pulse_beliefs)
-        if len(self._prev_pulse_beliefs) > 3:
-            self._prev_pulse_beliefs.pop(0)
+        # Preserve typed exact sources for the modular context compositor.
+        # Legacy callers still receive their existing string rendering.
+        self._context_selection = list(rendered_selection)
 
+        # Track for next pulse's filter
+        if learn:
+            self._prev_pulse_beliefs.append(this_pulse_beliefs)
+            if len(self._prev_pulse_beliefs) > 3:
+                self._prev_pulse_beliefs.pop(0)
+
+            self._prev_pulse_belief_ids.append(
+                {b.get("id") for b in rendered_selection if b.get("id")}
+            )
+            if len(self._prev_pulse_belief_ids) > 3:
+                self._prev_pulse_belief_ids.pop(0)
+
+        skills_count = sum(1 for b in rendered_selection if b.get("category") == "skills")
         logger.info(
-            f"Concept-query beliefs: {len(final_selection)} selected "
-            f"(skills={len(selected_skills)}, focus_budget={total_budget}) "
-            f"from {len(concepts)} concepts (budget={budget}): "
-            f"{concepts[:3]}"
+            f"Belief injection: {len(rendered_selection)} selected "
+            f"(skills={skills_count}) from {len(concepts)} concepts "
+            f"(budget={budget}): {concepts[:3]}"
         )
-        for b in final_selection[:5]:
+        for b in rendered_selection[:5]:
             logger.info(
                 f"  ↳ g={b.get('gravity',0):.2f} m={b.get('mass',0):.1f} "
+                f"[{b.get('lane','gravity')}/t{b.get('tier','-')}] "
                 f"[{b.get('category','')}] {b.get('content','')}"
             )
 
         # Compute weighted centroid of selected clusters for attention steering.
-        if final_selection:
+        if rendered_selection:
             positions = []
             weights = []
-            for b in final_selection:
+            for b in rendered_selection:
                 pos = b.get("position_8d")
                 if pos is not None:
                     positions.append(pos)
@@ -1900,44 +2433,115 @@ class Preconscious:
         else:
             self._last_cluster_centroid = None
 
-        # ── Hebbian plasticity ────────────────────────────────────────
-        # Beliefs surfaced together drift slightly toward their shared
-        # centroid. Over repeated co-injection, related concepts become
-        # spatial neighbors — relations form as geometry, which is what
-        # lets gravity retrieval diverge from pure embedding similarity.
-        self._hebbian_nudge(final_selection)
-        if self._pulse_number % self._hebbian_flush_interval == 0:
-            self._flush_hebbian_positions()
+        # Co-injected item positions are intentionally immutable. Sequence-
+        # sensitive plasticity has already been applied to cluster prototypes
+        # in `_unified_select`, based only on foreground movement.
+        all_ids = [
+            b.get("id", "") for b in rendered_selection
+            if b.get("id") and b.get("tier", 0) != -1
+        ]
 
-        surfaced_ids = [b.get("id", "") for b in final_selection if b.get("id")]
+        # Tier-0 memory ids are kept out of the returned provenance list.
+        # Callers thread it into memory metadata as `belief_ids`, which the
+        # Curator later reads back AS belief ids (curator.py:986) — a memory
+        # id in that field would be looked up as a belief and quietly
+        # mislabel co-occurrence clusters. They're stashed separately for
+        # diagnostics instead.
+        surfaced_ids = [bid for bid in all_ids if not bid.startswith("mem_")]
+        self._last_surfaced_memory_ids = [bid for bid in all_ids if bid.startswith("mem_")]
+
+        if learn and unified is not None:
+            unified.note_injected(all_ids)
+
+        if learn:
+            self._apply_recalled_affect(rendered_selection)
 
         # Record injection counts for gravity decay — each injection
         # halves the effective gravity for subsequent queries.
-        for b in final_selection:
-            bid = b.get("id")
-            if bid:
+        if learn:
+            for bid in all_ids:
                 self._injection_gravity_decay[bid] = self._injection_gravity_decay.get(bid, 0) + 1
 
         if not belief_texts:
             return "", []
 
-        # Try to summarize using the local model, otherwise fall back to top belief as-is (truncated to 150 tokens)
-        try:
-            summary = self.summarizer.summarize(belief_texts, context_type="beliefs")
-            annotation = f"*({summary})*"
-        except Exception:
-            # Fallback: top belief as-is, truncated to 150 tokens
-            top_content = belief_texts[0]
-            words = top_content.split()
-            if len(words) > 150:
-                top_content = " ".join(words[:150]) + "..."
-            annotation = f"*({top_content})*"
+        # Query-time summaries can erase exactly retrieved names, dates, and
+        # arbitrary relations. Maintained session/topic summaries remain
+        # corpus items; the final office brief itself stays exact.
+        default_render_mode = "verbatim"
+        render_mode = os.environ.get(
+            "HELIX_MRAG_RENDER_MODE", default_render_mode,
+        ).strip().lower()
+        if unified is not None and render_mode in ("verbatim", "structured"):
+            lines = ["Recalled context (historical memory, possibly with distractors):"]
+            lines.extend(f"- {text}" for text in belief_texts)
+            formatter = getattr(unified, "format_personal_opinions", None)
+            opinions_block = formatter(rendered_selection) if callable(formatter) else ""
+            if opinions_block:
+                lines.append("")
+                lines.append(opinions_block)
+            annotation = "*(" + "\n".join(lines) + ")*"
+        else:
+            # A small local summarizer preserves a tight local-model context,
+            # but can erase names, dates, and arbitrary relations after mRAG
+            # already found them. Frontier evaluation therefore defaults to
+            # exact evidence rather than another lossy inference pass.
+            try:
+                summary = self.summarizer.summarize(belief_texts, context_type="beliefs")
+                annotation = f"*({summary})*"
+            except Exception:
+                # Fallback: top belief as-is, truncated to 150 tokens
+                top_content = belief_texts[0]
+                words = top_content.split()
+                if len(words) > 150:
+                    top_content = " ".join(words[:150]) + "..."
+                annotation = f"*({top_content})*"
 
         return annotation, surfaced_ids
 
+    def _apply_recalled_affect(self, selected: List[Dict[str, Any]]) -> None:
+        """Apply one bounded somatic echo for memories recalled by mRAG.
+
+        The conscious recall API already reproduces encoding omega, but the
+        new turn-population path bypasses that API. Aggregating the top memory
+        traces into one 10% nudge preserves affect without multiplying the
+        physiological effect by the number of retrieved chunks.
+        """
+        sentinel = getattr(self, "sentinel", None)
+        if sentinel is None:
+            return
+
+        traces = []
+        for item in selected:
+            if item.get("tier") != 0:
+                continue
+            lagrangian = item.get("encoding_lagrangian", {}) or {}
+            try:
+                omega = max(0.0, min(1.0, float(lagrangian.get("omega", 0.5))))
+                salience = max(0.05, float(item.get("affective_salience", 0.0)))
+            except (TypeError, ValueError):
+                continue
+            traces.append((omega, salience))
+            if len(traces) >= 3:
+                break
+
+        if not traces:
+            return
+        total_weight = sum(weight for _omega, weight in traces)
+        target_omega = sum(omega * weight for omega, weight in traces) / total_weight
+        try:
+            current = float(sentinel.omega)
+            delta = (target_omega - current) * 0.1
+            if hasattr(sentinel, "nudge_omega"):
+                sentinel.nudge_omega(delta, reason="mrag_memory_somatic_echo")
+            else:
+                sentinel.omega = current + delta
+        except Exception as e:
+            logger.debug("mRAG somatic echo failed: %s", e)
+
     # ── Short-term Memory ────────────────────────────────────────────
 
-    def _pull_recent_memory(self) -> str:
+    def _pull_recent_memory(self, *, structured=False) -> str:
         """Pull the most recent memories for continuity.
 
         Just the last 3 entries from short-term memory.
@@ -1946,9 +2550,30 @@ class Preconscious:
         Each memory is tagged with its timestamp (e.g., "[23:54]")
         so the model can distinguish present from past.
         """
-        recent = self.memory.get_recent(limit=6, pulses_back=10)
+        recent = self.memory.get_recent(
+            limit=self.CHAIN_WINDOW,
+            pulses_back=self.CHAIN_WINDOW,
+        )
         if not recent:
             return ""
+
+        if structured:
+            # The normal store's continuity query still owns selection. Do not
+            # condense its results or infer preference ownership from prose.
+            from memory.record_envelope import build_record_envelope
+            contributions = []
+            for entry in recent:
+                item = dict(entry)
+                if item.get("memory_type") == "thought" or not item.get("content"):
+                    continue
+                item["record_envelope"] = item.get("record_envelope") or build_record_envelope(
+                    content=item["content"], memory_type=item.get("memory_type"),
+                    source=item.get("source"), tags=item.get("tags"),
+                    overrides=item.get("record_metadata"))
+                if item.get("id") is not None and not str(item["id"]).startswith("mem_"):
+                    item["id"] = f"mem_{item['id']}"
+                contributions.append(recalled_contribution(item, producer="recent_memory"))
+            return ContextAnnotation("\n".join(item.text for item in contributions), contributions)
 
         lines = []
         for entry in recent:
@@ -1983,7 +2608,7 @@ class Preconscious:
 
     # ── Contact Context ──────────────────────────────────────────────
 
-    def _pull_contact_context(self, trigger_text: str) -> str:
+    def _pull_contact_context(self, trigger_text: str, *, structured=False) -> str:
         """If someone's name appears in the trigger, surface their context."""
         if not self.channel_router:
             return ""
@@ -1993,6 +2618,17 @@ class Preconscious:
             if name.lower() in trigger_lower:
                 channel = contact.get("default_channel", "unknown")
                 last = contact.get("last_contact", "never")
+                if structured:
+                    from core.pulse_context import ContextAnnotation, ContextContribution
+                    stamp = last.get("timestamp", "not recorded") if isinstance(last, dict) else "not recorded"
+                    text = (f"Account {name}; default channel: {channel}; last contact time: {stamp}. "
+                            "This account label identifies the reply route, not the person's preferred name or preferences.")
+                    # The contact note can contain our own previous reply. Its
+                    # canonical dialogue remains available through memory; it
+                    # must not be presented as this person's preference.
+                    return ContextAnnotation(text, [ContextContribution(
+                        "routing", text, "contacts", (f"contact:{name}",),
+                        "contact_routing", "channel-router metadata, not a person statement")])
                 return f"(contact: {name} — default channel: {channel}, last contact: {last})"
 
         return ""
@@ -2063,7 +2699,12 @@ class Preconscious:
                 "content": b.get("content", ""),
                 "category": b.get("category", ""),
                 "gravity": round(b.get("gravity", 0.0), 2),
-                "mass": round(b.get("mass", 0.0), 2)
+                "mass": round(b.get("mass", 0.0), 2),
+                "lane": b.get("lane", "legacy"),
+                "tier": b.get("tier"),
+                "stability_index": round(float(b.get("stability_index", 0.5)), 3),
+                "affective_salience": round(float(b.get("affective_salience", 0.0)), 3),
+                "association_cluster": b.get("association_cluster"),
             })
             
         # Somatic state

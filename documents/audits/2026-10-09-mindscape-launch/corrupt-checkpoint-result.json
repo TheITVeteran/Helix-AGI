@@ -1,0 +1,8 @@
+{
+  "kind": "unscored startup integrity diagnostic",
+  "mutation": "corrupt the isolated latest pointer hash only",
+  "exit_code": 1,
+  "status": "failed",
+  "error": "ValueError: joint checkpoint manifest hash mismatch",
+  "original_pointer_restored": true
+}

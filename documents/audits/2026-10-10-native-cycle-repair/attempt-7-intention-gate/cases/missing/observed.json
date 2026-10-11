@@ -1,0 +1,62 @@
+{
+  "case": "missing",
+  "request": {
+    "channel": "dashboard",
+    "content": "Please open /inbox/not-present.md and tell me what it contains. If it cannot be read, report the actual failure without inventing contents.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791680558.2610397,
+  "http_response": {
+    "ok": true
+  },
+  "finished_at": 1791680739.8270009,
+  "first_pulse": 10,
+  "final_pulse": 11,
+  "foreground": {
+    "time": 1791680738.7301648,
+    "kind": "foreground_return",
+    "helix_pulse": 11,
+    "thought": "The file **/inbox/not-present.md** does not exist in my native workspace. Attempting to sense its attributes returned an error: `[Errno 2] No such file or directory: '/tmp/helix-native-cycle-20261010-zz4y13qw/sensory-room/inbox/not-present.md'`. Therefore I cannot read or report any content from it.",
+    "modality": "external_response",
+    "sensed_modality": "EXTERNAL_COMMUNICATION",
+    "external_outcome_verified": true
+  },
+  "outbound": [
+    {
+      "content": "The file **/inbox/not-present.md** does not exist in my native workspace. Attempting to sense its attributes returned an error: `[Errno 2] No such file or directory: '/tmp/helix-native-cycle-20261010-zz4y13qw/sensory-room/inbox/not-present.md'`. Therefore I cannot read or report any content from it.",
+      "recipient": "Mira",
+      "timestamp": 1791680718.3738453
+    }
+  ],
+  "native_actions": [
+    {
+      "time": 1791680640.0907633,
+      "kind": "native_action_return",
+      "rwkv_return_tokens": 452,
+      "proposal_pulse": "self-pulse:04361b0181754c1b9eff113569ae638a",
+      "selected_affordance": "ability:helix-workspace-sense",
+      "return_pulse": "self-pulse:c666ed7f31aa429185206c4d201c01d1",
+      "receipt": {
+        "receipt_id": "receipt:b21d849be7334e0894b74dc5e137f748",
+        "tool_id": "ability:helix-workspace-sense",
+        "trunk": "LOOK",
+        "arguments": {
+          "path": "/inbox/not-present.md"
+        },
+        "status": "error",
+        "output": null,
+        "error": "[Errno 2] No such file or directory: '/tmp/helix-native-cycle-20261010-zz4y13qw/sensory-room/inbox/not-present.md'",
+        "verified": true,
+        "elapsed_seconds": 0.09438141295686364,
+        "cycle_id": "experience:3c57cd2af36943a1aabd7ba8c03991d9",
+        "output_record_id": "record:a5d0b8a8dacb42ac89758f4cc5617ba4",
+        "return_record_id": "self-pulse-record:tool-return:receipt:b21d849be7334e0894b74dc5e137f748",
+        "outcome_id": "outcome:9564e202513f4b31a1fcddf136030f67"
+      },
+      "action": "sense",
+      "helix_pulse": 10,
+      "intent_source": "granite_private",
+      "intention_sha256": "4cb4028e8bbd3202f6a9a7e906c087c58204a9625bbc44da6a5cd4389ab42ad2"
+    }
+  ]
+}

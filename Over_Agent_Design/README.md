@@ -45,8 +45,8 @@ Tool schemas are completely removed from the main subconscious prompt. When Heli
 ### 3. Test-Time Compute for 8B Models
 Giving a local 8B model (`granite4.1:8b`) private "inner monologue" scratchpad tokens allows it to think out loud, catch execution errors, and refine its strategy before speaking. This extends test-time compute, giving small local models multi-step reasoning capabilities typically restricted to 70B+ frontier models.
 
-### 4. Integrated Helix Memory Recall
-Every user turn is recalled against Helix's canonical belief store and cognitive journal before generation. On the original `main` branch, `integrated_mrag.py` uses an in-folder compatibility bridge over Helix's existing 384D semantic index plus exact Layer-2 anchors from `people`, `concepts`, `skills`, and `desires`. If a later Helix revision provides `core.unified_retrieval`, the subproject uses that native mRAG pipeline automatically. Inbound messages, outbound messages, and ingested documents use the same canonical `MemoryManager` write boundary.
+### 4. Integrated Multi-Head mRAG Recall
+Every user turn is recalled against Helix's canonical belief store and cognitive journal before generation. `integrated_mrag.py` uses the existing unified retrieval pipeline: the native 1024D semantic lane is foreground retrieval, with bounded spatial complements and exact Layer-2 anchors from `people`, `concepts`, `skills`, and `desires`. Inbound messages, outbound messages, and ingested documents use the same canonical write boundary.
 
 ### 5. Dynamic Identity & Synthetic Affect Simulation
 Helix doesn't rely on a static prompt. It continuously updates a running **Self-Opinion Statement** (`self_opinion.json`) during nightly consolidation passes and tracks **Synthetic Affect Vectors** (Valence, Arousal, Focus Depth), allowing its tone and conceptual focus to evolve naturally over time based on real experiences.

@@ -975,6 +975,66 @@ class StabilitySentinel:
             "dkl_ratio": round(dkl_ratio, 3),
         }
 
+    def get_cognitive_focus_state(
+        self,
+        feeling: Optional[dict] = None,
+        pending_task: Optional[dict] = None,
+        has_pending_obligations: bool = False,
+    ) -> dict:
+        """Derive the current working memory focus state.
+
+        Combines 384D/8D attention entropy H(q), attentional inertia,
+        and hedonic omega with subconscious RWKV feelings and task obligations
+        to dynamically drive the Context Loom's focus allocation.
+        """
+        feeling = feeling or {}
+        modality = feeling.get("modality", "")
+        is_external = bool(feeling.get("is_external", False))
+        speak_prob = float(feeling.get("speak_probability", 0.0))
+
+        # Entropy ratio from 384D attention distribution
+        h_ratio = 1.0
+        spatial_H = getattr(self, "_spatial_H", None)
+        baseline = getattr(self, "_h_raw_baseline", None)
+        if spatial_H is not None and baseline and baseline > 0.01:
+            h_ratio = float(spatial_H) / float(baseline)
+        elif getattr(self, "current_entropy", 0.0) > 0:
+            h_ratio = float(self.current_entropy) / max(0.01, float(self.baseline_entropy))
+
+        if has_pending_obligations or modality == "INTERNAL_ACTION_REQUIRED":
+            focus_modality = "INTERNAL_ACTION_REQUIRED"
+            weights = {
+                "action": 3.0,
+                "inquiry": 1.5,
+                "reflection": 1.0,
+                "conversation": 0.2,
+            }
+        elif is_external and speak_prob >= 0.35 and h_ratio <= 1.3:
+            focus_modality = "EXTERNAL_COMMUNICATION"
+            weights = {
+                "conversation": 2.5,
+                "reflection": 1.0,
+                "action": 0.5,
+                "inquiry": 1.0,
+            }
+        else:
+            focus_modality = "INTERNAL_MONOLOGUE"
+            refl_weight = 3.0 if h_ratio < 0.8 else 2.0
+            weights = {
+                "reflection": refl_weight,
+                "inquiry": 1.8,
+                "action": 0.8,
+                "conversation": 0.4,
+            }
+
+        return {
+            "modality": focus_modality,
+            "weights": weights,
+            "h_ratio": round(h_ratio, 3),
+            "omega": round(float(self.omega), 3),
+            "mode": self.get_generation_params().get("mode", "steady"),
+        }
+
     # ── Lagrangian Snapshot (for State-Bound Memory) ───────────────
 
     def get_lagrangian_snapshot(self) -> dict:
@@ -994,12 +1054,28 @@ class StabilitySentinel:
                        abs(self.current_entropy - self.baseline_entropy))
         T = getattr(self, '_spatial_T', 1.0)
 
+        # Surprise = how much stability moved since the previous pulse.
+        #
+        # Only the sentinel sees consecutive pulses, so the delta has to be
+        # captured here or it is unrecoverable downstream: a stored snapshot
+        # holds s_total but not the value it changed from. Magnitude, not
+        # sign — an unexpected improvement is as surprising as an unexpected
+        # failure, and both are worth remembering.
+        #
+        # Measured over a live run: typical |delta| 0.185, notable 0.481,
+        # largest observed 0.691 against an s_total operating range of
+        # 2.23-3.29.
+        previous = getattr(self, "_prev_snapshot_s_total", None)
+        delta_s = 0.0 if previous is None else float(self.s_total) - float(previous)
+        self._prev_snapshot_s_total = float(self.s_total)
+
         return {
             "H": round(float(H), 4),
             "omega": round(self.omega, 4),
             "D_KL": round(float(D_KL), 4),
             "T": round(float(T), 4),
             "s_total": round(self.s_total, 4),
+            "delta_s": round(delta_s, 4),
             "severity": self.get_severity(),
             "feeling": self._generate_feeling(),
             "health_triplet": {

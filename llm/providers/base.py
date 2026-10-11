@@ -34,6 +34,10 @@ class ChatSession(ABC):
         """Clear any pending/queued tool responses/results in the session."""
         pass
 
+    def close(self) -> None:
+        """Release provider resources. Stateless providers may do nothing."""
+        pass
+
 
 
 class ProviderConfig:
@@ -46,7 +50,7 @@ class ProviderConfig:
 
     def __init__(
         self,
-        provider_type: str,          # "ollama", "llama_cpp", "gemini", "anthropic"
+        provider_type: str,          # gemini, anthropic, ollama, llama_cpp, codex_cli
         model: str,                  # Model name or path
         context_window: int = 128_000,
         temperature: float = 0.8,
@@ -76,8 +80,9 @@ def create_session(
     Args:
         config: Provider configuration.
         system_instruction: System prompt text.
-        tool_declarations: Optional Gemini FunctionDeclaration dicts (Gemini only).
-        tool_executor: Optional ToolExecutor for function call handling (Gemini only).
+        tool_declarations: Optional legacy Gemini-shaped function declarations.
+            Providers normalize the underlying JSON Schemas as needed.
+        tool_executor: Optional ToolExecutor for provider-native/host tool calls.
         preconscious: Optional Preconscious for belief enrichment on tool returns.
     """
     if config.provider_type == "gemini":
@@ -126,10 +131,44 @@ def create_session(
             tool_executor=tool_executor,
         )
 
+    elif config.provider_type == "codex_subscription":
+        from llm.providers.codex_subscription_provider import CodexSubscriptionSession
+        return CodexSubscriptionSession(
+            model=config.model,
+            system_instruction=system_instruction,
+            max_output_tokens=config.max_output_tokens,
+            options=config.options,
+        )
+
+    elif config.provider_type == "claude_cli":
+        from llm.providers.claude_cli_provider import ClaudeCliSession
+        return ClaudeCliSession(
+            model=config.model,
+            system_instruction=system_instruction,
+            max_output_tokens=config.max_output_tokens,
+            tool_declarations=tool_declarations,
+            tool_executor=tool_executor,
+            preconscious=preconscious,
+            options=config.options,
+        )
+
+    elif config.provider_type in ("codex", "codex_cli"):
+        from llm.providers.codex_cli_provider import CodexCliSession
+        return CodexCliSession(
+            model=config.model,
+            system_instruction=system_instruction,
+            max_output_tokens=config.max_output_tokens,
+            tool_declarations=tool_declarations,
+            tool_executor=tool_executor,
+            preconscious=preconscious,
+            options=config.options,
+        )
+
     else:
         raise ValueError(
             f"Unknown provider type: {config.provider_type}. "
-            f"Supported: gemini, anthropic, ollama, llama_cpp"
+            "Supported: gemini, anthropic, ollama, llama_cpp, codex_cli, "
+            "claude_cli, codex_subscription"
         )
 
 
@@ -224,6 +263,63 @@ def detect_available_provider() -> Optional[ProviderConfig]:
             context_window=64_000,
             options={"n_gpu_layers": -1},
         )
+
+    elif provider_pref == "claude_cli":
+        import shutil
+
+        if not shutil.which("claude"):
+            logger.warning("HELIX_PROVIDER=claude_cli but the claude CLI is unavailable.")
+        else:
+            context_window = int(os.environ.get("HELIX_CONTEXT_WINDOW", "200000"))
+            logger.info(
+                "Using subscription-authenticated Claude Code CLI%s",
+                f" ({model_pref})" if model_pref else "",
+            )
+            budget = os.environ.get("HELIX_CLAUDE_MAX_BUDGET_USD", "").strip()
+            return ProviderConfig(
+                provider_type="claude_cli",
+                model=model_pref,
+                context_window=context_window,
+                temperature=0.2,
+                max_output_tokens=4096,
+                options={
+                    "timeout": int(os.environ.get("HELIX_CLAUDE_TIMEOUT", "900")),
+                    "effort": os.environ.get("HELIX_CLAUDE_EFFORT", ""),
+                    "fallback_model": os.environ.get("HELIX_CLAUDE_FALLBACK_MODEL", ""),
+                    # A subscription is a quota, not a bill — the cap is a
+                    # backstop against a runaway pulse loop, not a cost
+                    # control. Unset by default so it never truncates a turn
+                    # the user did want.
+                    "max_budget_usd": budget or None,
+                },
+            )
+
+    elif provider_pref in ("codex", "codex_cli", "codex_subscription"):
+        import shutil
+
+        if not shutil.which("codex"):
+            logger.warning("HELIX_PROVIDER=%s but the codex CLI is unavailable.", provider_pref)
+        else:
+            context_window = int(os.environ.get("HELIX_CONTEXT_WINDOW", "128000"))
+            production_mode = provider_pref in ("codex", "codex_cli")
+            provider_type = "codex_cli" if production_mode else "codex_subscription"
+            logger.info(
+                "Using ChatGPT-authenticated Codex %s%s",
+                "App Server" if production_mode else "benchmark transport",
+                f" ({model_pref})" if model_pref else "",
+            )
+            return ProviderConfig(
+                provider_type=provider_type,
+                model=model_pref,
+                context_window=context_window,
+                temperature=0.2,
+                max_output_tokens=4096,
+                options={
+                    "timeout": int(os.environ.get("HELIX_CODEX_TIMEOUT", "600")),
+                    "effort": os.environ.get("HELIX_CODEX_EFFORT", "medium"),
+                    "summary": os.environ.get("HELIX_CODEX_SUMMARY", "none"),
+                },
+            )
 
     # 2. Auto-Detection Fallback (when no explicit provider_pref is set or it failed)
     # 2a. Gemini API

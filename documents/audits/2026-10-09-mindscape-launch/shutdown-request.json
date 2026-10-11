@@ -1,0 +1,6 @@
+{
+  "pid": 1705687,
+  "signal": "SIGTERM",
+  "time": 1791595155.2832341,
+  "purpose": "verify completion and checkpoint of any in-flight pulse"
+}

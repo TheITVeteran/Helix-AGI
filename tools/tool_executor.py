@@ -289,11 +289,15 @@ class ToolExecutor:
             "verbalize": self._fc_verbalize,
             "memory_recall": self._fc_memory_recall,
             "note": self._fc_note,
+            "note_write": self._fc_note,
+            "note_append": self._fc_update_note,
+            "note_clear": self._fc_clear_notes,
             "note_done": self._fc_note_done,
             "list_notes": self._fc_list_notes,
             "clear_notes": self._fc_clear_notes,
             "update_note": self._fc_update_note,
             "journal": self._fc_journal,
+            "nap": self._fc_reset_context,
             "reset_context": self._fc_reset_context,
         }
         perception_handlers = {
@@ -320,6 +324,7 @@ class ToolExecutor:
         browser_handlers = {
             "browse": self._fc_browse,
             "browse_interact": self._fc_browse_interact,
+            "browse_observe": self._fc_browse_observe,
             "browse_screenshot": self._fc_browse_screenshot,
         }
         git_handlers = {
@@ -392,6 +397,7 @@ class ToolExecutor:
             "desktop_window": self._fc_desktop_window,
             "desktop_focus": self._fc_desktop_focus,
             "desktop_open": self._fc_desktop_open,
+            "desktop_open_url": self._fc_desktop_open_url,
             "desktop_screenshot": self._fc_desktop_screenshot,
         }
 
@@ -454,6 +460,7 @@ class ToolExecutor:
             focus_types={
                 "browse": "focus",
                 "browse_interact": "focus",
+                "browse_observe": "intake",
             },
         )
         registry.register_batch(
@@ -548,6 +555,7 @@ class ToolExecutor:
                 "desktop_type": "focus",
                 "desktop_click": "focus",
                 "desktop_key": "focus",
+                "desktop_open_url": "focus",
             },
         )
 
@@ -613,10 +621,17 @@ class ToolExecutor:
             # stamp read results with "already responded" annotations so
             # re-perceived artifacts arrive with their history attached.
             try:
+                from core.action_protocol import classify_tool_result
                 from core.interaction_ledger import (
                     record_from_call, annotate_result,
                 )
-                record_from_call(name, args)
+                receipt = classify_tool_result(name, args, result or "")
+                self._last_action_receipt = receipt.to_dict()
+                # An attempted reply is not an interaction.  Only a receipt
+                # that actually confirms delivery may suppress future work on
+                # the artifact.
+                if receipt.confirmed:
+                    record_from_call(name, args)
                 result = annotate_result(name, result or "")
             except Exception as e:
                 logger.debug(f"Interaction ledger failed: {e}")
@@ -625,6 +640,20 @@ class ToolExecutor:
         finally:
             duration = time.monotonic() - start_time
             self._update_tools_status(finished_tool=name, duration=duration)
+
+    def execute_function_call_receipt(self, name: str, args: dict) -> dict:
+        """Execute once and return a typed receipt for modular action paths.
+
+        Existing provider adapters retain the string-returning method above.
+        New coordinators can use this entry point without re-parsing success
+        and failure language themselves.
+        """
+        from core.action_protocol import classify_tool_result
+
+        result = self.execute_function_call(name, args)
+        receipt = classify_tool_result(name, args, result)
+        self._last_action_receipt = receipt.to_dict()
+        return self._last_action_receipt
 
     # ── FC Handlers (structured args) ────────────────────────────────
 
@@ -645,7 +674,15 @@ class ToolExecutor:
                     memory_type="conversation",
                     source="helix_outbound",
                     importance=0.75,  # conversations are manifold-core (>= 0.7)
-                    tags=["reply", "outbound", "conversation", recipient.lower()],
+                    tags=[
+                        "reply", "outbound", "conversation", recipient.lower(),
+                        f"recipient:{recipient}",
+                    ],
+                    record_metadata={
+                        "record_kind": "outbound_message",
+                        "recipients": [recipient],
+                        "action_status": "delivered",
+                    },
                 )
             return f"Sent to {recipient}."
         return f"Could not deliver reply to {recipient} — no recent inbound channel or default channel found."
@@ -667,7 +704,15 @@ class ToolExecutor:
                     memory_type="conversation",
                     source="helix_outbound",
                     importance=0.75,  # conversations are manifold-core (>= 0.7)
-                    tags=["message", "outbound", "conversation", recipient.lower()],
+                    tags=[
+                        "message", "outbound", "conversation", recipient.lower(),
+                        f"recipient:{recipient}",
+                    ],
+                    record_metadata={
+                        "record_kind": "outbound_message",
+                        "recipients": [recipient],
+                        "action_status": "delivered",
+                    },
                 )
             return f"Sent to {recipient}."
         return f"Could not deliver message to {recipient} — no contact record or default channel found."
@@ -993,6 +1038,10 @@ class ToolExecutor:
         tag = ActionTag(tag="BROWSE_INTERACT", param=selector, content=f"{action} | {value}" if value else action)
         return self._exec_browser(tag)
 
+    def _fc_browse_observe(self, args: dict) -> str:
+        from tools import browser as br
+        return br.browse_observe()
+
     def _fc_browse_screenshot(self, args: dict) -> str:
         tag = ActionTag(tag="BROWSE_SCREENSHOT", param="", content="")
         return self._exec_browser(tag)
@@ -1232,6 +1281,10 @@ class ToolExecutor:
     def _fc_desktop_open(self, args: dict) -> str:
         from tools import desktop_control as dc
         return dc.desktop_open(app=args.get("app", ""))
+
+    def _fc_desktop_open_url(self, args: dict) -> str:
+        from tools import desktop_control as dc
+        return dc.desktop_open_url(url=args.get("url", ""))
 
     def _fc_desktop_screenshot(self, args: dict) -> str:
         from tools import desktop_control as dc

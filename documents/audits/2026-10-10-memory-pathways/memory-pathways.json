@@ -1,0 +1,1430 @@
+{
+  "kind": "read-only forensic diagnosis of recorded live integration; no new product evaluation",
+  "new_product_result": null,
+  "runtime_source_edits_this_diagnosis": [],
+  "recorded_run": "/tmp/helix-live-20261010-misw_7t0",
+  "source_parity": {
+    "recorded_sources_verified": true,
+    "pre_header_backups_used_for": [
+      "core/pulse_loop.py",
+      "core/mindscape.py"
+    ],
+    "source_hashes_at_diagnosis": {
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/brain/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/brain/friction_damper.py": "f3e8fb3a9506fc122d4af7eefe00e01a2d721020fdc9d85d1e959f7716f7f023",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/brain/sensory_cortex.py": "8dc17de809ad1ef89002294aca34c672ab93b7291dc4214c9b63087ea5ef3304",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/brain/stability_sentinel.py": "bc5693ce21432c4bf0bd2a8022f616e3cfea7ebe1b45fc8e2fdc1e7ec72562b8",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/brain/vision_cortex.py": "12ab2d82903cc5ff1775032db628c95cd8e54a4fcd2a698984fdf0599100530c",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/comms/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/comms/discord_bot.py": "caaa330ce0b4f015cd58657dfef15fb150a4a3cea993f7a174f653eaf5064db3",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/comms/slack_bot.py": "7b67a123ffbaaff6ad1c3008900f80926dfa043b9fbc474ca5228bc37c990b12",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/comms/telegram_bot.py": "27e29c72c8c5d6e4587052042548f17406127bbb541c5d88089f137540a1bc38",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/comms/webhook_channel.py": "d90c1828cb4bc742e7df7f5f199979f55d2e446f5ad1f52c2bc5857b03410d3b",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/comms/whatsapp_bot.py": "5057e4bc4c2dfb699cde76082c9650c34425ed1781c40344d09b481ba6fda7ad",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/__init__.py": "55bc598bc052f8a5d77e1fc877287ed97d33ec1a7c68e8ef49683d607e5fd211",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/action_planner.py": "129af08947b78dcc956fce559633906264a2b8e95d2adcab896fc94f564ed94b",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/action_protocol.py": "5418be4766ddc3f03b78fb8270238be9028a034f772c2a4e3a9b271749fbbc0d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/affect_field.py": "b03f9c019a1c703b67cf2425c879cd1af2359e4a5ede61d791b3d9cb9c659324",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/affect_hook.py": "0f1dfaa9d750f7db18db5bde78905066185ce07be89ffbdc2c9d0d520ec40bfe",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/affect_office.py": "0c229d1f0a5f89075939af56b6a5fc3e8c55d6227264c60f18f9bb54e7877fae",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/associative_transitions.py": "2e65d63683cef6ebc21fb35fada2a0af73421fc7c09c06ae1cb57564e5bcce8b",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/auxiliary_llm.py": "93ee7324d4bfda74c79ab16eac56958a78ce3e20d825a5f6b7cfb5dfec87e1a9",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/batch_service.py": "71fcc585f80f6f3b9a2bf57b2eeb042c072de089e26ef22f6718be52aaa61f09",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/belief_consolidator.py": "63a89753f7a83773e492812bd625c9ad9ea82bb5d1d363b15c5a697b4365882b",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/belief_cosmology.py": "bd8216aa46300131d6487279a59cb7485625d93033acf686c3aebac9f1d16243",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/belief_detector.py": "42d65875c168de87c9a8ccad5a9454f3e47fd9bd9764d9735f09edd98140857d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/case_memory_office.py": "0bebb25b9ecaa8658257f0110d2a895256103d90ade6a9555c39351ab357a578",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/co_occurrence_hook.py": "38a1631b35bcc1ee071deff1d6fd92bdcd83bc66222b5200e5d17d203ae4d0e2",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/cognitive_space.py": "7e531c38166f3a8da93f1e47cc6ebcf8035c6736eb86952a1682309637c146e1",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/concept_extractor.py": "09a19841250fd60c52215269f2cfb296c593536ac358066c90dda206ab99e0ad",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/concept_reranker.py": "4982883767db9e6d28ad65ac1781bbd9673c21297d39790378f6d879db0752cc",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/context_compressor.py": "c6bd509af40c231f5d19e43d8aa09000b14367cd508117b5a46251f3c148faa5",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/context_office.py": "94885b034bfbd01cbc246239b78d07ef6c05dae391934512bd2fe7c3d11c5d6a",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/crash_reporter.py": "bfc8806671c01fa0edf9dd1e96ee70dd0d9b768ce58eb894895f0d9f00b6591b",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/curator.py": "994ca1e98ac539598da7cd32c1adc511958b92f44ff64a33b61bc165b81a61b4",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/dual_pulse_loop.py": "d20893385a0ab0592937726c03be868d7a783e741d7be75a1e32b2885c01ac1d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/engagement_hook.py": "621d8400222448d300ef939674ddedb93948e456f28113b6ae276574450bd7d2",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/gguf_manager.py": "b243018cd716e7b5c52104350f3a7392bf6ef01dfd5fbce268795ffb804369f9",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/interaction_ledger.py": "790a494b3c2bec7759ef7585b7b6b954b15d48fc553f21a4ec6e00d9d2bb7d87",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/local_summarizer.py": "877f21276ea241fffd18863104c0c16f5f963fe89b1e7e1f825db28a3bb50c7e",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/memory_intake_office.py": "c5d6854e68685180183948738b68178380568457af4a60fd427a02d909b5a106",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/memory_log_office.py": "ed906f614ff2498609f6bd8467253db038f3e8518149617ae66a673729a32985",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/mindscape.py": "775958f8a582ac15c0d5fb7f2983a549ccd74f08147d403b145a36e11f5b09e4",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/mindscape_config.py": "f0cda9be0368df709e382baf03b417c52e2ace79d2d50e3aed9c7f6b5bf5af43",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/mindscape_lanes.py": "c803eb5b29d49134d0a576c81af4297d6a46d5cdc77457b449c8d0e71a55616a",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/office_runtime.py": "0672be9a37fdfac581c0bde7fb68d9bff0eee2225949064c77a0e580f1a3d8fa",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/office_workflows.py": "4e1646fd0bf6fc8b051b85ec0b5f8a2e3ce9604c42c92f25d158fdc523fd0d16",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/physics_engine.py": "cf20bafe250adca9a0c9b42533feeb6731b23e87804034e14502bf11d33f2bc9",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/post_pulse_hooks.py": "245c83e1c9b02ad22edaf843e415c316e5d660ff075a1c7a368c06bea0ff4d12",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/preconscious.py": "bffe30c63d18ea78083022b8465a6fcfb3fa1915463c616a72642e25ebd73fd9",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/pulse_loop.py": "6bde6d859ee947cfa419cca3a04cd0ab96021db327ed65285379506bda694798",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/reliance_evaluator.py": "6e173291ac691e55a7d326c2aa4caa222ee0ea558294749b8aee3b66e90c70b1",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/scratchpad.py": "05fdf6947cdbdebc101be4e178f73cc7770dca99068cd0445fa0027eaed9d26b",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/self_state.py": "ede043836ddc87853426cb2a8cdf6cda6ca64c1c0ec775b751e53d5b72907eb6",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/session_memory_maintenance.py": "1d4415d637ca8c909b48091fe86a806d329f0de935bef88bae075afc2ddef492",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/spatial_mind.py": "d63003eefc80c1f57c44a7776baf1376f914fcd27077a3ce5b662bc2b6cc8de5",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/__init__.py": "ad91c4d92e44320c7a5fc1d2dfa34aff63f6b1b528fa66655a1031106b65551f",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/capabilities.py": "bc2242a2e7c1da56f9d171c413ba46edac762b60c9b7d4c4fa109753fd223eb3",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/context.py": "03795fed1599d4610bb71ecd0a58898dca580fe95722d3c073aae007740fd835",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/controller.py": "bed2f9bbf24d2f705ea4046247370bf31fa34aafcbe7c8b7f94d51f2dd568e51",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/focus.py": "1b70cc61ca69864b57fc44170224eb8645cc0e54885b123f8dbf21431aeebb10",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/inception.py": "63afbde55eaf2da5284c396e9b05c9d23afd9c5408f2ed4af6239e461ead68da",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/models.py": "142fe2464543310ec9f49e6f1c963ff7b78bd01cca38cea712843c3580381e16",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/orchestrators.py": "78be2fd859a40f2071c2f59172fa7df12be2e2356574a51b711fd2bf3fdfc3ae",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/procedures.py": "f50d3b82b9ebd2fa544f38b33425c0a4775e062bdd17c624d4fd49319c617401",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/task_cognition/store.py": "70dc05d53abc143fcf7659a2ee79c29ccbfaa00e12261877f0150f0e88b541d3",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/tool_dispatcher.py": "bca9dd3727aa8f672d122c049163eec4a1af1b07560a9a1b281981e0af6a7e40",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/tool_lesson_tracker.py": "15d83d0eff7aa8b481a74ce78574fbebdc8df155698aacd48399f5391de06437",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/tool_orchestrator.py": "78723f6f4dfd3eb7a76c43efade822a7ffe79858c54cd12aa63feb552be52339",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/tool_task_runner.py": "4ba35fad92de389cd6b3377b64d2dec50aca037d3cb95426f442d0940787106a",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/unified_retrieval.py": "a7f6efb2569f99602efb0198c29fd064b5fe47e36d4d8dc2baf1d508838f13a4",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/workflow_detector.py": "75aeba8c0e2dbbf6ac6c5bf24ef55e331aa711a2d937bf031ddb9cd4c629ac4d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/__init__.py": "5c45c2cabcc748572c5e7a5098beee6c88a78d454dcb6dcacff1c99a04029e8a",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/background_daemon.py": "429ceed4f36372957c1df8914ad9c9e1fd063da30761be1ce9f7d5ccb544be14",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/constrained_decoding.py": "75abe9dd0358770912887537ab35c20467fcfd9a5586588a3c669064d988f884",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/orchestrated.py": "370a47b7d5f7fe38da8bcbc824398650962a1117873e2e60fef73ae34dba0181",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/orchestrator.py": "fddee38b1bdc815184f14d80181e5d0338b0e527c4731006f4f7ea1976997a1c",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/__init__.py": "907d9878a7964866ec2acac82ad8749f7757be3dc280c9e597b27a2285c5e329",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/anthropic_provider.py": "fa0d3be9ffc01f7ba2a0415fec426b9cf8fb2b33f50c4da3a1a89cff880443a4",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/base.py": "2d4cfa533fee31c6874ee81b0f7a7ef6a9c01c2e8691693975f55a28927efaaf",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/claude_cli_provider.py": "07a47b45e8f23e695515218c2f46b81b8fcbb6000fef94ad69efbc6f6f802c80",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/codex_cli_provider.py": "4eb11f78312dbb0d0ac9b8ef7c127e5f8cb2f5ecb368a0fe43a2fbcc84966782",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/codex_subscription_provider.py": "cb29f2e2c3d3580114cff66a1fd5f2ce189eb7d44682694f996bf8d13a9b674d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/gemini_provider.py": "60e751b138ff3cd041d1c12c5bf3d26c1e0b18e751688a8506dac3aed66bad0b",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/llama_cpp_provider.py": "db9f10fc10ba307b2c08a0cd69d93da20d8d4d545c1095ca1e0517f332732cf4",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/local_conscious.py": "ba968bce2b2fbf99180779b51399b88fed0f414e89643012cc13bb2295073461",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/providers/ollama_provider.py": "a762379592596b8adfd3260353543932f08175f2bf63d5fa8be763ccaef1f0cc",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/tool_pass.py": "848b82eb76c4584644f6a98698f30363a975088b595e91f323582874af64614d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/llm/tool_schema.py": "22406bde012d8b2d8044fca14b92f7778860139c099234ab6f7654873e5953c2",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/main.py": "774ea73abc925594f82c5db4093e3bcf0ab9a2c2f05222a2ee8025f108dcc99e",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/__init__.py": "440209ff0d022f568b319525d4318428e9aff6ad6e62ad405a03a32430233018",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/belief_store.py": "7add04f139634f5f7291ab6ac9f88545502b648c7a295c4c48202a94501958c7",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/cognitive_journal.py": "7557223965432df9505aff973e00f7e503a4e967ca9bbfbbf263372b627979bc",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/memory_manager.py": "80078cbb9ede0a753ea0e5eb1ee6869c426fbe66a124ef41d719a9e020df9f7f",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/__init__.py": "d0a6df702de4e0e1fc0c3f90cf5769dcdb3e7a40eefdc822378bafb01caee031",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/benchmark.py": "c3d795b15ccb951fb8396a2af65564dbd18e323045bd955d3bbe9debb7741d76",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/catalog.py": "f09502bc216b20eb5e6b797e6e074cd2487cf2246df1dbb34430253733abd9df",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/cli.py": "d086660217bbf60aea075fc34ee4fcaa751c9894db54216cb98c13a6e1080b3d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/corpus.py": "362efa0aa4c22150bcb16cee6ff8405c9895063841e465116f8c700a4c39ec4c",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/maintenance.py": "609362dfa68b274b36e8ad53bac396beeefe79bcf8f8622f8f3333dc90009be7",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/models.py": "297a089f898a19fc08455f2b9d7484c6224ba7b8512e0cabe35fa85117b6929d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/retrieval.py": "247367e91d4003e152b3ba08d18f790a124be072b6788ce9e9e481b4322dfd26",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/semantic_lane.py": "57f4d5005302e66113f333c95700a98bb0217e082c7134ad8610ca6ad0455b23",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/tagger.py": "5f2c5fc1ba85bde9dd032bdac478d4c605acd0d120cb24c2bc8047d23e258c05",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/token_counting.py": "0e24b01a9841b22a7f7afc55e55ec38dd7d7818a137104ce553f29765fc6c1ff",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/mrag/vector_store.py": "2f26e884bf90f4da3fefee458b66bcfac293359813daf3dc04a289a1bdcaed86",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/record_envelope.py": "2c4da2a95e341a901f8a1ea81ee6e389d22aca98555aa653a82ad07d7289d08a",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/semantic_encoder.py": "afd12d6729c01812ab8f3a13c2cbd5d0f6537006466f8223cbd731e9f9c88f39",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/memory/semantic_index.py": "13d1bf46fc85c19e448bf579ece7f6a637f1aadea80be607b9b7211166a2f05c",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/setup.py": "547416c7dcadf176df3001f672c8a6b74ad11ca7792b0b6a8167fd18d6d7aaee",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/__init__.py": "9da49242db92332ca7b2269010986af25eca631eb99221e77f93c84e6965a589",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/browser.py": "358c61d0379e8bb4ddb4083f8c2feb870c23c9806290a830538686bc0e5eac2d",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/channel_router.py": "62f08487e03dfeb5c540498aebbe39db31550138d0f11ce17d95f2e36a4c6798",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/custom/__init__.py": "d31e94deb7559e0380583bf029d72d94cfe092f5b2bf5eb71e2d87e61a2684f9",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/desktop_control.py": "647c630bf8f7ef9bc574076006b17b2ad29ba9db2b57d08aa7f9a71a92b36576",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/github_api.py": "6720f695a6a411c16d1703846f9226dfc788731132cb5fa5e6b5ff07fd78ee42",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/google_auth.py": "b2b0f696895324faf078aaca06c309d3657d177d4a3950f079a53ea9f94d4f1a",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/google_calendar.py": "5ccd2de2f137b92218cab4fbd932204da2e2a815514d40f44269ae8f228dcff7",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/google_drive.py": "75180cf83eedb2ac52e62f8726b0a463c7d9a76358e205f390e362eb53d0819a",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/google_email.py": "cc85c95a814ec363cf839da1350e1d288b2ee70ed6b4b0a20ecb2647e752a655",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/google_tasks.py": "2295aff986e73c974408aabad25f451f2c48f9803a33eb66a7b70efe0c9e2a47",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/moltbook.py": "8b311b956ec316d456ee14f1790fd430c259ce864b9263bcffc7b9ce5c9379fe",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/tool_declarations.py": "7c76ad49b0895e7ae3d8ca7ae1d5f34169f71549c51fd75c55d0e3e58aaf37fc",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/tool_executor.py": "e41c3bb3014f126117bba915681d0a30d88dade79cb1c8a1795c4627ad43bec7",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/tool_registry.py": "ebc99b6b8739cb5948be347725619910fa1afd60754a9927f9cbcd46e1f8dccd",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/ui_canvas_tool.py": "58fcc4b05c13d15e50c43e241bab87e550d1e2fee99c756fbd5bd0bee1ce7fdc",
+      "/home/nemo/Helix_AGI (GitHub Repo) (Public)/tools/web_search.py": "565c894a7a3f6d8f7a95bdca9e4f5053594a02bc0145b27d0356cf75db7b07a8",
+      "/home/nemo/MightyMem/context_loom/__init__.py": "e2df1b16c5e1525a049f0e376db2d9977d293bb968d1ecc1c31831feb19097e0",
+      "/home/nemo/MightyMem/context_loom/__main__.py": "76fa916e93e0ae1a6c1bb51dcc0bcf289c014e9f760a47165f8a84401ccf41d7",
+      "/home/nemo/MightyMem/context_loom/backend_state.py": "1d5474d2cb23a1e2bb67789b8f7347b8d6c015c01deed3801b3f0c47d6e309cf",
+      "/home/nemo/MightyMem/context_loom/capabilities.py": "fa414c57a5acac1b1981bf9689d10519295156afb9ff0512775f693b47582914",
+      "/home/nemo/MightyMem/context_loom/channels/__init__.py": "36bb35c58dfff6eeaefaefe26a3bc58f60222a4d5e6db9981af850b7e35d750a",
+      "/home/nemo/MightyMem/context_loom/channels/base.py": "4d7cdf209091cd6a12c3571a1a53834e757c6ff5894ef15b05e714cf840be47e",
+      "/home/nemo/MightyMem/context_loom/channels/discord.py": "d466f0fc89b86b84b544c9afb5a13eea0c8078c157340d36ac8bb8c72484a3cf",
+      "/home/nemo/MightyMem/context_loom/channels/piper_voice.py": "d1d8ec5354611aa9c3c107dafbb4ae6e841b689b31422ca7da8b066c7dfe46b9",
+      "/home/nemo/MightyMem/context_loom/channels/profiles.py": "e04997697731e079797b306d684220632eac6686a5dfbfe5e181520939572062",
+      "/home/nemo/MightyMem/context_loom/channels/router.py": "a8a8dcf87fe757848412064c628b7eb512ee577ce8d72ebb507910bf6d3f4f64",
+      "/home/nemo/MightyMem/context_loom/channels/telegram.py": "7bb78628d3000eee7a6a169a66689fa3d83a612cf7ebd40e69a6765d45ef95ef",
+      "/home/nemo/MightyMem/context_loom/cli.py": "f0cd14b5c2a078c15a99d09cef800f0adfc9ea102b08d7b9bc7450dce9f26d46",
+      "/home/nemo/MightyMem/context_loom/compiler.py": "6c122107948057f3f81786e92fe35e6001f0eb2e78db9e86a4ba5619874e4d7c",
+      "/home/nemo/MightyMem/context_loom/credentials.py": "eaa6651cdaa20a2d46168650cd4d4590dc7733fce5b212a49d3a2502bb401207",
+      "/home/nemo/MightyMem/context_loom/demo.py": "f7075aeb72e643ffb0183ada9717a55662846fac0828a82f37f8ac4722495807",
+      "/home/nemo/MightyMem/context_loom/deployment.py": "8d4a2f58e72fd484f42251cfa55307c7539d96e6bce5791db79f29fd4d4c7a9b",
+      "/home/nemo/MightyMem/context_loom/deployment_smoke.py": "75ac8c24fa0efdbde595ae2617cd29482d63f28bfef9c6ece827cfbc7f29b46a",
+      "/home/nemo/MightyMem/context_loom/doctor.py": "b71dcff60b8ea349aedb09ae9735477ca170e3a97d0ab569800e99bdf1da5858",
+      "/home/nemo/MightyMem/context_loom/engine.py": "24f3d84ba24f4edeb3ace79ba1e521ea567d4830c11b08ab3458a3024fdf6ce3",
+      "/home/nemo/MightyMem/context_loom/entity_graph.py": "93880fe88b4ee7f8a8a843c79bfdec2778b142975672dd246169beca226601c1",
+      "/home/nemo/MightyMem/context_loom/evaluation.py": "745a90c3e9f24f27388b19ff6bc3be5a7309893432ec1335b7447010540fda5f",
+      "/home/nemo/MightyMem/context_loom/full_system_benchmark.py": "96a77571801c77a3f04b96b37b27cd2351396bcbfbbf15ddb93f8f649357b277",
+      "/home/nemo/MightyMem/context_loom/gestation.py": "71c116e49ef74011934ee852885ed91df8378cc811eb546d0068df7a1a8f5871",
+      "/home/nemo/MightyMem/context_loom/habitus_agent.py": "966f6b8ed65e24f87e2f5bd86d4931d245c6f9d34bcd93485dfe280a7dcddcad",
+      "/home/nemo/MightyMem/context_loom/helix_pulse.py": "76c6013b46ef052b7fec87d0e349556fe643e05e6483512990d1db8e88f0db58",
+      "/home/nemo/MightyMem/context_loom/intent_cortex.py": "4c26c6d6db100243935928840d7fa0d42d8ed80ca8f924119c8757c2f0d09e6e",
+      "/home/nemo/MightyMem/context_loom/llm_evaluation.py": "429e04f0fe729e693dbfb6211ecc97aedb927ab0c7c1904a4852116ed11948d0",
+      "/home/nemo/MightyMem/context_loom/locomo_evaluation.py": "ae83eb636aa71c9c2c0775dd24a9d6714a0b05847b37b564e3872b1d8e632566",
+      "/home/nemo/MightyMem/context_loom/models.py": "b7ea497c5e6348e91e4f79d0630044c348cd6277011bea7efe6f75bc7a834f5d",
+      "/home/nemo/MightyMem/context_loom/multi_hop_lane.py": "eeb4ad7638ef5de74c309329a3c455b16ff5fc3a0f37430ca92775766327c36c",
+      "/home/nemo/MightyMem/context_loom/personality_smoke.py": "920cdc2304f681f5c745c4644bbe2875ac8bcdf834ddc7f6e397693c4e712095",
+      "/home/nemo/MightyMem/context_loom/reflection.py": "d1d1bc280476d11d23f3d28b8daf8b53be49ea119b6733c06d376da4753122a6",
+      "/home/nemo/MightyMem/context_loom/retrieval.py": "230f7044406d9e03803473d7cecf31176d9abdbc261ec9417b0d44db503ad41d",
+      "/home/nemo/MightyMem/context_loom/runtime.py": "37f277c989d38a20a81a7114ff90c697ecc9e16bc534366e6efb9a8eaecc4e45",
+      "/home/nemo/MightyMem/context_loom/store.py": "2043136b3428a194a1ef446e001ee06480af3353b3091cb9b56716a8c437af7a",
+      "/home/nemo/MightyMem/context_loom/summarizer.py": "95db6b34a6089195109d49c07986e7606eea43e4fc0b0e0598b2e27046d8eddd",
+      "/home/nemo/MightyMem/context_loom/tokenization.py": "13d484704a9fc0a2c066f82d4b0c2854bb3489a381272c331265489170cef5ec",
+      "/home/nemo/MightyMem/context_loom/topical.py": "279dc3bd553196e68bd59b9fc4c784be794d6d5bb0290e808062dc4bd1d8b163",
+      "/home/nemo/MightyMem/context_loom/x_membrane.py": "7cc11d5db9eb32e9a9bb360f9fbed4312d4c4a49c4cf63b0fe90ca52fdb42c12",
+      "/home/nemo/MightyMem/habitus_ai/__init__.py": "c91217d8ad7a64850be4a64aaf4163ff5e24628a7d0c0bd0d312616ac20e346e",
+      "/home/nemo/MightyMem/habitus_ai/agent.py": "0960d46d7060202c0a135544b82dfff4cd21798f6df3cee21f970d77eb5b7209",
+      "/home/nemo/MightyMem/habitus_ai/agent_memory.py": "f313f23af993fe2d0b7856a70255f3a3c81d1a3d8829cf80365879e1843e37f6",
+      "/home/nemo/MightyMem/habitus_ai/agent_workspace.py": "4136da7e3fdbbe420e1fb7155b113c5cb9cdd6a1876112d7d7f152b6b1f4d1ed",
+      "/home/nemo/MightyMem/habitus_ai/app.py": "032347f5f27173e5945390c34a2c66a253628aea83366c6144d6ae6ac329f2da",
+      "/home/nemo/MightyMem/habitus_ai/async_workers.py": "6011ac400dabd03bc4b770adb3bdcd7d429fbfd8a928efebbd35409f235b4713",
+      "/home/nemo/MightyMem/habitus_ai/audio.py": "f3c38f593261001b91f9612f47be06d982a712a85d69251b346ae2cb2fd98be9",
+      "/home/nemo/MightyMem/habitus_ai/calibrated_stream.py": "d5cf9832ac74cff3f5c826821df95e62362943b9daea90dd5f78a3a374c0524b",
+      "/home/nemo/MightyMem/habitus_ai/cli.py": "1bc41d1fd70bf87838add42c73071ca647a01c91233995abfc70ddecf2d59213",
+      "/home/nemo/MightyMem/habitus_ai/communication_data.py": "493c0399ae931840c04436e9e93db668b71d4717b66e77a07075aea559d96f63",
+      "/home/nemo/MightyMem/habitus_ai/communication_objectives.py": "509d8deed3bc3ab8017fc5e5f5e3eede0980e9975f408975fa277172f3565d56",
+      "/home/nemo/MightyMem/habitus_ai/communication_sampling.py": "f7d4100693088b9c10c12f6e83de19be6ae3b9ae8e1c563ea07cd10d6d48df07",
+      "/home/nemo/MightyMem/habitus_ai/communication_training.py": "438d1e89148e354e7ac6f6238dfb3b4568dc3813c199440998762664ee9d5067",
+      "/home/nemo/MightyMem/habitus_ai/context.py": "6da048a448373a4f380c24862f6b6253804912acb2ec8f0c8826830b8eac0a39",
+      "/home/nemo/MightyMem/habitus_ai/continual_mind.py": "e398728bcda8e45a49f3709c8a937cb605db8ca6faa2c5dffe9cbdf85c1a7ff7",
+      "/home/nemo/MightyMem/habitus_ai/continual_rwkv.py": "36630e63e14c009a7db72f5b356116c05ce277c863700f4b1f74a3d60015f703",
+      "/home/nemo/MightyMem/habitus_ai/continual_session.py": "c5c572801d7047252d2051fbe6e2d540cc4b8ded663b777255f036b58a128370",
+      "/home/nemo/MightyMem/habitus_ai/corpus_associations.py": "d457af82d0a95e5ea2f56a468aa5a4d4a467480b40d0f9e62aece11632a336dd",
+      "/home/nemo/MightyMem/habitus_ai/corpus_stream.py": "c93ba63ede5c499d9dbc5bfd6dc3e3a3a884ed04209e8079bc1e4296d4b8307a",
+      "/home/nemo/MightyMem/habitus_ai/demo.py": "73149f6bb5001af33aee074caed4555ff97808944e5bb452df4e6ee0ce33e3e8",
+      "/home/nemo/MightyMem/habitus_ai/developmental_cortex.py": "950cd21afc82bdbfeeebc675884edfbc2de00f054d3223cdbc553dc3beb700f5",
+      "/home/nemo/MightyMem/habitus_ai/developmental_curriculum.py": "d333e46b692b6b084e675c01d941a8756f5daec2c20926c89f185957193f66e5",
+      "/home/nemo/MightyMem/habitus_ai/developmental_runtime.py": "aa384b05b9cd89d77ff4abb67e017d0672e3cb7a14b35e33ed7cfbc121ba669c",
+      "/home/nemo/MightyMem/habitus_ai/doctor.py": "cc8d6218a6034a2e3220d1ed4a13702351b5b922e4f3ec5a090618179d6d5039",
+      "/home/nemo/MightyMem/habitus_ai/embeddings.py": "f1c554f1122c2232e8784c6ab813c1c223946199d6697541b3123031473ab07e",
+      "/home/nemo/MightyMem/habitus_ai/flow_core.py": "7c7e64cfe8a041ce0ef03ec7644ca8ba8e9572c2a08397cddef34953f28c71d5",
+      "/home/nemo/MightyMem/habitus_ai/flow_mind.py": "f66ac4e97830255f90448fb337fbec5c2219c58156053c7347332fca5932b790",
+      "/home/nemo/MightyMem/habitus_ai/functional_agent.py": "2e2a943415c644b508592f6b37b347bab5f0876c5876669e81fe5682151e7bbd",
+      "/home/nemo/MightyMem/habitus_ai/gestation.py": "c7b7f2787df1bc2ddc112f856415edb182b426b4b58d2d38cd3cbc82b0c30194",
+      "/home/nemo/MightyMem/habitus_ai/graph.py": "e8a76eda28093ce88ef231697a20d7780eab609f67d52ba623117902b209b45f",
+      "/home/nemo/MightyMem/habitus_ai/grounded_language.py": "8ebefad9ce72dd86ab0cad539bae7639174fabc87482f234ef49d81c3a0c2bd6",
+      "/home/nemo/MightyMem/habitus_ai/habitus_stream.py": "78255f7b1d92a0ce29c73adf4851326dd61e53edab4ba8e2942e83bbde0520de",
+      "/home/nemo/MightyMem/habitus_ai/inquiry_learning.py": "b42287a7f0f74f189410ee70c1fa679d1b623502b2bf92d69acc3f7fe9406082",
+      "/home/nemo/MightyMem/habitus_ai/integrated_agent.py": "49e5e7ad24a3505b0ba9ddc408645a98ad5e9afbc87d4adf634ecbf2e9461864",
+      "/home/nemo/MightyMem/habitus_ai/lanes.py": "c551a16a196035b2b08356a2e8823166cfab77e56288fb8f0c89d89ff398b304",
+      "/home/nemo/MightyMem/habitus_ai/language_vocabulary.py": "adf0e6a10f90694c474c6fe5d78ad507f7ccec3715bb96ab2183703b7b43eeb9",
+      "/home/nemo/MightyMem/habitus_ai/lexical_cortex.py": "7e649a081ff5d16d8183e6af62390f549b201404575da78faa47035cb69d7e75",
+      "/home/nemo/MightyMem/habitus_ai/memory_agent.py": "10c891e4449d1beae1c78ad217ca263ee581f744cd66107e24bd12aab00fcc5a",
+      "/home/nemo/MightyMem/habitus_ai/models.py": "d80fd9b8d242aba6e8d6363409748940406d49cc9d14c15954690c445728d037",
+      "/home/nemo/MightyMem/habitus_ai/open_weight.py": "d2b8988a4823b1cd2e195952792cb38fcefc8677c8758ccc8e6beacebde91f86",
+      "/home/nemo/MightyMem/habitus_ai/pipeline.py": "b39bdfa5af2d91101d4e65d7070b4dc4b1b490be74e779ed19d4d7d7e161c24a",
+      "/home/nemo/MightyMem/habitus_ai/recurrent.py": "089e5c1b4d1a57bc879573e51aa75e11decc615aed89104306bec8ac41fce5db",
+      "/home/nemo/MightyMem/habitus_ai/recurrent_conversation.py": "a89a70f5baa9d338ef4d29984adb9e31e0153d1e7e4883cfa4e8acb118f8bbe9",
+      "/home/nemo/MightyMem/habitus_ai/recurrent_flow.py": "a8ffdb5fce4c5f2b608272ce375bcd33038fa98713137d2b3381e88820190401",
+      "/home/nemo/MightyMem/habitus_ai/retentive_language.py": "cce564d153580fd58475c5aad8325879596633527d17a53d646486e121f77e4b",
+      "/home/nemo/MightyMem/habitus_ai/retrieval.py": "e1a635afd944bf8585d1ea57e4828967c3b2aedb425495689a59307972ad7106",
+      "/home/nemo/MightyMem/habitus_ai/rwkv7_language.py": "80f1949814afd670cf3ea88d4c751d0e54645c1dbff4977816188cc6c27a5da9",
+      "/home/nemo/MightyMem/habitus_ai/self_pulse.py": "180d8008f81e7bf64f231a09d0382c647baf796a3daaf8a465ae2f1122bf1bfc",
+      "/home/nemo/MightyMem/habitus_ai/sensory_motor_loop.py": "efe166ca2f8aad2a97a85352203dad57c13081941dff1ee520c5d42b8ef11116",
+      "/home/nemo/MightyMem/habitus_ai/sensory_reservoir.py": "25cdcc10390bbd0acea18a46abf2f8c3d8e4b5748fa2ac10145fc7f4985d9694",
+      "/home/nemo/MightyMem/habitus_ai/stateful_language.py": "187647a282d0040cf366fdc1c8cfdd1673029c0f4be1fd4c117d93c711c14e89",
+      "/home/nemo/MightyMem/habitus_ai/store.py": "5d85b9e16257701a4ec78458faef51b4ac67becdeba8b53fdd8ebd866728a264",
+      "/home/nemo/MightyMem/habitus_ai/stream_data.py": "09b94cf04b3ec795638ffc1a8ef944f6416a8b8db879c0033931af4d976a6d30",
+      "/home/nemo/MightyMem/habitus_ai/surface.py": "fb2e560b2054fbd792086a5c94e0327cad624dabe3b11b54184ed32bf3e94ae6",
+      "/home/nemo/MightyMem/habitus_ai/tools.py": "b451b58c530413e6fa9b71eda7d66ed472d7a487b7a5a362041708378c63354a",
+      "/home/nemo/MightyMem/habitus_ai/types.py": "7a096f0a520a5c00d618a90bd786c983acbc7b1bbbb857e6e4f93cfedf40e4cb",
+      "/home/nemo/MightyMem/habitus_ai/vector_adapters.py": "22fe8f3f6620c3560cef3e92dfc1136ed39c4063a97355aa9e586607d901e65b",
+      "/home/nemo/MightyMem/habitus_ai/working_memory.py": "35f86adae8c8bd4f97a6f8432844c1cf5a3686f27180afc409bc844329d118f8",
+      "/home/nemo/MightyMem/habitus_ai/workspace_cortex.py": "fa16e88faed8588d98e2a5a73270a1a04a63f04e8b6d707d698fa3f7e2adb0cc",
+      "/home/nemo/MightyMem/habitus_ai/workspace_observations.py": "38063702ab9a15f621f885c45a65f994364933011a0010d70665f09e1dcb094c",
+      "/home/nemo/MightyMem/pyproject.toml": "ec5bce74c884dd4dac32aa974fcd947879c23c43b52161ed9f5b5c779aff30f2"
+    }
+  },
+  "protected_evidence_hashes": {
+    "/tmp/helix-live-20261010-misw_7t0/trace.jsonl": "f54b3f44b99ff07bca4bbb5e81ea111708c150676a26d5d98059d0968a07f68a",
+    "/tmp/helix-live-20261010-misw_7t0/data/mindscape/receipts.jsonl": "ae46963ece8acf833a84ee9fcdfb049d86a7ef284057c889cbb5b31244f4d65d",
+    "/tmp/helix-live-20261010-misw_7t0/data/memory/cognitive_journal.jsonl": "e760cf687bb3d28147f353ed59771b804dea107b566c804d16c489da529215bf",
+    "/tmp/helix-live-20261010-misw_7t0/data/mindscape/loom.sqlite": "5c931224da5cc78d97b0922193cef41c2da5bd68dc12f6ed1d7b06186ffa2e97",
+    "/tmp/helix-live-20261010-misw_7t0/data/mindscape/joint/checkpoint-000008/mind.sqlite": "68a876f06ee448f8923f7a8147ebf205f1ea56d17a881e01a476b61282ce9cc7"
+  },
+  "legacy_human_message_classifications": [
+    {
+      "id": "mem_10",
+      "created_at": "2026-06-30T20:54:41-04:00",
+      "canonical_kind": "event",
+      "loom_kind": "episode",
+      "loom_evidence_status": "unverified"
+    },
+    {
+      "id": "mem_19",
+      "created_at": "2026-06-30T20:58:22-04:00",
+      "canonical_kind": "event",
+      "loom_kind": "episode",
+      "loom_evidence_status": "unverified"
+    },
+    {
+      "id": "mem_31",
+      "created_at": "2026-06-30T21:05:15-04:00",
+      "canonical_kind": "event",
+      "loom_kind": "episode",
+      "loom_evidence_status": "unverified"
+    },
+    {
+      "id": "mem_48",
+      "created_at": "2026-06-30T21:11:55-04:00",
+      "canonical_kind": "event",
+      "loom_kind": "episode",
+      "loom_evidence_status": "unverified"
+    },
+    {
+      "id": "mem_56",
+      "created_at": "2026-06-30T21:14:09-04:00",
+      "canonical_kind": "event",
+      "loom_kind": "episode",
+      "loom_evidence_status": "unverified"
+    }
+  ],
+  "state_desk_ordering": {
+    "scope": "2026-06-30",
+    "scope_record_count": 58,
+    "inherited_MAX_SCOPE_ITEMS": 12,
+    "truncated_prefix": [
+      {
+        "id": "mem_1",
+        "turn": 0,
+        "created_at": "2026-06-30T20:46:18-04:00",
+        "ordinal": 58
+      },
+      {
+        "id": "mem_2",
+        "turn": 0,
+        "created_at": "2026-06-30T20:46:19-04:00",
+        "ordinal": 59
+      },
+      {
+        "id": "mem_3",
+        "turn": 0,
+        "created_at": "2026-06-30T20:50:49-04:00",
+        "ordinal": 60
+      },
+      {
+        "id": "mem_4",
+        "turn": 0,
+        "created_at": "2026-06-30T20:50:50-04:00",
+        "ordinal": 61
+      },
+      {
+        "id": "mem_8",
+        "turn": 0,
+        "created_at": "2026-06-30T20:53:16-04:00",
+        "ordinal": 65
+      },
+      {
+        "id": "mem_9",
+        "turn": 0,
+        "created_at": "2026-06-30T20:53:16-04:00",
+        "ordinal": 66
+      },
+      {
+        "id": "mem_22",
+        "turn": 0,
+        "created_at": "2026-06-30T21:00:32-04:00",
+        "ordinal": 79
+      },
+      {
+        "id": "mem_23",
+        "turn": 0,
+        "created_at": "2026-06-30T21:00:32-04:00",
+        "ordinal": 80
+      },
+      {
+        "id": "mem_5",
+        "turn": 1,
+        "created_at": "2026-06-30T20:51:50-04:00",
+        "ordinal": 62
+      },
+      {
+        "id": "mem_6",
+        "turn": 1,
+        "created_at": "2026-06-30T20:51:51-04:00",
+        "ordinal": 63
+      },
+      {
+        "id": "mem_7",
+        "turn": 1,
+        "created_at": "2026-06-30T20:51:51-04:00",
+        "ordinal": 64
+      },
+      {
+        "id": "mem_10",
+        "turn": 1,
+        "created_at": "2026-06-30T20:54:41-04:00",
+        "ordinal": 67
+      }
+    ],
+    "labeled_current_after_prefix_reversal": {
+      "id": "mem_10",
+      "turn": 1,
+      "created_at": "2026-06-30T20:54:41-04:00",
+      "ordinal": 67
+    },
+    "latest_by_production_chronology": {
+      "id": "mem_58",
+      "turn": 9,
+      "created_at": "2026-06-30T21:14:10-04:00",
+      "ordinal": 115
+    }
+  },
+  "pulses": [
+    {
+      "pulse": 1,
+      "packet_id": "ctx_d874fdcea324a5d95ccd8da8",
+      "actual_foreground_call_matched": true,
+      "current_events_in_prompt": true,
+      "rwkv_state_changed": true,
+      "rwkv_event_tokens": 0,
+      "loom_candidate_count": 116,
+      "loom_admitted": [
+        {
+          "id": "mem_30",
+          "kind": "assistant",
+          "content_sha256": "e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+          "lane_scores": {
+            "semantic": 0.4625975365138024,
+            "recent": 0.0,
+            "subjective": 0.3195210305862257,
+            "habitus_graph": 1.0,
+            "correction": 0.85
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_43",
+          "kind": "assistant",
+          "content_sha256": "6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+          "lane_scores": {
+            "semantic": 0.43757322026381185,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.2883272387641892,
+            "multi_hop_graph": 0.9478313772956115,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.8163945089193481
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_47",
+          "kind": "assistant",
+          "content_sha256": "ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+          "lane_scores": {
+            "semantic": 0.4443037105899804,
+            "exact": 0.448951048951049,
+            "recent": 0.0,
+            "subjective": 0.2561215695802963,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.1515376721662593
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_55",
+          "kind": "assistant",
+          "content_sha256": "59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+          "lane_scores": {
+            "semantic": 0.3939555623785524,
+            "recent": 0.0,
+            "subjective": 0.28905731145025726,
+            "habitus_graph": 1.0,
+            "correction": 0.85
+          },
+          "reason": "highest fused utility within budget"
+        }
+      ],
+      "loom_rejections": {
+        "unverified inference excluded": 99,
+        "private thought is not language-visible evidence": 13
+      },
+      "candidate_classifications": [
+        {
+          "admitted": true,
+          "loom_kind": "assistant",
+          "canonical_kind": "outbound_message",
+          "count": 4
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "belief/no envelope",
+          "count": 52
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "event",
+          "count": 37
+        },
+        {
+          "admitted": false,
+          "loom_kind": "thought",
+          "canonical_kind": "thought",
+          "count": 13
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "memory",
+          "count": 10
+        }
+      ],
+      "native_recalled_ids_without_loom_records": [
+        "gestation:human-identity",
+        "gestation:taste:builder",
+        "gestation:self-identity"
+      ],
+      "mrag_returns": [],
+      "private_thought_ids_rejected_by_loom_but_present_in_prepacked_input": [],
+      "office": {
+        "binding_method": null,
+        "scope": null,
+        "scope_coverage": null,
+        "verified": null,
+        "reason": null
+      },
+      "stored_output_id": "mem_59",
+      "output_recalled_by_loom_on_pulses": [
+        2,
+        3,
+        4
+      ],
+      "next_retrieval_query_includes_this_output_tail": true,
+      "provider_receipt": {
+        "model": "granite4.1:3b",
+        "done_reason": "stop",
+        "prompt_eval_count": 2114,
+        "eval_count": 470
+      }
+    },
+    {
+      "pulse": 2,
+      "packet_id": "ctx_1280f896c9c019c857245554",
+      "actual_foreground_call_matched": true,
+      "current_events_in_prompt": true,
+      "rwkv_state_changed": true,
+      "rwkv_event_tokens": 63,
+      "loom_candidate_count": 121,
+      "loom_admitted": [
+        {
+          "id": "mem_30",
+          "kind": "assistant",
+          "content_sha256": "e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+          "lane_scores": {
+            "semantic": 0.5114147559295157,
+            "exact": 0.7678571428571429,
+            "recent": 0.0,
+            "subjective": 0.3031158919092455,
+            "multi_hop_graph": 0.09916925397758747,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.020852631829553294
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_43",
+          "kind": "assistant",
+          "content_sha256": "6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+          "lane_scores": {
+            "semantic": 0.6550838108462949,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.3640066107711306,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.38055424841472624
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_47",
+          "kind": "assistant",
+          "content_sha256": "ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+          "lane_scores": {
+            "semantic": 0.6419816653828762,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.3385672587913723,
+            "multi_hop_graph": 0.13648905376477466,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.039131706927878936
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_55",
+          "kind": "assistant",
+          "content_sha256": "59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+          "lane_scores": {
+            "semantic": 0.41613994312655944,
+            "exact": 0.002976190476190476,
+            "recent": 0.0,
+            "subjective": 0.277973533174312,
+            "multi_hop_graph": 0.12027831259925949,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.004322729676213942
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_59",
+          "kind": "assistant",
+          "content_sha256": "e06574e35e68ba5064422d88b7f5618541ce7ef5467c03323b57e5768ce6dfda",
+          "lane_scores": {
+            "semantic": 0.6669545268801037,
+            "exact": 1.0,
+            "recent": 0.44488604678833976,
+            "subjective": 0.3679971784236933,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.33999999999999997
+          },
+          "reason": "highest fused utility within budget"
+        }
+      ],
+      "loom_rejections": {
+        "unverified inference excluded": 99,
+        "private thought is not language-visible evidence": 17
+      },
+      "candidate_classifications": [
+        {
+          "admitted": true,
+          "loom_kind": "assistant",
+          "canonical_kind": "outbound_message",
+          "count": 5
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "belief/no envelope",
+          "count": 52
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "event",
+          "count": 37
+        },
+        {
+          "admitted": false,
+          "loom_kind": "thought",
+          "canonical_kind": "thought",
+          "count": 17
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "memory",
+          "count": 10
+        }
+      ],
+      "native_recalled_ids_without_loom_records": [
+        "gestation:taste:builder",
+        "gestation:human-identity",
+        "gestation:self-identity"
+      ],
+      "mrag_returns": [
+        {
+          "id": "mem_10",
+          "kind": "event",
+          "created_at": "2026-06-30T20:54:41-04:00",
+          "office_role": "current_state",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_7",
+          "kind": "thought",
+          "created_at": "2026-06-30T20:51:51-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_6",
+          "kind": "event",
+          "created_at": "2026-06-30T20:51:51-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_5",
+          "kind": "event",
+          "created_at": "2026-06-30T20:51:50-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_23",
+          "kind": "thought",
+          "created_at": "2026-06-30T21:00:32-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_22",
+          "kind": "event",
+          "created_at": "2026-06-30T21:00:32-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_8",
+          "kind": "event",
+          "created_at": "2026-06-30T20:53:16-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_3",
+          "kind": "event",
+          "created_at": "2026-06-30T20:50:49-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_1",
+          "kind": "event",
+          "created_at": "2026-06-30T20:46:18-04:00",
+          "office_role": "state_history",
+          "office_scope": "2026-06-30",
+          "office_verified": true,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_010",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": null,
+          "office_scope": null,
+          "office_verified": null,
+          "full_body_in_preconscious_annotations": true
+        }
+      ],
+      "private_thought_ids_rejected_by_loom_but_present_in_prepacked_input": [
+        "mem_23",
+        "mem_7"
+      ],
+      "office": {
+        "binding_method": "lexical_episode",
+        "scope": "2026-06-30",
+        "scope_coverage": 0.71831,
+        "verified": true,
+        "reason": "brief_bound"
+      },
+      "stored_output_id": "mem_61",
+      "output_recalled_by_loom_on_pulses": [
+        3,
+        4
+      ],
+      "next_retrieval_query_includes_this_output_tail": true,
+      "provider_receipt": {
+        "model": "granite4.1:3b",
+        "done_reason": "length",
+        "prompt_eval_count": 7822,
+        "eval_count": 370
+      }
+    },
+    {
+      "pulse": 3,
+      "packet_id": "ctx_8004c6067cde6b2c80ba3598",
+      "actual_foreground_call_matched": true,
+      "current_events_in_prompt": true,
+      "rwkv_state_changed": true,
+      "rwkv_event_tokens": 125,
+      "loom_candidate_count": 123,
+      "loom_admitted": [
+        {
+          "id": "mem_30",
+          "kind": "assistant",
+          "content_sha256": "e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+          "lane_scores": {
+            "semantic": 0.5044772955697329,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.29331440102350675,
+            "multi_hop_graph": 0.09920757043681944,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.10442809891865126
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_43",
+          "kind": "assistant",
+          "content_sha256": "6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+          "lane_scores": {
+            "semantic": 0.7906591898846541,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.41629469115632123,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.9745299168422912
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_47",
+          "kind": "assistant",
+          "content_sha256": "ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+          "lane_scores": {
+            "semantic": 0.6464466863371702,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.3405683658129233,
+            "multi_hop_graph": 0.5242913882227588,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.21864973505941515
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_55",
+          "kind": "assistant",
+          "content_sha256": "59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+          "lane_scores": {
+            "semantic": 0.3230474787904531,
+            "exact": 0.00749063670411985,
+            "recent": 0.0,
+            "subjective": 0.22769829460720195,
+            "multi_hop_graph": 0.11963265418708834,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.02774656242233306
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_59",
+          "kind": "assistant",
+          "content_sha256": "e06574e35e68ba5064422d88b7f5618541ce7ef5467c03323b57e5768ce6dfda",
+          "lane_scores": {
+            "semantic": 0.7274091505602636,
+            "exact": 1.0,
+            "recent": 0.46672880439168224,
+            "subjective": 0.3953038962510543,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.6951456549158916
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_60",
+          "kind": "user",
+          "content_sha256": "36751d73b075780730757be00341aa9cf06dcc1618651467433acd1d836a96a5",
+          "lane_scores": {
+            "semantic": 0.6115677895716257,
+            "exact": 0.6005617977528089,
+            "recent": 0.4115236176346705,
+            "subjective": 0.313780903533229,
+            "multi_hop_graph": 0.957136756735972,
+            "correction": 0.85,
+            "bm25_identity": 1.0
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_61",
+          "kind": "assistant",
+          "content_sha256": "64d0cd76a84b845b240a0399697313d6f41802d8d143754840248c6cf54fbbc7",
+          "lane_scores": {
+            "semantic": 0.7169345716953095,
+            "exact": 1.0,
+            "recent": 0.4739861277704901,
+            "subjective": 0.4059478148747146,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.2745129179183918
+          },
+          "reason": "highest fused utility within budget"
+        }
+      ],
+      "loom_rejections": {
+        "unverified inference excluded": 99,
+        "private thought is not language-visible evidence": 17
+      },
+      "candidate_classifications": [
+        {
+          "admitted": true,
+          "loom_kind": "assistant",
+          "canonical_kind": "outbound_message",
+          "count": 6
+        },
+        {
+          "admitted": true,
+          "loom_kind": "user",
+          "canonical_kind": "inbound_message",
+          "count": 1
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "belief/no envelope",
+          "count": 52
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "event",
+          "count": 37
+        },
+        {
+          "admitted": false,
+          "loom_kind": "thought",
+          "canonical_kind": "thought",
+          "count": 17
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "memory",
+          "count": 10
+        }
+      ],
+      "native_recalled_ids_without_loom_records": [
+        "gestation:human-identity",
+        "gestation:taste:builder",
+        "gestation:self-identity"
+      ],
+      "mrag_returns": [
+        {
+          "id": "mem_60",
+          "kind": "inbound_message",
+          "created_at": "2026-10-10T00:13:43-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_43",
+          "kind": "outbound_message",
+          "created_at": "2026-06-30T21:09:44-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "office_affect_state",
+          "kind": null,
+          "created_at": null,
+          "office_role": "affect_state",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_004",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_007",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_008",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_48",
+          "kind": "event",
+          "created_at": "2026-06-30T21:11:55-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_37",
+          "kind": "event",
+          "created_at": "2026-06-30T21:06:19-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "peo_boot_self",
+          "kind": "belief",
+          "created_at": "2026-08-13T11:40:18-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_47",
+          "kind": "outbound_message",
+          "created_at": "2026-06-30T21:11:55-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_006",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_005",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_002",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_003",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "des_boot_helpfulness_with_integrity",
+          "kind": "belief",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_17",
+          "kind": "event",
+          "created_at": "2026-06-30T20:58:22-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_31",
+          "kind": "event",
+          "created_at": "2026-06-30T21:05:15-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "pref_boot_coherence_over_performance",
+          "kind": "belief",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "pro_boot_first_contact_priorities",
+          "kind": "belief",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "pref_boot_continuity_preservation",
+          "kind": "belief",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_61",
+          "kind": "outbound_message",
+          "created_at": "2026-10-10T00:13:44-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": false
+        }
+      ],
+      "private_thought_ids_rejected_by_loom_but_present_in_prepacked_input": [],
+      "office": {
+        "binding_method": "none",
+        "scope": "2026-06-30",
+        "scope_coverage": 0.56383,
+        "verified": false,
+        "reason": "no_verified_brief"
+      },
+      "stored_output_id": "mem_63",
+      "output_recalled_by_loom_on_pulses": [
+        4
+      ],
+      "next_retrieval_query_includes_this_output_tail": true,
+      "provider_receipt": {
+        "model": "granite4.1:3b",
+        "done_reason": "stop",
+        "prompt_eval_count": 5231,
+        "eval_count": 1276
+      }
+    },
+    {
+      "pulse": 4,
+      "packet_id": "ctx_80a5ab9794704e38d9308e8a",
+      "actual_foreground_call_matched": true,
+      "current_events_in_prompt": true,
+      "rwkv_state_changed": true,
+      "rwkv_event_tokens": 588,
+      "loom_candidate_count": 123,
+      "loom_admitted": [
+        {
+          "id": "mem_30",
+          "kind": "assistant",
+          "content_sha256": "e04a6cea3bfacc8e60d01c5c0c61ee850dd936988de01007e027ad92c7f885aa",
+          "lane_scores": {
+            "semantic": 0.6584682908736611,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.3797397329722349,
+            "multi_hop_graph": 0.09933287485088137,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.2830795370331783
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_43",
+          "kind": "assistant",
+          "content_sha256": "6a8d8677fc3bbe7ee11747130e27a26664f7501ab4a6bcc29859ed13a8a974d5",
+          "lane_scores": {
+            "semantic": 0.5562227137788777,
+            "exact": 1.0,
+            "recent": 0.0,
+            "subjective": 0.32385963639373033,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.4221764251490524
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_47",
+          "kind": "assistant",
+          "content_sha256": "ca389f204d3c7a55aa551a3ffd6b31c00ef49ce5a5823963d7cc451b310b83a4",
+          "lane_scores": {
+            "semantic": 0.4583007404915511,
+            "exact": 0.8970588235294118,
+            "recent": 0.0,
+            "subjective": 0.25322457555692207,
+            "multi_hop_graph": 0.13195293385770326,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.08222491399271728
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_55",
+          "kind": "assistant",
+          "content_sha256": "59c7f0dabf65d31239ddfa1bdf71f085e4057c3e3c790e30501023def84ba3f4",
+          "lane_scores": {
+            "semantic": 0.342371342048654,
+            "exact": 0.011764705882352941,
+            "recent": 0.0,
+            "subjective": 0.2475336751922634,
+            "multi_hop_graph": 0.11328393809477834,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.030876315963711355
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_59",
+          "kind": "assistant",
+          "content_sha256": "e06574e35e68ba5064422d88b7f5618541ce7ef5467c03323b57e5768ce6dfda",
+          "lane_scores": {
+            "semantic": 0.5363017172766953,
+            "exact": 1.0,
+            "recent": 0.4349460678973753,
+            "subjective": 0.3152013310736218,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.5568122651249352
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_60",
+          "kind": "user",
+          "content_sha256": "36751d73b075780730757be00341aa9cf06dcc1618651467433acd1d836a96a5",
+          "lane_scores": {
+            "semantic": 0.5691177730151077,
+            "exact": 0.44705882352941173,
+            "recent": 0.3885521954576995,
+            "subjective": 0.29403619741230963,
+            "multi_hop_graph": 0.536881412781936,
+            "correction": 0.85,
+            "bm25_identity": 0.6520825751162731
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_61",
+          "kind": "assistant",
+          "content_sha256": "64d0cd76a84b845b240a0399697313d6f41802d8d143754840248c6cf54fbbc7",
+          "lane_scores": {
+            "semantic": 0.5175380926620498,
+            "exact": 1.0,
+            "recent": 0.43365768965125784,
+            "subjective": 0.3386943999889111,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.21203606924611088
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_62",
+          "kind": "user",
+          "content_sha256": "dda683dceaf3cb2bb64e87c0809e19d4ebd6722acb43efc8f7b7d5dd7fc51862",
+          "lane_scores": {
+            "semantic": 0.6858681053656612,
+            "exact": 1.0,
+            "recent": 0.4691336146818222,
+            "subjective": 0.36742805394331635,
+            "multi_hop_graph": 0.5896669000605002,
+            "correction": 0.85,
+            "bm25_identity": 1.0
+          },
+          "reason": "highest fused utility within budget"
+        },
+        {
+          "id": "mem_63",
+          "kind": "assistant",
+          "content_sha256": "6ea117762cb1920ea503507fb2518991419f0db6c64c3337db27cbce01029171",
+          "lane_scores": {
+            "semantic": 0.574208671440747,
+            "exact": 1.0,
+            "recent": 0.512571222305903,
+            "subjective": 0.35633508584814705,
+            "multi_hop_graph": 1.0,
+            "habitus_graph": 1.0,
+            "correction": 0.85,
+            "bm25_identity": 0.6179673269816807
+          },
+          "reason": "highest fused utility within budget"
+        }
+      ],
+      "loom_rejections": {
+        "unverified inference excluded": 99,
+        "private thought is not language-visible evidence": 15
+      },
+      "candidate_classifications": [
+        {
+          "admitted": true,
+          "loom_kind": "assistant",
+          "canonical_kind": "outbound_message",
+          "count": 7
+        },
+        {
+          "admitted": true,
+          "loom_kind": "user",
+          "canonical_kind": "inbound_message",
+          "count": 2
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "belief/no envelope",
+          "count": 52
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "event",
+          "count": 37
+        },
+        {
+          "admitted": false,
+          "loom_kind": "thought",
+          "canonical_kind": "thought",
+          "count": 15
+        },
+        {
+          "admitted": false,
+          "loom_kind": "episode",
+          "canonical_kind": "memory",
+          "count": 10
+        }
+      ],
+      "native_recalled_ids_without_loom_records": [
+        "gestation:human-identity",
+        "gestation:taste:builder",
+        "gestation:self-identity"
+      ],
+      "mrag_returns": [
+        {
+          "id": "mem_mem_boot_001",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_mem_boot_009",
+          "kind": "memory",
+          "created_at": "2026-06-28T00:00:00-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_56",
+          "kind": "event",
+          "created_at": "2026-06-30T21:14:09-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_44",
+          "kind": "event",
+          "created_at": "2026-06-30T21:09:47-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_62",
+          "kind": "inbound_message",
+          "created_at": "2026-10-10T00:17:09-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        },
+        {
+          "id": "mem_30",
+          "kind": "outbound_message",
+          "created_at": "2026-06-30T21:05:15-04:00",
+          "office_role": "unverified_semantic",
+          "office_scope": null,
+          "office_verified": false,
+          "full_body_in_preconscious_annotations": true
+        }
+      ],
+      "private_thought_ids_rejected_by_loom_but_present_in_prepacked_input": [],
+      "office": {
+        "binding_method": "none",
+        "scope": "2026-06-30",
+        "scope_coverage": 0.526718,
+        "verified": false,
+        "reason": "no_verified_brief"
+      },
+      "stored_output_id": "mem_73",
+      "output_recalled_by_loom_on_pulses": [],
+      "next_retrieval_query_includes_this_output_tail": false,
+      "provider_receipt": {
+        "model": "granite4.1:3b",
+        "done_reason": "stop",
+        "prompt_eval_count": 7257,
+        "eval_count": 842
+      }
+    }
+  ],
+  "observed_temporal_error": {
+    "old_source_record": "mem_17",
+    "old_record_s_total": 2.898,
+    "old_record_created_at_epoch": 1782867502.0,
+    "retrieved_on_pulse": 3,
+    "answer_pulse": 4,
+    "latest_received_s_total": 1.912,
+    "actual_answer_excerpt": "- `s_total` is climbing toward **2.9**, which indicates the system\u2019s overall performance metric has increased slightly but remains well below any failure threshold (the systemic health stays at\u202f1.0). This suggests that even though we\u2019re experiencing a modest rise in cognitive load, the core architecture can still handle it without breaking.",
+    "scope": "contradiction visible in recorded input and output, not a benchmark score"
+  },
+  "native_feedback_tables": {
+    "experience_cycles": 0,
+    "experience_cycle_returns": 0,
+    "outcomes": 0
+  },
+  "observed_action_route": {
+    "all_observed_tool_receipts": 0,
+    "all_observed_native_motor_calls": 0,
+    "all_observed_test_file_opens": 0,
+    "requested_output_exists": false
+  },
+  "interpretation_boundary": "Presence and exact source matches prove exposure and persistence, not isolated causation of model behavior. Candidate/admission counts are diagnostics, not recall accuracy.",
+  "saved_evidence_unchanged_after_inspection": true,
+  "runtime_source_unchanged_after_inspection": true
+}

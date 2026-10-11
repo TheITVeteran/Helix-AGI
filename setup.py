@@ -26,14 +26,136 @@ from bootstrap import (
     write_seed_data,
 )
 
+DEFAULT_LOCAL_MODEL = "granite4.1:3b"
+
+
+def upsert_env_values(path: Path, updates: dict) -> None:
+    """Update selected dotenv keys without exposing or dropping other secrets."""
+    lines = path.read_text().splitlines() if path.exists() else []
+    pending = {str(key): str(value) for key, value in updates.items()}
+    rendered = []
+    for line in lines:
+        stripped = line.strip()
+        if stripped and not stripped.startswith("#") and "=" in stripped:
+            key = stripped.partition("=")[0].strip()
+            if key in pending:
+                rendered.append(f"{key}={pending.pop(key)}")
+                continue
+        rendered.append(line)
+    rendered.extend(f"{key}={value}" for key, value in pending.items())
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(rendered).rstrip() + "\n")
+
+
+def apply_config_updates(base_dir: Path, updates: dict) -> bool:
+    """Merge keys into config/config.json, preserving everything else."""
+    config_path = base_dir / "config" / "config.json"
+    config = {}
+    if config_path.exists():
+        try:
+            with open(config_path) as f:
+                config = json.load(f)
+        except Exception as e:
+            print(f"  ⚠ Could not read {config_path}: {e}")
+            return False
+
+    config.update(updates)
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with open(config_path, "w") as f:
+            json.dump(config, f, indent=2)
+            f.write("\n")
+    except Exception as e:
+        print(f"  ⚠ Could not write {config_path}: {e}")
+        return False
+    return True
+
+
+def local_mode_config(provider: str, model: str, context_window: int) -> dict:
+    """Config for fully-local operation with orchestrated tool use.
+
+    A local model cannot hold 80 tool schemas in an 8K window, and Ollama has
+    no native tool channel at all. `tool_format: orchestrated` gives the main
+    window one line per toolset and runs the actual tool work in directed
+    passes, so local mode gets the full toolset without the full manifest.
+    """
+    return {
+        "tool_format": "orchestrated",
+        "local_provider": provider,
+        "local_model": model or DEFAULT_LOCAL_MODEL,
+        "local_context_window": context_window,
+    }
+
+
+def subscription_cli_config(provider: str, model: str) -> dict:
+    """Config for driving the conscious model through a logged-in CLI.
+
+    A subscription is a quota, not a bill: exhausting the window parks Helix
+    for the remainder of it rather than charging more. Measured steady-state
+    cost of one resumed Claude Code turn on a small Helix prompt is ~$0.017
+    (6.9K cached prefix read + ~700 output tokens), and output — not prompt —
+    is the majority of it. At the 30-second REGULAR cadence that is roughly
+    $2/hour of quota; at the 15-minute resting cadence it is a few cents.
+
+    So this mode ships with the slowest resting pulse the loop allows. The
+    cadence is what makes a subscription viable, not the transport.
+    """
+    codex_agent_mode = provider == "codex_cli"
+    return {
+        "llm_provider": provider,
+        "llm_model": model,
+        "resting_pulse_minutes": 60,
+        # Codex App Server can run the main thread thought-only while Helix
+        # gives scoped tool manifests to durable focus tasks.  This is the
+        # modular action path; no full schema catalog enters main thought.
+        "cli_agent_mode": codex_agent_mode,
+        "task_cognition_mode": "active" if codex_agent_mode else "observe",
+        "tool_format": "api",
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Helix AGI First Run Setup")
     parser.add_argument("--non-interactive", action="store_true", help="Run without user prompts")
+    parser.add_argument("--composition", choices=["mindscape", "helix"], default=None,
+                        help="mindscape loads Helix + MightyMem/Habitus/RWKV + Context Loom + mRAG")
+    parser.add_argument("--composition-only", action="store_true",
+                        help="Configure composition without rewriting credentials or seeding lived memory")
+    parser.add_argument("--mightymem-path", type=Path)
+    parser.add_argument("--rwkv-model", type=Path)
+    parser.add_argument("--workspace", type=Path)
+    parser.add_argument("--resume-only", action="store_true")
     parser.add_argument("--agent-name", default="Helix", help="Name of your agent")
     parser.add_argument("--creator-name", default="<name>", help="Your name")
     parser.add_argument("--gemini-key", default="", help="Gemini API Key")
     parser.add_argument("--anthropic-key", default="", help="Anthropic API Key")
     parser.add_argument("--openai-key", default="", help="OpenAI API Key")
+    parser.add_argument(
+        "--provider",
+        choices=["codex_cli", "claude_cli", "gemini", "anthropic", "ollama", "llama_cpp"],
+        default="gemini",
+        help="Primary conscious LLM provider",
+    )
+    parser.add_argument(
+        "--subscription-cli",
+        choices=["claude_cli", "codex_cli"],
+        default="",
+        help="Run the conscious model through an already-logged-in CLI "
+             "subscription instead of an API key",
+    )
+    parser.add_argument("--model", default="", help="Provider model (blank uses the provider default)")
+    parser.add_argument(
+        "--local-mode",
+        action="store_true",
+        help="Run fully local: no API key, tools driven by orchestrated "
+             "directed passes instead of native function calling",
+    )
+    parser.add_argument(
+        "--local-context-window",
+        type=int,
+        default=8192,
+        help="Context window for the local model in local mode",
+    )
     parser.add_argument("--telegram-token", default="", help="Telegram Bot Token")
     parser.add_argument("--telegram-owner", default="", help="Telegram Owner ID")
     parser.add_argument("--discord-token", default="", help="Discord Bot Token")
@@ -62,6 +184,35 @@ def main():
 
     base_dir = Path(__file__).parent.resolve()
 
+    if args.composition is not None:
+        from core.mindscape_config import defaults, activate
+        existing_path = base_dir / "config/config.json"
+        existing = json.loads(existing_path.read_text()) if existing_path.exists() else {}
+        updates = {"composition": args.composition}
+        if args.composition == "mindscape":
+            updates = {**defaults(base_dir), **existing, **updates}
+            updates["mindscape"] = {**defaults(base_dir)["mindscape"], **existing.get("mindscape", {})}
+            for key, value in (("package_path", args.mightymem_path), ("rwkv_model", args.rwkv_model), ("workspace", args.workspace)):
+                if value is not None:
+                    updates["mindscape"][key] = str(value.resolve())
+            if args.resume_only:
+                updates["mindscape"]["gestation"] = "resume_only"
+            updates.update(pulse_mode="standard", local_provider="ollama", llm_provider="ollama")
+            if args.model:
+                updates["local_model"] = args.model
+            updates["llm_model"] = updates["local_model"]
+            if not args.model:
+                args.model = updates["local_model"]
+            activate(updates)
+            args.local_mode, args.provider = True, "ollama"
+        if not apply_config_updates(base_dir, updates):
+            raise SystemExit("Composition configuration was not saved")
+        if args.composition_only:
+            print(f"Configured {args.composition}. Verify actual loading with: venv/bin/python main.py --check-setup")
+            return
+    elif args.composition_only:
+        parser.error("--composition-only requires --composition")
+
     print("=" * 60)
     print("  HELIX AGI — First Run Setup")
     print("=" * 60)
@@ -71,6 +222,18 @@ def main():
     cred_dir = Path(os.path.expanduser("~/.config/helix"))
     cred_dir.mkdir(parents=True, exist_ok=True)
     cred_path = cred_dir / "credentials.env"
+
+    # Bound before the branch below: credential creation is skipped on a
+    # re-run, but the mode selection still has to be applied.
+    local_mode = args.local_mode
+    subscription_cli = args.subscription_cli
+    llm_provider = args.provider
+    llm_model = args.model
+    if subscription_cli:
+        llm_provider = subscription_cli
+        local_mode = False
+    elif local_mode and llm_provider not in {"ollama", "llama_cpp"}:
+        llm_provider = "ollama"
 
     if cred_path.exists():
         print(f"✓ {cred_path} already exists — skipping credential creation.")
@@ -92,18 +255,79 @@ def main():
         webhook_inbound_secret = args.webhook_inbound_secret
         moltbook_key = args.moltbook_key
         vision_provider = args.vision_provider
+        llm_provider = args.provider
+        llm_model = args.model
+        local_mode = args.local_mode
+        subscription_cli = args.subscription_cli
+        if subscription_cli:
+            llm_provider = subscription_cli
+            local_mode = False
+        elif local_mode and llm_provider not in {"ollama", "llama_cpp"}:
+            llm_provider = "ollama"
 
         # Track which comms channels the user enables
         enabled_channels = ["dashboard"]  # Dashboard is always enabled
 
         if not args.non_interactive:
             print("\n" + "-"*40)
-            print("  [API Configuration - WARNING: MONITOR YOUR COSTS]")
-            print("  Due to Helix's continuous autonomy, API costs can spike rapidly.")
-            print("  Subconscious systems require a Gemini API key (free tier is fine).")
-            gemini_api_key = input("  Gemini API key: ").strip()
-            anthropic_api_key = input("  Anthropic API key (optional): ").strip()
-            openai_api_key = input("  OpenAI API key (optional): ").strip()
+            print("  [Mode]")
+            print("  1. Local  — runs entirely on your machine. No API key, no")
+            print("              per-token cost. Full tool use via orchestrated")
+            print("              directed passes. Slower, and needs Ollama or a")
+            print("              GGUF model installed.")
+            print("  2. Hosted — an API provider drives the conscious model, with")
+            print("              native tool calling. Faster and sharper; costs")
+            print("              money continuously, because Helix never stops.")
+            print("  3. Subscription CLI — an already-logged-in Codex or Claude")
+            print("              Code CLI drives the conscious model. No API key.")
+            print("              A subscription is a quota, not a bill: running")
+            print("              hot exhausts the window and parks Helix, so this")
+            print("              mode gates the model behind a slower pulse.")
+            mode_choice = input("  Mode (1/2/3) [2]: ").strip()
+            local_mode = mode_choice == "1"
+            subscription_cli = ""
+
+            if mode_choice == "3":
+                selected = input(
+                    "  CLI (claude_cli/codex_cli) [claude_cli]: "
+                ).strip().lower()
+                subscription_cli = (
+                    selected if selected in {"claude_cli", "codex_cli"} else "claude_cli"
+                )
+                llm_provider = subscription_cli
+                llm_model = input(
+                    "  Model (blank = account default): "
+                ).strip()
+                binary = "claude" if subscription_cli == "claude_cli" else "codex"
+                print(f"  Subscription CLI selected — make sure `{binary}` is logged in.")
+                print("  Pulse cadence will be set to resting-only to protect the quota.")
+            elif local_mode:
+                selected = input(
+                    "  Local runtime (ollama/llama_cpp) [ollama]: "
+                ).strip().lower()
+                llm_provider = selected if selected in {"ollama", "llama_cpp"} else "ollama"
+                llm_model = input(
+                    f"  Local model (blank = {DEFAULT_LOCAL_MODEL}): "
+                ).strip()
+                print("  Local mode selected — no API keys required.")
+                print("  Tools run through directed passes, one toolset at a time.")
+            else:
+                print("\n" + "-"*40)
+                print("  [API Configuration - WARNING: MONITOR YOUR COSTS]")
+                print("  Due to Helix's continuous autonomy, API costs can spike rapidly.")
+                print("  Subconscious systems follow the selected provider; Gemini remains an optional fallback.")
+                selected = input(
+                    "  Primary provider (codex_cli/gemini/anthropic/ollama/llama_cpp) "
+                    "[gemini]: "
+                ).strip().lower()
+                if selected in {"codex_cli", "gemini", "anthropic", "ollama", "llama_cpp"}:
+                    llm_provider = selected
+                llm_model = input(
+                    "  Primary model (blank = provider/account default): "
+                ).strip()
+                gemini_api_key = input("  Gemini API key: ").strip()
+                anthropic_api_key = input("  Anthropic API key (optional): ").strip()
+                openai_api_key = input("  OpenAI API key (optional): ").strip()
 
             print("\n" + "-"*40)
             print("  [Vision Configuration]")
@@ -191,12 +415,50 @@ def main():
             f.write(f"HELIX_WEBHOOK_INBOUND_SECRET={webhook_inbound_secret}\n")
             f.write(f"MOLTBOOK_API_KEY={moltbook_key}\n")
             f.write(f"HELIX_COMMS_CHANNELS={comms_channels}\n")
-            f.write(f"HELIX_PROVIDER=gemini\n")
+            f.write(f"HELIX_PROVIDER={llm_provider}\n")
+            f.write(f"HELIX_MODEL={llm_model}\n")
             f.write(f"HELIX_VISION_PROVIDER={vision_provider}\n")
             f.write(f"HELIX_VISION_MODEL=gemini-2.5-flash\n")
 
         print(f"  ✓ Created {cred_path}")
         print(f"  ✓ Enabled comms channels: {comms_channels}")
+
+    # Explicit mode switches must also update an existing credentials file.
+    # Previously setup skipped the whole credential block on re-runs, leaving
+    # HELIX_PROVIDER pointed at the old backend even though config.json said
+    # Codex.  Preserve every unrelated key and only upsert the transport pair.
+    if subscription_cli:
+        upsert_env_values(cred_path, {
+            "HELIX_PROVIDER": subscription_cli,
+            "HELIX_MODEL": llm_model,
+        })
+    elif local_mode:
+        upsert_env_values(cred_path, {
+            "HELIX_PROVIDER": llm_provider,
+            "HELIX_MODEL": llm_model or DEFAULT_LOCAL_MODEL,
+        })
+
+    # ── Subscription CLI: quota-paced conscious model, no API key ─────
+    if subscription_cli:
+        updates = subscription_cli_config(subscription_cli, llm_model)
+        if apply_config_updates(base_dir, updates):
+            print(
+                f"  ✓ Subscription CLI: {subscription_cli} "
+                f"({llm_model or 'account default'}), "
+                f"resting pulse every {updates['resting_pulse_minutes']} min"
+            )
+
+    # ── Local mode: orchestrated tool use, no API dependency ──────────
+    if local_mode:
+        updates = local_mode_config(
+            llm_provider, llm_model, args.local_context_window,
+        )
+        if apply_config_updates(base_dir, updates):
+            print(
+                f"  ✓ Local mode: {updates['local_provider']} "
+                f"({updates['local_model']}, ctx={updates['local_context_window']}), "
+                "orchestrated tool use"
+            )
 
     # ── Step 2: Create required directories ───────────────────────
     dirs = [

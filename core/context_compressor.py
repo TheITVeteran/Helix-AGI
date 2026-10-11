@@ -20,8 +20,10 @@ Algorithm:
 
 Trigger conditions:
   - Primary: prompt_token_count > 50% of context limit
-  - Secondary: focus_drift > 1.5 (replaces hard reset)
   - Emergency: prompt_token_count > 80% of context limit
+
+Attention drift is logged by PulseLoop for diagnostics but no longer triggers
+compression or a context reset.
 """
 
 import json
@@ -34,11 +36,11 @@ logger = logging.getLogger("helix.core.context_compressor")
 
 # Prefix for compaction summaries — tells the model this is a chronological continuation
 SUMMARY_PREFIX = (
-    "[COGNITIVE CONTINUITY] The following is a seamless continuation of your "
-    "recent thoughts, actions, and experiences, compacted for memory efficiency. "
-    "You have already experienced everything described here in exactly this order. "
-    "Resume your train of thought naturally from the final events described. "
-    "Respond ONLY to events that occur AFTER this narrative."
+    "[COGNITIVE CONTINUITY — MODEL-GENERATED SUMMARY] This is a fallible "
+    "recollection of earlier context, not a transcript or proof of an action. "
+    "Preserve speaker and source distinctions. Current requests and original "
+    "observations take precedence over this summary; an unresolved request "
+    "remains unresolved without its actual outcome."
 )
 
 # Chars per token estimate
@@ -88,11 +90,10 @@ def _content_text(content: Any) -> str:
 
 
 class ContextCompressor:
-    """Rolling context compressor for Helix's Gemini chat sessions.
+    """Provider-neutral rolling context compressor for Helix chat sessions.
 
-    Monitors token count and focus drift, triggering compression when
-    thresholds are exceeded. Replaces the hard context reset with
-    smooth rolling summarization.
+    Monitors token pressure and replaces hard context resets with smooth
+    rolling summarization.
     """
 
     def __init__(
@@ -333,8 +334,6 @@ class ContextCompressor:
                 if isinstance(part, dict):
                     if "text" in part:
                         text = part["text"]
-                        if len(text) > 4000:
-                            text = text[:3000] + "\n...[truncated]...\n" + text[-800:]
                         label = "MODEL" if role == "model" else "USER"
                         parts_out.append(f"[{label}]: {text}")
 
@@ -343,8 +342,6 @@ class ContextCompressor:
                         name = fc.get("name", "?")
                         args = fc.get("args", {})
                         args_str = json.dumps(args, default=str)
-                        if len(args_str) > 500:
-                            args_str = args_str[:500] + "..."
                         parts_out.append(f"[TOOL CALL]: {name}({args_str})")
 
                     elif "function_response" in part:
@@ -352,15 +349,11 @@ class ContextCompressor:
                         name = fr.get("name", "?")
                         response = fr.get("response", {})
                         result_str = str(response.get("result", ""))
-                        if len(result_str) > 4000:
-                            result_str = result_str[:3000] + "\n...[truncated]...\n" + result_str[-800:]
                         parts_out.append(f"[TOOL RESULT {name}]: {result_str}")
 
                 elif isinstance(part, str):
                     label = "MODEL" if role == "model" else "USER"
                     text = part
-                    if len(text) > 4000:
-                        text = text[:3000] + "\n...[truncated]...\n" + text[-800:]
                     parts_out.append(f"[{label}]: {text}")
 
         return "\n\n".join(parts_out)
@@ -427,21 +420,21 @@ Target ~{summary_budget} tokens. Only output the recollection, no preamble."""
             )
 
         try:
-            from google import genai
-            import os
-
-            key = os.environ.get("GEMINI_API_KEY", "")
-            if not key:
-                logger.warning("No GEMINI_API_KEY — cannot generate summary")
+            from core.auxiliary_llm import get_auxiliary_client
+            client = get_auxiliary_client()
+            if client is None:
+                logger.warning("Auxiliary LLM unavailable — cannot generate summary")
                 return None
-
-            client = genai.Client(api_key=key)
-            response = client.models.generate_content(
-                model=self.auxiliary_model,
-                contents=prompt,
+            summary_text = client.generate(
+                prompt,
+                system_instruction=_preamble,
+                temperature=0.2,
+                max_output_tokens=max(512, summary_budget * 2),
             )
-
-            summary_text = response.text.strip()
+            if not summary_text:
+                logger.warning("Auxiliary LLM returned no compression summary")
+                return None
+            summary_text = summary_text.strip()
             self._previous_summary = summary_text
             return f"{SUMMARY_PREFIX}\n\n{summary_text}"
 
@@ -456,6 +449,7 @@ Target ~{summary_budget} tokens. Only output the recollection, no preamble."""
         messages: List[Dict[str, Any]],
         current_tokens: int = 0,
         spatial_state: Optional[Dict[str, Any]] = None,
+        preserve_on_failure: bool = False,
     ) -> List[Dict[str, Any]]:
         """Compress conversation messages by summarizing middle turns.
 
@@ -487,7 +481,9 @@ Target ~{summary_budget} tokens. Only output the recollection, no preamble."""
             return messages
 
         # Phase 1b: Prune old tool results
-        messages, pruned = self._prune_tool_results(messages, tail_start)
+        original_messages = messages
+        messages, pruned = ((messages, 0) if preserve_on_failure else
+                            self._prune_tool_results(messages, tail_start))
         if pruned:
             logger.info("Pre-compression: pruned %d old tool result(s)", pruned)
 
@@ -503,6 +499,9 @@ Target ~{summary_budget} tokens. Only output the recollection, no preamble."""
         )
 
         summary = self._generate_summary(turns_to_summarize, spatial_state)
+        if not summary and preserve_on_failure:
+            logger.error("Summary unavailable; retaining the complete original dialogue")
+            return original_messages
 
         # Phase 3: Assemble compressed history
         compressed = []

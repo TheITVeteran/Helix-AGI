@@ -210,8 +210,8 @@ class SchedulePage(QWidget):
         """)
         schedule_layout.addWidget(self.summary_label)
 
-        # Check if current provider is local and update summary
-        self._update_pulse_mode()
+        # Initialize the readout from the configured schedule and pulse rate.
+        self._update_summary()
 
         layout.addWidget(schedule_group)
 

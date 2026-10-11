@@ -1,453 +1,1388 @@
 #!/usr/bin/env python3
 """
-Helix — LoCoMo Conversational Memory Benchmark Sandbox
+Helix — LoCoMo Conversational Memory Agent Benchmark
 
-Evaluates Helix's dual-space memory architecture (384D Semantic Index and 8D Spatial Mind)
-against the Snap Research LoCoMo dataset.
+This benchmark evaluates Helix as an actual question-answering agent over a
+LoCoMo dialogue corpus. It seeds each dialogue into Helix's episodic memory,
+asks the conscious model to answer each question over a configurable number of
+preconscious/physics pulses, and scores the generated answer.
 
-Evaluates:
-  - Recall@1, Recall@3, Recall@5 (Evidence-based and Answer-based)
-  - Token-level overlap F1 score of retrieved contexts
-  - Average latency per query
+Retrieval metrics are still reported, but only as diagnostics:
+  - Contextual evidence recall via MemoryManager.search_contextual()
+  - Semantic evidence recall via MemoryManager.search_semantic()
+  - Spatial evidence recall via PhysicsEngine.query_neighborhood()
 """
 
-import os
-import sys
-import json
+from __future__ import annotations
+
 import argparse
+import json
 import logging
+import os
+import re
+import string
+import sys
 import tempfile
 import time
-from pathlib import Path
 from collections import Counter
-import numpy as np
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 # Ensure Helix packages are importable
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-# Configure Logging
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("locomo_sandbox")
 
-# ── Metric Normalization & Scoring ────────────────────────────────────
 
-def normalize_answer(s):
-    """Normalize text for evaluation (lowercase, remove punctuation/articles)."""
-    import re
-    import string
-    s = str(s).lower()
-    # Remove punctuation
+CATEGORY_NAMES = {
+    1: "Multi-hop (Category 1)",
+    2: "Temporal (Category 2)",
+    3: "Open-domain (Category 3)",
+    4: "Single-hop (Category 4)",
+    5: "Adversarial (Category 5)",
+}
+
+ABSTENTION_MARKERS = (
+    "not mentioned",
+    "not provided",
+    "no information",
+    "unknown",
+    "unspecified",
+    "cannot be determined",
+    "can't be determined",
+)
+
+INGEST_SYSTEM_INSTRUCTION = """\
+You are Helix operating in observation mode while a historical dialogue is
+replayed to you as live events.
+
+Rules:
+- Treat each event as something you are perceiving right now.
+- Do not answer the historical speakers or roleplay as them.
+- Respond with 1-2 short first-person internal thought sentences about what
+  seems important to remember.
+- Be concise. No markdown fences.
+"""
+
+QA_SYSTEM_INSTRUCTION = """\
+You are Helix answering a factual memory question about dialogue events you
+observed earlier.
+
+Rules:
+- Answer using only what can be recalled from memory.
+- If the answer is absent or genuinely indeterminate, answer "Not mentioned."
+- Prefer a short direct answer, not an explanation.
+- Return exactly one JSON object with this shape:
+  {"answer": "your short answer here"}
+- Do not use markdown fences.
+"""
+
+DEEP_MEMORY_QA_SYSTEM_INSTRUCTION = """\
+You are Helix answering a memory probe about people and dialogue events you
+observed earlier. A probe may ask for a fact, a spontaneous association, a
+speaker's conversational style, or how that speaker would handle an analogous
+situation.
+
+Rules:
+- Use only context recalled through Helix memory; do not invent transcript facts.
+- For open-ended style or transfer probes, give one natural, concise response.
+- Return exactly one JSON object with this shape:
+  {"answer": "your answer here"}
+- Do not mention the benchmark, retrieval system, or injected context.
+- Do not use markdown fences.
+"""
+
+MAINTENANCE_SYSTEM_INSTRUCTION = """\
+Extract durable person-specific context from one completed conversation session.
+Return one JSON object with a `people` list. Each person may contain: name,
+facts, preferences, opinions, traits, communication_style, and affect.
+Every facet is a list of short strings. Each person must also contain source_ids
+listing only record IDs specifically about that person. Use explicit support,
+keep people separate, and return at most two items per facet. No explanation.
+"""
+
+
+def require_numpy():
+    try:
+        import numpy as np  # type: ignore
+    except ImportError as exc:
+        raise RuntimeError(
+            "numpy is required to run the full LoCoMo benchmark. "
+            "Install the Helix runtime dependencies first."
+        ) from exc
+    return np
+
+
+def normalize_answer(text: Any) -> str:
+    """Normalize text for EM/F1 style evaluation."""
+    text = str(text).lower()
     exclude = set(string.punctuation)
-    s = ''.join(ch for ch in s if ch not in exclude)
-    # Remove articles
-    s = re.sub(r'\b(a|an|the|and)\b', ' ', s)
-    # White space fix
-    s = ' '.join(s.split())
-    return s
+    text = "".join(ch for ch in text if ch not in exclude)
+    text = re.sub(r"\b(a|an|the|and)\b", " ", text)
+    return " ".join(text.split())
 
-def compute_token_f1(prediction, ground_truth):
+
+def compute_token_f1(prediction: Any, ground_truth: Any) -> float:
     """Calculate token-level F1 overlap."""
     pred_tokens = normalize_answer(prediction).split()
     gt_tokens = normalize_answer(ground_truth).split()
-    
+
     if not pred_tokens or not gt_tokens:
         return 1.0 if pred_tokens == gt_tokens else 0.0
-    
-    # Try Porter Stemmer if available
+
     try:
         from nltk.stem import PorterStemmer
-        ps = PorterStemmer()
-        pred_tokens = [ps.stem(t) for t in pred_tokens]
-        gt_tokens = [ps.stem(t) for t in gt_tokens]
+
+        stemmer = PorterStemmer()
+        pred_tokens = [stemmer.stem(tok) for tok in pred_tokens]
+        gt_tokens = [stemmer.stem(tok) for tok in gt_tokens]
     except ImportError:
-        pass  # Fallback to unstemmed tokens
-        
+        pass
+
     common = Counter(pred_tokens) & Counter(gt_tokens)
     num_same = sum(common.values())
     if num_same == 0:
         return 0.0
-    
-    precision = 1.0 * num_same / len(pred_tokens)
-    recall = 1.0 * num_same / len(gt_tokens)
-    f1 = (2 * precision * recall) / (precision + recall)
-    return f1
 
-def compute_multi_f1(prediction, ground_truth):
-    """Calculate F1 for comma-separated or multi-answer targets."""
-    predictions = [p.strip() for p in str(prediction).split(',')]
-    ground_truths = [g.strip() for g in str(ground_truth).split(',')]
-    return float(np.mean([max([compute_token_f1(p, gt) for p in predictions]) for gt in ground_truths]))
+    precision = num_same / len(pred_tokens)
+    recall = num_same / len(gt_tokens)
+    return (2 * precision * recall) / (precision + recall)
 
-# ── Dialogue Ingestion ──────────────────────────────────────────────
 
-def parse_dia_id(text_content):
-    """Extract dia_id (e.g. D1:3) from the prefix if present."""
+def compute_multi_f1(prediction: Any, ground_truth: Any) -> float:
+    """Calculate mean best-match F1 for comma-separated multi-answer targets."""
+    predictions = [part.strip() for part in str(prediction).split(",") if part.strip()]
+    ground_truths = [part.strip() for part in str(ground_truth).split(",") if part.strip()]
+    if not predictions or not ground_truths:
+        return compute_token_f1(prediction, ground_truth)
+    scores = [max(compute_token_f1(pred, gold) for pred in predictions) for gold in ground_truths]
+    return sum(scores) / len(scores)
+
+
+def is_abstention(text: Any) -> bool:
+    normalized = normalize_answer(text)
+    return any(marker in normalized for marker in ABSTENTION_MARKERS)
+
+
+def compute_answer_metrics(prediction: str, ground_truth: str, category: int) -> Tuple[float, float]:
+    """Compute exact match and F1 with adversarial abstention handling."""
+    # LoCoMo category 5 stores an ``adversarial_answer`` containing the
+    # tempting answer implied by the question's false premise. The official
+    # evaluator grades these items by whether the model refuses that premise,
+    # not by matching the stored distractor text.
+    if category == 5:
+        pred_abstains = is_abstention(prediction)
+        return (1.0 if pred_abstains else 0.0, 1.0 if pred_abstains else 0.0)
+
+    em = 1.0 if normalize_answer(prediction) == normalize_answer(ground_truth) else 0.0
+    if category == 1:
+        f1 = compute_multi_f1(prediction, ground_truth)
+    else:
+        f1 = compute_token_f1(prediction, ground_truth)
+    return em, f1
+
+
+def parse_dia_id(text_content: str) -> Optional[str]:
+    """Extract dia_id (e.g. D1:3) from a payload prefix like [D1:3]."""
     if text_content.startswith("[") and "]" in text_content:
         idx = text_content.find("]")
         return text_content[1:idx]
     return None
 
-# ── Main Evaluator ───────────────────────────────────────────────────
 
-def run_evaluation(dataset_path, num_dialogues, dry_run=False, save_path=None):
-    logger.info(f"Loading LoCoMo dataset from: {dataset_path}")
+def extract_dialogue_id(item: Dict[str, Any]) -> Optional[str]:
+    """Recover the LoCoMo dia_id from a memory result."""
+    for tag in item.get("tags", []) or []:
+        tag = str(tag)
+        if re.fullmatch(r"D\d+:\d+", tag):
+            return tag
+    content = item.get("content", "")
+    return parse_dia_id(content) if isinstance(content, str) else None
+
+
+def extract_injected_dialogue_ids(context_strings: Sequence[str]) -> List[str]:
+    """Recover exact event IDs from the context the answering model saw."""
+    return list(dict.fromkeys(
+        match
+        for context in context_strings
+        for match in re.findall(r"\[(D\d+:\d+)\]", str(context or ""))
+    ))
+
+
+def mean(values: List[float]) -> float:
+    return (sum(values) / len(values)) if values else 0.0
+
+
+def strip_fences(text: str) -> str:
+    text = text.strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text)
+        text = re.sub(r"\s*```$", "", text)
+    return text.strip()
+
+
+def extract_json_object(text: str) -> Optional[Dict[str, Any]]:
+    cleaned = strip_fences(text)
+    if not cleaned:
+        return None
+    try:
+        parsed = json.loads(cleaned)
+        if isinstance(parsed, dict):
+            return parsed
+    except json.JSONDecodeError:
+        pass
+
+    starts = [idx for idx, ch in enumerate(cleaned) if ch == "{"][:20]
+    for start in starts:
+        depth = 0
+        in_string = False
+        escape = False
+        for idx in range(start, len(cleaned)):
+            ch = cleaned[idx]
+            if in_string:
+                if escape:
+                    escape = False
+                elif ch == "\\":
+                    escape = True
+                elif ch == '"':
+                    in_string = False
+                continue
+            if ch == '"':
+                in_string = True
+            elif ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    candidate = cleaned[start : idx + 1]
+                    try:
+                        parsed = json.loads(candidate)
+                    except json.JSONDecodeError:
+                        break
+                    if isinstance(parsed, dict):
+                        return parsed
+                    break
+    return None
+
+
+def extract_answer(raw_text: str) -> str:
+    """Extract the answer from a model response."""
+    payload = extract_json_object(raw_text)
+    if payload is not None:
+        answer = payload.get("answer")
+        if answer is None:
+            answer = payload.get("response") or payload.get("reply")
+        if answer is not None:
+            return str(answer).strip()
+
+    cleaned = strip_fences(raw_text)
+    cleaned = re.sub(r"^\s*answer\s*:\s*", "", cleaned, flags=re.IGNORECASE)
+    first_line = cleaned.splitlines()[0].strip() if cleaned else ""
+    return first_line or cleaned.strip()
+
+
+def load_provider_config(backend: str = "auto", model: str = ""):
+    from llm.providers.base import ProviderConfig, detect_available_provider
+    from scripts.cli_benchmark_adapter import _load_helix_credentials
+
+    if backend == "ollama":
+        return ProviderConfig(
+            provider_type="ollama",
+            model=model or "granite4.1:8b",
+            context_window=64_000,
+            temperature=0.2,
+            max_output_tokens=512,
+            options={
+                "num_ctx": 64_000,
+                "url": os.environ.get("OLLAMA_URL", "http://localhost:11434"),
+            },
+        )
+
+    _load_helix_credentials()
+    provider_config = detect_available_provider()
+    if provider_config is not None:
+        provider_config.temperature = 0.2
+        provider_config.max_output_tokens = min(provider_config.max_output_tokens, 512)
+    return provider_config
+
+
+def build_runtime(tmp_dir: str) -> Dict[str, Any]:
+    from core.physics_engine import PhysicsEngine
+    from core.preconscious import Preconscious
+    from core.scratchpad import Scratchpad
+    from memory.belief_store import BeliefStore
+    from memory.memory_manager import MemoryManager
+
+    data_dir = Path(tmp_dir) / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+
+    physics = PhysicsEngine(str(data_dir / "spatial"))
+    # A memory benchmark cannot continue honestly after the semantic encoder
+    # substitutes zero vectors. Production Helix may retain its spatial-only
+    # fallback, but this isolated evaluator fails closed after bounded retries.
+    physics.semantic_encoder.strict = True
+    memory_manager = MemoryManager(str(data_dir / "memory"))
+    memory_manager.set_physics(physics)
+    belief_store = BeliefStore(str(data_dir / "beliefs"))
+    scratchpad = Scratchpad(str(data_dir / "scratchpad"))
+
+    class _MockRouter:
+        contacts = {}
+
+    preconscious = Preconscious(
+        memory_manager=memory_manager,
+        belief_store=belief_store,
+        physics_engine=physics,
+        scratchpad=scratchpad,
+        channel_router=_MockRouter(),
+        active_toolsets={"core"},
+    )
+
+    return {
+        "physics": physics,
+        "memory_manager": memory_manager,
+        "belief_store": belief_store,
+        "scratchpad": scratchpad,
+        "preconscious": preconscious,
+    }
+
+def reset_question_state(preconscious, physics) -> None:
+    """Clear short-term state so each QA is evaluated independently."""
+    np = require_numpy()
+    preconscious._prev_pulse_beliefs = []
+    preconscious._prev_pulse_belief_ids = []
+    # The corpus is immutable during the exam. Keep its canonical belief
+    # cache warm between independent questions; clearing it forced every QA
+    # to re-embed the same maintenance profiles without changing retrieval.
+    preconscious._concept_blacklist = {}
+    preconscious._memory_blacklist = {}
+    preconscious._tool_belief_blacklist = {}
+    preconscious._lexicon_blacklist = {}
+    preconscious._recent_tool_history = []
+    preconscious._pulse_number = 0
+    preconscious._last_trigger_text = ""
+    preconscious._last_concepts = []
+    preconscious._last_neighbors = []
+    preconscious._last_selected_beliefs = []
+    preconscious._last_cluster_centroid = None
+    preconscious._injection_gravity_decay = {}
+    unified = getattr(preconscious, "_unified", None)
+    if unified is not None:
+        unified.lane_a._recent_injections = []
+    associative = getattr(preconscious, "_associative", None)
+    if associative is not None:
+        associative.break_sequence()
+
+    for space in [physics.spatial_mind.belief_space, physics.spatial_mind.memory_space]:
+        to_remove = [pid for pid, data in space._points.items() if data.get("type") == "trail"]
+        for pid in to_remove:
+            del space._points[pid]
+        if to_remove:
+            space._tree_dirty = True
+            space._rebuild_tree()
+
+    physics.attention_center = np.zeros(8, dtype=np.float32)
+    physics.spatial_mind.prev_center = None
+    physics.spatial_mind._velocity = np.zeros(8, dtype=np.float32)
+    physics.spatial_mind._gamma = 0.5
+    physics.last_flashes = []
+
+
+def render_preconscious_context(annotations: List[str], ambient: str) -> str:
+    """Flatten preconscious output into a single pulse-local context string."""
+    parts = [str(item).strip() for item in annotations if str(item).strip()]
+    if ambient and ambient.strip():
+        parts.append(ambient.strip())
+    return "\n\n".join(parts).strip()
+
+
+def build_operational_pulse_message(
+    *,
+    pulse_number: int,
+    context_string: str,
+    events: List[str],
+    mode: str,
+    question: str = "",
+    previous_answer: str = "",
+    max_pulses: int = 1,
+) -> str:
+    """Render a pulse-style message similar to the live pulse loop."""
+    parts = [f"[Pulse {pulse_number} — {time.strftime('%Y-%m-%d %H:%M:%S')}]"]
+    if context_string:
+        parts.append(context_string)
+
+    if events:
+        parts.append("New events since your last thought:")
+        for event in events:
+            parts.append(f"  {event}")
+    else:
+        parts.append("No new events.")
+
+    if mode == "qa":
+        parts.append("")
+        parts.append(QA_SYSTEM_INSTRUCTION.strip())
+        parts.append(f"Question: {question}")
+        if previous_answer:
+            parts.append(f"Previous draft answer: {previous_answer}")
+        if pulse_number < max_pulses:
+            parts.append("Give your current best short answer. You may revise it next pulse.")
+        else:
+            parts.append("Give your final short answer now.")
+
+    return "\n".join(parts).strip()
+
+
+def format_dialogue_payload(
+    dia_id: str,
+    speaker: str,
+    text: str,
+    session_datetime: str,
+    visual_description: str = "",
+) -> str:
+    time_prefix = f"[TIME: {session_datetime}] " if session_datetime else ""
+    visual = (
+        f" [observed image: {' '.join(str(visual_description).split())}]"
+        if visual_description else ""
+    )
+    return f"[{dia_id}] {time_prefix}{speaker}: {text}{visual}"
+
+
+def store_pulse_artifacts(
+    runtime: Dict[str, Any],
+    *,
+    events: List[str],
+    raw_response: str,
+    surfaced_ids: List[str],
+    store_thought: bool = True,
+) -> List[str]:
+    """Store pulse input/output memories in the live operational shape."""
+    physics = runtime["physics"]
+    memory_manager = runtime["memory_manager"]
+    projection = physics.spatial_mind.belief_space.projection
+    pulse_id = int(getattr(physics, "_pulse_count", 0) or 0)
+    spatial_embeddings = physics.embed_text_batch(events)
+    try:
+        semantic_embeddings = physics.embed_semantic_batch(events, is_query=False)
+    except Exception as exc:
+        logger.warning("Batch semantic ingest unavailable: %s", exc)
+        semantic_embeddings = [None] * len(events)
+
+    stored_event_ids: List[str] = []
+    for index, event in enumerate(events):
+        event_emb = spatial_embeddings[index]
+        event_emb_list = event_emb.tolist() if event_emb is not None else None
+        event_pos = projection.project(event_emb).tolist() if event_emb is not None else None
+        semantic_emb = semantic_embeddings[index]
+        semantic_emb_list = (
+            semantic_emb.tolist() if semantic_emb is not None else None
+        )
+
+        tags = ["pulse_event", "locomo_dialogue"]
+        did = parse_dia_id(event)
+        if did:
+            tags.append(did)
+            if ":" in did:
+                session_ref, turn_ref = did.split(":", 1)
+                tags.extend((
+                    f"session:{session_ref}",
+                    f"turn:{turn_ref}",
+                    f"event:{did}",
+                ))
+        if "[TIME:" in event:
+            tags.append("timestamped")
+
+        memory_id = memory_manager.store(
+            content=event,
+            memory_type="event",
+            source="pulse_input",
+            importance=0.75,
+            tags=tags,
+            position_8d=event_pos,
+            embedding_384d=event_emb_list,
+            semantic_embedding_1024d=semantic_emb_list,
+            pulse_id=pulse_id,
+        )
+        stored_event_ids.append(f"mem_{memory_id}")
+
+    if not store_thought:
+        return stored_event_ids
+
+    thought_text = f"[thought] {raw_response}"
+    thought_emb = physics.embed_text(thought_text)
+    thought_emb_list = thought_emb.tolist() if thought_emb is not None else None
+    thought_pos = projection.project(thought_emb).tolist() if thought_emb is not None else None
+
+    memory_manager.store(
+        content=thought_text,
+        memory_type="thought",
+        source="pulse_output",
+        importance=0.5,
+        tags=["pulse_thought", "locomo_dialogue"],
+        belief_ids=surfaced_ids,
+        position_8d=thought_pos,
+        embedding_384d=thought_emb_list,
+        pulse_id=pulse_id,
+    )
+    return stored_event_ids
+
+
+def run_operational_pulse(
+    runtime: Dict[str, Any],
+    session,
+    *,
+    previous_thought: str,
+    events: List[str],
+    trigger_type: str,
+    mode: str,
+    pulse_number: int,
+    question: str = "",
+    previous_answer: str = "",
+    max_pulses: int = 1,
+    learn: bool = True,
+    store_artifacts: bool = True,
+    advance_physics: bool = True,
+    store_thought_artifact: bool = True,
+) -> Dict[str, Any]:
+    """Run one Helix-style pulse: inject, think, store, then step physics."""
+    physics = runtime["physics"]
+    preconscious = runtime["preconscious"]
+
+    annotations, ambient, surfaced_ids, centroid = preconscious.inject(
+        previous_thought=previous_thought,
+        incoming_events=events,
+        trigger_type=trigger_type,
+        learn=learn,
+    )
+    context_string = render_preconscious_context(annotations, ambient)
+    pulse_message = build_operational_pulse_message(
+        pulse_number=pulse_number,
+        context_string=context_string,
+        events=events,
+        mode=mode,
+        question=question,
+        previous_answer=previous_answer,
+        max_pulses=max_pulses,
+    )
+    raw_response = session.send_message(pulse_message)
+    if str(raw_response).lstrip().lower().startswith("[internal error:"):
+        raise RuntimeError(str(raw_response).strip())
+
+    artifact_memory_ids: List[str] = []
+    if store_artifacts:
+        artifact_memory_ids = store_pulse_artifacts(
+            runtime,
+            events=events,
+            raw_response=raw_response,
+            surfaced_ids=surfaced_ids,
+            store_thought=store_thought_artifact,
+        )
+    if advance_physics:
+        incoming_text = " ".join(events) if events else None
+        physics.step_pulse(
+            thought_text=raw_response,
+            incoming_text=incoming_text,
+            cluster_centroid=centroid,
+        )
+
+    unified = getattr(preconscious, "_unified", None)
+
+    result = {
+        "prompt": pulse_message,
+        "raw_response": raw_response,
+        "surfaced_ids": surfaced_ids,
+        "context_string": context_string,
+        "retrieval_stats": dict(unified.last_stats) if unified is not None else {},
+        "artifact_memory_ids": artifact_memory_ids,
+    }
+    if mode == "qa":
+        result["answer"] = extract_answer(raw_response)
+    return result
+
+
+def replay_dialogue(
+    runtime: Dict[str, Any],
+    provider_config,
+    dialogue: Dict[str, Any],
+    ingest_batch_size: int = 1,
+    maintenance_mode: str = "off",
+    maintenance_model: str = "",
+) -> Dict[str, Any]:
+    """Replay live sessions with optional between-session maintenance."""
+    from llm.providers.base import create_session
+
+    conv = dialogue["conversation"]
+    session_nums = []
+    for key in conv.keys():
+        if key.startswith("session_") and not key.endswith("_date_time"):
+            session_nums.append(int(key.split("_")[1]))
+    session_nums.sort()
+
+    traces = []
+    maintenance_traces = []
+    total_turns = 0
+    batch_size = max(1, ingest_batch_size)
+    for s_num in session_nums:
+        session_key = f"session_{s_num}"
+        session_id = f"D{s_num}"
+        session_datetime = conv.get(f"{session_key}_date_time", "")
+        session_events = [
+            format_dialogue_payload(
+                dia_id=turn["dia_id"],
+                speaker=turn["speaker"],
+                text=turn["text"],
+                session_datetime=session_datetime,
+                visual_description=turn.get("blip_caption", ""),
+            )
+            for turn in conv[session_key]
+        ]
+        total_turns += len(session_events)
+        session = create_session(
+            provider_config,
+            INGEST_SYSTEM_INSTRUCTION,
+            tool_declarations=None,
+            tool_executor=None,
+            preconscious=runtime["preconscious"],
+        )
+        previous_thought = ""
+        session_memory_ids: List[str] = []
+        try:
+            for idx in range(0, len(session_events), batch_size):
+                batch = session_events[idx : idx + batch_size]
+                pulse = run_operational_pulse(
+                    runtime,
+                    session,
+                    previous_thought=previous_thought,
+                    events=batch,
+                    trigger_type="user_message",
+                    mode="ingest",
+                    pulse_number=len(traces) + 1,
+                )
+                session_memory_ids.extend(pulse["artifact_memory_ids"])
+                traces.append(
+                    {
+                        "pulse": len(traces) + 1,
+                        "session_id": session_id,
+                        "events": batch,
+                        "raw_response": pulse["raw_response"],
+                        "context_string": pulse["context_string"],
+                    }
+                )
+                previous_thought = pulse["raw_response"]
+        finally:
+            close = getattr(session, "close", None)
+            if callable(close):
+                close()
+
+        if maintenance_mode != "off":
+            maintenance_traces.append(run_session_maintenance(
+                runtime,
+                provider_config,
+                session_id=session_id,
+                memory_ids=session_memory_ids,
+                mode=maintenance_mode,
+                maintenance_model=maintenance_model,
+            ))
+        associative = getattr(runtime["preconscious"], "_associative", None)
+        if associative is not None:
+            associative.break_sequence()
+
+    return {
+        "turn_count": total_turns,
+        "pulse_count": len(traces),
+        "traces": traces,
+        "maintenance_mode": maintenance_mode,
+        "maintenance": maintenance_traces,
+    }
+
+
+def run_session_maintenance(
+    runtime: Dict[str, Any],
+    provider_config,
+    *,
+    session_id: str,
+    memory_ids: Sequence[str],
+    mode: str,
+    maintenance_model: str = "",
+) -> Dict[str, Any]:
+    """Run reusable exact filing plus one optional bounded local worker."""
+    from core.session_memory_maintenance import SessionMemoryMaintenance
+    from llm.providers.base import ProviderConfig, create_session
+
+    preconscious = runtime["preconscious"]
+    unified = getattr(preconscious, "_unified", None)
+    office = getattr(unified, "context_office", None)
+    if office is None:
+        return {"session_id": session_id, "worker_error": "Context Office unavailable"}
+    records = [
+        unified.corpus.get(memory_id)
+        for memory_id in memory_ids
+    ]
+    records = [record for record in records if record is not None]
+
+    worker = None
+    if mode == "full":
+        options = dict(provider_config.options or {})
+        # Maintenance sees one bounded session slice, not the full 64K QA
+        # context. Unload its auxiliary model after the call so Ollama does
+        # not retain the 8B reader, 3B worker, and embedding model together.
+        options["num_ctx"] = min(int(options.get("num_ctx", 16_384)), 16_384)
+        options["keep_alive"] = "0"
+        maintenance_config = ProviderConfig(
+            provider_type=provider_config.provider_type,
+            model=maintenance_model or provider_config.model,
+            context_window=provider_config.context_window,
+            temperature=0.0,
+            max_output_tokens=min(768, provider_config.max_output_tokens),
+            options=options,
+        )
+
+        def worker(request):
+            session = create_session(
+                maintenance_config,
+                MAINTENANCE_SYSTEM_INSTRUCTION,
+                tool_declarations=None,
+                tool_executor=None,
+            )
+            try:
+                response = session.send_message(json.dumps(request, ensure_ascii=False))
+            finally:
+                close = getattr(session, "close", None)
+                if callable(close):
+                    close()
+            parsed = extract_json_object(response)
+            if parsed is None:
+                raise ValueError("Maintenance worker returned malformed JSON.")
+            return parsed
+
+    stats = SessionMemoryMaintenance(
+        cases=office.cases,
+        belief_store=runtime["belief_store"],
+        worker=worker,
+    ).run(session_id, records)
+
+    # Newly formed people facets are immediately searchable by the current
+    # preconscious instance; do not wait for a process restart.
+    preconscious._lexicon_lookup = {}
+    preconscious._load_layer2_anchors()
+    preconscious._belief_cache = []
+    preconscious._belief_cache_count = 0
+    preconscious._belief_cache_mass = 0.0
+    return stats
+
+
+def run_agent_question(
+    runtime: Dict[str, Any],
+    provider_config,
+    question: str,
+    max_pulses: int,
+    system_instruction: str = QA_SYSTEM_INSTRUCTION,
+    learn: bool = False,
+) -> Dict[str, Any]:
+    """Ask Helix a LoCoMo question over one or more operational pulses."""
+    from llm.providers.base import create_session
+
+    session = create_session(
+        provider_config,
+        system_instruction,
+        tool_declarations=None,
+        tool_executor=None,
+        preconscious=runtime["preconscious"],
+    )
+
+    previous_thought = ""
+    previous_answer = ""
+    pulse_traces = []
+    initial_events = [f"Operator question: {question}"]
+    started = time.perf_counter()
+
+    for pulse_number in range(1, max_pulses + 1):
+        incoming_events = initial_events if pulse_number == 1 else []
+        trigger_type = "user_message" if pulse_number == 1 else "llm_output"
+        pulse = run_operational_pulse(
+            runtime,
+            session,
+            previous_thought=previous_thought,
+            events=incoming_events,
+            trigger_type=trigger_type,
+            mode="qa",
+            pulse_number=pulse_number,
+            question=question,
+            previous_answer=previous_answer,
+            max_pulses=max_pulses,
+            learn=learn,
+            store_artifacts=learn,
+            advance_physics=learn,
+        )
+        answer = pulse["answer"]
+
+        pulse_traces.append(
+            {
+                "pulse": pulse_number,
+                "prompt": pulse["prompt"],
+                "raw_response": pulse["raw_response"],
+                "answer": answer,
+                "context_string": pulse["context_string"],
+                "surfaced_ids": pulse["surfaced_ids"],
+                "retrieval_stats": pulse["retrieval_stats"],
+            }
+        )
+        previous_thought = pulse["raw_response"]
+        previous_answer = answer
+
+    latency_ms = (time.perf_counter() - started) * 1000.0
+    result = {
+        "answer": previous_answer,
+        "latency_ms": latency_ms,
+        "pulses": pulse_traces,
+    }
+    close = getattr(session, "close", None)
+    if callable(close):
+        close()
+    return result
+
+
+def collect_retrieval_diagnostics(runtime: Dict[str, Any], question: str) -> Dict[str, Any]:
+    """Collect independent baseline-lane diagnostics without re-running Helix."""
+    memory_manager = runtime["memory_manager"]
+    physics = runtime["physics"]
+
+    contextual = memory_manager.search_contextual(question, limit=5, refresh_access=False)
+    semantic = memory_manager.search_semantic(question, limit=5)
+    spatial = physics.query_neighborhood(question, k=5, attention_relative=True)
+
+    return {
+        "contextual_ids": [extract_dialogue_id(item) for item in contextual if extract_dialogue_id(item)],
+        "semantic_ids": [extract_dialogue_id(item) for item in semantic if extract_dialogue_id(item)],
+        "spatial_ids": [parse_dia_id(item.get("content", "")) for item in spatial if parse_dia_id(item.get("content", ""))],
+        # Filled from the actual pulse context after the answer. A second
+        # unified retrieval is stateful and can disagree item-by-item with
+        # the context that was really injected.
+        "unified_ids": [],
+        "unified_stats": {},
+    }
+
+
+def collect_unified_diagnostics(runtime: Dict[str, Any], question: str) -> Tuple[List[str], Dict[str, Any]]:
+    """Run the unified pipeline exactly as a pulse would, for attribution.
+
+    Both lanes are exercised: the gravity lane is seeded the same way
+    Preconscious._pull_relevant_beliefs seeds it, then handed to the merge
+    layer as Lane B. Running Lane A alone would report every item as
+    "semantic" and tell us nothing about whether the spatial lane earns its
+    place.
+
+    Returns (dialogue ids in rank order, lane attribution stats). Empty when
+    HELIX_UNIFIED_RAG=0, so the baseline run still works.
+    """
+    preconscious = runtime["preconscious"]
+    unified = getattr(preconscious, "_unified", None)
+    if unified is None:
+        return [], {}
+
+    try:
+        preconscious._ensure_belief_cache()
+        spatial_candidates = preconscious._gravity_query(
+            seed_text=question,
+            exclude=set(),
+            max_results=preconscious.MAX_BELIEFS_PER_QUERY,
+        )
+        items = unified.retrieve(
+            trigger_text=question,
+            spatial_candidates=spatial_candidates,
+            complement_quota=preconscious.UNIFIED_COMPLEMENT_CAP,
+            max_items=10,
+        )
+    except Exception as exc:  # diagnostics must never fail the benchmark
+        logger.warning("Unified diagnostics failed: %s", exc)
+        return [], {}
+
+    dia_ids = []
+    for item in items:
+        dia_id = parse_dia_id(item.get("content", ""))
+        if dia_id:
+            dia_ids.append(dia_id)
+
+    return dia_ids, dict(unified.last_stats)
+
+
+def init_lane_attribution() -> Dict[str, List[float]]:
+    return {
+        "semantic_only": [],
+        "spatial_only": [],
+        "both_lanes": [],
+        "suppressed_provenance": [],
+        "suppressed_duplicate": [],
+        "tier0": [],
+        "tier1": [],
+        "tier2": [],
+    }
+
+
+def update_lane_attribution(store: Dict[str, List[float]], stats: Dict[str, Any]) -> None:
+    if not stats:
+        return
+    by_lane = stats.get("by_lane", {})
+    by_tier = stats.get("by_tier", {})
+    store["semantic_only"].append(by_lane.get("semantic", 0))
+    store["spatial_only"].append(by_lane.get("spatial", 0))
+    store["both_lanes"].append(by_lane.get("both", 0))
+    store["suppressed_provenance"].append(stats.get("suppressed_provenance", 0))
+    store["suppressed_duplicate"].append(stats.get("suppressed_duplicate", 0))
+    store["tier0"].append(by_tier.get(0, 0))
+    store["tier1"].append(by_tier.get(1, 0))
+    store["tier2"].append(by_tier.get(2, 0))
+
+
+def update_recall_metrics(store: Dict[str, List[float]], retrieved_ids: List[str], evidence: List[str]) -> None:
+    r1 = int(any(eid in retrieved_ids[:1] for eid in evidence)) if evidence else 1
+    r3 = int(any(eid in retrieved_ids[:3] for eid in evidence)) if evidence else 1
+    r5 = int(any(eid in retrieved_ids[:5] for eid in evidence)) if evidence else 1
+    store["recall@1"].append(r1)
+    store["recall@3"].append(r3)
+    store["recall@5"].append(r5)
+
+
+def init_recall_store() -> Dict[str, List[float]]:
+    return {"recall@1": [], "recall@3": [], "recall@5": []}
+
+
+def run_evaluation(
+    dataset_path: str,
+    num_dialogues: int,
+    max_pulses: int = 2,
+    ingest_batch_size: int = 1,
+    dialogue_index: int = 0,
+    max_questions: Optional[int] = None,
+    backend: str = "auto",
+    model: str = "",
+    maintenance: str = "off",
+    maintenance_model: str = "",
+    dry_run: bool = False,
+    save_path: Optional[str] = None,
+    details_path: Optional[str] = None,
+    maintenance_path: Optional[str] = None,
+) -> bool:
+    logger.info("Loading LoCoMo dataset from: %s", dataset_path)
     if not os.path.exists(dataset_path):
-        logger.error(f"Dataset not found at {dataset_path}")
+        logger.error("Dataset not found at %s", dataset_path)
         return False
-        
-    with open(dataset_path, "r") as f:
-        data = json.load(f)
-        
+
+    with open(dataset_path, "r", encoding="utf-8") as handle:
+        data = json.load(handle)
+
     total_dialogues = len(data)
-    num_to_eval = min(num_dialogues, total_dialogues)
-    logger.info(f"Dataset contains {total_dialogues} dialogues. Evaluating {num_to_eval}.")
+    if dialogue_index < 0 or dialogue_index >= total_dialogues:
+        logger.error(
+            "Dialogue index %d is outside the dataset range 0..%d.",
+            dialogue_index,
+            total_dialogues - 1,
+        )
+        return False
+    num_to_eval = min(num_dialogues, total_dialogues - dialogue_index)
+    logger.info(
+        "Dataset contains %d dialogues. Evaluating %d starting at index %d.",
+        total_dialogues,
+        num_to_eval,
+        dialogue_index,
+    )
 
     if dry_run:
+        sample = data[dialogue_index]
+        session_count = sum(
+            1
+            for key in sample["conversation"].keys()
+            if key.startswith("session_") and not key.endswith("_date_time")
+        )
         logger.info("=== DRY RUN MODE ===")
-        # Just inspect and verify first dialogue
-        sample = data[0]
-        logger.info(f"Sample ID: {sample['sample_id']}")
-        logger.info(f"Conversation sessions: {len(sample['conversation']) - 2} sessions") # excluding speaker_a/b keys
-        logger.info(f"QA Pairs: {len(sample['qa'])}")
+        logger.info("Sample ID: %s", sample["sample_id"])
+        logger.info("Conversation sessions: %d", session_count)
+        selected_questions = len(sample["qa"])
+        if max_questions is not None:
+            selected_questions = min(selected_questions, max_questions)
+        logger.info("QA Pairs selected: %d/%d", selected_questions, len(sample["qa"]))
         logger.info("Dry run check passed successfully.")
         return True
 
-    # Import Helix modules only when running to catch errors early
-    from core.physics_engine import PhysicsEngine
-    from memory.memory_manager import MemoryManager
+    provider_config = load_provider_config(backend=backend, model=model)
+    if provider_config is None:
+        logger.error("No Helix provider detected. Configure Gemini, Anthropic, Ollama, or llama.cpp first.")
+        return False
+    logger.info(
+        "Using provider: %s (%s)",
+        provider_config.provider_type,
+        provider_config.model,
+    )
 
-    category_names = {
-        1: "Multi-hop (Category 1)",
-        2: "Temporal (Category 2)",
-        3: "Open-domain (Category 3)",
-        4: "Single-hop (Category 4)",
-        5: "Adversarial (Category 5)"
+    global_answer = {"em": [], "f1": [], "latency": [], "pulses": []}
+    global_recall = {
+        "contextual": init_recall_store(),
+        "semantic": init_recall_store(),
+        "spatial": init_recall_store(),
+        "unified": init_recall_store(),
     }
-
-    # Global Stats
-    global_results = {
-        "semantic": {"recall@1": [], "recall@3": [], "recall@5": [], "f1": [], "latency": []},
-        "gravity": {"recall@1": [], "recall@3": [], "recall@5": [], "f1": [], "latency": []},
-        "preconscious": {"recall@1": [], "recall@3": [], "recall@5": [], "f1": [], "latency": []}
+    lane_attribution = init_lane_attribution()
+    cat_answer: Dict[int, Dict[str, List[float]]] = {
+        cat: {"em": [], "f1": [], "latency": []} for cat in CATEGORY_NAMES
     }
-    
-    # Per-category Stats
-    cat_results = {}
-    for cat in range(1, 6):
-        cat_results[cat] = {
-            "semantic": {"recall@1": [], "recall@3": [], "recall@5": [], "f1": []},
-            "gravity": {"recall@1": [], "recall@3": [], "recall@5": [], "f1": []},
-            "preconscious": {"recall@1": [], "recall@3": [], "recall@5": [], "f1": []}
-        }
+    cat_contextual_recall: Dict[int, Dict[str, List[float]]] = {
+        cat: init_recall_store() for cat in CATEGORY_NAMES
+    }
+    details: List[Dict[str, Any]] = []
+    maintenance_audit: List[Dict[str, Any]] = []
+    maintenance_snapshots: List[Dict[str, Any]] = []
 
-    # Evaluate each selected dialogue
     for d_idx in range(num_to_eval):
-        dialogue = data[d_idx]
+        dialogue = data[dialogue_index + d_idx]
         sample_id = dialogue["sample_id"]
-        logger.info(f"[{d_idx + 1}/{num_to_eval}] Evaluating Dialogue: {sample_id}")
+        logger.info("[%d/%d] Evaluating dialogue %s", d_idx + 1, num_to_eval, sample_id)
 
-        # Setup temporary directories for Helix databases
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            physics = PhysicsEngine(data_dir=tmp_dir)
-            memory_manager = MemoryManager(data_dir=tmp_dir)
-            memory_manager.set_physics(physics)
+        with tempfile.TemporaryDirectory(prefix="locomo_helix_") as tmp_dir:
+            runtime = build_runtime(tmp_dir)
+            replay = replay_dialogue(
+                runtime,
+                provider_config,
+                dialogue,
+                ingest_batch_size=max(1, ingest_batch_size),
+                maintenance_mode=maintenance,
+                maintenance_model=maintenance_model,
+            )
+            maintenance_audit.extend(replay.get("maintenance", []))
+            if maintenance != "off":
+                office = getattr(
+                    getattr(runtime["preconscious"]._unified, "context_office", None),
+                    "cases",
+                    None,
+                )
+                maintenance_snapshots.append({
+                    "sample_id": sample_id,
+                    "cycles": replay.get("maintenance", []),
+                    "cases": office.summary() if office is not None else [],
+                    "profiles": [
+                        {
+                            "id": belief.get("id"),
+                            "term": belief.get("term"),
+                            "content": belief.get("content"),
+                            "memory_refs": belief.get("memory_refs", []),
+                        }
+                        for belief in runtime["belief_store"].get_category(
+                            "people", limit=100_000
+                        )
+                        if belief.get("formation_type") == "session_profile"
+                    ],
+                })
+            logger.info(
+                "Replayed %d dialogue turns through %d operational pulses.",
+                replay["turn_count"],
+                replay["pulse_count"],
+            )
 
-            # 1. Chronological Dialogue Injection
-            conv = dialogue["conversation"]
-            speaker_a = conv.get("speaker_a", "Speaker A")
-            speaker_b = conv.get("speaker_b", "Speaker B")
-            
-            # Find and sort session keys
-            session_nums = []
-            for key in conv.keys():
-                if key.startswith("session_") and not key.endswith("_date_time"):
-                    session_nums.append(int(key.split("_")[1]))
-            session_nums.sort()
-
-            logger.info(f"Injecting {len(session_nums)} sessions...")
-            turn_count = 0
-            
-            for s_num in session_nums:
-                session_key = f"session_{s_num}"
-                turns = conv[session_key]
-                session_datetime = conv.get(f"{session_key}_date_time", "")
-
-                for turn in turns:
-                    speaker = turn["speaker"]
-                    dia_id = turn["dia_id"]
-                    text = turn["text"]
-                    
-                    # Construct memory payload containing dialogue ID
-                    payload = f"[{dia_id}] {speaker}: {text}"
-                    
-                    # Store in MemoryManager journal and Register in Physics spaces
-                    emb = physics.embed_text(payload)
-                    physics.add_memory_point(
-                        memory_id=f"mem_{dia_id}",
-                        text=payload,
-                        importance=0.5,
-                        content=payload,
-                    )
-                    
-                    memory_manager.store(
-                        content=payload,
-                        memory_type="observation",
-                        source=speaker,
-                        tags=[dia_id],
-                        embedding_384d=emb.tolist()
-                    )
-                    turn_count += 1
-
-            logger.info(f"Seeded {turn_count} dialogue turns into Helix spaces.")
-
-            # 2. Evaluation on Dialogue-Specific QA Pairs
-            qas = dialogue["qa"]
-            logger.info(f"Running evaluation on {len(qas)} QA pairs...")
-            
-            # Use tqdm if available
-            try:
-                from tqdm import tqdm
-                qa_iterable = tqdm(qas, desc="QA Pairs")
-            except ImportError:
-                qa_iterable = qas
-
-            for qa in qa_iterable:
+            qa_items = dialogue["qa"]
+            if max_questions is not None:
+                qa_items = qa_items[:max_questions]
+            for qa_idx, qa in enumerate(qa_items, start=1):
                 question = qa["question"]
-                answer = qa.get("answer") or qa.get("adversarial_answer") or ""
-                category = qa["category"]
-                evidence = qa["evidence"] # list of dia_ids, e.g. ['D1:3']
+                category = int(qa["category"])
+                evidence = list(qa.get("evidence", []))
+                adversarial_answer = qa.get("adversarial_answer") if category == 5 else None
+                answer = "Not mentioned." if category == 5 else (qa.get("answer") or "")
+                answer_target = answer.split(";")[0].strip() if category == 3 else answer
 
-                # Normalize category-specific answer targets (category 3 splits on semicolon in LoCoMo)
-                if category == 3:
-                    answer_target = answer.split(';')[0].strip()
-                else:
-                    answer_target = answer
+                logger.info(
+                    "  QA %d/%d | category=%d | %s",
+                    qa_idx,
+                    len(qa_items),
+                    category,
+                    question[:120],
+                )
 
-                # --- Query 384D Semantic Index ---
-                t0 = time.perf_counter()
-                sem_res = memory_manager.search_semantic(question, limit=5)
-                sem_latency = (time.perf_counter() - t0) * 1000.0
-                
-                # --- Query 8D Manifold ---
-                t0 = time.perf_counter()
-                grav_res = physics.query_neighborhood(question, k=5)
-                grav_latency = (time.perf_counter() - t0) * 1000.0
+                reset_question_state(runtime["preconscious"], runtime["physics"])
+                agent_result = run_agent_question(runtime, provider_config, question, max_pulses=max_pulses)
+                retrieval = collect_retrieval_diagnostics(runtime, question)
+                retrieval["unified_ids"] = extract_injected_dialogue_ids(
+                    [pulse.get("context_string", "") for pulse in agent_result["pulses"]]
+                )
+                retrieval["unified_stats"] = (
+                    dict(agent_result["pulses"][0].get("retrieval_stats") or {})
+                    if agent_result["pulses"] else {}
+                )
+                answer_em, answer_f1 = compute_answer_metrics(agent_result["answer"], answer_target, category)
 
-                # --- Query Preconscious (Combined) ---
-                t0 = time.perf_counter()
-                # 1. 384D Semantic search for up to 100 candidates
-                pre_sem_res = memory_manager.search_semantic(question, limit=100)
-                # 2. Project question into 8D
-                query_pos = physics.embed_and_project(question)
-                # 3. Rank anchored candidates by Verlinde gravity in 8D
-                pre_scored = []
-                memory_space = physics.spatial_mind.memory_space
-                for r in pre_sem_res:
-                    content = r["content"]
-                    did = parse_dia_id(content)
-                    pt = None
-                    if did:
-                        pt = memory_space.get_point(f"mem_{did}")
-                    if not pt:
-                        for pid, p in memory_space._points.items():
-                            if p.get("content") == content:
-                                pt = p
-                                break
-                    if pt:
-                        mass = memory_space._compute_structural_mass(pt)
-                        temperature = memory_space._compute_temperature(pt)
-                        pos_8d = pt.get("position")
-                        dist_sq = float(np.sum((pos_8d - query_pos) ** 2))
-                        gravity = (temperature * mass) / (dist_sq + 1e-4)
-                    else:
-                        gravity = 0.0
-                    pre_scored.append({
-                        "content": content,
-                        "gravity": gravity
-                    })
-                pre_scored.sort(key=lambda x: x["gravity"], reverse=True)
-                pre_res = pre_scored[:5]
-                pre_latency = (time.perf_counter() - t0) * 1000.0
+                global_answer["em"].append(answer_em)
+                global_answer["f1"].append(answer_f1)
+                global_answer["latency"].append(agent_result["latency_ms"])
+                global_answer["pulses"].append(max_pulses)
 
-                # Extract retrieved dialogue IDs
-                sem_ids = []
-                sem_texts = []
-                for r in sem_res:
-                    did = parse_dia_id(r["content"])
-                    if did:
-                        sem_ids.append(did)
-                    sem_texts.append(r["content"])
-                    
-                grav_ids = []
-                grav_texts = []
-                for r in grav_res:
-                    did = parse_dia_id(r["content"])
-                    if did:
-                        grav_ids.append(did)
-                    grav_texts.append(r["content"])
+                cat_answer[category]["em"].append(answer_em)
+                cat_answer[category]["f1"].append(answer_f1)
+                cat_answer[category]["latency"].append(agent_result["latency_ms"])
 
-                pre_ids = []
-                pre_texts = []
-                for r in pre_res:
-                    did = parse_dia_id(r["content"])
-                    if did:
-                        pre_ids.append(did)
-                    pre_texts.append(r["content"])
+                update_recall_metrics(global_recall["contextual"], retrieval["contextual_ids"], evidence)
+                update_recall_metrics(global_recall["semantic"], retrieval["semantic_ids"], evidence)
+                update_recall_metrics(global_recall["spatial"], retrieval["spatial_ids"], evidence)
+                update_recall_metrics(global_recall["unified"], retrieval["unified_ids"], evidence)
+                update_recall_metrics(cat_contextual_recall[category], retrieval["contextual_ids"], evidence)
+                update_lane_attribution(lane_attribution, retrieval["unified_stats"])
 
-                # --- Score Retrieval ---
-                for mode, retrieved_ids, retrieved_texts, latency, target_dict in [
-                    ("semantic", sem_ids, sem_texts, sem_latency, global_results["semantic"]),
-                    ("gravity", grav_ids, grav_texts, grav_latency, global_results["gravity"]),
-                    ("preconscious", pre_ids, pre_texts, pre_latency, global_results["preconscious"])
-                ]:
-                    # Recall@K (evidence overlap check)
-                    r1 = int(any(eid in retrieved_ids[:1] for eid in evidence)) if evidence else 1
-                    r3 = int(any(eid in retrieved_ids[:3] for eid in evidence)) if evidence else 1
-                    r5 = int(any(eid in retrieved_ids[:5] for eid in evidence)) if evidence else 1
-                    
-                    # Token F1 on concatenated top retrieval context
-                    retrieved_context = " ".join(retrieved_texts[:3]) # Use top 3 context window
-                    if category == 1:
-                        f1_score = compute_multi_f1(retrieved_context, answer_target)
-                    elif category == 5:
-                        # Adversarial F1
-                        pred_lower = retrieved_context.lower()
-                        if 'no information available' in pred_lower or 'not mentioned' in pred_lower:
-                            f1_score = 1.0 if 'not mentioned' in answer_target.lower() or 'no information' in answer_target.lower() else 0.0
-                        else:
-                            f1_score = 0.0
-                    else:
-                        f1_score = compute_token_f1(retrieved_context, answer_target)
+                details.append(
+                    {
+                        "sample_id": sample_id,
+                        "category": category,
+                        "question": question,
+                        "gold_answer": answer_target,
+                        "adversarial_answer": adversarial_answer,
+                        "prediction": agent_result["answer"],
+                        "answer_em": answer_em,
+                        "answer_f1": answer_f1,
+                        "evidence": evidence,
+                        "contextual_ids": retrieval["contextual_ids"],
+                        "semantic_ids": retrieval["semantic_ids"],
+                        "spatial_ids": retrieval["spatial_ids"],
+                        "unified_ids": retrieval["unified_ids"],
+                        "unified_stats": retrieval["unified_stats"],
+                        "latency_ms": round(agent_result["latency_ms"], 2),
+                        "replay_turns": replay["turn_count"],
+                        "replay_pulses": replay["pulse_count"],
+                        "maintenance_mode": replay["maintenance_mode"],
+                        "pulses": agent_result["pulses"],
+                    }
+                )
 
-                    # Append to Global
-                    target_dict["recall@1"].append(r1)
-                    target_dict["recall@3"].append(r3)
-                    target_dict["recall@5"].append(r5)
-                    target_dict["f1"].append(f1_score)
-                    target_dict["latency"].append(latency)
-
-                    # Append to Category
-                    cat_dict = cat_results[category][mode]
-                    cat_dict["recall@1"].append(r1)
-                    cat_dict["recall@3"].append(r3)
-                    cat_dict["recall@5"].append(r5)
-                    cat_dict["f1"].append(f1_score)
-
-    # ── Aggregate and Report ──────────────────────────────────────────
-
-    report_lines = []
-    report_lines.append("# Helix Memory Retrieval Benchmark Report (LoCoMo)")
+    report_lines: List[str] = []
+    report_lines.append("# Helix LoCoMo Agent Benchmark Report")
     report_lines.append(f"**Date**: {time.strftime('%Y-%m-%d %H:%M:%S')}")
     report_lines.append(f"**Dialogues Evaluated**: {num_to_eval}")
+    report_lines.append(f"**Starting Dialogue Index**: {dialogue_index}")
+    report_lines.append(f"**Questions Evaluated**: {len(global_answer['f1'])}")
+    report_lines.append(f"**Question Pulses**: {max_pulses}")
+    report_lines.append(f"**Replay Batch Size**: {ingest_batch_size}")
+    report_lines.append(f"**Between-Session Maintenance**: {maintenance}")
+    if maintenance == "full":
+        report_lines.append(
+            f"**Maintenance Model**: {maintenance_model or provider_config.model}"
+        )
+    report_lines.append(f"**Provider**: {provider_config.provider_type} / {provider_config.model}")
     report_lines.append("")
 
-    report_lines.append("## Global Metrics Summary")
-    report_lines.append("| Metric | Semantic Index (384D) | Spatial Mind (8D Manifold) | Preconscious (Combined) |")
+    if maintenance_audit:
+        report_lines.append("## Maintenance Audit")
+        report_lines.append("")
+        report_lines.append(
+            f"- Cycles completed: {len(maintenance_audit)}"
+        )
+        report_lines.append(
+            "- Exact case references linked: "
+            + str(sum(int(item.get("references_linked", 0)) for item in maintenance_audit))
+        )
+        report_lines.append(
+            "- Person-session profiles written: "
+            + str(sum(int(item.get("profiles_written", 0)) for item in maintenance_audit))
+        )
+        worker_errors = [item for item in maintenance_audit if item.get("worker_error")]
+        report_lines.append(f"- Worker failures: {len(worker_errors)}")
+        report_lines.append("")
+    report_lines.append(
+        "This run scores Helix's generated answers. Retrieval scores below are diagnostic provenance checks, not the primary grade."
+    )
+    report_lines.append(
+        "LoCoMo Category 5 is scored as adversarial-premise rejection: an abstention is correct; the stored adversarial answer is a distractor."
+    )
+    report_lines.append("")
+
+    report_lines.append("## Global Answer Metrics")
+    report_lines.append("| Metric | Helix Agent |")
+    report_lines.append("|---|---|")
+    report_lines.append(f"| Average Exact Match | {mean(global_answer['em']):.4f} |")
+    report_lines.append(f"| Average Answer F1 | {mean(global_answer['f1']):.4f} |")
+    report_lines.append(f"| Avg Latency (ms) | {mean(global_answer['latency']):.2f} ms |")
+    report_lines.append(f"| Avg Pulses | {mean(global_answer['pulses']):.2f} |")
+    report_lines.append("")
+
+    report_lines.append("## Evidence Recall Diagnostics")
+    report_lines.append("| Retrieval Path | Recall@1 | Recall@3 | Recall@5 |")
     report_lines.append("|---|---|---|---|")
-    
-    for metric in ["recall@1", "recall@3", "recall@5", "f1"]:
-        sem_val = np.mean(global_results["semantic"][metric])
-        grav_val = np.mean(global_results["gravity"][metric])
-        pre_val = np.mean(global_results["preconscious"][metric])
-        report_lines.append(f"| Average {metric.title()} | {sem_val:.4f} | {grav_val:.4f} | {pre_val:.4f} |")
-        
-    sem_lat = np.mean(global_results["semantic"]["latency"])
-    grav_lat = np.mean(global_results["gravity"]["latency"])
-    pre_lat = np.mean(global_results["preconscious"]["latency"])
-    report_lines.append(f"| Avg Latency (ms) | {sem_lat:.2f} ms | {grav_lat:.2f} ms | {pre_lat:.2f} ms |")
+    for label, key in [
+        ("Contextual (`search_contextual`)", "contextual"),
+        ("Semantic (`search_semantic`)", "semantic"),
+        ("Spatial (`query_neighborhood`)", "spatial"),
+        ("**Unified (cosine + spatial)**", "unified"),
+    ]:
+        report_lines.append(
+            f"| {label} | {mean(global_recall[key]['recall@1']):.4f} | "
+            f"{mean(global_recall[key]['recall@3']):.4f} | {mean(global_recall[key]['recall@5']):.4f} |"
+        )
     report_lines.append("")
 
-    report_lines.append("## Category-Specific Breakdown")
-    report_lines.append("### 384D Semantic Index")
-    report_lines.append("| Category | Count | Recall@1 | Recall@3 | Recall@5 | Token F1 |")
-    report_lines.append("|---|---|---|---|---|---|")
-    for cat in range(1, 6):
-        cat_dict = cat_results[cat]["semantic"]
-        count = len(cat_dict["f1"])
-        if count > 0:
-            report_lines.append(
-                f"| {category_names[cat]} | {count} | {np.mean(cat_dict['recall@1']):.4f} | "
-                f"{np.mean(cat_dict['recall@3']):.4f} | {np.mean(cat_dict['recall@5']):.4f} | {np.mean(cat_dict['f1']):.4f} |"
-            )
-    report_lines.append("")
+    if lane_attribution["semantic_only"]:
+        report_lines.append("## Unified Lane Attribution")
+        report_lines.append(
+            "Per-question averages. The spatial lane earns its place only if "
+            "`Spatial only` is non-zero AND unified recall beats the semantic "
+            "lane alone — otherwise the merge is carrying dead weight."
+        )
+        report_lines.append("")
+        report_lines.append("| Signal | Avg per question |")
+        report_lines.append("|---|---|")
+        for label, key in [
+            ("Injected — semantic lane only", "semantic_only"),
+            ("Injected — spatial lane only (the complement)", "spatial_only"),
+            ("Injected — found by both lanes", "both_lanes"),
+            ("Dropped — provenance suppression", "suppressed_provenance"),
+            ("Dropped — near-duplicate purge", "suppressed_duplicate"),
+            ("Tier 0 (verbatim memories)", "tier0"),
+            ("Tier 1 (outer-tier beliefs)", "tier1"),
+            ("Tier 2 (term-anchored beliefs)", "tier2"),
+        ]:
+            report_lines.append(f"| {label} | {mean(lane_attribution[key]):.2f} |")
+        report_lines.append("")
 
-    report_lines.append("### 8D Spatial Mind (Manifold)")
-    report_lines.append("| Category | Count | Recall@1 | Recall@3 | Recall@5 | Token F1 |")
-    report_lines.append("|---|---|---|---|---|---|")
-    for cat in range(1, 6):
-        cat_dict = cat_results[cat]["gravity"]
-        count = len(cat_dict["f1"])
-        if count > 0:
-            report_lines.append(
-                f"| {category_names[cat]} | {count} | {np.mean(cat_dict['recall@1']):.4f} | "
-                f"{np.mean(cat_dict['recall@3']):.4f} | {np.mean(cat_dict['recall@5']):.4f} | {np.mean(cat_dict['f1']):.4f} |"
-            )
-    report_lines.append("")
-
-    report_lines.append("### Preconscious (Combined)")
-    report_lines.append("| Category | Count | Recall@1 | Recall@3 | Recall@5 | Token F1 |")
-    report_lines.append("|---|---|---|---|---|---|")
-    for cat in range(1, 6):
-        cat_dict = cat_results[cat]["preconscious"]
-        count = len(cat_dict["f1"])
-        if count > 0:
-            report_lines.append(
-                f"| {category_names[cat]} | {count} | {np.mean(cat_dict['recall@1']):.4f} | "
-                f"{np.mean(cat_dict['recall@3']):.4f} | {np.mean(cat_dict['recall@5']):.4f} | {np.mean(cat_dict['f1']):.4f} |"
-            )
+    report_lines.append("## Category Breakdown")
+    report_lines.append("| Category | Count | Answer EM | Answer F1 | Contextual R@1 | Contextual R@3 | Contextual R@5 | Avg Latency (ms) |")
+    report_lines.append("|---|---|---|---|---|---|---|---|")
+    for cat, label in CATEGORY_NAMES.items():
+        count = len(cat_answer[cat]["f1"])
+        if count == 0:
+            continue
+        report_lines.append(
+            f"| {label} | {count} | {mean(cat_answer[cat]['em']):.4f} | "
+            f"{mean(cat_answer[cat]['f1']):.4f} | {mean(cat_contextual_recall[cat]['recall@1']):.4f} | "
+            f"{mean(cat_contextual_recall[cat]['recall@3']):.4f} | {mean(cat_contextual_recall[cat]['recall@5']):.4f} | "
+            f"{mean(cat_answer[cat]['latency']):.2f} |"
+        )
     report_lines.append("")
 
     report_output = "\n".join(report_lines)
     print(report_output)
 
     if save_path:
-        save_path = Path(save_path)
-        save_path.parent.mkdir(parents=True, exist_ok=True)
-        save_path.write_text(report_output)
-        logger.info(f"Results saved to: {save_path}")
+        save_file = Path(save_path)
+        save_file.parent.mkdir(parents=True, exist_ok=True)
+        save_file.write_text(report_output, encoding="utf-8")
+        logger.info("Report saved to: %s", save_file)
+
+    if details_path:
+        details_file = Path(details_path)
+        details_file.parent.mkdir(parents=True, exist_ok=True)
+        details_file.write_text(json.dumps(details, indent=2), encoding="utf-8")
+        logger.info("Detailed results saved to: %s", details_file)
+
+    if maintenance_path and maintenance_snapshots:
+        maintenance_file = Path(maintenance_path)
+        maintenance_file.parent.mkdir(parents=True, exist_ok=True)
+        maintenance_file.write_text(
+            json.dumps(maintenance_snapshots, indent=2), encoding="utf-8"
+        )
+        logger.info("Maintenance audit saved to: %s", maintenance_file)
 
     return True
 
-# ── Entry Point ──────────────────────────────────────────────────────
 
-def main():
-    parser = argparse.ArgumentParser(description="Helix LoCoMo Benchmark Sandbox")
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Helix LoCoMo agent benchmark")
     parser.add_argument(
         "--dataset",
         type=str,
         default="locomo10.json",
-        help="Path to locomo10.json dataset"
+        help="Path to the LoCoMo dataset JSON file",
     )
     parser.add_argument(
         "--num-dialogues",
         type=int,
         default=1,
-        help="Number of dialogue scenarios to evaluate (1-10)"
+        help="Number of dialogues to evaluate",
+    )
+    parser.add_argument(
+        "--dialogue-index",
+        type=int,
+        default=0,
+        help="Zero-based index of the first dialogue to evaluate",
+    )
+    parser.add_argument(
+        "--max-questions",
+        type=int,
+        default=None,
+        help="Optional per-dialogue question cap",
+    )
+    parser.add_argument(
+        "--backend",
+        choices=("auto", "ollama"),
+        default="auto",
+        help="Reader backend; choose ollama to bypass stored API credentials",
+    )
+    parser.add_argument(
+        "--model",
+        default="",
+        help="Optional reader model override",
+    )
+    parser.add_argument(
+        "--maintenance",
+        choices=("off", "cases", "full"),
+        default="off",
+        help="Between-session maintenance: exact case filing only, or filing plus derived person facets",
+    )
+    parser.add_argument(
+        "--maintenance-model",
+        default="",
+        help="Optional model for the bounded maintenance worker",
+    )
+    parser.add_argument(
+        "--max-pulses",
+        type=int,
+        default=2,
+        help="How many Helix pulses to give each question before scoring the final answer",
+    )
+    parser.add_argument(
+        "--ingest-batch-size",
+        type=int,
+        default=1,
+        help="How many dialogue turns to replay into one operational pulse during ingestion",
     )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Load and verify dataset structure without running the test"
+        help="Load and verify dataset structure without running the benchmark",
     )
     parser.add_argument(
         "--save-results",
         type=str,
         default="documents/locomo_benchmark_report.md",
-        help="Path to save the markdown benchmark report"
+        help="Path to save the markdown report",
     )
-    
+    parser.add_argument(
+        "--save-details",
+        type=str,
+        default="documents/locomo_benchmark_details.json",
+        help="Path to save per-question raw outputs and metrics",
+    )
+    parser.add_argument(
+        "--save-maintenance",
+        type=str,
+        default="",
+        help="Optional path for case counts, maintenance cycles, and source-linked profiles",
+    )
     args = parser.parse_args()
-    
+
     success = run_evaluation(
         dataset_path=args.dataset,
         num_dialogues=args.num_dialogues,
+        max_pulses=max(1, args.max_pulses),
+        ingest_batch_size=max(1, args.ingest_batch_size),
+        dialogue_index=args.dialogue_index,
+        max_questions=max(1, args.max_questions) if args.max_questions is not None else None,
+        backend=args.backend,
+        model=args.model,
+        maintenance=args.maintenance,
+        maintenance_model=args.maintenance_model,
         dry_run=args.dry_run,
-        save_path=args.save_results
+        save_path=args.save_results,
+        details_path=args.save_details,
+        maintenance_path=args.save_maintenance or None,
     )
-    sys.exit(0 if success else 1)
+    raise SystemExit(0 if success else 1)
+
 
 if __name__ == "__main__":
     main()

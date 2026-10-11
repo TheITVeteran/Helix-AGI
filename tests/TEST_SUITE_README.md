@@ -1,236 +1,183 @@
-# Comprehensive Test Suite for Helix-AGI
+# Helix Test Suite
 
-## Quick Start
+**Documentation status:** current test guide · **Last verified against source:** 2026-08-15
 
-Run all tests:
+Use the repository virtual environment for every command. Some retrieval tests
+mock the semantic encoder; end-to-end semantic runs require local Ollama with
+`qwen3-embedding:0.6b` available.
+
+## Recommended Commands
+
+Run the repository's curated quick suite:
+
 ```bash
-python tests/run_all_tests.py
+venv/bin/python tests/run_all_tests.py --quick
 ```
 
-Run only quick tests (validation + core):
+Run its curated full suite, including simulators and load/stress scripts:
+
 ```bash
-python tests/run_all_tests.py --quick
+venv/bin/python tests/run_all_tests.py
 ```
 
-Run a specific test:
+Audit every discoverable unit and integration module, including retained
+legacy tests that are not part of the curated green gate:
+
 ```bash
-python tests/run_all_tests.py --script test_tool_executor.py
+venv/bin/python -m unittest discover -s tests -p 'test_*.py'
 ```
 
-## Test Scripts Overview
+Run one test module:
 
-### 1. **validate_config.py** - Configuration Validator
-Validates system configuration before running:
-- Credentials file presence and readability
-- Environment variables
-- Required data directories
-- Tool schema completeness
-- Python dependencies
-
-**Run:** `python tests/validate_config.py`
-
-### 2. **test_integration.py** - Integration Tests
-End-to-end integration testing:
-- Channel router message flow
-- Tool executor integration
-- Memory persistence
-- Memory retrieval and semantic search
-- Tool registration and execution with context
-
-**Run:** `python tests/test_integration.py`
-
-### 3. **test_tool_executor.py** - Tool Executor Tests
-Tests tool execution functionality:
-- Tool invocation (single and multiple parameters)
-- Parameter validation
-- Result parsing and metadata handling
-- Error handling (execution failures, timeouts, invalid params)
-- Error recovery
-- Context injection
-- Memory access
-
-**Run:** `python tests/test_tool_executor.py`
-
-### 4. **test_belief_operations.py** - Belief Operations Tests
-Tests belief system functionality:
-- Belief creation across categories (identity, people, capabilities, desires, knowledge)
-- Belief retrieval (by category, with limits, search)
-- Belief mass calculations and normalization
-- Belief merging and composition
-
-**Run:** `python tests/test_belief_operations.py`
-
-### 5. **test_channel_router.py** - Channel Router Tests
-Tests communication pipeline:
-- Contact management (add, retrieve, list)
-- Message queueing and delivery
-- Telegram-specific flows
-- Message delivery callbacks
-- Contact organization by channel
-
-**Run:** `python tests/test_channel_router.py`
-
-### 6. **test_preconscious_injection.py** - Preconscious Context Builder
-Tests context window assembly:
-- Adding memories and beliefs to context
-- Memory/belief weighting (priority, recency)
-- Scratchpad note injection
-- Context window overflow handling
-- Token counting and compression
-
-**Run:** `python tests/test_preconscious_injection.py`
-
-### 7. **simulate_memory_operations.py** - Memory Simulator
-Simulates memory system operations:
-- Memory load/save cycles
-- Memory promotion logic (short-term → long-term → core)
-- Semantic indexing patterns
-- Data persistence and integrity verification
-
-**Run:** `python tests/simulate_memory_operations.py`
-
-### 8. **simulate_physics.py** - Physics Engine Simulator
-Simulates 8D manifold and semantic indexing:
-- 8D point representation and distance calculations
-- Gravity calculations in 8D space
-- Lagrangian energy calculations
-- Semantic indexing with FAISS-like nearest neighbor search
-- Manifold evolution over multiple pulses
-- Attractor dynamics and center of mass calculations
-
-**Run:** `python tests/simulate_physics.py`
-
-### 9. **stress_test_pulse.py** - Pulse Loop Stress Test
-Stress tests pulse loop behavior:
-- Basic pulse operations (100 pulses)
-- Memory growth monitoring (200 pulses)
-- Stability sentinel threshold testing
-- Pulse time variability analysis
-- Sustained load over 500+ pulses
-
-**Run:** `python tests/stress_test_pulse.py`
-
-### 10. **load_test.py** - Load Test Suite
-Performance and load testing:
-- High-volume message handling (1000+ messages)
-- Context window saturation under load
-- Tool execution latency measurement (per-tool stats)
-- Concurrent user simulation (50+ concurrent)
-- Sustained load test (30 second duration)
-
-Measures:
-- Throughput (messages/second)
-- Latency (min, avg, max, p95, p99)
-- Error rates
-- Resource saturation
-
-**Run:** `python tests/load_test.py`
-
-### 11. **run_all_tests.py** - Master Test Runner
-Orchestrates all test suites with:
-- Sequential execution of all tests
-- Centralized result aggregation
-- Summary reporting
-- Exit codes for CI/CD integration
-
-**Run:** `python tests/run_all_tests.py`
-
-## Test Categories
-
-### Configuration & Setup
-- `validate_config.py` - System configuration validation
-
-### Core Unit Tests
-- `test_tool_executor.py` - Tool execution
-- `test_belief_operations.py` - Belief management
-- `test_channel_router.py` - Communication routing
-- `test_preconscious_injection.py` - Context building
-
-### Integration Tests
-- `test_integration.py` - Full system integration flows
-
-### System Simulations
-- `simulate_memory_operations.py` - Memory system behavior
-- `simulate_physics.py` - Physics engine and manifold dynamics
-
-### Performance & Load Tests
-- `stress_test_pulse.py` - Pulse loop under stress
-- `load_test.py` - High-volume load testing
-
-## Expected Test Results
-
-### Validation
-- All required credentials and directories detected
-- Optional dependencies noted but not required
-
-### Unit Tests
-- 100+ test cases across all modules
-- 95%+ pass rate expected
-
-### Simulations
-- Memory: 50+ memories created and promoted
-- Physics: 8D manifold with gravity calculations
-- Semantic search with nearest neighbor queries
-
-### Performance Tests
-- Pulse throughput: 15-25 pulses/second
-- Message throughput: 100+ msg/second
-- Latency p99: <200ms for typical operations
-- Memory growth: <1MB per 100 pulses
-- Context saturation: Proper compression at 90%+
-
-## Continuous Integration
-
-For CI/CD pipelines, use quick mode:
 ```bash
-python tests/run_all_tests.py --quick
+venv/bin/python tests/test_task_cognition.py
+venv/bin/python tests/run_all_tests.py --script test_task_cognition.py
 ```
 
-This runs only validation and core tests (60-90 seconds total).
+`run_all_tests.py` is the maintained subprocess gate with a five-minute limit
+per listed script. Raw `unittest` discovery is the broadest dependency-free
+audit, but it also includes legacy contract tests that are not currently in
+the curated runner and may expose known migration debt. Do not treat those two
+commands as equivalent coverage or release criteria.
 
-## Troubleshooting
+## Current Architecture Coverage
 
-If tests fail:
+| Area | Primary tests |
+|---|---|
+| Native semantic representation | `test_semantic_encoder.py` |
+| Multi-head full/sentence/RAKE retrieval | `test_mrag_semantic_lane.py` |
+| mRAG-primary lane separation | `test_unified_retrieval.py` |
+| Directed non-semantic associations | `test_associative_transitions.py` |
+| Progressive learned-memory benchmark | `test_deep_memory_benchmark.py` |
+| Sandboxed LongMemEval ingestion, selection, and review artifacts | `test_longmemeval_sandbox.py` |
+| Exact RAGOffice exam parity and scoring | `test_ragoffice_parity_sandbox.py` |
+| Codex App Server provider and host tools | `test_codex_cli_provider.py` |
+| Clarify-plan-act-verify action contract | `test_action_protocol.py`, `test_action_planner.py`, `test_action_path_exam.py` |
+| Provider-neutral identity and affect capsule | `test_self_state.py` |
+| Codex one-switch setup | `test_codex_agent_setup.py` |
+| Event-driven tasks, orchestrators, focus, and procedures | `test_task_cognition.py` |
+| Preconscious context assembly | `test_preconscious_injection.py` |
+| Maintained session/subject/topic/relation logs and canonical-ID deduplication | `test_case_memory_office.py` |
+| Typed source-aware Office capsules and stateless speaker boundary | `test_office_runtime.py` |
+| Belief and memory behavior | `test_belief_operations.py`, `test_emc2_retrieval.py` |
+| Tool dispatch and learned tools | `test_tool_executor.py`, `test_tool_learning_pipeline.py`, `test_tool_factory.py` |
+| Channels and dashboard | `test_channel_router.py`, `test_dashboard_*.py` |
+| Safety and runtime integrity | `test_simulated_safety_benchmark.py`, `test_runtime_integrity.py` |
 
-1. **Configuration errors**: Run `python tests/validate_config.py` first
-2. **Import errors**: Ensure all dependencies are installed (`pip install -r requirements.txt`)
-3. **Memory issues**: Close other applications before running load tests
-4. **Timeout errors**: Increase timeout values in test scripts if running on slow systems
+The current architecture and documentation precedence are defined in
+[`documents/architecture_current.md`](../documents/architecture_current.md)
+and [`documents/README.md`](../documents/README.md).
 
-## Adding New Tests
+## Action-Path Smokes
 
-To add a new test:
+The deterministic exam has no external side effects:
 
-1. Create `tests/test_<feature>.py` following the existing pattern
-2. Use `unittest.TestCase` for unit tests
-3. Include a `run_<feature>_tests()` function
-4. Add to `tests/run_all_tests.py` in the `test_scripts` list
-
-## Performance Baselines
-
-These are typical performance baselines to compare against:
-
-- Single pulse execution: 40-50ms
-- Tool invocation: 10-100ms (varies by tool)
-- Memory save/load: 5-20ms for 100 memories
-- Context assembly: 1-5ms
-- Semantic search: 2-10ms for 1000 vectors
-
-If performance degrades significantly, investigate:
-- Memory leaks (use stress tests with memory monitoring)
-- Inefficient algorithms (profile with cProfile)
-- Resource contention (check system resources)
-
-## Support & Debugging
-
-For detailed debug output, modify test scripts:
-```python
-import logging
-logging.basicConfig(level=logging.DEBUG)
+```bash
+venv/bin/python tests/run_action_path_exam.py
 ```
 
-For performance profiling:
-```python
-import cProfile
-cProfile.run('run_memory_simulation()')
+The local-model smoke uses a virtual tool world, so it exercises real model
+planning without changing host files or accounts:
+
+```bash
+venv/bin/python tests/run_action_path_local_smoke.py \
+  --model granite4.1:8b --json
 ```
+
+The Codex smoke creates a real authenticated App Server thread, but keeps its
+workspace read-only, disables network and approvals, and exposes no host tools:
+
+```bash
+venv/bin/python tests/run_codex_helix_smoke.py --json
+```
+
+It distinguishes a successful App Server handshake from model inference. A
+subscription usage limit therefore reports `transport_ready: true` with an
+inference blocker instead of being misreported as a wiring failure.
+
+## Progressive Deep-Memory Evaluation
+
+First validate the fixture and checkpoint assembly without calling a conscious
+model:
+
+```bash
+venv/bin/python tests/locomo_deep_memory_sandbox.py --dry-run
+```
+
+Then run fresh checkpoint exams through a locally authenticated Codex client:
+
+```bash
+venv/bin/python tests/locomo_deep_memory_sandbox.py \
+  --backend codex-subscription \
+  --retrieval-profile frontier \
+  --ingest-mode scripted
+```
+
+Use `--association-memory on` and `off` for the transition-memory ablation.
+`scripted` ingestion isolates retrieval behavior; `connector` performs the
+costlier end-to-end conscious replay. Exam turns are retrieval-only and do not
+teach the system.
+
+## LongMemEval-S Development Evaluation
+
+`longmemeval_sandbox.py` indexes cleaned LongMemEval histories into a fresh
+temporary Helix runtime for each question and answers through the ordinary
+preconscious mRAG injection. Its 100-question ceiling is enforced by the CLI.
+The default sample is proportional across question type and abstention status,
+using a recorded seed rather than the category-skewed first 100 rows.
+History ingestion records direct session-cluster transitions when the
+associative lane is enabled; exam questions use `learn=False`.
+
+```bash
+venv/bin/python tests/longmemeval_sandbox.py \
+  --dataset /path/to/longmemeval_s_cleaned.json \
+  --dry-run
+```
+
+The run is resumable and saves a manual review page per answer. Automated
+exact match, token overlap, and evidence-session recall remain diagnostics;
+the review pages preserve the gold evidence and actual injected context.
+Use `--backend ollama --model granite4.1:8b` for a subscription-free run or a
+same-reader comparison with RAGOffice. Reader backend and model are locked into
+the resume manifest.
+
+## RAGOffice Exact-Exam Parity
+
+`ragoffice_parity_sandbox.py` executes RAGOffice's current 110-item generator,
+freezes the resulting 100 answerable questions plus ten negative controls, and
+ingests the exact 220 source turns into one isolated Helix mind. It uses
+RAGOffice's answer prompt, local Granite reader, accepted-answer alternatives,
+required-span rules, and refusal scoring. The snapshot hash, RAGOffice commit,
+and dirty source paths are recorded before the run.
+
+```bash
+venv/bin/python tests/ragoffice_parity_sandbox.py \
+  --ragoffice-root /home/nemo/RAGOffice \
+  --model granite4.1:8b \
+  --context-office on \
+  --resume
+```
+
+Use `--context-office off` with a different output directory for the semantic
+advisor ablation. `--question-ids q_1,q_11,q_50,n_7` performs a cheap targeted
+audit without changing the frozen exam or indexing scope.
+
+This is the appropriate same-exam comparison. LongMemEval remains the broader,
+much longer natural-dialogue evaluation rather than a directly comparable
+replacement for RAGOffice's synthetic suite.
+
+## Test Classes
+
+- `test_*.py` files are unit or integration regressions. The curated runner
+  defines the maintained gate; raw discovery also includes retained legacy
+  contracts and is useful for migration-debt audits.
+- `simulate_*.py`, `stress_test_pulse.py`, and `load_test.py` exercise model or
+  performance behavior outside the ordinary unit-test contract.
+- `*_sandbox.py` and `*_benchmark.py` scripts are explicit experiments. Read
+  their CLI help and output location before running them.
+- Generated reports belong in `benchmark_results/`; dated reports describe the
+  evaluated build and are not current architecture references.
+
+No fixed throughput, latency, or pass-rate numbers are promised here. Those
+figures depend on hardware, store size, provider, local model availability, and
+the exact commit, so performance claims belong in dated benchmark reports.

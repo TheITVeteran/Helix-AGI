@@ -1,0 +1,323 @@
+{
+  "kind": "forensic analysis of saved live integration diagnostic plus formatting checks",
+  "new_product_result": null,
+  "recorded_run": "/tmp/helix-live-20261010-misw_7t0",
+  "recorded_composition_manifest": "../2026-10-10-live-agent/composition-manifest.json",
+  "evidence_hashes_verified": {
+    "trace.jsonl": "f54b3f44b99ff07bca4bbb5e81ea111708c150676a26d5d98059d0968a07f68a",
+    "interactions.jsonl": "046d83e24ca2a07ba72ece998b1e7458050cf39f58b7330620a4b97e839c1ba2",
+    "agent.log": "e3349ace860cfb3d79f97d95b3938fd25fd9acfe2631430f1f23096d46c8a571",
+    "logs/helix.log": "471bff3cbee00db6f5579252ae49c649f77ca3c544615c4ad0b01484466ffea1",
+    "data/mindscape/receipts.jsonl": "ae46963ece8acf833a84ee9fcdfb049d86a7ef284057c889cbb5b31244f4d65d",
+    "data/mindscape/joint/LATEST.json": "012d7fd80d1b544ee564980cb7b5e00170fe604468c5675cb4e2c94d981dd85f",
+    "data/mindscape/joint/events.jsonl": "fc8f4cc8744f474325dd167729836123fca441a14101b1bd1f9bb10b466875cc",
+    "phase1-scheduled/trace.jsonl": "5dcbf9c8dc6ddb9f41b22690b4455a7713ce5a6f5d271ea9e1c42ea506fe39ab",
+    "phase1-scheduled/logs/helix.log": "459bd9d9399ba391685363bf0d78cb698d0e8a65b6a1fcdc8b3f3034b2b4ae0d"
+  },
+  "pre_edit_sources_verified": {
+    "helix": {
+      "count": 124,
+      "matches_recorded_run": true,
+      "pre_edit_backups_used": true
+    },
+    "mightymem": {
+      "count": 100,
+      "matches_recorded_run": true,
+      "pre_edit_backups_used": false
+    }
+  },
+  "pulses": [
+    {
+      "pulse": 1,
+      "event_count": 0,
+      "event_characters": 0,
+      "previous_thought_query_characters": 0,
+      "annotation_characters": [
+        156,
+        168
+      ],
+      "loom_section_counts": {
+        "continuity": 4
+      },
+      "loom_task_id": null,
+      "loom_current_event_id": null,
+      "topical": {
+        "focus_topics": [],
+        "momentum": {},
+        "drift": 0.0,
+        "familiarity": {},
+        "action_mode_mix": {},
+        "max_depth": 1,
+        "rendered": ""
+      },
+      "first_y_path": {
+        "trace_id": "trace:pulse:125:input:identity:self",
+        "side": "input",
+        "start_node_id": "SELF",
+        "target_node_id": "identity:self",
+        "path_node_ids": [
+          "SELF",
+          "IN:HEAR",
+          "identity:self"
+        ],
+        "path_edge_ids": [
+          "edge:input:03146da5d58fb097",
+          "edge:input:cee2b31d2f3bb30c"
+        ],
+        "total_travel_time": 30.99955001,
+        "endpoint_score": 0.11942632,
+        "evidence_record_ids": []
+      },
+      "mrag_last_call_question_type": null,
+      "mrag_last_call_requested_facets": null,
+      "mrag_last_call_requires_chronology": null,
+      "cluster_centroid_present": false,
+      "foreground_request_matched_saved_packet": true,
+      "foreground_history_messages": 2,
+      "foreground_provider_receipt": {
+        "model": "granite4.1:3b",
+        "done": true,
+        "done_reason": "stop",
+        "prompt_eval_count": 2114,
+        "eval_count": 470
+      },
+      "recorded_prompt": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-1-recorded-prompt.txt",
+        "sha256": "365991772b33703fa74cc457dec4f2b23c1f7505177cdd799f933a76d6ea08bb"
+      },
+      "layout_preview": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-1-layout-preview.txt",
+        "sha256": "7b16692d2ae05472e5300ec6b6cf89155e815f15e813fb562e31fb22091089d5",
+        "kind": "formatting only; no retrieval or inference rerun",
+        "all_recorded_payloads_preserved": true
+      }
+    },
+    {
+      "pulse": 2,
+      "event_count": 1,
+      "event_characters": 268,
+      "previous_thought_query_characters": 500,
+      "annotation_characters": [
+        104,
+        15339,
+        169,
+        168,
+        72
+      ],
+      "loom_section_counts": {
+        "continuity": 5
+      },
+      "loom_task_id": null,
+      "loom_current_event_id": null,
+      "topical": {
+        "focus_topics": [
+          ""
+        ],
+        "momentum": {
+          "": "rising"
+        },
+        "drift": 0.0,
+        "familiarity": {
+          "": 0.45
+        },
+        "action_mode_mix": {},
+        "max_depth": 1,
+        "rendered": "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: \nMomentum:  (rising)\nConversational drift: 0.0"
+      },
+      "first_y_path": {
+        "trace_id": "trace:pulse:128:input:identity:self",
+        "side": "input",
+        "start_node_id": "SELF",
+        "target_node_id": "identity:self",
+        "path_node_ids": [
+          "SELF",
+          "IN:HEAR",
+          "identity:self"
+        ],
+        "path_edge_ids": [
+          "edge:input:03146da5d58fb097",
+          "edge:input:cee2b31d2f3bb30c"
+        ],
+        "total_travel_time": 30.99955001,
+        "endpoint_score": 0.29960142,
+        "evidence_record_ids": []
+      },
+      "mrag_last_call_question_type": "statement",
+      "mrag_last_call_requested_facets": [],
+      "mrag_last_call_requires_chronology": true,
+      "cluster_centroid_present": true,
+      "foreground_request_matched_saved_packet": true,
+      "foreground_history_messages": 4,
+      "foreground_provider_receipt": {
+        "model": "granite4.1:3b",
+        "done": true,
+        "done_reason": "length",
+        "prompt_eval_count": 7822,
+        "eval_count": 370
+      },
+      "recorded_prompt": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-2-recorded-prompt.txt",
+        "sha256": "66e8e26bf4da8a9fa4057450f8706e77900c6e851a15e2666f23d4d51ad094d7"
+      },
+      "layout_preview": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-2-layout-preview.txt",
+        "sha256": "6756b48fdc5a8603e3eeaa2029c780a94649cb4c79185317b396410d1f535808",
+        "kind": "formatting only; no retrieval or inference rerun",
+        "all_recorded_payloads_preserved": true
+      }
+    },
+    {
+      "pulse": 3,
+      "event_count": 1,
+      "event_characters": 549,
+      "previous_thought_query_characters": 500,
+      "annotation_characters": [
+        6628,
+        267,
+        168,
+        240
+      ],
+      "loom_section_counts": {
+        "continuity": 7
+      },
+      "loom_task_id": null,
+      "loom_current_event_id": null,
+      "topical": {
+        "focus_topics": [
+          ""
+        ],
+        "momentum": {
+          "": "rising"
+        },
+        "drift": 0.0,
+        "familiarity": {
+          "": 0.765
+        },
+        "action_mode_mix": {},
+        "max_depth": 1,
+        "rendered": "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: \nMomentum:  (rising)\nConversational drift: 0.0"
+      },
+      "first_y_path": {
+        "trace_id": "trace:pulse:132:input:identity:self",
+        "side": "input",
+        "start_node_id": "SELF",
+        "target_node_id": "identity:self",
+        "path_node_ids": [
+          "SELF",
+          "IN:HEAR",
+          "identity:self"
+        ],
+        "path_edge_ids": [
+          "edge:input:03146da5d58fb097",
+          "edge:input:cee2b31d2f3bb30c"
+        ],
+        "total_travel_time": 30.99955001,
+        "endpoint_score": 0.22842946,
+        "evidence_record_ids": []
+      },
+      "mrag_last_call_question_type": "location",
+      "mrag_last_call_requested_facets": [
+        "affect",
+        "identity",
+        "location"
+      ],
+      "mrag_last_call_requires_chronology": true,
+      "cluster_centroid_present": true,
+      "foreground_request_matched_saved_packet": true,
+      "foreground_history_messages": 6,
+      "foreground_provider_receipt": {
+        "model": "granite4.1:3b",
+        "done": true,
+        "done_reason": "stop",
+        "prompt_eval_count": 5231,
+        "eval_count": 1276
+      },
+      "recorded_prompt": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-3-recorded-prompt.txt",
+        "sha256": "af64d2b0e96d7f1ec4bade7fc4fb6fa723196d558f33bdfdca663cfe9fb7f392"
+      },
+      "layout_preview": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-3-layout-preview.txt",
+        "sha256": "a3c175daeeb135208893e733863165aa30d017b202ca4dffa8c647242bd49b14",
+        "kind": "formatting only; no retrieval or inference rerun",
+        "all_recorded_payloads_preserved": true
+      }
+    },
+    {
+      "pulse": 4,
+      "event_count": 9,
+      "event_characters": 1532,
+      "previous_thought_query_characters": 500,
+      "annotation_characters": [
+        2387,
+        333,
+        168,
+        238
+      ],
+      "loom_section_counts": {
+        "continuity": 9
+      },
+      "loom_task_id": null,
+      "loom_current_event_id": null,
+      "topical": {
+        "focus_topics": [
+          ""
+        ],
+        "momentum": {
+          "": "rising"
+        },
+        "drift": 0.0,
+        "familiarity": {
+          "": 0.9855
+        },
+        "action_mode_mix": {},
+        "max_depth": 1,
+        "rendered": "[TOPICAL ORIENTATION & DRIFT]\nFocus topics: \nMomentum:  (rising)\nConversational drift: 0.0"
+      },
+      "first_y_path": {
+        "trace_id": "trace:pulse:136:input:identity:self",
+        "side": "input",
+        "start_node_id": "SELF",
+        "target_node_id": "identity:self",
+        "path_node_ids": [
+          "SELF",
+          "IN:HEAR",
+          "identity:self"
+        ],
+        "path_edge_ids": [
+          "edge:input:03146da5d58fb097",
+          "edge:input:cee2b31d2f3bb30c"
+        ],
+        "total_travel_time": 30.99955001,
+        "endpoint_score": 0.14720811,
+        "evidence_record_ids": []
+      },
+      "mrag_last_call_question_type": "preference",
+      "mrag_last_call_requested_facets": [
+        "preference"
+      ],
+      "mrag_last_call_requires_chronology": true,
+      "cluster_centroid_present": true,
+      "foreground_request_matched_saved_packet": true,
+      "foreground_history_messages": 8,
+      "foreground_provider_receipt": {
+        "model": "granite4.1:3b",
+        "done": true,
+        "done_reason": "stop",
+        "prompt_eval_count": 7257,
+        "eval_count": 842
+      },
+      "recorded_prompt": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-4-recorded-prompt.txt",
+        "sha256": "1447d9e813c6c31be1f5a96bf4375459fd4bc87a12f12e248e8ea10c77091c82"
+      },
+      "layout_preview": {
+        "path": "/tmp/helix-attention-20261010-mox8f0hi/pulse-4-layout-preview.txt",
+        "sha256": "910d44a3a10e223ae23d798aeeca89ac5d268e95f6580d7832e565b14c508e8e",
+        "kind": "formatting only; no retrieval or inference rerun",
+        "all_recorded_payloads_preserved": true
+      }
+    }
+  ],
+  "note": "Layout previews use saved payloads solely to check presentation preservation. They are not new agent responses or product evaluations."
+}

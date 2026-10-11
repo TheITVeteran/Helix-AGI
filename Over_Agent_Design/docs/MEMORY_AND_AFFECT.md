@@ -1,25 +1,23 @@
 # 🧠 Memory & Affect Simulation Specification
 
-> **Helix Preconscious Retrieval, Dynamic Identity Compilation, and Synthetic Affect State Vector Pipelines.**
+> **Multi-Head mRAG Preconscious Retrieval, Dynamic Identity Compilation, and Synthetic Affect State Vector Pipelines.**
 
 ---
 
-## 1. Integrated Helix Recall (`integrated_mrag.py`)
+## 1. Integrated Multi-Head mRAG (`integrated_mrag.py`)
 
-The Over-Agent uses Helix's in-repository memory implementation directly. There is no second cache and no copied feature-branch runtime.
+The Over-Agent uses Helix's in-repository memory implementation directly. There is no keyword-scanning adapter and no second cache.
 
 ### Canonical stores
 - `data/memory/cognitive_journal.jsonl`: append-only Layer-0 memories, including inbound/outbound messages and document chunks.
 - `data/beliefs/*.json`: outer beliefs plus Layer-2 `people`, `concepts`, `skills`, and `desires` anchors.
-- `data/spatial/semantic_index*`: the semantic index supplied by the containing Helix revision.
+- `data/spatial/semantic_index_1024d*`: native semantic retrieval index; the stable 384D-to-8D representation remains a separate spatial complement.
 
 ### Preconscious Retrieval Workflow:
 1. `SubconsciousConductor.process_user_event()` calls `HelixMRAGRuntime.recall_context()` before generation.
-2. On original `main`, the in-folder bridge queries Helix's 384D semantic index and prepends bounded exact Layer-2 term/alias matches.
-3. On revisions that provide `core.unified_retrieval`, the runtime selects that native multi-head mRAG implementation automatically.
+2. Unified mRAG runs multi-head semantic retrieval over one tiered corpus and adds only bounded non-semantic complements.
+3. Exact Layer-2 term/alias matches receive priority without replacing source memories.
 4. The compact result grounds the current executive and speaker calls, then inbound and outbound text are persisted through `MemoryManager`.
-
-Original `main` predates structured record envelopes. In that compatibility mode, record kind, direction, epistemic role, and evidence scopes are preserved as `record:*` tags on the canonical journal entry. No parent-repository file is modified by this subproject.
 
 ---
 

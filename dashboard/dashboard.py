@@ -514,84 +514,51 @@ def create_app():
     def api_status():
         return jsonify(read_status())
 
-    # ── Agent Canvas UI Endpoints ────────────────────────────────────
+    # ── Agent Canvas UI Endpoints ──────────────────────────────────────────
 
     @app.route("/api/canvas", methods=["GET", "POST"])
     def api_canvas():
-        """Read or update the bounded dashboard canvas payload."""
+        """Get or update current Agent-controlled UI Canvas state."""
         canvas_path = SPATIAL_DIR / "agent_canvas.json"
         if request.method == "POST":
             data = request.get_json(force=True, silent=True) or {}
-            if not isinstance(data, dict):
-                return jsonify({"error": "Canvas payload must be an object"}), 400
-
-            view_type = str(data.get("view_type") or "card").strip().lower()
-            allowed_views = {
-                "markdown", "text", "image", "media", "browser", "iframe",
-                "terminal", "sandbox", "card", "alert",
-            }
-            if view_type not in allowed_views:
-                return jsonify({"error": f"Unsupported canvas view: {view_type}"}), 400
-
-            content = str(data.get("content") or "")
-            title = str(data.get("title") or "Agent Canvas")
-            media_url = data.get("media_url")
-            if len(content) > 500_000 or len(title) > 200:
-                return jsonify({"error": "Canvas payload exceeds the local UI limit"}), 413
-            if media_url is not None and len(str(media_url)) > 2_048:
-                return jsonify({"error": "Canvas media URL is too long"}), 413
-
             try:
-                timestamp = float(data.get("timestamp") or time.time())
-            except (TypeError, ValueError):
-                return jsonify({"error": "Canvas timestamp must be numeric"}), 400
-            if not math.isfinite(timestamp):
-                return jsonify({"error": "Canvas timestamp must be finite"}), 400
-
-            payload = {
-                "view_type": view_type,
-                "title": title.strip(),
-                "content": content,
-                "media_url": str(media_url).strip() if media_url else None,
-                "auto_switch": bool(data.get("auto_switch", False)),
-                "timestamp": timestamp,
-                "metadata": data.get("metadata") if isinstance(data.get("metadata"), dict) else {},
-            }
-            try:
-                SPATIAL_DIR.mkdir(parents=True, exist_ok=True)
-                with open(canvas_path, "w", encoding="utf-8") as handle:
-                    json.dump(payload, handle, indent=2)
+                with open(canvas_path, "w", encoding="utf-8") as f:
+                    json.dump(data, f, indent=2)
                 return jsonify({"ok": True})
-            except OSError as exc:
-                return jsonify({"error": str(exc)}), 500
+            except Exception as e:
+                return jsonify({"error": str(e)}), 500
 
         if canvas_path.exists():
             try:
-                with open(canvas_path, "r", encoding="utf-8") as handle:
-                    return jsonify(json.load(handle))
-            except (OSError, json.JSONDecodeError):
+                with open(canvas_path, "r", encoding="utf-8") as f:
+                    return jsonify(json.load(f))
+            except Exception:
                 pass
         return jsonify({
             "view_type": "card",
             "title": "Agent Canvas",
-            "content": "Helix has not rendered canvas content yet.",
+            "content": "Helix has not initialized dynamic canvas content yet.",
             "media_url": None,
             "auto_switch": False,
-            "timestamp": 0,
-            "metadata": {},
+            "timestamp": time.time(),
         })
 
     @app.route("/api/canvas_history")
     def api_canvas_history():
+        """Get recent Agent Canvas UI history."""
         limit = _coerce_int(request.args.get("limit", 20), default=20, minimum=1, maximum=100)
         history_path = SPATIAL_DIR / "agent_canvas_history.json"
         if history_path.exists():
             try:
-                with open(history_path, "r", encoding="utf-8") as handle:
-                    data = json.load(handle)
-                if isinstance(data, list):
-                    return jsonify({"entries": list(reversed(data[-limit:])), "total": len(data)})
-            except (OSError, json.JSONDecodeError):
+                with open(history_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    if isinstance(data, list):
+                        return jsonify({
+                            "entries": list(reversed(data[-limit:])),
+                            "total": len(data),
+                        })
+            except Exception:
                 pass
         return jsonify({"entries": [], "total": 0})
 

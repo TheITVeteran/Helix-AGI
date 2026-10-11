@@ -1,0 +1,14 @@
+{
+  "case": "sense",
+  "request": {
+    "channel": "dashboard",
+    "content": "Please move to /inbox in your native workspace and feel the files there before opening them. Tell me their actual names, types and attributes. Do not infer their contents from filenames.",
+    "sender": "Mira"
+  },
+  "submitted_at": 1791676970.7363923,
+  "http_response": {
+    "ok": true
+  },
+  "runtime_failure": "RuntimeError: Mindscape foreground did not complete: [internal error: LLM call failed — Generation reached the provider context/output boundary; incomplete response withheld]",
+  "product_result": null
+}

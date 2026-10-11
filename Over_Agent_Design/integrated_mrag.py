@@ -1,19 +1,15 @@
-"""Helix memory runtime for the Over-Agent subproject.
+"""Native Helix mRAG runtime for the Over-Agent.
 
 This module is the one memory boundary used by the conductor, researcher,
 document ingester, and proactive vision path.  It does not maintain a second
-JSON cache.  On Helix revisions that provide ``core.unified_retrieval`` reads
-use that native mRAG pipeline.  The original ``main`` branch predates that
-module, so a small in-folder bridge uses its canonical 384D semantic index and
-exact Layer-2 anchors instead.  Writes always go through
-:class:`memory.memory_manager.MemoryManager`.
+JSON cache or a keyword-only fallback.  Reads go through Helix's unified mRAG
+retrieval over the canonical belief store and cognitive journal; writes go
+through :class:`memory.memory_manager.MemoryManager`.
 """
 
 from __future__ import annotations
 
 import os
-import inspect
-import re
 import sys
 import threading
 from dataclasses import dataclass, field
@@ -24,7 +20,6 @@ from typing import Any, Dict, Iterable, List, Optional
 APP_DIR = Path(__file__).resolve().parent
 DEFAULT_REPO_ROOT = APP_DIR.parent
 LAYER2_BELIEF_CATEGORIES = ("people", "concepts", "skills", "desires")
-_WORD_RE = re.compile(r"[\w'-]+", re.UNICODE)
 
 
 @dataclass(frozen=True)
@@ -45,141 +40,6 @@ class MRAGConfig:
         object.__setattr__(self, "data_dir", data)
 
 
-class _MainRetrievalBridge:
-    """Read adapter for Helix ``main`` without copying feature-branch code.
-
-    The bridge keeps semantic retrieval as the foreground lane.  Explicit
-    Layer-2 terms and aliases are prepended when the query names them exactly;
-    this bounded lexicon pass does not replace semantic evidence.
-    """
-
-    def __init__(self, belief_store, memory_manager, physics_engine):
-        self.belief_store = belief_store
-        self.memory_manager = memory_manager
-        self.physics_engine = physics_engine
-
-    @staticmethod
-    def _words(text: str) -> List[str]:
-        return [word.casefold() for word in _WORD_RE.findall(text or "")]
-
-    @classmethod
-    def _contains_phrase(cls, query: str, phrase: str) -> bool:
-        query_words = cls._words(query)
-        phrase_words = cls._words(phrase)
-        if not phrase_words or len(phrase_words) > len(query_words):
-            return False
-        width = len(phrase_words)
-        return any(
-            query_words[index:index + width] == phrase_words
-            for index in range(len(query_words) - width + 1)
-        )
-
-    def _layer2_matches(self, query: str) -> List[Dict[str, Any]]:
-        matches: List[Dict[str, Any]] = []
-        for category in LAYER2_BELIEF_CATEGORIES:
-            for belief in self.belief_store.get_category(category, limit=500):
-                names = [belief.get("term", ""), belief.get("name", "")]
-                names.extend(belief.get("aliases", []) or [])
-                matched = [
-                    str(name) for name in names
-                    if name and self._contains_phrase(query, str(name))
-                ]
-                if not matched:
-                    continue
-                item = dict(belief)
-                item.update({
-                    "id": str(belief.get("id", "")),
-                    "content": str(belief.get("content", "")),
-                    "tier": 2,
-                    "lane": "layer2_exact",
-                    "_category": category,
-                    "category": category,
-                    "score": 2.0 + max(len(self._words(name)) for name in matched),
-                })
-                matches.append(item)
-        matches.sort(
-            key=lambda item: (item.get("score", 0.0), item.get("mass", 0.0)),
-            reverse=True,
-        )
-        return matches
-
-    def _semantic_matches(self, query: str, limit: int) -> List[Dict[str, Any]]:
-        matches: List[Dict[str, Any]] = []
-        try:
-            memories = self.memory_manager.search_semantic(query, limit=limit)
-        except Exception:
-            memories = []
-        for memory in memories:
-            item = dict(memory)
-            item.update({
-                "id": str(memory.get("id", "")),
-                "content": str(memory.get("content", "")),
-                "tier": 0,
-                "lane": "semantic_384d",
-                "category": memory.get("memory_type") or "memory",
-                "score": float(memory.get("similarity", 0.0)),
-            })
-            matches.append(item)
-
-        try:
-            beliefs = self.physics_engine.semantic_search(
-                query,
-                k=limit,
-                filter_fn=lambda _record_id, metadata: metadata.get("type") == "belief",
-            )
-        except Exception:
-            beliefs = []
-        for belief in beliefs:
-            metadata = dict(belief.get("metadata", {}))
-            category = str(metadata.get("category", "belief"))
-            item = {
-                "id": str(belief.get("id", "")),
-                "content": str(metadata.get("content", "")),
-                "tier": 2 if category in LAYER2_BELIEF_CATEGORIES else 1,
-                "lane": "semantic_384d",
-                "_category": category,
-                "category": category,
-                "score": float(belief.get("similarity", 0.0)),
-            }
-            matches.append(item)
-        matches.sort(key=lambda item: item.get("score", 0.0), reverse=True)
-        return matches
-
-    def retrieve(
-        self,
-        trigger_text: str,
-        complement_quota: int = 2,
-        max_items: int = 12,
-        token_budget: Optional[int] = None,
-        **_unused: Any,
-    ) -> List[Dict[str, Any]]:
-        del complement_quota  # Main's 384D bridge has no separate complement lane.
-        query = (trigger_text or "").strip()
-        if not query:
-            return []
-
-        limit = max(1, int(max_items))
-        ordered = self._layer2_matches(query)
-        ordered.extend(self._semantic_matches(query, limit=max(limit * 2, 8)))
-
-        selected: List[Dict[str, Any]] = []
-        seen = set()
-        used_tokens = 0
-        for item in ordered:
-            record_id = str(item.get("id", ""))
-            if not record_id or record_id in seen:
-                continue
-            item_tokens = len(str(item.get("content", "")).split())
-            if token_budget is not None and used_tokens + item_tokens > token_budget:
-                continue
-            selected.append(item)
-            seen.add(record_id)
-            used_tokens += item_tokens
-            if len(selected) >= limit:
-                break
-        return selected
-
-
 class HelixMRAGRuntime:
     """Own Helix memory storage, indexing, retrieval, and persistence."""
 
@@ -193,6 +53,7 @@ class HelixMRAGRuntime:
             sys.path.insert(0, root_text)
 
         from core.physics_engine import PhysicsEngine
+        from core.unified_retrieval import UnifiedRetrieval
         from memory.belief_store import BeliefStore
         from memory.memory_manager import MemoryManager
 
@@ -211,24 +72,11 @@ class HelixMRAGRuntime:
                 self.memory_manager,
             )
 
-        try:
-            from core.unified_retrieval import UnifiedRetrieval
-        except ModuleNotFoundError as exc:
-            if exc.name != "core.unified_retrieval":
-                raise
-            self.retrieval = _MainRetrievalBridge(
-                belief_store=self.belief_store,
-                memory_manager=self.memory_manager,
-                physics_engine=self.physics_engine,
-            )
-            self.retrieval_mode = "main_semantic_384d_bridge"
-        else:
-            self.retrieval = UnifiedRetrieval(
-                belief_store=self.belief_store,
-                memory_manager=self.memory_manager,
-                physics_engine=self.physics_engine,
-            )
-            self.retrieval_mode = "unified_mrag"
+        self.retrieval = UnifiedRetrieval(
+            belief_store=self.belief_store,
+            memory_manager=self.memory_manager,
+            physics_engine=self.physics_engine,
+        )
 
     def recall(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
         """Return bounded, provenance-bearing unified mRAG results."""
@@ -294,29 +142,13 @@ class HelixMRAGRuntime:
         if not content:
             return None
         with self._lock:
-            store_kwargs: Dict[str, Any] = {
-                "content": content,
-                "memory_type": memory_type,
-                "source": source,
-                "importance": importance,
-                "tags": list(tags or []),
-            }
-            store_parameters = inspect.signature(self.memory_manager.store).parameters
-            if "record_metadata" in store_parameters:
-                store_kwargs["record_metadata"] = record_metadata or {}
-            else:
-                # Original main has no structured record-envelope argument.
-                # Preserve the boundary metadata as inspectable canonical tags.
-                for key, value in sorted((record_metadata or {}).items()):
-                    values = value if isinstance(value, (list, tuple, set)) else [value]
-                    store_kwargs["tags"].extend(
-                        f"record:{key}:{entry}" for entry in values
-                        if entry is not None and str(entry).strip()
-                    )
-                store_kwargs["tags"] = list(dict.fromkeys(store_kwargs["tags"]))
-
             memory_id = self.memory_manager.store(
-                **store_kwargs,
+                content=content,
+                memory_type=memory_type,
+                source=source,
+                importance=importance,
+                tags=tags or [],
+                record_metadata=record_metadata or {},
             )
             if persist_index:
                 self.physics_engine.save_all()
@@ -357,19 +189,11 @@ class HelixMRAGRuntime:
 
     def get_status(self) -> Dict[str, Any]:
         stats = self.belief_store.get_stats()
-        semantic_encoder = getattr(self.physics_engine, "semantic_encoder", None)
-        semantic_index = getattr(self.physics_engine, "semantic_index", None)
-        semantic_dimensions = int(
-            getattr(semantic_encoder, "dim", 0)
-            or getattr(semantic_index, "dim", 0)
-            or 0
-        )
         return {
             "repo_root": str(self.config.repo_root),
             "data_dir": str(self.config.data_dir),
-            "retrieval_mode": self.retrieval_mode,
-            "semantic_dimensions": semantic_dimensions,
-            "semantic_index_count": int(getattr(semantic_index, "count", 0)),
+            "semantic_dimensions": int(self.physics_engine.semantic_encoder.dim),
+            "semantic_index_count": int(self.physics_engine.semantic_index.count),
             "memory_count": int(self.memory_manager.get_stats().get("total_memories", 0)),
             "layer2_categories": {
                 category: int(stats.get(category, 0))

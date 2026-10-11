@@ -1,0 +1,51 @@
+  Credentials: loaded via dotenv
+Initializing Helix Architecture...
+  Memory: {'total_entries': 14, 'total_memories': 14, 'journal_path': 'data/memory/cognitive_journal.jsonl'}
+  Beliefs: {'total_beliefs': 39, 'with_relations': 0, 'with_memory_refs': 0, 'core': 1, 'deep': 38, 'surface': 0, 'avg_confidence': 0.804, 'schema_version': 4, 'premises': 8, 'propositions': 11, 'preferences': 6, 'people': 2, 'skills': 2, 'desires': 4, 'concepts': 6}
+  Scratchpad: 0 active notes
+  Spatial: pulse=0, γ=0.50
+  SemanticIndex: 46 vectors (numpy_brute)
+  Sentinel: Ω=0.713, severity=critical
+  Spatial bootstrap: 39 beliefs, 7 memories in 8D manifold
+  Contacts: 1 known
+  Tools: executor ready
+  Telegram: disabled (no token)
+  Discord: disabled (no token)
+  Slack: disabled (no token)
+  WhatsApp: disabled (no token)
+  Webhook: disabled (no config)
+  Provider: ollama (granite4.1:3b)
+  Pulse mode: standard
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+[ERROR] Config not found for rwkv7-g1j-1.5b-20260831-2c18b29. You can manually add it to HARDCODED_CONFIG_FOR_MODELS in utils/auto_docstring.py
+{"loaded_shard": "model-00001-of-00004.safetensors"}
+{"loaded_shard": "model-00002-of-00004.safetensors"}
+{"loaded_shard": "model-00003-of-00004.safetensors"}
+{"loaded_shard": "model-00004-of-00004.safetensors"}
+Traceback (most recent call last):
+  File "/home/nemo/Helix_AGI (GitHub Repo) (Public)/main.py", line 755, in <module>
+    components = setup_helix(args.data_dir, start_sensors=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nemo/Helix_AGI (GitHub Repo) (Public)/main.py", line 429, in setup_helix
+    pulse_loop.mindscape = Mindscape(_mindscape_settings, data_dir, preconscious, local_models=local_models)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/mindscape.py", line 105, in __init__
+    self._worker.submit(self._open).result()
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nemo/Helix_AGI (GitHub Repo) (Public)/core/mindscape.py", line 132, in _open
+    self.native = ContinualMind(model=Path(self.config["mindscape"]["rwkv_model"]),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nemo/MightyMem/habitus_ai/continual_mind.py", line 71, in __init__
+    raise ValueError("joint checkpoint manifest hash mismatch")
+ValueError: joint checkpoint manifest hash mismatch
